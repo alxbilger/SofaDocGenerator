@@ -140,14 +140,22 @@ void generateDoc(const std::string& output)
                 it = fileContent.insert({filename, content}).first;
             }
 
-            it->second.content += "## " + creator->getClass()->templateName + "\n\n";
-
-            it->second.content += "Target: " + std::string{creator->getTarget()} + "\n";
-            it->second.content += "namespace: " + creator->getClass()->namespaceName + "\n\n";
-            it->second.content += "parents: \n";
-            for (const auto& parent : creator->getClass()->parents)
+            if (!creator->getClass()->templateName.empty())
             {
-                it->second.content += "- " + parent->className + "\n";
+                it->second.content += "## " + creator->getClass()->templateName + "\n\n";
+            }
+
+            it->second.content += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
+            it->second.content += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
+            if (!creator->getClass()->parents.empty())
+            {
+                it->second.content += "__parents__: \n";
+
+                for (const auto& parent : creator->getClass()->parents)
+                {
+                    it->second.content += "- " + parent->className + "\n";
+                }
+                it->second.content += "\n";
             }
 
             const auto tmpNode = sofa::core::objectmodel::New<sofa::simulation::graph::DAGNode>("tmp");
@@ -155,10 +163,13 @@ void generateDoc(const std::string& output)
             const auto object = creator->createInstance(tmpNode.get(), &desc);
 
 
-            it->second.content += "Data: \n";
+            it->second.content += "Data: \n\n";
+
+            it->second.content += "| Name | Description | Default value |\n";
+            it->second.content += "| ---- | ----------- | ------------- |\n";
             for (const auto& data : object->getDataFields())
             {
-                it->second.content += "- " + data->getName() + ": " + data->getHelp() + '\n';
+                it->second.content += "| " + data->getName() + " | " + data->getHelp() + " | " + data->getDefaultValueString() + " |\n";
             }
 
 
