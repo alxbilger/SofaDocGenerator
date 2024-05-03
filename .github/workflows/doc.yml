@@ -97,4 +97,4 @@ jobs:
           echo '------ ls -laR "$WORKSPACE_INSTALL_PATH" ------'
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
-          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }}
+          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ./doc
