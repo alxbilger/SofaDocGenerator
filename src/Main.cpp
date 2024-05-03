@@ -223,14 +223,18 @@ void generateDoc(std::string outputDirectory)
     threads.reserve(entries.size());
     for (const auto& entry : entries)
     {
-        std::cout << entry->className << std::endl;
-        threads.emplace_back([&entry, &topicsDirectory, &fileContent, &mutex]()
+        if (entry->className == "Distances") //skip because this component is buggy
         {
-            for (const auto& [templateInstance, creator] : entry->creatorMap)
+            std::cout << entry->className << std::endl;
+
+            threads.emplace_back([&entry, &topicsDirectory, &fileContent, &mutex]()
             {
-                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
-            }
-        });
+                for (const auto& [templateInstance, creator] : entry->creatorMap)
+                {
+                    generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+                }
+            });
+        }
     }
 
     for (auto& t : threads)
