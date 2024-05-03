@@ -2,6 +2,8 @@
 #include <cxxopts.hpp>
 #include <fstream>
 #include <iostream>
+#include <mutex>
+#include <thread>
 #include <sofa/core/ComponentLibrary.h>
 
 #include <sofa/helper/logging/Messaging.h>
@@ -9,7 +11,6 @@
 
 #include <sofa/simulation/config.h>
 #include <sofa/simulation/Node.h>
-#include <sofa/simulation/common/SceneLoaderXML.h>
 
 #include <sofa/helper/logging/LoggingMessageHandler.h>
 
@@ -18,7 +19,6 @@
 #include <sofa/helper/system/FileRepository.h>
 #include <sofa/helper/system/PluginManager.h>
 #include <sofa/simulation/graph/DAGNode.h>
-#include <sofa/simulation/graph/DAGSimulation.h>
 #include <sofa/simulation/graph/init.h>
 
 struct FileContent
@@ -109,7 +109,8 @@ void generateComponentDoc(
     const std::string& outputDirectory,
     std::unordered_map<std::string, FileContent>& fileContent,
     const sofa::core::ClassEntry::SPtr& entry,
-    sofa::core::ObjectFactory::Creator::SPtr creator)
+    sofa::core::ObjectFactory::Creator::SPtr creator,
+    std::mutex& mutex)
 {
     auto targetDirectory = std::string{creator->getTarget()};
 
@@ -130,6 +131,7 @@ void generateComponentDoc(
         content.content += entry->description + "\n\n";
 
         content.directory = directory;
+        std::lock_guard guard(mutex);
         it = fileContent.insert({filename, content}).first;
     }
 
@@ -152,17 +154,27 @@ void generateComponentDoc(
     }
 
     const auto tmpNode = sofa::core::objectmodel::New<sofa::simulation::graph::DAGNode>("tmp");
-    sofa::core::objectmodel::BaseObjectDescription desc;
-    const auto object = creator->createInstance(tmpNode.get(), &desc);
-
-
-    it->second.content += "Data: \n\n";
-
-    it->second.content += "| Name | Description | Default value |\n";
-    it->second.content += "| ---- | ----------- | ------------- |\n";
-    for (const auto& data : object->getDataFields())
+    if (tmpNode)
     {
-        it->second.content += "| " + data->getName() + " | " + data->getHelp() + " | " + data->getDefaultValueString() + " |\n";
+        sofa::core::objectmodel::BaseObjectDescription desc;
+        const auto object = creator->createInstance(tmpNode.get(), &desc);
+        if (object)
+        {
+            it->second.content += "Data: \n\n";
+
+            it->second.content += "| Name | Description | Default value |\n";
+            it->second.content += "| ---- | ----------- | ------------- |\n";
+            for (const auto& data : object->getDataFields())
+            {
+                if (data)
+                {
+                    it->second.content +=
+                        "| " + data->getName() +
+                        " | " + data->getHelp() +
+                        " | " + data->getDefaultValueString() + " |\n";
+                }
+            }
+        }
     }
 }
 
@@ -173,13 +185,25 @@ void generateDoc(const std::string& output)
 
     std::unordered_map<std::string, FileContent> fileContent;
 
+    std::vector<std::thread> threads;
+    std::mutex mutex;
+
+    threads.reserve(entries.size());
     for (const auto& entry : entries)
     {
         std::cout << entry->className << std::endl;
-        for (const auto& [templateInstance, creator] : entry->creatorMap)
+        threads.emplace_back([&entry, &output, &fileContent, &mutex]()
         {
-            generateComponentDoc(output, fileContent, entry, creator);
-        }
+            for (const auto& [templateInstance, creator] : entry->creatorMap)
+            {
+                generateComponentDoc(output, fileContent, entry, creator, mutex);
+            }
+        });
+    }
+
+    for (auto& t : threads)
+    {
+        t.join();
     }
 
     for (const auto& [filename, content] : fileContent)
