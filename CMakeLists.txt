@@ -9,7 +9,7 @@ set(SOFADOCGENERATOR_SRC "src")
 
 set(SOURCE_FILES ${SOFADOCGENERATOR_SRC}/Main.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Core Sofa.GUI.Common Sofa.Simulation.Graph)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SOFADOCGENERATOR_SRC})
 target_include_directories(${PROJECT_NAME} PRIVATE extlibs/cxxopts-2.2.1/include)
