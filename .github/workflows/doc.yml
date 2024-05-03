@@ -3,7 +3,7 @@ name: Generate and publish documentation
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   documentation:
