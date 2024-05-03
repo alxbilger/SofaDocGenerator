@@ -42,3 +42,10 @@ target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts::cxxopts)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SOFADOCGENERATOR_SRC})
 
 set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER Applications)
+
+sofa_add_targets_to_package(
+    PACKAGE_NAME Sofa.GUI
+    TARGETS ${PROJECT_NAME} AUTO_SET_TARGET_PROPERTIES
+    INCLUDE_SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}"
+    INCLUDE_INSTALL_DIR "Sofa.GUI/${PROJECT_NAME}"
+    )
