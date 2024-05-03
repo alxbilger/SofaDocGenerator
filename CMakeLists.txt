@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.14)
 project(SofaDocGenerator)
 
 find_package(Sofa.Core REQUIRED)
-sofa_find_package(Sofa.GUI.Common REQUIRED)
 sofa_find_package(Sofa.Simulation.Graph REQUIRED)
 
 
@@ -40,8 +39,6 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Core Sofa.Simulation.Graph)
 target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts::cxxopts)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SOFADOCGENERATOR_SRC})
-
-set_target_properties(${PROJECT_NAME} PROPERTIES FOLDER Applications)
 
 sofa_add_targets_to_package(
     PACKAGE_NAME Sofa.GUI
