@@ -21,6 +21,12 @@
 #include <sofa/simulation/graph/DAGSimulation.h>
 #include <sofa/simulation/graph/init.h>
 
+struct FileContent
+{
+    std::string directory;
+    std::string content;
+};
+
 void loadPlugins(const char* const appName, const std::vector<std::string>& pluginsToLoad);
 
 void generateDoc(const std::string& output);
@@ -99,81 +105,80 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
     }
 }
 
+void generateComponentDoc(
+    const std::string& outputDirectory,
+    std::unordered_map<std::string, FileContent>& fileContent,
+    const sofa::core::ClassEntry::SPtr& entry,
+    sofa::core::ObjectFactory::Creator::SPtr creator)
+{
+    auto targetDirectory = std::string{creator->getTarget()};
+
+    // replace . by /
+    std::replace( targetDirectory.begin(), targetDirectory.end(), '.', '/');
+
+    std::string directory = sofa::helper::system::FileSystem::append(outputDirectory, targetDirectory);
+    directory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(directory);
+
+    const std::string filename = sofa::helper::system::FileSystem::append(directory, entry->className + ".md");
+
+    auto it = fileContent.find(filename);
+    if (it == fileContent.end())
+    {
+        FileContent content;
+        content.content = "# " + entry->className + "\n\n";
+
+        content.content += entry->description + "\n\n";
+
+        content.directory = directory;
+        it = fileContent.insert({filename, content}).first;
+    }
+
+    if (!creator->getClass()->templateName.empty())
+    {
+        it->second.content += "## " + creator->getClass()->templateName + "\n\n";
+    }
+
+    it->second.content += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
+    it->second.content += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
+    if (!creator->getClass()->parents.empty())
+    {
+        it->second.content += "__parents__: \n";
+
+        for (const auto& parent : creator->getClass()->parents)
+        {
+            it->second.content += "- " + parent->className + "\n";
+        }
+        it->second.content += "\n";
+    }
+
+    const auto tmpNode = sofa::core::objectmodel::New<sofa::simulation::graph::DAGNode>("tmp");
+    sofa::core::objectmodel::BaseObjectDescription desc;
+    const auto object = creator->createInstance(tmpNode.get(), &desc);
+
+
+    it->second.content += "Data: \n\n";
+
+    it->second.content += "| Name | Description | Default value |\n";
+    it->second.content += "| ---- | ----------- | ------------- |\n";
+    for (const auto& data : object->getDataFields())
+    {
+        it->second.content += "| " + data->getName() + " | " + data->getHelp() + " | " + data->getDefaultValueString() + " |\n";
+    }
+}
+
 void generateDoc(const std::string& output)
 {
     static std::vector<sofa::core::ClassEntry::SPtr> entries;
     sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
-
-    struct FileContent
-    {
-        std::string directory;
-        std::string content;
-    };
 
     std::unordered_map<std::string, FileContent> fileContent;
 
     for (const auto& entry : entries)
     {
         std::cout << entry->className << std::endl;
-
         for (const auto& [templateInstance, creator] : entry->creatorMap)
         {
-            auto targetDirectory = std::string{creator->getTarget()};
-
-            // replace . by /
-            std::replace( targetDirectory.begin(), targetDirectory.end(), '.', '/');
-
-            std::string directory = sofa::helper::system::FileSystem::append(output, targetDirectory);
-            directory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(directory);
-
-            const auto filename = sofa::helper::system::FileSystem::append(directory, entry->className + ".md");
-
-            auto it = fileContent.find(filename);
-            if (it == fileContent.end())
-            {
-                FileContent content;
-                content.content = "# " + entry->className + "\n\n";
-
-                content.content += entry->description + "\n\n";
-
-                content.directory = directory;
-                it = fileContent.insert({filename, content}).first;
-            }
-
-            if (!creator->getClass()->templateName.empty())
-            {
-                it->second.content += "## " + creator->getClass()->templateName + "\n\n";
-            }
-
-            it->second.content += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
-            it->second.content += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
-            if (!creator->getClass()->parents.empty())
-            {
-                it->second.content += "__parents__: \n";
-
-                for (const auto& parent : creator->getClass()->parents)
-                {
-                    it->second.content += "- " + parent->className + "\n";
-                }
-                it->second.content += "\n";
-            }
-
-            const auto tmpNode = sofa::core::objectmodel::New<sofa::simulation::graph::DAGNode>("tmp");
-            sofa::core::objectmodel::BaseObjectDescription desc;
-            const auto object = creator->createInstance(tmpNode.get(), &desc);
-
-
-            it->second.content += "Data: \n\n";
-
-            it->second.content += "| Name | Description | Default value |\n";
-            it->second.content += "| ---- | ----------- | ------------- |\n";
-            for (const auto& data : object->getDataFields())
-            {
-                it->second.content += "| " + data->getName() + " | " + data->getHelp() + " | " + data->getDefaultValueString() + " |\n";
-            }
-
-
-            std::cout << "- " << filename << std::endl;
+            generateComponentDoc(output, fileContent, entry, creator);
         }
     }
 
