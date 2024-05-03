@@ -57,8 +57,6 @@ jobs:
             ninja install
             echo ${CCACHE_BASEDIR}
             ccache -s
-            echo '------ ls -laR "$WORKSPACE_BUILD_PATH" ------'
-            ls -laR "$WORKSPACE_BUILD_PATH"
           fi
 
       - name: Create artifact
@@ -76,6 +74,12 @@ jobs:
       - name: Set env vars for binaries
         shell: bash
         run: |
+          echo '------ ls -laR "$WORKSPACE_BUILD_PATH" ------'
+          ls -laR "$WORKSPACE_BUILD_PATH"
+          echo '------ ls -la "$WORKSPACE_INSTALL_PATH" ------'
+          ls -la "$WORKSPACE_INSTALL_PATH"
+          echo '------ ls -la "$WORKSPACE_ARTIFACT_PATH" ------'
+          ls -la "$WORKSPACE_ARTIFACT_PATH"
           # Set env vars for tests
           if [[ "$RUNNER_OS" == "Windows" ]]; then
             echo "$(cd $WORKSPACE_ARTIFACT_PATH/lib && pwd -W)" >> $GITHUB_PATH
