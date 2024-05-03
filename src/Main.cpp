@@ -29,11 +29,11 @@ struct FileContent
 
 void loadPlugins(const char* const appName, const std::vector<std::string>& pluginsToLoad);
 
-void generateDoc(const std::string& output);
+void generateDoc(std::string outputDirectory);
 
 int main(int argc, char** argv)
 {
-    constexpr const char* appName = "PluginFinder";
+    constexpr const char* appName = "SofaDocGenerator";
     cxxopts::Options options(appName, "Generate SOFA documentation based on the ObjectFactory");
     options.add_options()
         ("verbose", "Verbose")
@@ -107,7 +107,7 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
 
 void generateComponentDoc(
     const std::string& outputDirectory,
-    std::unordered_map<std::string, FileContent>& fileContent,
+    std::map<std::string, FileContent>& fileContent,
     const sofa::core::ClassEntry::SPtr& entry,
     sofa::core::ObjectFactory::Creator::SPtr creator,
     std::mutex& mutex)
@@ -162,28 +162,60 @@ void generateComponentDoc(
         {
             it->second.content += "Data: \n\n";
 
-            it->second.content += "| Name | Description | Default value |\n";
-            it->second.content += "| ---- | ----------- | ------------- |\n";
+            it->second.content += R"(<table>
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default value</th>
+    </tr>
+</thead>
+<tbody>
+)";
+
+            std::map<std::string, std::vector<sofa::core::BaseData*> > dataGroups;
             for (const auto& data : object->getDataFields())
             {
                 if (data)
                 {
-                    it->second.content +=
-                        "| " + data->getName() +
-                        " | " + data->getHelp() +
-                        " | " + data->getDefaultValueString() + " |\n";
+                    dataGroups[data->group].push_back(data);
                 }
             }
+            for (const auto& [group, dataList] : dataGroups)
+            {
+                if (!group.empty())
+                {
+                    it->second.content += "\t<tr>\n";
+                    it->second.content += "\t\t<td colspan=\"3\">" + group + "</td>\n";
+                    it->second.content += "\t</tr>\n";
+                }
+                for (const auto& data : dataList)
+                {
+                    it->second.content += "\t<tr>\n";
+                    it->second.content += "\t\t<td>" + data->getName() + "</td>\n";
+                    auto help = data->getHelp();
+                    sofa::helper::replaceAll(help, "<", "&lt;");
+                    sofa::helper::replaceAll(help, ">", "&gt;");
+                    it->second.content += "\t\t<td>\n" + help + "\n</td>\n";
+                    it->second.content += "\t\t<td>" + data->getDefaultValueString() + "</td>\n";
+                    it->second.content += "\t</tr>\n";
+                }
+            }
+            it->second.content += "\n</tbody>\n</table>\n\n";
         }
     }
 }
 
-void generateDoc(const std::string& output)
+void generateDoc(std::string outputDirectory)
 {
+    outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
+    const auto topicsDirectory = sofa::helper::system::FileSystem::append(outputDirectory, "topics");
+    const auto inTreeFile = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
+
     static std::vector<sofa::core::ClassEntry::SPtr> entries;
     sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
 
-    std::unordered_map<std::string, FileContent> fileContent;
+    std::map<std::string, FileContent> fileContent;
 
     std::vector<std::thread> threads;
     std::mutex mutex;
@@ -192,11 +224,11 @@ void generateDoc(const std::string& output)
     for (const auto& entry : entries)
     {
         std::cout << entry->className << std::endl;
-        threads.emplace_back([&entry, &output, &fileContent, &mutex]()
+        threads.emplace_back([&entry, &topicsDirectory, &fileContent, &mutex]()
         {
             for (const auto& [templateInstance, creator] : entry->creatorMap)
             {
-                generateComponentDoc(output, fileContent, entry, creator, mutex);
+                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
             }
         });
     }
@@ -212,4 +244,94 @@ void generateDoc(const std::string& output)
         std::ofstream f(filename);
         f << content.content;
     }
+
+    std::ofstream f(inTreeFile);
+    f << R"(<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE instance-profile
+        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
+
+<instance-profile id="in" name="SOFA" start-page="README.md">
+)";
+
+
+    struct TreeNode
+    {
+        std::string name;
+        std::map<std::string, std::unique_ptr<TreeNode>> children;
+
+        explicit TreeNode(std::string n) : name(std::move(n)) {}
+    };
+
+    class Tree {
+    private:
+        TreeNode root{""};
+
+    public:
+        Tree() = default;
+
+        const TreeNode& getRoot() const { return root; }
+
+        void addPath(const std::string& path)
+        {
+            std::stringstream ss(path);
+            std::string token;
+            TreeNode* current = &root;
+
+            while (getline(ss, token, '/'))
+            {
+                if (token.empty()) continue; // Skip empty tokens
+                if (current->children.find(token) == current->children.end()) {
+                    current->children[token] = std::make_unique<TreeNode>(token);
+                }
+                current = current->children[token].get();
+            }
+        }
+
+    } tree;
+
+
+
+    for (const auto& [filename, content] : fileContent)
+    {
+        auto shortFilename = filename;
+        sofa::helper::replaceAll(shortFilename, topicsDirectory, "");
+
+        while(shortFilename[0] == '/')
+        {
+            shortFilename = shortFilename.substr(1);
+        }
+
+        tree.addPath(shortFilename);
+    }
+
+    std::cout << "----------------" << std::endl;
+
+    std::function<void(const TreeNode&)> traversal;
+    std::string tab;
+    unsigned int id {};
+    traversal = [&f, &traversal, &tab, &id](const TreeNode& node)
+    {
+        if (node.children.empty())
+        {
+            f << tab << "<toc-element topic=\"" << node.name << "\" id=\"" << id++ << "\"/>\n";
+        }
+        else
+        {
+            f << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
+            for (const auto& [name, child] : node.children)
+            {
+                const auto oldTab = tab;
+                tab += "\t";
+                traversal(*child);
+                tab = oldTab;
+            }
+            f << tab << "</toc-element>\n";
+        }
+    };
+
+    traversal(tree.getRoot());
+
+    // f << "\t<toc-element topic=\"" << shortFilename << "\"/>\n";
+
+    f << "</instance-profile>";
 }

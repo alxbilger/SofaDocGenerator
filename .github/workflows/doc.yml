@@ -91,10 +91,10 @@ jobs:
           # Add execution right on the tests
           chmod +x $WORKSPACE_INSTALL_PATH/bin/*${{ steps.sofa.outputs.exe }}
 
-      - name: Doc generation
+      - name: Markdown generation
         shell: bash
         run: |
           echo '------ ls -laR "$WORKSPACE_INSTALL_PATH" ------'
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
-          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ./doc
+          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o "$WORKSPACE_SRC_PATH/doc"
