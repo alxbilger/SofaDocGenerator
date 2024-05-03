@@ -57,8 +57,8 @@ jobs:
             ninja install
             echo ${CCACHE_BASEDIR}
             ccache -s
-            echo '------ ls -la "$WORKSPACE_BUILD_PATH" ------'
-            ls -la "$WORKSPACE_BUILD_PATH"
+            echo '------ ls -laR "$WORKSPACE_BUILD_PATH" ------'
+            ls -laR "$WORKSPACE_BUILD_PATH"
           fi
 
       - name: Create artifact
