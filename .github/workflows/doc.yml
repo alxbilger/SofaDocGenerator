@@ -54,7 +54,7 @@ jobs:
               -DCMAKE_PREFIX_PATH=$SOFA_ROOT/lib/cmake \
               -DCMAKE_BUILD_TYPE=Release \
               -DCMAKE_INSTALL_PREFIX="$WORKSPACE_INSTALL_PATH" \
-              -DAPPLICATION_SOFADOCGENERATOR=ON
+              -DAPPLICATION_SOFADOCGENERATOR=ON \
               ../src
             ninja install
             echo ${CCACHE_BASEDIR}
