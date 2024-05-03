@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(SofaDocGenerator)
 
-sofa_find_package(Sofa.Core REQUIRED)
+find_package(Sofa.Core REQUIRED)
 sofa_find_package(Sofa.GUI.Common REQUIRED)
 sofa_find_package(Sofa.Simulation.Graph REQUIRED)
 
