@@ -223,7 +223,9 @@ void generateDoc(std::string outputDirectory)
     threads.reserve(entries.size());
     for (const auto& entry : entries)
     {
-        if (entry->className == "Distances") //skip because this component is buggy
+        if (entry->className != "Distances"
+            && entry->className != "ContactListener"
+            ) //skip because these component is buggy
         {
             std::cout << entry->className << std::endl;
 
