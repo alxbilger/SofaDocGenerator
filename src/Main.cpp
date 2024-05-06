@@ -99,6 +99,8 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
         msg_info(appName) << "Loading automatically plugin list in " << defaultConfigPluginPath;
         sofa::helper::system::PluginManager::getInstance().readFromIniFile(defaultConfigPluginPath);
     }
+
+    msg_info(appName) << "plugins loaded";
 }
 
 void generateComponentDoc(
@@ -229,6 +231,7 @@ void generateDoc(std::string outputDirectory)
             && entry->className != "FileMessageHandlerComponent"
             && entry->className != "MORUnilateralInteractionConstraint"
             && entry->className != "WireBeamInterpolation"
+            && entry->className != "CapsuleCollisionModel"
             ) //skip because these component is buggy
         {
             std::cout << entry->className << std::endl;
