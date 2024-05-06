@@ -247,13 +247,14 @@ void generateDoc(std::string outputDirectory)
 
     for (const auto& [filename, content] : fileContent)
     {
+        std::cout << "Writing " << filename << std::endl;
         sofa::helper::system::FileSystem::findOrCreateAValidPath(content.directory);
         std::ofstream f(filename);
         f << content.content;
     }
 
-    std::ofstream f(inTreeFile);
-    f << R"(<?xml version="1.0" encoding="UTF-8"?>
+    std::ofstream treeFile(inTreeFile);
+    treeFile << R"(<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE instance-profile
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
@@ -317,17 +318,17 @@ void generateDoc(std::string outputDirectory)
     std::function<void(const TreeNode&)> traversal;
     std::string tab;
     unsigned int id {};
-    traversal = [&f, &traversal, &tab, &id](const TreeNode& node)
+    traversal = [&treeFile, &traversal, &tab, &id](const TreeNode& node)
     {
         if (node.children.empty() && !node.name.empty())
         {
-            f << tab << "<toc-element topic=\"" << node.name << "\" id=\"" << id++ << "\"/>\n";
+            treeFile << tab << "<toc-element topic=\"" << node.name << "\" id=\"" << id++ << "\"/>\n";
         }
         else
         {
             if (!node.name.empty())
             {
-                f << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
+                treeFile << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
             }
             for (const auto& [name, child] : node.children)
             {
@@ -339,7 +340,7 @@ void generateDoc(std::string outputDirectory)
 
             if (!node.name.empty())
             {
-                f << tab << "</toc-element>\n";
+                treeFile << tab << "</toc-element>\n";
             }
         }
     };
@@ -348,5 +349,5 @@ void generateDoc(std::string outputDirectory)
 
     // f << "\t<toc-element topic=\"" << shortFilename << "\"/>\n";
 
-    f << "</instance-profile>";
+    treeFile << "</instance-profile>";
 }
