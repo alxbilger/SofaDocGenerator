@@ -94,14 +94,10 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
         msg_info(appName) << "Loading automatically plugin list in " << configPluginPath;
         sofa::helper::system::PluginManager::getInstance().readFromIniFile(configPluginPath);
     }
-    else if (sofa::helper::system::PluginRepository.findFile(defaultConfigPluginPath, "", nullptr))
+    if (sofa::helper::system::PluginRepository.findFile(defaultConfigPluginPath, "", nullptr))
     {
         msg_info(appName) << "Loading automatically plugin list in " << defaultConfigPluginPath;
         sofa::helper::system::PluginManager::getInstance().readFromIniFile(defaultConfigPluginPath);
-    }
-    else
-    {
-        msg_info(appName) << "No plugin list found. No plugin will be automatically loaded.";
     }
 }
 
