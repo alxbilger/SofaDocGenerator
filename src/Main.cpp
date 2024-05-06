@@ -232,6 +232,7 @@ void generateDoc(std::string outputDirectory)
             && entry->className != "ContactListener"
             && entry->className != "FileMessageHandlerComponent"
             && entry->className != "MORUnilateralInteractionConstraint"
+            && entry->className != "WireBeamInterpolation"
             ) //skip because these component is buggy
         {
             std::cout << entry->className << std::endl;
