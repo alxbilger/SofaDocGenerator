@@ -257,7 +257,8 @@ void generateDoc(std::string outputDirectory)
 <!DOCTYPE instance-profile
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
 
-<instance-profile id="in" name="SOFA" start-page="README.md">
+<instance-profile id="in" name="SOFA" start-page="START.md">\
+    <toc-element topic="START.md"/>
 )";
 
 
@@ -318,13 +319,16 @@ void generateDoc(std::string outputDirectory)
     unsigned int id {};
     traversal = [&f, &traversal, &tab, &id](const TreeNode& node)
     {
-        if (node.children.empty())
+        if (node.children.empty() && !node.name.empty())
         {
             f << tab << "<toc-element topic=\"" << node.name << "\" id=\"" << id++ << "\"/>\n";
         }
         else
         {
-            f << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
+            if (!node.name.empty())
+            {
+                f << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
+            }
             for (const auto& [name, child] : node.children)
             {
                 const auto oldTab = tab;
@@ -332,7 +336,11 @@ void generateDoc(std::string outputDirectory)
                 traversal(*child);
                 tab = oldTab;
             }
-            f << tab << "</toc-element>\n";
+
+            if (!node.name.empty())
+            {
+                f << tab << "</toc-element>\n";
+            }
         }
     };
 
