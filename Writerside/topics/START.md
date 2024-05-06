@@ -3,6 +3,8 @@
 Welcome to the comprehensive documentation of SOFA, featuring an organized inventory of all its components alongside select plugins.
 This documentation is complementary to the official documentation website: https://www.sofa-framework.org/community/doc/
 
+[![SOFA, Simulation Open-Framework Architecture](https://www.sofa-framework.org/wp-content/uploads/2013/01/SOFA_LOGO_ORANGE_2-normal.png)](https://www.sofa-framework.org/)
+
 ## Overview
 In this repository, you will discover detailed descriptions of each component, along with any associated templates. Each component entry includes a breakdown of available templates and their respective data, accompanied by thorough descriptions.
 
