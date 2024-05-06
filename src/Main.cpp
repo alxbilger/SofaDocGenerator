@@ -209,8 +209,13 @@ void generateComponentDoc(
 void generateDoc(std::string outputDirectory)
 {
     outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
+    std::cout << "output directory: " << outputDirectory << std::endl;
+
     const auto topicsDirectory = sofa::helper::system::FileSystem::append(outputDirectory, "topics");
-    const auto inTreeFile = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
+    std::cout << "topics directory: " << topicsDirectory << std::endl;
+
+    const auto inTreeFilename = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
+    std::cout << "in.tree file: " << inTreeFilename << std::endl;
 
     static std::vector<sofa::core::ClassEntry::SPtr> entries;
     sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
@@ -253,7 +258,7 @@ void generateDoc(std::string outputDirectory)
         f << content.content;
     }
 
-    std::ofstream treeFile(inTreeFile);
+    std::ofstream treeFile(inTreeFilename);
     treeFile << R"(<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE instance-profile
         SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
