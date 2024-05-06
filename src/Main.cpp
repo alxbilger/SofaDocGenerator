@@ -231,6 +231,7 @@ void generateDoc(std::string outputDirectory)
         if (entry->className != "Distances"
             && entry->className != "ContactListener"
             && entry->className != "FileMessageHandlerComponent"
+            && entry->className != "MORUnilateralInteractionConstraint"
             ) //skip because these component is buggy
         {
             std::cout << entry->className << std::endl;
