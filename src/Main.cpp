@@ -220,10 +220,7 @@ void generateDoc(std::string outputDirectory)
 
     std::map<std::string, FileContent> fileContent;
 
-    std::vector<std::thread> threads;
     std::mutex mutex;
-
-    threads.reserve(entries.size());
     for (const auto& entry : entries)
     {
         if (entry->className != "Distances"
@@ -236,19 +233,11 @@ void generateDoc(std::string outputDirectory)
         {
             std::cout << entry->className << std::endl;
 
-            threads.emplace_back([&entry, &topicsDirectory, &fileContent, &mutex]()
+            for (const auto& [templateInstance, creator] : entry->creatorMap)
             {
-                for (const auto& [templateInstance, creator] : entry->creatorMap)
-                {
-                    generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
-                }
-            });
+                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+            }
         }
-    }
-
-    for (auto& t : threads)
-    {
-        t.join();
     }
 
     for (const auto& [filename, content] : fileContent)
