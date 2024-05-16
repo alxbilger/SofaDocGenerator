@@ -220,16 +220,15 @@ void generateDoc(std::string outputDirectory)
 
     std::map<std::string, FileContent> fileContent;
 
+    static const std::vector<std::string> skippedComponents {
+        "CapsuleCollisionModel",
+        "MORUnilateralInteractionConstraint"
+    };
+
     std::mutex mutex;
     for (const auto& entry : entries)
     {
-        if (entry->className != "Distances"
-            && entry->className != "ContactListener"
-            && entry->className != "FileMessageHandlerComponent"
-            && entry->className != "MORUnilateralInteractionConstraint"
-            && entry->className != "WireBeamInterpolation"
-            && entry->className != "CapsuleCollisionModel"
-            ) //skip because these component is buggy
+        if (std::find(skippedComponents.begin(), skippedComponents.end(), entry->className) == skippedComponents.end()) //skip because these components are buggy
         {
             std::cout << entry->className << std::endl;
 
