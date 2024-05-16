@@ -140,6 +140,7 @@ void generateComponentDoc(
 
     it->second.content += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
     it->second.content += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
+    it->second.content += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
     if (!creator->getClass()->parents.empty())
     {
         it->second.content += "__parents__: \n";
