@@ -326,6 +326,17 @@ void generateDoc(std::string outputDirectory)
         "MORUnilateralInteractionConstraint"
     };
 
+    const bool isCudaLoaded = sofa::helper::system::PluginManager::getInstance().pluginIsLoaded("SofaCUDA");
+    const auto isCudaTemplate = [](std::string t)
+    {
+        return t == "CudaRigid3d" || t == "CudaRigid3f" ||
+            t == "CudaRigid2d" || t == "CudaRigid2f" ||
+            t == "CudaVec3d" || t == "CudaVec3d1" || t == "CudaVec3f" || t == "CudaVec3f1" ||
+            t == "CudaVec2d" || t == "CudaVec2f" ||
+            t == "CudaVec1d" || t == "CudaVec1f" ||
+            t == "CudaVec6d" || t == "CudaVec6f";
+    };
+
     std::mutex mutex;
     for (const auto& entry : entries)
     {
@@ -335,7 +346,11 @@ void generateDoc(std::string outputDirectory)
 
             for (const auto& [templateInstance, creator] : entry->creatorMap)
             {
-                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+                const bool isCudaT = isCudaTemplate(creator->getClass()->templateName);
+                if (isCudaT && isCudaLoaded || !isCudaT)
+                {
+                    generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+                }
             }
         }
     }
