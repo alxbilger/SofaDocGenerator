@@ -204,49 +204,8 @@ void generateComponentDoc(
     }
 }
 
-void generateDoc(std::string outputDirectory)
+void writeTOCfile(const std::string topicsDirectory, const std::string inTreeFilename, std::map<std::string, FileContent> fileContent)
 {
-    outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
-    std::cout << "output directory: " << outputDirectory << std::endl;
-
-    const auto topicsDirectory = sofa::helper::system::FileSystem::append(outputDirectory, "topics");
-    std::cout << "topics directory: " << topicsDirectory << std::endl;
-
-    const auto inTreeFilename = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
-    std::cout << "in.tree file: " << inTreeFilename << std::endl;
-
-    static std::vector<sofa::core::ClassEntry::SPtr> entries;
-    sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
-
-    std::map<std::string, FileContent> fileContent;
-
-    static const std::vector<std::string> skippedComponents {
-        "CapsuleCollisionModel",
-        "MORUnilateralInteractionConstraint"
-    };
-
-    std::mutex mutex;
-    for (const auto& entry : entries)
-    {
-        if (std::find(skippedComponents.begin(), skippedComponents.end(), entry->className) == skippedComponents.end()) //skip because these components are buggy
-        {
-            std::cout << entry->className << std::endl;
-
-            for (const auto& [templateInstance, creator] : entry->creatorMap)
-            {
-                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
-            }
-        }
-    }
-
-    for (const auto& [filename, content] : fileContent)
-    {
-        std::cout << "Writing " << filename << std::endl;
-        sofa::helper::system::FileSystem::findOrCreateAValidPath(content.directory);
-        std::ofstream f(filename);
-        f << content.content;
-    }
-
     std::ofstream treeFile(inTreeFilename);
     treeFile << R"(<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE instance-profile
@@ -344,4 +303,50 @@ void generateDoc(std::string outputDirectory)
     // f << "\t<toc-element topic=\"" << shortFilename << "\"/>\n";
 
     treeFile << "</instance-profile>";
+}
+
+void generateDoc(std::string outputDirectory)
+{
+    outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
+    std::cout << "output directory: " << outputDirectory << std::endl;
+
+    const auto topicsDirectory = sofa::helper::system::FileSystem::append(outputDirectory, "topics");
+    std::cout << "topics directory: " << topicsDirectory << std::endl;
+
+    const auto inTreeFilename = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
+    std::cout << "in.tree file: " << inTreeFilename << std::endl;
+
+    static std::vector<sofa::core::ClassEntry::SPtr> entries;
+    sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
+
+    std::map<std::string, FileContent> fileContent;
+
+    static const std::vector<std::string> skippedComponents {
+        "CapsuleCollisionModel",
+        "MORUnilateralInteractionConstraint"
+    };
+
+    std::mutex mutex;
+    for (const auto& entry : entries)
+    {
+        if (std::find(skippedComponents.begin(), skippedComponents.end(), entry->className) == skippedComponents.end()) //skip because these components are buggy
+        {
+            std::cout << entry->className << std::endl;
+
+            for (const auto& [templateInstance, creator] : entry->creatorMap)
+            {
+                generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+            }
+        }
+    }
+
+    for (const auto& [filename, content] : fileContent)
+    {
+        std::cout << "Writing " << filename << std::endl;
+        sofa::helper::system::FileSystem::findOrCreateAValidPath(content.directory);
+        std::ofstream f(filename);
+        f << content.content;
+    }
+
+    writeTOCfile(topicsDirectory, inTreeFilename, fileContent);
 }
