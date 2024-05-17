@@ -29,7 +29,7 @@ struct FileContent
 
 void loadPlugins(const char* const appName, const std::vector<std::string>& pluginsToLoad);
 
-void generateDoc(std::string outputDirectory);
+void generateDoc(std::string outputDirectory, bool skipEmptyModuleName);
 
 int main(int argc, char** argv)
 {
@@ -38,6 +38,7 @@ int main(int argc, char** argv)
     options.add_options()
         ("verbose", "Verbose")
         ("h,help", "print usage")
+        ("skip_empty_module_name", "skip doc generation for components with empty module name")
         ("l,load", "load given plugins", cxxopts::value<std::vector<std::string>>())
         ("o,output", "Documentation is generated in this directory", cxxopts::value<std::string>());
 
@@ -73,8 +74,11 @@ int main(int argc, char** argv)
     });
 
     const auto verbose = result["verbose"].as<bool>();
+    const auto skipEmptyModuleName = result["skip_empty_module_name"].as<bool>();
 
-    generateDoc(result["output"].as<std::string>());
+    msg_info_when(skipEmptyModuleName, appName) << "Components with empty module name will be skipped";
+
+    generateDoc(result["output"].as<std::string>(), skipEmptyModuleName);
 
     sofa::simulation::graph::cleanup();
     return 0;
@@ -306,7 +310,7 @@ void writeTOCfile(const std::string topicsDirectory, const std::string inTreeFil
     treeFile << "</instance-profile>";
 }
 
-void generateDoc(std::string outputDirectory)
+void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
 {
     outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
     std::cout << "output directory: " << outputDirectory << std::endl;
@@ -347,6 +351,12 @@ void generateDoc(std::string outputDirectory)
 
             for (const auto& [templateInstance, creator] : entry->creatorMap)
             {
+                const auto moduleName = std::string{creator->getTarget()};
+                if (moduleName.empty() && skipEmptyModuleName)
+                {
+                    continue;
+                }
+
                 const bool isCudaT = isCudaTemplate(creator->getClass()->templateName);
                 if (isCudaT && isCudaLoaded || !isCudaT)
                 {
