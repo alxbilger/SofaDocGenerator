@@ -106,7 +106,7 @@ jobs:
           echo '------ ls -laR "$WORKSPACE_INSTALL_PATH" ------'
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
-          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o "$WORKSPACE_SRC_PATH/Writerside"
+          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o "$WORKSPACE_SRC_PATH/Writerside" --examples ${{ github.workspace }}/sofa/share/sofa/examples
 
       - name: Build docs using Writerside Docker builder
         uses: JetBrains/writerside-github-action@v4
