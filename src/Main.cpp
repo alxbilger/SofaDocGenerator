@@ -1,5 +1,6 @@
 
 #include <cxxopts.hpp>
+#include <filesystem>
 #include <fstream>
 #include <iostream>
 #include <mutex>
@@ -18,11 +19,13 @@
 #include <sofa/helper/BackTrace.h>
 #include <sofa/helper/system/FileRepository.h>
 #include <sofa/helper/system/PluginManager.h>
+#include <sofa/simulation/common/SceneLoaderXML.h>
 #include <sofa/simulation/graph/DAGNode.h>
 #include <sofa/simulation/graph/init.h>
 
 struct FileContent
 {
+    std::string componentName;
     std::string directory;
     std::string content;
     std::map<std::string, std::string> templateContentMap;
@@ -30,7 +33,27 @@ struct FileContent
 
 void loadPlugins(const char* const appName, const std::vector<std::string>& pluginsToLoad);
 
-void generateDoc(std::string outputDirectory, bool skipEmptyModuleName);
+void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const std::vector<std::string>& examplesDirectories);
+
+std::vector<std::string> find_files_by_prefix(const std::string& directory, const std::string& prefix)
+{
+    std::vector<std::string> files;
+    namespace fs = std::filesystem;
+
+    for (const auto& entry : fs::directory_iterator(directory))
+    {
+        if (entry.is_regular_file() &&
+            entry.path().filename().string().find(prefix) == 0) {
+            files.push_back(entry.path().string());
+            } else if (entry.is_directory() && !fs::is_symlink(entry)) {
+                std::vector<std::string> subdir_files = find_files_by_prefix(entry.path().string(), prefix);
+                files.insert(files.end(), subdir_files.begin(), subdir_files.end());
+            }
+    }
+
+    return files;
+}
+
 
 int main(int argc, char** argv)
 {
@@ -41,7 +64,9 @@ int main(int argc, char** argv)
         ("h,help", "print usage")
         ("skip_empty_module_name", "skip doc generation for components with empty module name")
         ("l,load", "load given plugins", cxxopts::value<std::vector<std::string>>())
-        ("o,output", "Documentation is generated in this directory", cxxopts::value<std::string>());
+        ("o,output", "Documentation is generated in this directory", cxxopts::value<std::string>())
+        ("examples", "Example files", cxxopts::value<std::vector<std::string>>())
+    ;
 
     const auto result = options.parse(argc, argv);
 
@@ -79,7 +104,13 @@ int main(int argc, char** argv)
 
     msg_info_when(skipEmptyModuleName, appName) << "Components with empty module name will be skipped";
 
-    generateDoc(result["output"].as<std::string>(), skipEmptyModuleName);
+    std::vector<std::string> examplesDirectories;
+    if (result.count("examples"))
+    {
+        examplesDirectories = result["examples"].as<std::vector<std::string>>();
+    }
+
+    generateDoc(result["output"].as<std::string>(), skipEmptyModuleName, examplesDirectories);
 
     sofa::simulation::graph::cleanup();
     return 0;
@@ -130,6 +161,7 @@ void generateComponentDoc(
     if (it == fileContent.end())
     {
         FileContent content;
+        content.componentName = entry->className;
         content.content = "# " + entry->className + "\n\n";
 
         content.content += entry->description + "\n\n";
@@ -309,7 +341,7 @@ void writeTOCfile(const std::string topicsDirectory, const std::string inTreeFil
     treeFile << "</instance-profile>";
 }
 
-void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
+void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const std::vector<std::string>& examplesDirectories)
 {
     outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
     std::cout << "output directory: " << outputDirectory << std::endl;
@@ -398,6 +430,48 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
                 f << '\n';
             }
             f << templateContent << '\n';
+        }
+
+        std::stringstream ss;
+        for (const auto& dir : examplesDirectories)
+        {
+            const auto exampleFiles = find_files_by_prefix(dir, content.componentName);
+
+            sofa::simulation::SceneLoader::ExtensionList extensions;
+            sofa::simulation::SceneLoaderXML xmlloader;
+            xmlloader.getExtensionList(&extensions);
+
+            std::vector<std::string> filteredFiles;
+            for (const auto& file : exampleFiles)
+            {
+                const auto extension = sofa::helper::system::FileSystem::getExtension(file);
+                if (std::find(extensions.begin(), extensions.end(), extension) != extensions.end())
+                {
+                    filteredFiles.push_back(file);
+                }
+            }
+
+            if (!filteredFiles.empty())
+            {
+                for (const auto& file : filteredFiles)
+                {
+                    ss << file << "\n\n";
+                    ss << "```xml\n";
+                    std::string line;
+                    std::ifstream exFile(file);
+                    while (std::getline (exFile, line))
+                    {
+                        ss << line << "\n";
+                    }
+                    ss << "```\n";
+                }
+            }
+        }
+
+        if (!ss.str().empty())
+        {
+            f << "## Examples\n\n";
+            f << ss.str();
         }
     }
 
