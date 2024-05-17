@@ -25,6 +25,7 @@ struct FileContent
 {
     std::string directory;
     std::string content;
+    std::map<std::string, std::string> templateContentMap;
 };
 
 void loadPlugins(const char* const appName, const std::vector<std::string>& pluginsToLoad);
@@ -112,6 +113,7 @@ void generateComponentDoc(
     std::map<std::string, FileContent>& fileContent,
     const sofa::core::ClassEntry::SPtr& entry,
     sofa::core::ObjectFactory::Creator::SPtr creator,
+    std::string templateName,
     std::mutex& mutex)
 {
     auto targetDirectory = std::string{creator->getTarget()};
@@ -137,23 +139,20 @@ void generateComponentDoc(
         it = fileContent.insert({filename, content}).first;
     }
 
-    if (!creator->getClass()->templateName.empty())
-    {
-        it->second.content += "## " + creator->getClass()->templateName + "\n\n";
-    }
+    auto& templateContent = it->second.templateContentMap[templateName];
 
-    it->second.content += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
-    it->second.content += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
-    it->second.content += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
+    templateContent += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
+    templateContent += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
+    templateContent += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
     if (!creator->getClass()->parents.empty())
     {
-        it->second.content += "__parents__: \n";
+        templateContent += "__parents__: \n";
 
         for (const auto& parent : creator->getClass()->parents)
         {
-            it->second.content += "- " + parent->className + "\n";
+            templateContent += "- " + parent->className + "\n";
         }
-        it->second.content += "\n";
+        templateContent += "\n";
     }
 
     const auto tmpNode = sofa::core::objectmodel::New<sofa::simulation::graph::DAGNode>("tmp");
@@ -163,9 +162,9 @@ void generateComponentDoc(
         const auto object = creator->createInstance(tmpNode.get(), &desc);
         if (object)
         {
-            it->second.content += "Data: \n\n";
+            templateContent += "Data: \n\n";
 
-            it->second.content += R"(<table>
+            templateContent += R"(<table>
 <thead>
     <tr>
         <th>Name</th>
@@ -188,23 +187,23 @@ void generateComponentDoc(
             {
                 if (!group.empty())
                 {
-                    it->second.content += "\t<tr>\n";
-                    it->second.content += "\t\t<td colspan=\"3\">" + group + "</td>\n";
-                    it->second.content += "\t</tr>\n";
+                    templateContent += "\t<tr>\n";
+                    templateContent += "\t\t<td colspan=\"3\">" + group + "</td>\n";
+                    templateContent += "\t</tr>\n";
                 }
                 for (const auto& data : dataList)
                 {
-                    it->second.content += "\t<tr>\n";
-                    it->second.content += "\t\t<td>" + data->getName() + "</td>\n";
+                    templateContent += "\t<tr>\n";
+                    templateContent += "\t\t<td>" + data->getName() + "</td>\n";
                     auto help = data->getHelp();
                     sofa::helper::replaceAll(help, "<", "&lt;");
                     sofa::helper::replaceAll(help, ">", "&gt;");
-                    it->second.content += "\t\t<td>\n" + help + "\n</td>\n";
-                    it->second.content += "\t\t<td>" + data->getDefaultValueString() + "</td>\n";
-                    it->second.content += "\t</tr>\n";
+                    templateContent += "\t\t<td>\n" + help + "\n</td>\n";
+                    templateContent += "\t\t<td>" + data->getDefaultValueString() + "</td>\n";
+                    templateContent += "\t</tr>\n";
                 }
             }
-            it->second.content += "\n</tbody>\n</table>\n\n";
+            templateContent += "\n</tbody>\n</table>\n\n";
         }
     }
 }
@@ -349,6 +348,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
         {
             std::cout << entry->className << std::endl;
 
+            sofa::core::ObjectFactory::CreatorMap filteredCreatorMap;
             for (const auto& [templateInstance, creator] : entry->creatorMap)
             {
                 const auto moduleName = std::string{creator->getTarget()};
@@ -360,8 +360,14 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
                 const bool isCudaT = isCudaTemplate(creator->getClass()->templateName);
                 if (isCudaT && isCudaLoaded || !isCudaT)
                 {
-                    generateComponentDoc(topicsDirectory, fileContent, entry, creator, mutex);
+                    filteredCreatorMap.insert({templateInstance, creator});
                 }
+
+            }
+
+            for (const auto& [templateInstance, creator] : filteredCreatorMap)
+            {
+                generateComponentDoc(topicsDirectory, fileContent, entry, creator, creator->getClass()->templateName, mutex);
             }
         }
     }
@@ -372,6 +378,27 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName)
         sofa::helper::system::FileSystem::findOrCreateAValidPath(content.directory);
         std::ofstream f(filename);
         f << content.content;
+
+        std::map<std::string, std::set<std::string> > fusedTemplates;
+
+        for (const auto& [templateName, templateContent] : content.templateContentMap)
+        {
+            fusedTemplates[templateContent].insert(templateName);
+        }
+
+        for (const auto& [templateContent, templateNames] : fusedTemplates)
+        {
+            if (!templateNames.empty() && std::all_of(templateNames.begin(), templateNames.end(), [](const std::string& templateName){return !templateName.empty();}))
+            {
+                f << "__Templates__:\n";
+                for (const auto& templateName : templateNames)
+                {
+                    f << "- " << templateName << '\n';
+                }
+                f << '\n';
+            }
+            f << templateContent << '\n';
+        }
     }
 
     writeTOCfile(topicsDirectory, inTreeFilename, fileContent);
