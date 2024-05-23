@@ -23,6 +23,8 @@
 #include <sofa/simulation/graph/DAGNode.h>
 #include <sofa/simulation/graph/init.h>
 
+#include "XMLtoPython.h"
+
 struct FileContent
 {
     std::string componentName;
@@ -482,14 +484,25 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
                 for (const auto& file : filteredFiles)
                 {
                     // ss << file << "\n\n";
-                    ss << "```xml\n";
-                    std::string line;
-                    std::ifstream exFile(file);
-                    while (std::getline (exFile, line))
                     {
-                        ss << line << "\n";
+                        ss << "```xml\n";
+                        std::string line;
+                        std::ifstream exFile(file);
+                        while (std::getline (exFile, line))
+                        {
+                            ss << line << "\n";
+                        }
+                        ss << "```\n";
                     }
-                    ss << "```\n";
+
+                    {
+                        std::string pythonString;
+                        convertXMLToPython(file, pythonString);
+
+                        ss << "```python\n";
+                        ss << pythonString;
+                        ss << "```\n";
+                    }
                 }
             }
         }

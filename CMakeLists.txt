@@ -3,7 +3,7 @@ project(SofaDocGenerator)
 
 find_package(Sofa.Core REQUIRED)
 sofa_find_package(Sofa.Simulation.Graph REQUIRED)
-
+sofa_find_package(TinyXML2 REQUIRED)
 
 find_package(cxxopts 3.1 QUIET)
 if(NOT cxxopts_FOUND AND SOFA_ALLOW_FETCH_DEPENDENCIES)
@@ -35,9 +35,10 @@ set(SOFADOCGENERATOR_SRC "src")
 
 set(SOURCE_FILES ${SOFADOCGENERATOR_SRC}/Main.cpp)
 
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${SOFADOCGENERATOR_SRC}/XMLtoPython.h)
 target_link_libraries(${PROJECT_NAME} PUBLIC Sofa.Core Sofa.Simulation.Graph)
 target_link_libraries(${PROJECT_NAME} PUBLIC cxxopts::cxxopts)
+target_link_libraries(${PROJECT_NAME} PRIVATE tinyxml2::tinyxml2)
 target_include_directories(${PROJECT_NAME} PUBLIC ${SOFADOCGENERATOR_SRC})
 
 sofa_add_targets_to_package(
