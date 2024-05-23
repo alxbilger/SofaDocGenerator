@@ -45,6 +45,9 @@ jobs:
         with:
           path: ${{ env.WORKSPACE_SRC_PATH }}
 
+      - name: Install tinyxml2
+        run: sudo apt-get install -y libtinyxml2-dev
+
       - name: Build and install
         shell: bash
         run: |
