@@ -119,8 +119,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: doc_markdown
-          path: |
-            "$WORKSPACE_SRC_PATH/Writerside/topics"
+          path: Writerside/topics
           overwrite: true
 
       - name: Build docs using Writerside Docker builder
