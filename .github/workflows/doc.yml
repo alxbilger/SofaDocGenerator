@@ -119,8 +119,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: doc_markdown
-          path: Writerside/topics
+          path: ./Writerside/topics
           overwrite: true
+          if-no-files-found: error
 
       - name: Build docs using Writerside Docker builder
         uses: JetBrains/writerside-github-action@v4
