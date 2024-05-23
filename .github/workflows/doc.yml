@@ -114,11 +114,13 @@ jobs:
           cd $WORKSPACE_INSTALL_PATH
           ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o "$WORKSPACE_SRC_PATH/Writerside" --examples ${{ github.workspace }}/sofa/share/sofa/examples
 
-      - uses: stefanzweifel/git-auto-commit-action@v5
+      - name: Save markdown doc
+        uses: actions/upload-artifact@v4
         with:
-          commit_message: generate doc
-          branch: genmarkdown
-          repository: "$WORKSPACE_SRC_PATH/Writerside/topics"
+          name: doc_markdown
+          path: |
+            "$WORKSPACE_SRC_PATH/Writerside/topics"
+          overwrite: true
 
       - name: Build docs using Writerside Docker builder
         uses: JetBrains/writerside-github-action@v4
@@ -127,10 +129,10 @@ jobs:
           artifact: ${{ env.ARTIFACT }}
           docker-version: ${{ env.DOCKER_VERSION }}
 
-      - name: Save artifact with build results
+      - name: Save html doc
         uses: actions/upload-artifact@v4
         with:
-          name: docs
+          name: doc_html
           path: |
             artifacts/${{ env.ARTIFACT }}
             artifacts/report.json
