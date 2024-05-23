@@ -139,6 +139,72 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
     msg_info(appName) << "plugins loaded";
 }
 
+void extractComponentLinks(std::string& templateContent, const sofa::core::objectmodel::BaseObject::SPtr object)
+{
+    const auto& links = object->getLinks();
+    if (links.empty())
+    {
+        return;
+    }
+
+    templateContent += "Links: \n\n";
+
+    templateContent += "| Name | Description |\n";
+    templateContent += "| ---- | ----------- |\n";
+
+    for (const auto& link : object->getLinks())
+    {
+        templateContent += "|" + link->getName() + "|" + link->getHelp() + "|\n";
+    }
+    templateContent += "\n\n";
+}
+
+void extractComponentData(std::string& templateContent, const sofa::core::objectmodel::BaseObject::SPtr object)
+{
+    templateContent += "Data: \n\n";
+
+    templateContent += R"(<table>
+<thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Default value</th>
+    </tr>
+</thead>
+<tbody>
+)";
+
+    std::map<std::string, std::vector<sofa::core::BaseData*> > dataGroups;
+    for (const auto& data : object->getDataFields())
+    {
+        if (data)
+        {
+            dataGroups[data->group].push_back(data);
+        }
+    }
+    for (const auto& [group, dataList] : dataGroups)
+    {
+        if (!group.empty())
+        {
+            templateContent += "\t<tr>\n";
+            templateContent += "\t\t<td colspan=\"3\">" + group + "</td>\n";
+            templateContent += "\t</tr>\n";
+        }
+        for (const auto& data : dataList)
+        {
+            templateContent += "\t<tr>\n";
+            templateContent += "\t\t<td>" + data->getName() + "</td>\n";
+            auto help = data->getHelp();
+            sofa::helper::replaceAll(help, "<", "&lt;");
+            sofa::helper::replaceAll(help, ">", "&gt;");
+            templateContent += "\t\t<td>\n" + help + "\n</td>\n";
+            templateContent += "\t\t<td>" + data->getDefaultValueString() + "</td>\n";
+            templateContent += "\t</tr>\n";
+        }
+    }
+    templateContent += "\n</tbody>\n</table>\n\n";
+}
+
 void generateComponentDoc(
     const std::string& outputDirectory,
     std::map<std::string, FileContent>& fileContent,
@@ -175,7 +241,7 @@ void generateComponentDoc(
 
     templateContent += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
     templateContent += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
-    templateContent += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
+    // templateContent += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
     if (!creator->getClass()->parents.empty())
     {
         templateContent += "__parents__: \n";
@@ -194,48 +260,8 @@ void generateComponentDoc(
         const auto object = creator->createInstance(tmpNode.get(), &desc);
         if (object)
         {
-            templateContent += "Data: \n\n";
-
-            templateContent += R"(<table>
-<thead>
-    <tr>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Default value</th>
-    </tr>
-</thead>
-<tbody>
-)";
-
-            std::map<std::string, std::vector<sofa::core::BaseData*> > dataGroups;
-            for (const auto& data : object->getDataFields())
-            {
-                if (data)
-                {
-                    dataGroups[data->group].push_back(data);
-                }
-            }
-            for (const auto& [group, dataList] : dataGroups)
-            {
-                if (!group.empty())
-                {
-                    templateContent += "\t<tr>\n";
-                    templateContent += "\t\t<td colspan=\"3\">" + group + "</td>\n";
-                    templateContent += "\t</tr>\n";
-                }
-                for (const auto& data : dataList)
-                {
-                    templateContent += "\t<tr>\n";
-                    templateContent += "\t\t<td>" + data->getName() + "</td>\n";
-                    auto help = data->getHelp();
-                    sofa::helper::replaceAll(help, "<", "&lt;");
-                    sofa::helper::replaceAll(help, ">", "&gt;");
-                    templateContent += "\t\t<td>\n" + help + "\n</td>\n";
-                    templateContent += "\t\t<td>" + data->getDefaultValueString() + "</td>\n";
-                    templateContent += "\t</tr>\n";
-                }
-            }
-            templateContent += "\n</tbody>\n</table>\n\n";
+            extractComponentData(templateContent, object);
+            extractComponentLinks(templateContent, object);
         }
     }
 }
@@ -455,7 +481,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
             {
                 for (const auto& file : filteredFiles)
                 {
-                    ss << file << "\n\n";
+                    // ss << file << "\n\n";
                     ss << "```xml\n";
                     std::string line;
                     std::ifstream exFile(file);
