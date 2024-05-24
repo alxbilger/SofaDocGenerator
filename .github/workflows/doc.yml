@@ -126,6 +126,26 @@ jobs:
           overwrite: true
           if-no-files-found: error
 
+      - name: Checkout documentation code
+        uses: actions/checkout@v4
+        with:
+          repository: 'https://github.com/sofa-framework/doc'
+          path: ${{ env.WORKSPACE_SRC_PATH }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - run: python ${{ github.workspace }}/src/scripts/merge_docs.py ${{ github.workspace }}/src/Writerside/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
+
+      - name: Save merged doc
+        uses: actions/upload-artifact@v4
+        with:
+          name: doc_markdown
+          path: ${{ github.workspace }}/doc
+          overwrite: true
+          if-no-files-found: error
+
       - name: Build docs using Writerside Docker builder
         uses: JetBrains/writerside-github-action@v4
         with:
