@@ -109,7 +109,7 @@ jobs:
           echo '------ ls -laR "$WORKSPACE_INSTALL_PATH" ------'
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
-          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ${{ github.workspace }}/SofaDocGenerator/Writerside" --examples ${{ github.workspace }}/sofa/share/sofa/examples
+          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ${{ github.workspace }}/SofaDocGenerator/Writerside --examples ${{ github.workspace }}/sofa/share/sofa/examples
           ls -la "$WORKSPACE_SRC_PATH/Writerside"
 
       - name: Save markdown doc
