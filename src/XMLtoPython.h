@@ -19,9 +19,8 @@ inline void traversingXML(tinyxml2::XMLNode* node, std::string& pythonString, st
         auto element = dynamic_cast<tinyxml2::XMLElement*>(node);
         if (std::string{element->Name()} == std::string{"Node"})
         {
-            pythonString += "\n\t" + currentNode + ".addChild(";
-
             {
+                const std::string parentNode = currentNode;
                 const tinyxml2::XMLAttribute* attribute = element->FirstAttribute();
                 while (attribute != nullptr)
                 {
@@ -32,6 +31,7 @@ inline void traversingXML(tinyxml2::XMLNode* node, std::string& pythonString, st
                     }
                     attribute = attribute->Next();
                 }
+                pythonString += "\n\t" + currentNode + " = " + parentNode + ".addChild(";
                 pythonString += "\'" + currentNode + "\'";
             }
             {
