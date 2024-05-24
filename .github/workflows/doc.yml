@@ -45,7 +45,7 @@ jobs:
         with:
           path: 'SofaDocGenerator'
 
-      - name: Checkout source code
+      - name: Checkout merged doc branch
         uses: actions/checkout@v4
         with:
           path: 'merged_doc'
@@ -138,6 +138,16 @@ jobs:
           path: ${{ github.workspace }}/doc
           overwrite: true
           if-no-files-found: error
+
+      - name: Commit merged doc
+        run: |
+          cd ${{ github.workspace }}/merged_doc
+          rm -rf
+          cp -a ${{ github.workspace }}/doc ${{ github.workspace }}/merged_doc
+          git config --global user.name "doc generator"
+          git config --global user.email "username@users.noreply.github.com"
+          git commit -a -m "Update documentation"
+          git push
 
       - name: Build docs using Writerside Docker builder
         uses: JetBrains/writerside-github-action@v4
