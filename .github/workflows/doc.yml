@@ -43,7 +43,13 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v4
         with:
-          path: ${{ env.WORKSPACE_SRC_PATH }}
+          path: 'SofaDocGenerator'
+
+      - name: Checkout documentation code
+        uses: actions/checkout@v4
+        with:
+          repository: 'sofa-framework/doc'
+          path: 'doc'
 
       - name: Install tinyxml2
         run: sudo apt-get install -y libtinyxml2-dev
@@ -125,12 +131,6 @@ jobs:
           path: ${{ github.workspace }}/src/Writerside/topics
           overwrite: true
           if-no-files-found: error
-
-      - name: Checkout documentation code
-        uses: actions/checkout@v4
-        with:
-          repository: 'sofa-framework/doc'
-          path: ${{ env.WORKSPACE_SRC_PATH }}
 
       - uses: actions/setup-python@v5
         with:
