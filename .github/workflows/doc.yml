@@ -109,7 +109,7 @@ jobs:
           echo '------ ls -laR "$WORKSPACE_INSTALL_PATH" ------'
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
-          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o "$WORKSPACE_SRC_PATH/Writerside" --examples ${{ github.workspace }}/sofa/share/sofa/examples
+          ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ${{ github.workspace }}/SofaDocGenerator/Writerside" --examples ${{ github.workspace }}/sofa/share/sofa/examples
           ls -la "$WORKSPACE_SRC_PATH/Writerside"
 
       - name: Save markdown doc
@@ -124,7 +124,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      - run: python ${{ github.workspace }}/src/script/merge_docs.py ${{ github.workspace }}/src/Writerside/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
+      - run: python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/Writerside/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
 
       - name: Save merged doc
         uses: actions/upload-artifact@v4
