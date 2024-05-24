@@ -45,6 +45,12 @@ jobs:
         with:
           path: 'SofaDocGenerator'
 
+      - name: Checkout source code
+        uses: actions/checkout@v4
+        with:
+          path: 'merged_doc'
+          ref: 'merged_doc'
+
       - name: Checkout documentation code
         uses: actions/checkout@v4
         with:
