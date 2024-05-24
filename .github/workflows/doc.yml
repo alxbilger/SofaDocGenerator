@@ -110,13 +110,12 @@ jobs:
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
           ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ${{ github.workspace }}/SofaDocGenerator/Writerside --examples ${{ github.workspace }}/sofa/share/sofa/examples
-          ls -la "$WORKSPACE_SRC_PATH/Writerside"
 
       - name: Save markdown doc
         uses: actions/upload-artifact@v4
         with:
           name: doc_markdown
-          path: ${{ github.workspace }}/src/Writerside/topics
+          path: ${{ github.workspace }}/SofaDocGenerator/Writerside/topics
           overwrite: true
           if-no-files-found: error
 
