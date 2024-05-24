@@ -129,7 +129,7 @@ jobs:
       - name: Checkout documentation code
         uses: actions/checkout@v4
         with:
-          repository: 'https://github.com/sofa-framework/doc'
+          repository: 'sofa-framework/doc'
           path: ${{ env.WORKSPACE_SRC_PATH }}
 
       - uses: actions/setup-python@v5
