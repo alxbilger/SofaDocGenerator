@@ -199,7 +199,7 @@ Dimension of the convolution kernel to smooth the voxels. 0 if no smoothing is r
 	<tr>
 		<td>facets</td>
 		<td>
-Input mesh facets
+Input mesh d_facets
 </td>
 		<td></td>
 	</tr>

@@ -107,7 +107,7 @@ Velocities.
 		<td></td>
 	</tr>
 	<tr>
-		<td>old_position</td>
+		<td>d_old_position</td>
 		<td>
 Old positions.
 </td>

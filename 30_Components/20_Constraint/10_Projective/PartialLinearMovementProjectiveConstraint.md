@@ -107,28 +107,35 @@ movements corresponding to the key times
 		<td></td>
 	</tr>
 	<tr>
-		<td>linearMovementBetweenNodesInIndices</td>
+		<td>d_showMovement</td>
+		<td>
+Visualization of the movement to be applied to constrained dofs.
+</td>
+		<td>0</td>
+	</tr>
+	<tr>
+		<td>d_linearMovementBetweenNodesInIndices</td>
 		<td>
 Take into account the linear movement between the constrained points
 </td>
 		<td>0</td>
 	</tr>
 	<tr>
-		<td>mainIndice</td>
+		<td>d_mainIndice</td>
 		<td>
 The main indice node in the list of constrained nodes, it defines how to apply the linear movement between this constrained nodes 
 </td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>minDepIndice</td>
+		<td>d_minDepIndice</td>
 		<td>
 The indice node in the list of constrained nodes, which is imposed the minimum displacment 
 </td>
 		<td></td>
 	</tr>
 	<tr>
-		<td>maxDepIndice</td>
+		<td>d_maxDepIndice</td>
 		<td>
 The indice node in the list of constrained nodes, which is imposed the maximum displacment 
 </td>
@@ -163,21 +170,11 @@ Size of specimen in Z-direction
 		<td>0</td>
 	</tr>
 	<tr>
-		<td>movedDirections</td>
+		<td>d_movedDirections</td>
 		<td>
 for each direction, 1 if moved, 0 if free
 </td>
 		<td></td>
-	</tr>
-	<tr>
-		<td colspan="3">Visualization</td>
-	</tr>
-	<tr>
-		<td>showMovement</td>
-		<td>
-Visualization of the movement to be applied to constrained dofs.
-</td>
-		<td>0</td>
 	</tr>
 
 </tbody>
@@ -301,10 +298,7 @@ If true, movements are relative to first position, absolute otherwise
 		<td>1</td>
 	</tr>
 	<tr>
-		<td colspan="3">Visualization</td>
-	</tr>
-	<tr>
-		<td>showMovement</td>
+		<td>d_showMovement</td>
 		<td>
 Visualization of the movement to be applied to constrained dofs.
 </td>
