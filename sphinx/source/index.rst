@@ -1,15 +1,18 @@
-.. SOFA documentation master file, created by
-   sphinx-quickstart on Mon May 27 13:24:02 2024.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
 Welcome to SOFA's documentation!
 ================================
 
+SOFA Components Documentation
+-----------------------------
+
+Welcome to the comprehensive documentation of SOFA, featuring an organized inventory of all its components alongside select plugins.
+This documentation is complementary to the official documentation website: [sofa-framework.org/community/doc](https://www.sofa-framework.org/community/doc/)
+
+[![SOFA, Simulation Open-Framework Architecture](https://www.sofa-framework.org/wp-content/uploads/2013/01/SOFA_LOGO_ORANGE_2-normal.png)](https://www.sofa-framework.org/)
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 3
    :caption: Contents:
 
-   START.md
+   :glob:
 
 
