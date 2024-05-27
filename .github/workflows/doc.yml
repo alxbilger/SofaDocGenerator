@@ -141,7 +141,6 @@ jobs:
           if-no-files-found: error
 
       - name: Commit merged doc
-        continue-on-error: true
         run: |
           cd ${{ github.workspace }}/merged_doc
           rm -rf
@@ -150,8 +149,8 @@ jobs:
           git config --global user.email "username@users.noreply.github.com"
           git add *
           git diff
-          git commit -a -m "Update documentation"
-          git push
+          if [ "$GIT_STATUS" != "" ]; then git commit -a -m "Update documentation"; fi
+          if [ "$GIT_STATUS" != "" ]; then git push; fi
 
       - name: Install dependencies
         run: pip install sphinx myst_parser
