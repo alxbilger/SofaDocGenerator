@@ -148,7 +148,7 @@ jobs:
           if [ "$GIT_STATUS" != "" ]; then git push; fi
 
       - name: Install dependencies
-        run: pip install sphinx myst_parser
+        run: pip install sphinx pydata-sphinx-theme myst_parser
 
       - name: Copy files for sphinx
         run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/sphinx/source
