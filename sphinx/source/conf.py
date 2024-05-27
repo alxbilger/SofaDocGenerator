@@ -19,7 +19,10 @@ extensions = ['myst_parser']
 templates_path = ['_templates']
 exclude_patterns = []
 
-
+source_suffix = {
+    '.rst': 'restructuredtext',
+    '.md': 'markdown',
+}
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
