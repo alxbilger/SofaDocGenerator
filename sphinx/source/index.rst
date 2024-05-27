@@ -15,4 +15,5 @@ This documentation is complementary to the official documentation website: [sofa
 
    :glob:
 
+   *
 
