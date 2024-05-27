@@ -179,4 +179,5 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-        artifact_name: 'doc_html'
+        with:
+          artifact_name: 'doc_html'
