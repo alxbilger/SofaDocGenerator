@@ -153,20 +153,21 @@ jobs:
           git commit -a -m "Update documentation"
           git push
 
-      - name: Build docs using Writerside Docker builder
-        uses: JetBrains/writerside-github-action@v4
-        with:
-          instance: ${{ env.INSTANCE }}
-          artifact: ${{ env.ARTIFACT }}
-          docker-version: ${{ env.DOCKER_VERSION }}
+      - name: Install dependencies
+        run: pip install sphinx myst_parser
+
+      - name: Copy files for sphinx
+        run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/sphinx/source
+
+      - name: Sphinx build
+        run: sphinx-build ${{ github.workspace }}/sphinx/source ${{ github.workspace }}/sphinx/build
 
       - name: Save html doc
         uses: actions/upload-artifact@v4
         with:
           name: doc_html
           path: |
-            artifacts/${{ env.ARTIFACT }}
-            artifacts/report.json
+            ${{ github.workspace }}/sphinx/build
           retention-days: 7
 
   deploy:
