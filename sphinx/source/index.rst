@@ -12,7 +12,6 @@ This documentation is complementary to the official documentation website: [sofa
 .. toctree::
    :maxdepth: 3
    :caption: Contents:
-
    :glob:
 
    *
