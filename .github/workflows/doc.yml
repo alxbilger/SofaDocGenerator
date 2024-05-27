@@ -148,27 +148,10 @@ jobs:
           if [ "$GIT_STATUS" != "" ]; then git push; fi
 
       - name: Install dependencies
-        run: pip install sphinx pydata-sphinx-theme myst_parser
+        run: pip install mkdocs
 
-      - name: Copy files for sphinx
-        run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/sphinx/source
+      - name: Copy files for mkdocs
+        run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/mkdocs/docs
 
-      - name: Sphinx build
-        run: sphinx-build ${{ github.workspace }}/SofaDocGenerator/sphinx/source ${{ github.workspace }}/SofaDocGenerator/sphinx/build
-
-      - name: Save html doc
-        uses: actions/upload-artifact@v4
-        with:
-          name: doc_html
-          path: |
-            ${{ github.workspace }}/SofaDocGenerator/sphinx/build
-          retention-days: 7
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
-        with:
-          publish_branch: gh-pages
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ${{ github.workspace }}/SofaDocGenerator/sphinx/build
-          force_orphan: true
+      - name: Mkdocs build and deploy
+        run: mkdocs gh-deploy
