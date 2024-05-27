@@ -160,7 +160,7 @@ jobs:
         run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/sphinx/source
 
       - name: Sphinx build
-        run: sphinx-build ${{ github.workspace }}/SofaDocGenerator/sphinx/source ${{ github.workspace }}/sphinx/build
+        run: sphinx-build ${{ github.workspace }}/SofaDocGenerator/sphinx/source ${{ github.workspace }}/SofaDocGenerator/sphinx/build
 
       - name: Save html doc
         uses: actions/upload-artifact@v4
