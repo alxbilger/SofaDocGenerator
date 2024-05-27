@@ -156,4 +156,6 @@ jobs:
           cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/mkdocs/docs
 
       - name: Mkdocs build and deploy
-        run: mkdocs gh-deploy
+        run: |
+          cd ${{ github.workspace }}/SofaDocGenerator/mkdocs
+          mkdocs gh-deploy
