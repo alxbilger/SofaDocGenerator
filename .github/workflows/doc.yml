@@ -157,17 +157,17 @@ jobs:
         run: pip install sphinx myst_parser
 
       - name: Copy files for sphinx
-        run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/sphinx/source
+        run: cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/sphinx/source
 
       - name: Sphinx build
-        run: sphinx-build ${{ github.workspace }}/sphinx/source ${{ github.workspace }}/sphinx/build
+        run: sphinx-build ${{ github.workspace }}/SofaDocGenerator/sphinx/source ${{ github.workspace }}/sphinx/build
 
       - name: Save html doc
         uses: actions/upload-artifact@v4
         with:
           name: doc_html
           path: |
-            ${{ github.workspace }}/sphinx/build
+            ${{ github.workspace }}/SofaDocGenerator/sphinx/build
           retention-days: 7
 
   deploy:
