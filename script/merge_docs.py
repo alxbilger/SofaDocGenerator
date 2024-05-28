@@ -106,6 +106,7 @@ def copy_subfolder(source_dir, source_subfolder, dest_dir, dest_subfolder):
                 print(f"Copying {source_item_path} to {dest_item_path}")
                 shutil.copy2(source_item_path, dest_item_path)
             else:
+                print(f"Merging {source_item_path} to {dest_item_path}")
                 merge_files(source_item_path, dest_item_path)
 
 
