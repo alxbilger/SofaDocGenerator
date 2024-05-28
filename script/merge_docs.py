@@ -42,14 +42,18 @@ def replace_target_content(filename, starting_content, ending_content, replaceme
 
 
 def merge_files(source_file, target_file):
+    print('Extracting content from', source_file)
     source_content = extract_content(source_file, "__Target__", "")
     start_autodoc = "<!-- automatically generated doc START -->"
     end_autodoc = "<!-- automatically generated doc END -->"
+    print('Extracting content from', target_file)
     target_content = extract_content(target_file, start_autodoc, end_autodoc)
 
     if target_content:
+        print('Replacing content in', target_file)
         replace_target_content(target_file, start_autodoc, end_autodoc, source_content)
     else:
+        print('Writing content in', target_file)
         with open(target_file, "a") as f:
             f.write(start_autodoc + '\n')
             f.write(source_content + '\n')
