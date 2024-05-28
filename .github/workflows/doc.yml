@@ -129,8 +129,7 @@ jobs:
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GL/Component ${{ github.workspace }}/doc/30_Components
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GUI/Component ${{ github.workspace }}/doc/30_Components/GUI
-          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/ ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins
-          rm -rf ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins/Sofa
+          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/image_gui ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins/image_gui
 
       - name: Save merged doc
         uses: actions/upload-artifact@v4
