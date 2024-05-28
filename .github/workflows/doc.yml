@@ -148,7 +148,7 @@ jobs:
           if [ "$GIT_STATUS" != "" ]; then git push; fi
 
       - name: Install dependencies
-        run: pip install mkdocs
+        run: pip install mkdocs mkdocs-material
 
       - name: Copy files for mkdocs
         run: |

@@ -1,2 +1,7 @@
 site_name: SOFA Documentation
-theme: readthedocs
+site_url: https://alxbilger.github.io/SofaDocGenerator/
+theme:
+  name: material
+  logo: assets/logo.png
+  palette:
+    scheme: slate
