@@ -37,7 +37,7 @@ def replace_target_content(filename, starting_content, ending_content, replaceme
     if filename.endswith('FreeMotionAnimationLoop.md'):
         print(replacement)
         print(new_file_content)
-    with open(filename, 'w') as f:
+    with open(filename, 'w', encoding='utf-8') as f:
         f.write(new_file_content)
 
 
@@ -56,7 +56,7 @@ def merge_files(source_file, target_file):
         replace_target_content(target_file, start_autodoc, end_autodoc, source_content)
     else:
         print('Writing content in', target_file)
-        with open(target_file, "a") as f:
+        with open(target_file, "a", encoding='utf-8') as f:
             f.write(start_autodoc + '\n')
             f.write(source_content + '\n')
             f.write(end_autodoc + '\n')
