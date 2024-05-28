@@ -42,11 +42,13 @@ def replace_target_content(filename, starting_content, ending_content, replaceme
 
 
 def merge_files(source_file, target_file):
-    print('Extracting content from', source_file)
+    print('Extracting content from source', source_file)
     source_content = extract_content(source_file, "__Target__", "")
+
     start_autodoc = "<!-- automatically generated doc START -->"
     end_autodoc = "<!-- automatically generated doc END -->"
-    print('Extracting content from', target_file)
+
+    print('Extracting content from target', target_file)
     target_content = extract_content(target_file, start_autodoc, end_autodoc)
 
     if target_content:
@@ -98,10 +100,16 @@ def copy_subfolder(source_dir, source_subfolder, dest_dir, dest_subfolder):
         else:
 
             existing_dest_item = item
+
+            existing_items = []
             for dest_item in os.listdir(dest_path):
                 if dest_item.endswith(item):
-                    existing_dest_item = dest_item
-                    break
+                    existing_items.append(dest_item)
+
+            if existing_items:
+                def length_diff(string):
+                    return abs(len(string) - len(item[0]))
+                existing_dest_item = return min(existing_items, key=length_diff)
 
             dest_item_path = os.path.join(dest_path, existing_dest_item)
 
