@@ -126,6 +126,7 @@ jobs:
 
       - name: Merge doc
         run: |
+          ls -la ${{ github.workspace }}/SofaDocGenerator/markdown/topics/
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GL/Component ${{ github.workspace }}/doc/30_Components
           python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GUI/Component ${{ github.workspace }}/doc/30_Components/GUI
