@@ -246,7 +246,7 @@ void generateComponentDoc(
     // templateContent += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
     if (!creator->getClass()->parents.empty())
     {
-        templateContent += "__parents__: \n";
+        templateContent += "__parents__: \n\n";
 
         for (const auto& parent : creator->getClass()->parents)
         {
