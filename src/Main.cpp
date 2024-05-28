@@ -450,7 +450,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
         {
             if (!templateNames.empty() && std::all_of(templateNames.begin(), templateNames.end(), [](const std::string& templateName){return !templateName.empty();}))
             {
-                f << "__Templates__:\n";
+                f << "__Templates__:\n\n";
                 for (const auto& templateName : templateNames)
                 {
                     f << "- " << templateName << '\n';
