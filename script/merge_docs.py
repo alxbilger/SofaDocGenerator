@@ -104,7 +104,9 @@ def copy_subfolder(source_dir, source_subfolder, dest_dir, dest_subfolder):
             existing_items = []
             for dest_item in os.listdir(dest_path):
                 if dest_item.endswith(item):
-                    existing_items.append(dest_item)
+                    start = dest_item.replace(item, '')
+                    if not start or start[-1] == '_':
+                        existing_items.append(dest_item)
 
             if existing_items:
                 def length_diff(string):
