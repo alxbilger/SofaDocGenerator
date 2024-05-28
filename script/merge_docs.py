@@ -109,7 +109,7 @@ def copy_subfolder(source_dir, source_subfolder, dest_dir, dest_subfolder):
             if existing_items:
                 def length_diff(string):
                     return abs(len(string) - len(item[0]))
-                existing_dest_item = return min(existing_items, key=length_diff)
+                existing_dest_item = min(existing_items, key=length_diff)
 
             dest_item_path = os.path.join(dest_path, existing_dest_item)
 
