@@ -152,7 +152,7 @@ jobs:
 
       - name: Copy files for mkdocs
         run: |
-          mkdir ${{ github.workspace }}/SofaDocGenerator/mkdocs/docs
+          mkdir -p ${{ github.workspace }}/SofaDocGenerator/mkdocs/docs
           cp -a ${{ github.workspace }}/merged_doc/* ${{ github.workspace }}/SofaDocGenerator/mkdocs/docs
 
       - name: Mkdocs build and deploy
