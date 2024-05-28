@@ -158,4 +158,4 @@ jobs:
       - name: Mkdocs build and deploy
         run: |
           cd ${{ github.workspace }}/SofaDocGenerator/mkdocs
-          mkdocs gh-deploy
+          mkdocs gh-deploy --force
