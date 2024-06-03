@@ -36,7 +36,7 @@ def contains_md_file(directory):
 def analyze_folder(yml_file, folder_path):
     with open(yml_file, "a") as file:
         nav_content = ''
-        for root, dirs, files in os.walk(folder_path):
+        for root, dirs, files in sorted(os.walk(folder_path)):
             if root == folder_path:
                 continue  # Skip the root directory
             if contains_md_file(root):
@@ -48,7 +48,7 @@ def analyze_folder(yml_file, folder_path):
 
                 nav_content += f"{indent}- {folder_name}:\n"
                 subindent = TAB * (level + 1)
-                for filename in files:
+                for filename in sorted(files):
                     if filename.endswith('.md'):
                         relative_file_path = os.path.relpath(os.path.join(root, filename), folder_path)
                         nav_content += f"{subindent}- {clean_title(filename)}: {relative_file_path}\n"
