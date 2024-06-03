@@ -2,31 +2,37 @@ import sys
 import re
 import os
 
-starting_pattern = r"^\d+_"
+# Compiling the regex pattern for performance improvement
+STARTING_PATTERN = re.compile(r"^\d+_")
 
 
 def starts_with_digits_and_underscore(text):
     """
-    Checks if a string starts with digits followed by an underscore using regex.
+    Checks if the given text starts with one or more digits followed by an underscore.
 
-    Args:
-    text: The string to check.
+    Parameters:
+        text (str): The text to check.
 
     Returns:
-    True if the string starts with digits and _, False otherwise.
+        bool: True if the text matches the pattern, False otherwise.
     """
-    return bool(re.match(starting_pattern, text))
+    return bool(STARTING_PATTERN.match(text))
 
 
 def add_metadata(filepath):
+    """
+    Adds metadata to a file. The metadata includes a title extracted from the filename.
+
+    Parameters:
+        filepath (str): The path to the file to which metadata will be added.
+    """
     filename = os.path.basename(filepath)
     filename = os.path.splitext(filename)[0]
-    match = re.search(starting_pattern, filename)
-    title = filename[match.end():]
+    match = STARTING_PATTERN.search(filename)
+    title = filename[match.end():] if match else filename
     title = title.replace("_", " ")
-    header_text = "---\n"
-    header_text += "title: " + title + '\n'
-    header_text += "---\n\n"
+    header_text = f"---\ntitle: {title}\n---\n\n"
+
     with open(filepath, "r+", encoding='utf-8') as file:
         content = file.read()
         if not content.startswith(header_text):
@@ -37,24 +43,31 @@ def add_metadata(filepath):
 
 def analyze_folder(folder_path):
     """
-    Analyzes all files recursively in a folder, modifying files starting with digits and _.
+    Recursively analyzes a folder and adds metadata to all files whose names
+    start with one or more digits followed by an underscore.
 
-    Args:
-    folder_path: Path to the folder to analyze.
-    header_text: The text to add as the header for matching files.
+    Parameters:
+        folder_path (str): The path to the folder to analyze.
     """
     for root, _, files in os.walk(folder_path):
         for filename in files:
             if starts_with_digits_and_underscore(filename):
                 filepath = os.path.join(root, filename)
-                print(f"Adding meta-data to: {filepath}")
+                print(f"Adding metadata to: {filepath}")
                 add_metadata(filepath)
 
 
-
 if __name__ == "__main__":
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <input_directory>")
+        sys.exit(1)
+
     input_directory = sys.argv[1]
 
-    print(f"input_directory: {input_directory}")
+    if not os.path.isdir(input_directory):
+        print(f"Error: {input_directory} is not a valid directory.")
+        sys.exit(1)
+
+    print(f"Input directory: {input_directory}")
 
     analyze_folder(input_directory)
