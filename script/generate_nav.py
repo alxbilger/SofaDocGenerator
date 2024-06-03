@@ -55,6 +55,7 @@ def analyze_folder(yml_file, folder_path):
         if nav_content != '':
             file.write('nav:\n')
             file.write(nav_content)
+            print(nav_content)
 
 
 if __name__ == "__main__":
