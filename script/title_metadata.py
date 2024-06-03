@@ -1,3 +1,9 @@
+"""
+This script recursively processes files in a specified directory, adding metadata to files
+whose names start with one or more digits followed by an underscore. The metadata includes
+a title extracted from the filename and added as a YAML header.
+"""
+
 import sys
 import re
 import os
