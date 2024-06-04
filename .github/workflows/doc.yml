@@ -146,6 +146,7 @@ jobs:
           if-no-files-found: error
 
       - name: Commit merged doc
+        continue-on-error: true
         run: |
           cd ${{ github.workspace }}/merged_doc
           rm -rf *
