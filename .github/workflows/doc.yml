@@ -155,9 +155,8 @@ jobs:
           git status
           git add *
           git status
-          git diff
-          if [ "$GIT_STATUS" != "" ]; then git commit -a -m "Update documentation"; fi
-          if [ "$GIT_STATUS" != "" ]; then git push; fi
+          git commit -a -m "Update documentation"
+          git push --force
 
       - name: Install dependencies
         run: pip install mkdocs mkdocs-material
