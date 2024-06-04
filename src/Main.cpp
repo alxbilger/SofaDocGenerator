@@ -37,9 +37,10 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
 
 void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const std::vector<std::string>& examplesDirectories);
 
-std::vector<std::string> find_files_by_prefix(const std::string& directory, const std::string& prefix, const std::string& root)
+void find_files_by_prefix(
+    const std::string& directory, const std::string& prefix, const std::string& root,
+    std::vector<std::string> outAbsoluteFiles, std::vector<std::string> outRelativeFiles)
 {
-    std::vector<std::string> files;
     namespace fs = std::filesystem;
 
     for (const auto& entry : fs::directory_iterator(directory))
@@ -47,17 +48,15 @@ std::vector<std::string> find_files_by_prefix(const std::string& directory, cons
         if (entry.is_regular_file() &&
             entry.path().filename().string().find(prefix) == 0)
         {
-            files.push_back(fs::relative(entry, fs::path(root)).string());
+            outRelativeFiles.push_back(fs::relative(entry, fs::path(root)).string());
+            outAbsoluteFiles.push_back(entry.path().string());
         }
         else if (entry.is_directory() && !fs::is_symlink(entry))
         {
-            std::vector<std::string> subdir_files = find_files_by_prefix(
-                entry.path().string(), prefix, root);
-            files.insert(files.end(), subdir_files.begin(), subdir_files.end());
+            find_files_by_prefix(
+                entry.path().string(), prefix, root, outAbsoluteFiles, outRelativeFiles);
         }
     }
-
-    return files;
 }
 
 
@@ -467,32 +466,41 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
         std::stringstream ss;
         for (const auto& dir : examplesDirectories)
         {
-            const auto exampleFiles = find_files_by_prefix(dir, content.componentName, dir);
+            std::vector<std::string> absoluteFiles, relativeFiles;
+            find_files_by_prefix(dir, content.componentName, dir, absoluteFiles, relativeFiles);
 
             sofa::simulation::SceneLoader::ExtensionList extensions;
             sofa::simulation::SceneLoaderXML xmlloader;
             xmlloader.getExtensionList(&extensions);
 
-            std::vector<std::string> filteredFiles;
-            for (const auto& file : exampleFiles)
+            std::vector<std::string> filteredAbsoluteFiles, filteredRelativeFiles;
+
+            for (std::size_t i = 0; i < absoluteFiles.size(); ++i)
             {
-                const auto extension = sofa::helper::system::FileSystem::getExtension(file);
+                const auto& absoluteFile = absoluteFiles[i];
+                const auto& relativeFile = relativeFiles[i];
+
+                const auto extension = sofa::helper::system::FileSystem::getExtension(absoluteFile);
                 if (std::find(extensions.begin(), extensions.end(), extension) != extensions.end())
                 {
-                    filteredFiles.push_back(file);
+                    filteredAbsoluteFiles.push_back(absoluteFile);
+                    filteredRelativeFiles.push_back(relativeFile);
                 }
             }
 
-            if (!filteredFiles.empty())
+            if (!filteredAbsoluteFiles.empty())
             {
-                for (const auto& file : filteredFiles)
+                for (std::size_t i = 0; i < filteredAbsoluteFiles.size(); ++i)
                 {
-                    ss << file << "\n\n";
+                    const auto& absoluteFile = filteredAbsoluteFiles[i];
+                    const auto& relativeFile = filteredRelativeFiles[i];
+
+                    ss << relativeFile << "\n\n";
                     {
                         ss << "=== \"XML\"\n\n";
                         ss << "    ```xml\n";
                         std::string line;
-                        std::ifstream exFile(file);
+                        std::ifstream exFile(absoluteFile);
                         while (std::getline (exFile, line))
                         {
                             ss << "    " << line << "\n";
@@ -502,7 +510,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
 
                     {
                         std::string pythonString;
-                        convertXMLToPython(file, pythonString);
+                        convertXMLToPython(absoluteFile, pythonString);
 
                         ss << "=== \"Python\"\n\n";
                         ss << "    ```python\n";
