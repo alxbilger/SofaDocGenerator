@@ -111,14 +111,14 @@ jobs:
           ls -la "$WORKSPACE_INSTALL_PATH"
           cd $WORKSPACE_INSTALL_PATH
           ./bin/SofaDocGenerator${{ steps.sofa.outputs.exe }} -o ${{ github.workspace }}/SofaDocGenerator/markdown --examples ${{ github.workspace }}/sofa/share/sofa/examples
-          rm ${{ github.workspace }}/SofaDocGenerator/markdown/topics/image/ImageViewer.md
-          rm ${{ github.workspace }}/SofaDocGenerator/markdown/topics/image_gui/ImageToolBox.md
+          rm ${{ github.workspace }}/SofaDocGenerator/markdown/image/ImageViewer.md
+          rm ${{ github.workspace }}/SofaDocGenerator/markdown/image_gui/ImageToolBox.md
 
       - name: Save markdown doc
         uses: actions/upload-artifact@v4
         with:
           name: doc_markdown
-          path: ${{ github.workspace }}/SofaDocGenerator/markdown/topics
+          path: ${{ github.workspace }}/SofaDocGenerator/markdown
           overwrite: true
           if-no-files-found: error
 
@@ -128,11 +128,11 @@ jobs:
 
       - name: Merge doc
         run: |
-          ls -la ${{ github.workspace }}/SofaDocGenerator/markdown/topics/
-          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/Component ${{ github.workspace }}/doc/30_Components
-          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GL/Component ${{ github.workspace }}/doc/30_Components
-          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics/Sofa/GUI/Component ${{ github.workspace }}/doc/30_Components/GUI
-          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/topics ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins
+          ls -la ${{ github.workspace }}/SofaDocGenerator/markdown/
+          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/Sofa/Component ${{ github.workspace }}/doc/30_Components
+          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/Sofa/GL/Component ${{ github.workspace }}/doc/30_Components
+          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown/Sofa/GUI/Component ${{ github.workspace }}/doc/30_Components/GUI
+          python ${{ github.workspace }}/SofaDocGenerator/script/merge_docs.py ${{ github.workspace }}/SofaDocGenerator/markdown ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins
           rm -rf ${{ github.workspace }}/doc/35_Plugins/50_Usual_plugins/Sofa
           python ${{ github.workspace }}/SofaDocGenerator/script/title_metadata.py ${{ github.workspace }}/doc
           python ${{ github.workspace }}/SofaDocGenerator/script/generate_nav.py ${{ github.workspace }}/SofaDocGenerator/mkdocs/mkdocs.yml ${{ github.workspace }}/doc

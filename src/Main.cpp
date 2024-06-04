@@ -276,12 +276,6 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
     outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
     std::cout << "output directory: " << outputDirectory << std::endl;
 
-    const auto topicsDirectory = sofa::helper::system::FileSystem::append(outputDirectory, "topics");
-    std::cout << "topics directory: " << topicsDirectory << std::endl;
-
-    const auto inTreeFilename = sofa::helper::system::FileSystem::append(outputDirectory, "in.tree");
-    std::cout << "in.tree file: " << inTreeFilename << std::endl;
-
     static std::vector<sofa::core::ClassEntry::SPtr> entries;
     sofa::core::ObjectFactory::getInstance()->getAllEntries(entries);
 
@@ -329,7 +323,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
 
             for (const auto& [templateInstance, creator] : filteredCreatorMap)
             {
-                generateComponentDoc(topicsDirectory, fileContent, entry, creator, creator->getClass()->templateName, mutex);
+                generateComponentDoc(outputDirectory, fileContent, entry, creator, creator->getClass()->templateName, mutex);
             }
         }
     }
