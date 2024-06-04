@@ -2,6 +2,8 @@
 
 #include <tinyxml2.h>
 
+inline std::string indent = "    ";
+
 inline void traversingXML(tinyxml2::XMLNode* node, std::string& pythonString, std::string& currentNode)
 {
     if(node == nullptr)
@@ -31,7 +33,7 @@ inline void traversingXML(tinyxml2::XMLNode* node, std::string& pythonString, st
                     }
                     attribute = attribute->Next();
                 }
-                pythonString += "\n\t" + currentNode + " = " + parentNode + ".addChild(";
+                pythonString += "\n" + indent + indent + currentNode + " = " + parentNode + ".addChild(";
                 pythonString += "\'" + currentNode + "\'";
             }
             {
@@ -49,7 +51,7 @@ inline void traversingXML(tinyxml2::XMLNode* node, std::string& pythonString, st
         }
         else
         {
-            pythonString += "\t" + currentNode + ".addObject(\'" + std::string{element->Name()} + "\'";
+            pythonString += indent + indent + currentNode + ".addObject(\'" + std::string{element->Name()} + "\'";
 
             const tinyxml2::XMLAttribute* attribute = element->FirstAttribute();
             while (attribute != nullptr)
@@ -103,7 +105,7 @@ inline void convertXMLToPython(
     tinyxml2::XMLDocument doc;
     doc.LoadFile( xmlFilename.c_str() );
 
-    pythonString += "def createScene(rootNode):\n";
+    pythonString += indent + "def createScene(rootNode):\n";
 
     std::string currentNode { "rootNode" };
     traversingXML(&doc, pythonString, currentNode);

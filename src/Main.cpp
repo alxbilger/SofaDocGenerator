@@ -37,7 +37,7 @@ void loadPlugins(const char* const appName, const std::vector<std::string>& plug
 
 void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const std::vector<std::string>& examplesDirectories);
 
-std::vector<std::string> find_files_by_prefix(const std::string& directory, const std::string& prefix)
+std::vector<std::string> find_files_by_prefix(const std::string& directory, const std::string& prefix, const std::string& root)
 {
     std::vector<std::string> files;
     namespace fs = std::filesystem;
@@ -45,12 +45,16 @@ std::vector<std::string> find_files_by_prefix(const std::string& directory, cons
     for (const auto& entry : fs::directory_iterator(directory))
     {
         if (entry.is_regular_file() &&
-            entry.path().filename().string().find(prefix) == 0) {
-            files.push_back(entry.path().string());
-            } else if (entry.is_directory() && !fs::is_symlink(entry)) {
-                std::vector<std::string> subdir_files = find_files_by_prefix(entry.path().string(), prefix);
-                files.insert(files.end(), subdir_files.begin(), subdir_files.end());
-            }
+            entry.path().filename().string().find(prefix) == 0)
+        {
+            files.push_back(fs::relative(entry, fs::path(root)).string());
+        }
+        else if (entry.is_directory() && !fs::is_symlink(entry))
+        {
+            std::vector<std::string> subdir_files = find_files_by_prefix(
+                entry.path().string(), prefix, root);
+            files.insert(files.end(), subdir_files.begin(), subdir_files.end());
+        }
     }
 
     return files;
@@ -463,7 +467,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
         std::stringstream ss;
         for (const auto& dir : examplesDirectories)
         {
-            const auto exampleFiles = find_files_by_prefix(dir, content.componentName);
+            const auto exampleFiles = find_files_by_prefix(dir, content.componentName, dir);
 
             sofa::simulation::SceneLoader::ExtensionList extensions;
             sofa::simulation::SceneLoaderXML xmlloader;
@@ -483,25 +487,27 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
             {
                 for (const auto& file : filteredFiles)
                 {
-                    // ss << file << "\n\n";
+                    ss << file << "\n\n";
                     {
-                        ss << "```xml\n";
+                        ss << "=== \"XML\"\n\n";
+                        ss << "    ```xml\n";
                         std::string line;
                         std::ifstream exFile(file);
                         while (std::getline (exFile, line))
                         {
-                            ss << line << "\n";
+                            ss << "    " << line << "\n";
                         }
-                        ss << "```\n";
+                        ss << "    ```\n\n";
                     }
 
                     {
                         std::string pythonString;
                         convertXMLToPython(file, pythonString);
 
-                        ss << "```python\n";
+                        ss << "=== \"Python\"\n\n";
+                        ss << "    ```python\n";
                         ss << pythonString;
-                        ss << "```\n";
+                        ss << "    ```\n\n";
                     }
                 }
             }
