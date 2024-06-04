@@ -5,15 +5,15 @@ Tension monitoring
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: SofaValidation
+__Target__: `SofaValidation`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- DevMonitor
+- `#!c++ DevMonitor`
 
 Data: 
 

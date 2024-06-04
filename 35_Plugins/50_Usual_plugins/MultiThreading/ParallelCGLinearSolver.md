@@ -5,17 +5,17 @@ Linear system solver using the conjugate gradient iterative algorithm in paralle
 
 __Templates__:
 
-- ParallelCompressedRowSparseMatrixMat3x3d
-- ParallelCompressedRowSparseMatrixd
+- `#!c++ ParallelCompressedRowSparseMatrixMat3x3d`
+- `#!c++ ParallelCompressedRowSparseMatrixd`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::linearsolver::iterative
+__namespace__: `#!c++ multithreading::component::linearsolver::iterative`
 
 __parents__: 
 
-- CGLinearSolver
-- Base
+- `#!c++ CGLinearSolver`
+- `#!c++ Base`
 
 Data: 
 

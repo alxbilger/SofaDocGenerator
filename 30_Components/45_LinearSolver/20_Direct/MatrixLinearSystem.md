@@ -6,15 +6,15 @@ Linear system
 
 __Templates__:
 
-- BTDMatrix6d
+- `#!c++ BTDMatrix6d`
 
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- TypedMatrixLinearSystem
+- `#!c++ TypedMatrixLinearSystem`
 
 Data: 
 

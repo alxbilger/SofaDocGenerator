@@ -95,13 +95,13 @@ node.addObject('UniformMass', totalMass='10')
 
 An example scene involving a UniformMass is available in [*examples/Component/Mass/UniformMass.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Mass/UniformMass.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Mass
+__Target__: `Sofa.Component.Mass`
 
-__namespace__: sofa::component::mass
+__namespace__: `#!c++ sofa::component::mass`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 
@@ -287,15 +287,15 @@ Links:
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: Sofa.Component.Mass
+__Target__: `Sofa.Component.Mass`
 
-__namespace__: sofa::component::mass
+__namespace__: `#!c++ sofa::component::mass`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 
@@ -481,18 +481,18 @@ Links:
 
 __Templates__:
 
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.Mass
+__Target__: `Sofa.Component.Mass`
 
-__namespace__: sofa::component::mass
+__namespace__: `#!c++ sofa::component::mass`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 

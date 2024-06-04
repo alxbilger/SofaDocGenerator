@@ -5,15 +5,15 @@ Direct linear solver based on Sparse Cholesky factorization, implemented with th
 
 __Templates__:
 
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: CSparseSolvers
+__Target__: `CSparseSolvers`
 
-__namespace__: csparsesolvers
+__namespace__: `#!c++ csparsesolvers`
 
 __parents__: 
 
-- OrderingMethodAccessor
+- `#!c++ OrderingMethodAccessor`
 
 Data: 
 

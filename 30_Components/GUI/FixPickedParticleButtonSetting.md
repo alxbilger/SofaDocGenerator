@@ -3,13 +3,13 @@
 Fix a picked particle in space
 
 
-__Target__: Sofa.GUI.Component
+__Target__: `Sofa.GUI.Component`
 
-__namespace__: sofa::gui::component
+__namespace__: `#!c++ sofa::gui::component`
 
 __parents__: 
 
-- MouseButtonSetting
+- `#!c++ MouseButtonSetting`
 
 Data: 
 

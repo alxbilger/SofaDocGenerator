@@ -3,13 +3,13 @@
 Optimized Proximity Intersection based on Triangle-Triangle tests, ignoring Edge-Edge cases
 
 
-__Target__: Sofa.Component.Collision.Detection.Intersection
+__Target__: `Sofa.Component.Collision.Detection.Intersection`
 
-__namespace__: sofa::component::collision::detection::intersection
+__namespace__: `#!c++ sofa::component::collision::detection::intersection`
 
 __parents__: 
 
-- BaseProximityIntersection
+- `#!c++ BaseProximityIntersection`
 
 Data: 
 

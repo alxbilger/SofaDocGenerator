@@ -5,19 +5,19 @@ Lagrangian-based fixation of DOFs of the model
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.Constraint.Lagrangian.Model
+__Target__: `Sofa.Component.Constraint.Lagrangian.Model`
 
-__namespace__: sofa::component::constraint::lagrangian::model
+__namespace__: `#!c++ sofa::component::constraint::lagrangian::model`
 
 __parents__: 
 
-- Constraint
+- `#!c++ Constraint`
 
 Data: 
 

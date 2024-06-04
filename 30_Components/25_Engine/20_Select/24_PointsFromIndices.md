@@ -23,13 +23,13 @@ Examples
 
 An example scene involving the PointsFromIndices engine is available in [*examples/Component/Engine/Select/PointsFromIndices.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Engine/Select/PointsFromIndices.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

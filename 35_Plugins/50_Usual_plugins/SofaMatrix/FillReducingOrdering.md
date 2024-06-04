@@ -5,15 +5,15 @@ Reorder the degrees of freedom to reduce fill-in
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaMatrix
+__Target__: `SofaMatrix`
 
-__namespace__: sofa::component::linearsolver
+__namespace__: `#!c++ sofa::component::linearsolver`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

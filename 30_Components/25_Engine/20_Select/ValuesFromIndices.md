@@ -5,30 +5,30 @@ Find the values given a list of indices
 
 __Templates__:
 
-- I
-- RigidCoord2d
-- RigidCoord3d
-- RigidDeriv2d
-- RigidDeriv3d
-- Vec2d
-- Vec3d
-- Vec4d
-- Vec6d
-- d
-- fixed_array<I,2>
-- fixed_array<I,3>
-- fixed_array<I,4>
-- fixed_array<I,8>
-- i
-- string
+- `#!c++ I`
+- `#!c++ RigidCoord2d`
+- `#!c++ RigidCoord3d`
+- `#!c++ RigidDeriv2d`
+- `#!c++ RigidDeriv3d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec4d`
+- `#!c++ Vec6d`
+- `#!c++ d`
+- `#!c++ fixed_array<I,2>`
+- `#!c++ fixed_array<I,3>`
+- `#!c++ fixed_array<I,4>`
+- `#!c++ fixed_array<I,8>`
+- `#!c++ i`
+- `#!c++ string`
 
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

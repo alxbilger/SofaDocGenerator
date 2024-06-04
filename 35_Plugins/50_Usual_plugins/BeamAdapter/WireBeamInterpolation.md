@@ -5,15 +5,15 @@ Adaptive Beam Interpolation on Wire rest Shape
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::fem::_wirebeaminterpolation_
+__namespace__: `#!c++ sofa::component::fem::_wirebeaminterpolation_`
 
 __parents__: 
 
-- BaseBeamInterpolation
+- `#!c++ BaseBeamInterpolation`
 
 Data: 
 

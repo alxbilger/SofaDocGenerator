@@ -5,20 +5,20 @@ Apply a permutation to a set of indices
 
 __Templates__:
 
-- I
-- fixed_array<I,2>
-- fixed_array<I,3>
-- fixed_array<I,4>
-- fixed_array<I,8>
-- i
+- `#!c++ I`
+- `#!c++ fixed_array<I,2>`
+- `#!c++ fixed_array<I,3>`
+- `#!c++ fixed_array<I,4>`
+- `#!c++ fixed_array<I,8>`
+- `#!c++ i`
 
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Export the scene under the Wavefront OBJ format.When several frames are exported the file name have the following pattern: outfile000.obj outfile001.obj.
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::_visualmodelobjexporter_
+__namespace__: `#!c++ sofa::component::_visualmodelobjexporter_`
 
 __parents__: 
 
-- BaseSimulationExporter
+- `#!c++ BaseSimulationExporter`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Manager handling carving operations between a tool and an object.
 
 
-__Target__: SofaCarving
+__Target__: `SofaCarving`
 
-__namespace__: sofa::component::collision
+__namespace__: `#!c++ sofa::component::collision`
 
 __parents__: 
 
-- BaseController
+- `#!c++ BaseController`
 
 Data: 
 

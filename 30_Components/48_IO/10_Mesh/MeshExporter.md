@@ -11,13 +11,13 @@ Supported format are:
 
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::_meshexporter_
+__namespace__: `#!c++ sofa::component::_meshexporter_`
 
 __parents__: 
 
-- BaseSimulationExporter
+- `#!c++ BaseSimulationExporter`
 
 Data: 
 

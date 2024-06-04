@@ -5,18 +5,18 @@ Compute a rasterization image from several meshes
 
 __Templates__:
 
-- ImageB
-- ImageD
-- ImageUC
-- ImageUS
+- `#!c++ ImageB`
+- `#!c++ ImageD`
+- `#!c++ ImageUC`
+- `#!c++ ImageUS`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

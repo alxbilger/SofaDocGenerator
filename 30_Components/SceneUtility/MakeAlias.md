@@ -3,13 +3,13 @@
 This object create an alias to a component name to make the scene more readable. 
 
 
-__Target__: Sofa.Component.SceneUtility
+__Target__: `Sofa.Component.SceneUtility`
 
-__namespace__: sofa::component::sceneutility::makealiascomponent
+__namespace__: `#!c++ sofa::component::sceneutility::makealiascomponent`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

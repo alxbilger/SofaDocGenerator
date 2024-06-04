@@ -3,13 +3,13 @@
 Implements an user interaction handler that controls the values of the articulations of an articulated hierarchy container.
 
 
-__Target__: ArticulatedSystemPlugin
+__Target__: `ArticulatedSystemPlugin`
 
-__namespace__: sofa::component::controller
+__namespace__: `#!c++ sofa::component::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

@@ -5,15 +5,15 @@ Dummy visual component.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: PluginExample
+__Target__: `PluginExample`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- VisualModelImpl
+- `#!c++ VisualModelImpl`
 
 Data: 
 

@@ -32,13 +32,13 @@ Examples
 
 An example scene involving the TextureInterpolation engine is available in [*examples/Component/Engine/GL/TextureInterpolation.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Engine/GL/TextureInterpolation.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.GL.Component.Engine
+__Target__: `Sofa.GL.Component.Engine`
 
-__namespace__: sofa::gl::component::engine
+__namespace__: `#!c++ sofa::gl::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

@@ -5,16 +5,16 @@ Direct linear solver based on Sparse LU factorization, implemented with the CSPA
 
 __Templates__:
 
-- CompressedRowSparseMatrixMat3x3d
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixMat3x3d`
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: CSparseSolvers
+__Target__: `CSparseSolvers`
 
-__namespace__: csparsesolvers
+__namespace__: `#!c++ csparsesolvers`
 
 __parents__: 
 
-- OrderingMethodAccessor
+- `#!c++ OrderingMethodAccessor`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Read topological Changes and process them.
 
 
-__Target__: Sofa.Component.Topology.Utility
+__Target__: `Sofa.Component.Topology.Utility`
 
-__namespace__: sofa::component::topology::utility
+__namespace__: `#!c++ sofa::component::topology::utility`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

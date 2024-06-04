@@ -5,16 +5,16 @@ Generate flat faces between adjacent regions of an image
 
 __Templates__:
 
-- ImageUC
-- ImageUI
+- `#!c++ ImageUC`
+- `#!c++ ImageUI`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Export the global system matrix from a linear solver.
 
 
-__Target__: SofaMatrix
+__Target__: `SofaMatrix`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- BaseSimulationExporter
+- `#!c++ BaseSimulationExporter`
 
 Data: 
 

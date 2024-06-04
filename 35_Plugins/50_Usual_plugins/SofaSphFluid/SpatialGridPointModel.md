@@ -3,13 +3,13 @@
 Collision model which represents a set of points, spatially grouped using a SpatialGridContainer
 
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::collision
+__namespace__: `#!c++ sofa::component::collision`
 
 __parents__: 
 
-- PointCollisionModel
+- `#!c++ PointCollisionModel`
 
 Data: 
 

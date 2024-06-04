@@ -5,15 +5,15 @@ Linear system solver based on a precomputed inverse matrix, wrapped by a per-nod
 
 __Templates__:
 
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: Sofa.Component.LinearSolver.Preconditioner
+__Target__: `Sofa.Component.LinearSolver.Preconditioner`
 
-__namespace__: sofa::component::linearsolver::preconditioner
+__namespace__: `#!c++ sofa::component::linearsolver::preconditioner`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

@@ -5,15 +5,15 @@ Adaptive Beam finite elements
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::forcefield::_AdaptiveInflatableBeamForceField_
+__namespace__: `#!c++ sofa::component::forcefield::_AdaptiveInflatableBeamForceField_`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 

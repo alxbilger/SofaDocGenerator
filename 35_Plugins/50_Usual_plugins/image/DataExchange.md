@@ -6,25 +6,25 @@ DataExchange
 
 __Templates__:
 
-- ImageB
-- ImageC
-- ImageD
-- ImageF
-- ImageI
-- ImageL
-- ImageS
-- ImageUC
-- ImageUI
-- ImageUL
-- ImageUS
+- `#!c++ ImageB`
+- `#!c++ ImageC`
+- `#!c++ ImageD`
+- `#!c++ ImageF`
+- `#!c++ ImageI`
+- `#!c++ ImageL`
+- `#!c++ ImageS`
+- `#!c++ ImageUC`
+- `#!c++ ImageUI`
+- `#!c++ ImageUL`
+- `#!c++ ImageUS`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::core
+__namespace__: `#!c++ sofa::core`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

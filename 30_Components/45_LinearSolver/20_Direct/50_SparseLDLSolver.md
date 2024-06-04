@@ -88,13 +88,13 @@ node.addObject('SparseLDLSolver')
 
 An example scene involving a SparseLDLSolver is available in [*examples/Component/LinearSolver/Direct/FEMBAR_SparseLDLSolver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/LinearSolver/Direct/FEMBAR_SparseLDLSolver.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- SparseLDLSolverImpl
+- `#!c++ SparseLDLSolverImpl`
 
 Data: 
 

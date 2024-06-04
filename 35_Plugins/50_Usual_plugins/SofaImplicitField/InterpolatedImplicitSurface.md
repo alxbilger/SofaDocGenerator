@@ -3,13 +3,13 @@
 Deprecated. This class is forwarding DiscreteGridField.
 
 
-__Target__: SofaImplicitField
+__Target__: `SofaImplicitField`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- DiscreteGridField
+- `#!c++ DiscreteGridField`
 
 Data: 
 

@@ -5,15 +5,15 @@ Repulsion applied by an ellipsoid toward the exterior or the interior
 
 __Templates__:
 
-- Vec3d,Rigid3d
+- `#!c++ Vec3d,Rigid3d`
 
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- MixedInteractionForceField
+- `#!c++ MixedInteractionForceField`
 
 Data: 
 

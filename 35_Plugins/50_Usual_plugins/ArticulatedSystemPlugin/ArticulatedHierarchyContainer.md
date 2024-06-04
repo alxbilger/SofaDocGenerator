@@ -3,13 +3,13 @@
 This class allow to store and retrieve all the articulation centers from an articulated rigid object
 
 
-__Target__: ArticulatedSystemPlugin
+__Target__: `ArticulatedSystemPlugin`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Implements a handler that controls the values of the articulations of an articulated hierarchy container using a .bvh file.
 
 
-__Target__: ArticulatedSystemPlugin
+__Target__: `ArticulatedSystemPlugin`
 
-__namespace__: sofa::component::controller
+__namespace__: `#!c++ sofa::component::controller`
 
 __parents__: 
 
-- ArticulatedHierarchyController
+- `#!c++ ArticulatedHierarchyController`
 
 Data: 
 

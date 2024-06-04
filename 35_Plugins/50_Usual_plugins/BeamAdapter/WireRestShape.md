@@ -5,15 +5,15 @@ Describe the shape functions on multiple segments using curvilinear abscissa
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::engine::_wirerestshape_
+__namespace__: `#!c++ sofa::component::engine::_wirerestshape_`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

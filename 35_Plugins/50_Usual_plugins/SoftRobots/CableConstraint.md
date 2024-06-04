@@ -5,15 +5,15 @@ Simulate a cable.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::constraint
+__namespace__: `#!c++ softrobots::constraint`
 
 __parents__: 
 
-- CableModel
+- `#!c++ CableModel`
 
 Data: 
 
@@ -311,15 +311,15 @@ Used only with sphere and geodesic methods.|
 
 __Templates__:
 
-- Vec2d
+- `#!c++ Vec2d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::constraint
+__namespace__: `#!c++ softrobots::constraint`
 
 __parents__: 
 
-- CableModel
+- `#!c++ CableModel`
 
 Data: 
 

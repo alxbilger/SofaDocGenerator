@@ -5,17 +5,17 @@ Isotropic or anisotropic diffusion on Tetrahedral Meshes
 
 __Templates__:
 
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Diffusion
+__Target__: `Sofa.Component.Diffusion`
 
-__namespace__: sofa::component::diffusion
+__namespace__: `#!c++ sofa::component::diffusion`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

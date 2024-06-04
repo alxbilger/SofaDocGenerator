@@ -5,24 +5,24 @@ Find the indices of a list of values within a larger set of values
 
 __Templates__:
 
-- I
-- Vec2d
-- Vec3d
-- d
-- fixed_array<I,2>
-- fixed_array<I,3>
-- fixed_array<I,4>
-- fixed_array<I,8>
-- i
-- string
+- `#!c++ I`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ d`
+- `#!c++ fixed_array<I,2>`
+- `#!c++ fixed_array<I,3>`
+- `#!c++ fixed_array<I,4>`
+- `#!c++ fixed_array<I,8>`
+- `#!c++ i`
+- `#!c++ string`
 
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

@@ -5,16 +5,16 @@ Render a trail behind particles
 
 __Templates__:
 
-- Rigid3d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Visual
+__Target__: `Sofa.Component.Visual`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

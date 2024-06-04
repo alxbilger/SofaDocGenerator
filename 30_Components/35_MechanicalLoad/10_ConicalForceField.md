@@ -182,13 +182,13 @@ cone color. (default=0.0,0.0,0.0,1.0,1.0)
 </Node>
 ```
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

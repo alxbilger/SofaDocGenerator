@@ -3,13 +3,13 @@
 Generates a denser point cloud from an input point cloud
 
 
-__Target__: CGALPlugin
+__Target__: `CGALPlugin`
 
-__namespace__: cgal
+__namespace__: `#!c++ cgal`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

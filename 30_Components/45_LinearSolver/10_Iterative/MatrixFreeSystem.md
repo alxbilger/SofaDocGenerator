@@ -5,15 +5,15 @@ Matrix-free linear system
 
 __Templates__:
 
-- GraphScattered
+- `#!c++ GraphScattered`
 
-__Target__: Sofa.Component.LinearSolver.Iterative
+__Target__: `Sofa.Component.LinearSolver.Iterative`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- TypedMatrixLinearSystem
+- `#!c++ TypedMatrixLinearSystem`
 
 Data: 
 

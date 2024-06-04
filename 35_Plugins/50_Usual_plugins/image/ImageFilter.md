@@ -5,21 +5,21 @@ Filter an image
 
 __Templates__:
 
-- ImageB,ImageB
-- ImageB,ImageD
-- ImageD,ImageB
-- ImageD,ImageD
-- ImageD,ImageUC
-- ImageUC,ImageD
-- ImageUC,ImageUC
+- `#!c++ ImageB,ImageB`
+- `#!c++ ImageB,ImageD`
+- `#!c++ ImageD,ImageB`
+- `#!c++ ImageD,ImageD`
+- `#!c++ ImageD,ImageUC`
+- `#!c++ ImageUC,ImageD`
+- `#!c++ ImageUC,ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

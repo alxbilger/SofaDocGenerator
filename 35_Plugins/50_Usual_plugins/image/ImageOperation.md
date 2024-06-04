@@ -5,17 +5,17 @@ This class computes an image as an operation between two images
 
 __Templates__:
 
-- ImageB
-- ImageD
-- ImageUC
+- `#!c++ ImageB`
+- `#!c++ ImageD`
+- `#!c++ ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

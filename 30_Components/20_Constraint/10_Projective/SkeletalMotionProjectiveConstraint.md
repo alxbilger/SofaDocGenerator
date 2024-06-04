@@ -5,15 +5,15 @@ animate a skeleton
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: Sofa.Component.Constraint.Projective
+__Target__: `Sofa.Component.Constraint.Projective`
 
-__namespace__: sofa::component::constraint::projective
+__namespace__: `#!c++ sofa::component::constraint::projective`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

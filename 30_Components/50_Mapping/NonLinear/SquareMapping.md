@@ -5,15 +5,15 @@ Compute the square
 
 __Templates__:
 
-- Vec1d,Vec1d
+- `#!c++ Vec1d,Vec1d`
 
-__Target__: Sofa.Component.Mapping.NonLinear
+__Target__: `Sofa.Component.Mapping.NonLinear`
 
-__namespace__: sofa::component::mapping::nonlinear
+__namespace__: `#!c++ sofa::component::mapping::nonlinear`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

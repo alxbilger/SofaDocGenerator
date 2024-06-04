@@ -3,13 +3,13 @@
 Broad phase collision detection using extensive pair-wise tests
 
 
-__Target__: Sofa.Component.Collision.Detection.Algorithm
+__Target__: `Sofa.Component.Collision.Detection.Algorithm`
 
-__namespace__: sofa::component::collision::detection::algorithm
+__namespace__: `#!c++ sofa::component::collision::detection::algorithm`
 
 __parents__: 
 
-- BroadPhaseDetection
+- `#!c++ BroadPhaseDetection`
 
 Data: 
 

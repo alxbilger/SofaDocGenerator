@@ -5,15 +5,15 @@ Visual model for OpenGL display using Glew extensions
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- OglModel
+- `#!c++ OglModel`
 
 Data: 
 

@@ -5,19 +5,19 @@ Create reference intensity profiles from custom values
 
 __Templates__:
 
-- ImageB
-- ImageD
-- ImageS
-- ImageUC
-- ImageUS
+- `#!c++ ImageB`
+- `#!c++ ImageD`
+- `#!c++ ImageS`
+- `#!c++ ImageUC`
+- `#!c++ ImageUS`
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

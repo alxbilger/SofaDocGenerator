@@ -5,15 +5,15 @@ Generate tetrahedral mesh from image
 
 __Templates__:
 
-- Vec3d,ImageUC
+- `#!c++ Vec3d,ImageUC`
 
-__Target__: CGALPlugin
+__Target__: `CGALPlugin`
 
-__namespace__: cgal
+__namespace__: `#!c++ cgal`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

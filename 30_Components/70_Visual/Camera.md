@@ -3,13 +3,13 @@
 A Camera that render the scene from a given location & orientation.
 
 
-__Target__: Sofa.Component.Visual
+__Target__: `Sofa.Component.Visual`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- BaseCamera
+- `#!c++ BaseCamera`
 
 Data: 
 

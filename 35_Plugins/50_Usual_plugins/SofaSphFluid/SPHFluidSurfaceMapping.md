@@ -5,16 +5,16 @@ SPHFluidSurfaceMappingClass
 
 __Templates__:
 
-- Vec3d,Vec3d
+- `#!c++ Vec3d,Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- Mapping
-- MeshTopology
+- `#!c++ Mapping`
+- `#!c++ MeshTopology`
 
 Data: 
 

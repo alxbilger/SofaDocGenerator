@@ -7,17 +7,17 @@ Supports Mouse Interaction using CUDA
 
 __Templates__:
 
-- Rigid3d
-- Vec2d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.GUI.Component
+__Target__: `Sofa.GUI.Component`
 
-__namespace__: sofa::gui::component::performer
+__namespace__: `#!c++ sofa::gui::component::performer`
 
 __parents__: 
 
-- BaseMouseInteractor
+- `#!c++ BaseMouseInteractor`
 
 Data: 
 

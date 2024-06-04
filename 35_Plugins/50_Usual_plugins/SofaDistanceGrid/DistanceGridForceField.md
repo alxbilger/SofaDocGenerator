@@ -5,15 +5,15 @@ Force applied by a distancegrid toward the exterior, the interior, or the surfac
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaDistanceGrid
+__Target__: `SofaDistanceGrid`
 
-__namespace__: sofa::component::forcefield
+__namespace__: `#!c++ sofa::component::forcefield`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

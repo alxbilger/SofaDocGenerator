@@ -3,13 +3,13 @@
 Approximate minimum degree ordering implemented in the Eigen library
 
 
-__Target__: Sofa.Component.LinearSolver.Ordering
+__Target__: `Sofa.Component.LinearSolver.Ordering`
 
-__namespace__: sofa::component::linearsolver::ordering
+__namespace__: `#!c++ sofa::component::linearsolver::ordering`
 
 __parents__: 
 
-- BaseEigenOrderingMethod
+- `#!c++ BaseEigenOrderingMethod`
 
 Data: 
 

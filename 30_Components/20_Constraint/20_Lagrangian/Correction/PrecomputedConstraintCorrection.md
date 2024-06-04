@@ -6,17 +6,17 @@ Supports GPU-side computations using CUDA.
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Constraint.Lagrangian.Correction
+__Target__: `Sofa.Component.Constraint.Lagrangian.Correction`
 
-__namespace__: sofa::component::constraint::lagrangian::correction
+__namespace__: `#!c++ sofa::component::constraint::lagrangian::correction`
 
 __parents__: 
 
-- ConstraintCorrection
+- `#!c++ ConstraintCorrection`
 
 Data: 
 

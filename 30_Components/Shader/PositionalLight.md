@@ -3,13 +3,13 @@
 A positional light illuminating the scene.The light has a location from which the ray are starting in all direction  (cannot cast shadows for now)
 
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- Light
+- `#!c++ Light`
 
 Data: 
 

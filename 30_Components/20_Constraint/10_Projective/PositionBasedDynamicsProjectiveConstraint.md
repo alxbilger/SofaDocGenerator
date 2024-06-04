@@ -5,19 +5,19 @@ Position-based dynamics
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.Constraint.Projective
+__Target__: `Sofa.Component.Constraint.Projective`
 
-__namespace__: sofa::component::constraint::projective
+__namespace__: `#!c++ sofa::component::constraint::projective`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

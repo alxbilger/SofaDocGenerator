@@ -123,14 +123,14 @@ node.addObject('EulerImplicitSolver', name='ODEsolver', rayleighStiffness='0.1' 
  
 An example scene involving a StaticSolver is available in [*examples/Component/ODESolver/Backward/EulerImplicitSolver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/ODESolver/Backward/EulerImplicitSolver.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.ODESolver.Backward
+__Target__: `Sofa.Component.ODESolver.Backward`
 
-__namespace__: sofa::component::odesolver::backward
+__namespace__: `#!c++ sofa::component::odesolver::backward`
 
 __parents__: 
 
-- OdeSolver
-- LinearSolverAccessor
+- `#!c++ OdeSolver`
+- `#!c++ LinearSolverAccessor`
 
 Data: 
 

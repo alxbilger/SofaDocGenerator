@@ -3,13 +3,13 @@
 Dummy component with a custom widget.
 
 
-__Target__: PluginExample
+__Target__: `PluginExample`
 
-__namespace__: sofa::component::behaviormodel
+__namespace__: `#!c++ sofa::component::behaviormodel`
 
 __parents__: 
 
-- BehaviorModel
+- `#!c++ BehaviorModel`
 
 Data: 
 

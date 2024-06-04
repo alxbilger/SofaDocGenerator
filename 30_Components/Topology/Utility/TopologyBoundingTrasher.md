@@ -5,15 +5,15 @@ A class to remove all elements going outside from the given Bounding Box.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Topology.Utility
+__Target__: `Sofa.Component.Topology.Utility`
 
-__namespace__: sofa::component::topology::utility
+__namespace__: `#!c++ sofa::component::topology::utility`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

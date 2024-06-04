@@ -3,13 +3,13 @@
 This class is a specific implementation of TopologicalMapping where the destination topology should be kept identical to the source topology. The implementation currently assumes that both topology have been initialized identically.
 
 
-__Target__: Sofa.Component.Topology.Mapping
+__Target__: `Sofa.Component.Topology.Mapping`
 
-__namespace__: sofa::component::topology::mapping
+__namespace__: `#!c++ sofa::component::topology::mapping`
 
 __parents__: 
 
-- TopologicalMapping
+- `#!c++ TopologicalMapping`
 
 Data: 
 

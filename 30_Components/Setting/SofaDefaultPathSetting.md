@@ -3,13 +3,13 @@
 Default Paths for Sofa Application
 
 
-__Target__: Sofa.Component.Setting
+__Target__: `Sofa.Component.Setting`
 
-__namespace__: sofa::component::setting
+__namespace__: `#!c++ sofa::component::setting`
 
 __parents__: 
 
-- ConfigurationSetting
+- `#!c++ ConfigurationSetting`
 
 Data: 
 

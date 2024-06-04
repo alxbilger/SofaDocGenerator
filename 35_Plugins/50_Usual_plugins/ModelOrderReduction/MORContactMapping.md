@@ -5,17 +5,17 @@ Special case of mapping where the child points are the same as the parent points
 
 __Templates__:
 
-- Vec1d,Vec1d
-- Vec2d,Vec2d
-- Vec3d,Vec3d
+- `#!c++ Vec1d,Vec1d`
+- `#!c++ Vec2d,Vec2d`
+- `#!c++ Vec3d,Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

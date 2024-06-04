@@ -5,15 +5,15 @@ Periodically compute the distance between 2 set of points
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaValidation
+__Target__: `SofaValidation`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- EvalPointsDistance
+- `#!c++ EvalPointsDistance`
 
 Data: 
 

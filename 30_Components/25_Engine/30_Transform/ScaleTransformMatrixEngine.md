@@ -3,13 +3,13 @@
 Compose the input transform (if any) with the given scale transformation
 
 
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- AbstractTransformMatrixEngine
+- `#!c++ AbstractTransformMatrixEngine`
 
 Data: 
 

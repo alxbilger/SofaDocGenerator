@@ -3,13 +3,13 @@
 Collision detection using extensive pair-wise tests performed in parallel
 
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::collision::detection::algorithm
+__namespace__: `#!c++ multithreading::component::collision::detection::algorithm`
 
 __parents__: 
 
-- BruteForceBroadPhase
+- `#!c++ BruteForceBroadPhase`
 
 Data: 
 

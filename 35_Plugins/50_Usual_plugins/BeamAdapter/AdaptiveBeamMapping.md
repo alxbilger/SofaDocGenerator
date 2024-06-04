@@ -5,16 +5,16 @@ Set the positions and velocities of points attached to a beam using linear inter
 
 __Templates__:
 
-- Rigid3d,Rigid3d
-- Rigid3d,Vec3d
+- `#!c++ Rigid3d,Rigid3d`
+- `#!c++ Rigid3d,Vec3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::mapping::_adaptivebeammapping_
+__namespace__: `#!c++ sofa::component::mapping::_adaptivebeammapping_`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

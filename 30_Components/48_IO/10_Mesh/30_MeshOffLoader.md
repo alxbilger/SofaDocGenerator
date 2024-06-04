@@ -32,13 +32,13 @@ node.addObject('MeshOffLoader', name="offLoader", filename="mesh/aneurysm3D_1.of
 
 An example scene involving a MeshOffLoader is available in [*examples/Component/IO/Mesh/MeshOffLoader.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/IO/Mesh/MeshOffLoader.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::io::mesh
+__namespace__: `#!c++ sofa::component::io::mesh`
 
 __parents__: 
 
-- MeshLoader
+- `#!c++ MeshLoader`
 
 Data: 
 

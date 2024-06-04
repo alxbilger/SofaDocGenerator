@@ -3,13 +3,13 @@
 Explicit time integrator using central difference (also known as Verlet of Leap-frog)
 
 
-__Target__: Sofa.Component.ODESolver.Forward
+__Target__: `Sofa.Component.ODESolver.Forward`
 
-__namespace__: sofa::component::odesolver::forward
+__namespace__: `#!c++ sofa::component::odesolver::forward`
 
 __parents__: 
 
-- OdeSolver
+- `#!c++ OdeSolver`
 
 Data: 
 

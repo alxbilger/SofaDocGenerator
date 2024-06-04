@@ -6,15 +6,15 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Collision.Response.Contact
+__Target__: `Sofa.Component.Collision.Response.Contact`
 
-__namespace__: sofa::component::collision::response::contact
+__namespace__: `#!c++ sofa::component::collision::response::contact`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

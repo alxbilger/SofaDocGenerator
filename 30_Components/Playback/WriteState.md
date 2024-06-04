@@ -3,13 +3,13 @@
 Write State vectors to file at each timestep
 
 
-__Target__: Sofa.Component.Playback
+__Target__: `Sofa.Component.Playback`
 
-__namespace__: sofa::component::playback
+__namespace__: `#!c++ sofa::component::playback`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

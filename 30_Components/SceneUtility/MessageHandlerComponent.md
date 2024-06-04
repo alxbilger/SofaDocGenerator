@@ -3,13 +3,13 @@
 This object controls the way Sofa print's info/warning/error/fatal messages. 
 
 
-__Target__: Sofa.Component.SceneUtility
+__Target__: `Sofa.Component.SceneUtility`
 
-__namespace__: sofa::component::sceneutility
+__namespace__: `#!c++ sofa::component::sceneutility`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

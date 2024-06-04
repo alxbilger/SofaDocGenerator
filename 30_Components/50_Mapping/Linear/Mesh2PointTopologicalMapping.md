@@ -3,13 +3,13 @@
 This class maps any mesh primitive (point, edge, triangle...) into a point using a relative position from the primitive
 
 
-__Target__: Sofa.Component.Mapping.Linear
+__Target__: `Sofa.Component.Mapping.Linear`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- TopologicalMapping
+- `#!c++ TopologicalMapping`
 
 Data: 
 

@@ -5,16 +5,16 @@ Compute edge extensions
 
 __Templates__:
 
-- Rigid3d,Vec1d
-- Vec3d,Vec1d
+- `#!c++ Rigid3d,Vec1d`
+- `#!c++ Vec3d,Vec1d`
 
-__Target__: Sofa.Component.Mapping.NonLinear
+__Target__: `Sofa.Component.Mapping.NonLinear`
 
-__namespace__: sofa::component::mapping::nonlinear
+__namespace__: `#!c++ sofa::component::mapping::nonlinear`
 
 __parents__: 
 
-- MultiMapping
+- `#!c++ MultiMapping`
 
 Data: 
 

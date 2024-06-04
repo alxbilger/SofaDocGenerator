@@ -6,15 +6,15 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 
@@ -172,15 +172,15 @@ Links:
 
 __Templates__:
 
-- Vec2d
+- `#!c++ Vec2d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

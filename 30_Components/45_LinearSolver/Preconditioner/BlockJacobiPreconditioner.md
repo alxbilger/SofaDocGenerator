@@ -5,15 +5,15 @@ Linear solver based on a NxN block diagonal matrix (i.e. block Jacobi preconditi
 
 __Templates__:
 
-- FullVector
+- `#!c++ FullVector`
 
-__Target__: Sofa.Component.LinearSolver.Preconditioner
+__Target__: `Sofa.Component.LinearSolver.Preconditioner`
 
-__namespace__: sofa::component::linearsolver::preconditioner
+__namespace__: `#!c++ sofa::component::linearsolver::preconditioner`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

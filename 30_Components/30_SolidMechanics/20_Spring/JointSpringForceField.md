@@ -5,15 +5,15 @@ Springs for Rigids
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: Sofa.Component.SolidMechanics.Spring
+__Target__: `Sofa.Component.SolidMechanics.Spring`
 
-__namespace__: sofa::component::solidmechanics::spring
+__namespace__: `#!c++ sofa::component::solidmechanics::spring`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

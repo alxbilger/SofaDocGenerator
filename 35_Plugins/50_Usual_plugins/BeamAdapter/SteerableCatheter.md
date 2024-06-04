@@ -4,15 +4,15 @@
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- WireRestShape
+- `#!c++ WireRestShape`
 
 Data: 
 

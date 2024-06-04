@@ -3,13 +3,13 @@
 An engine computing inertia matrix and the principal direction of a mesh.
 
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component
+__namespace__: `#!c++ sofa::component`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

@@ -5,15 +5,15 @@ Linear system taking advantage of the constant sparsity pattern of the global ma
 
 __Templates__:
 
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: Sofa.Component.LinearSystem
+__Target__: `Sofa.Component.LinearSystem`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- MatrixLinearSystem
+- `#!c++ MatrixLinearSystem`
 
 Data: 
 

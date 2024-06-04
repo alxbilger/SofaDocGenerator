@@ -26,13 +26,13 @@ Examples
 
 An example scene involving the MergePoints engine is available in [*examples/Component/Engine/Generate/MergePoints.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Engine/Generate/MergePoints.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Engine.Generate
+__Target__: `Sofa.Component.Engine.Generate`
 
-__namespace__: sofa::component::engine::generate
+__namespace__: `#!c++ sofa::component::engine::generate`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

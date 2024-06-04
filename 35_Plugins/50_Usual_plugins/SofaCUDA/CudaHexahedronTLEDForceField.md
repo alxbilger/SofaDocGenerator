@@ -3,13 +3,13 @@
 GPU-side TLED hexahedron forcefield using CUDA
 
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::gpu::cuda
+__namespace__: `#!c++ sofa::gpu::cuda`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

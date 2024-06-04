@@ -5,15 +5,15 @@ Constrain a rigid to be attached to a beam (only in position, not the orientatio
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::constraintset::_adaptiveBeamSlidingConstraint_
+__namespace__: `#!c++ sofa::component::constraintset::_adaptiveBeamSlidingConstraint_`
 
 __parents__: 
 
-- PairInteractionConstraint
+- `#!c++ PairInteractionConstraint`
 
 Data: 
 

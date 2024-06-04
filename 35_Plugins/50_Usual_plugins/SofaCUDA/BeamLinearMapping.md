@@ -6,16 +6,16 @@ Set the positions and velocities of points attached to a beam using linear inter
 
 __Templates__:
 
-- Rigid3d,CudaVec3d
-- Rigid3d,CudaVec3f
+- `#!c++ Rigid3d,CudaVec3d`
+- `#!c++ Rigid3d,CudaVec3f`
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

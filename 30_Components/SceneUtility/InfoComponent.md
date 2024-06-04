@@ -3,13 +3,13 @@
 This object retain the info/error message
 
 
-__Target__: Sofa.Component.SceneUtility
+__Target__: `Sofa.Component.SceneUtility`
 
-__namespace__: sofa::component::sceneutility::infocomponent
+__namespace__: `#!c++ sofa::component::sceneutility::infocomponent`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

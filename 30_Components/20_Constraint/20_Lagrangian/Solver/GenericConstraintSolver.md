@@ -3,13 +3,13 @@
 A Generic Constraint Solver using the Linear Complementarity Problem formulation to solve Constraint based components
 
 
-__Target__: Sofa.Component.Constraint.Lagrangian.Solver
+__Target__: `Sofa.Component.Constraint.Lagrangian.Solver`
 
-__namespace__: sofa::component::constraint::lagrangian::solver
+__namespace__: `#!c++ sofa::component::constraint::lagrangian::solver`
 
 __parents__: 
 
-- ConstraintSolverImpl
+- `#!c++ ConstraintSolverImpl`
 
 Data: 
 

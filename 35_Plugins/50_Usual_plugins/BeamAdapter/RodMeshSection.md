@@ -5,15 +5,15 @@ Class defining a Rod Section using a MeshLoader and material parameters.
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::beamadapter
+__namespace__: `#!c++ sofa::beamadapter`
 
 __parents__: 
 
-- BaseRodSectionMaterial
+- `#!c++ BaseRodSectionMaterial`
 
 Data: 
 

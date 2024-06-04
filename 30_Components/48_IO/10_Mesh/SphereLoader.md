@@ -3,13 +3,13 @@
 Loader for sphere model description files
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::io::mesh
+__namespace__: `#!c++ sofa::component::io::mesh`
 
 __parents__: 
 
-- BaseLoader
+- `#!c++ BaseLoader`
 
 Data: 
 

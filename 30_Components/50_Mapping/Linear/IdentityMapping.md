@@ -6,23 +6,23 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Rigid2d,Rigid2d
-- Rigid2d,Vec2d
-- Rigid3d,Rigid3d
-- Rigid3d,Vec3d
-- Vec1d,Vec1d
-- Vec2d,Vec2d
-- Vec3d,Vec3d
-- Vec6d,Vec3d
-- Vec6d,Vec6d
+- `#!c++ Rigid2d,Rigid2d`
+- `#!c++ Rigid2d,Vec2d`
+- `#!c++ Rigid3d,Rigid3d`
+- `#!c++ Rigid3d,Vec3d`
+- `#!c++ Vec1d,Vec1d`
+- `#!c++ Vec2d,Vec2d`
+- `#!c++ Vec3d,Vec3d`
+- `#!c++ Vec6d,Vec3d`
+- `#!c++ Vec6d,Vec6d`
 
-__Target__: Sofa.Component.Mapping.Linear
+__Target__: `Sofa.Component.Mapping.Linear`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

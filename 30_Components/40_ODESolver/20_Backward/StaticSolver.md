@@ -3,14 +3,14 @@
 Static ODE Solver
 
 
-__Target__: Sofa.Component.ODESolver.Backward
+__Target__: `Sofa.Component.ODESolver.Backward`
 
-__namespace__: sofa::component::odesolver::backward
+__namespace__: `#!c++ sofa::component::odesolver::backward`
 
 __parents__: 
 
-- OdeSolver
-- LinearSolverAccessor
+- `#!c++ OdeSolver`
+- `#!c++ LinearSolverAccessor`
 
 Data: 
 

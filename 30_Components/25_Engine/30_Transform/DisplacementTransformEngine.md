@@ -5,16 +5,16 @@ Converts a vector of Rigid to a vector of displacement transforms.
 
 __Templates__:
 
-- Rigid3d,Mat4x4d
-- Rigid3d,RigidCoord3d
+- `#!c++ Rigid3d,Mat4x4d`
+- `#!c++ Rigid3d,RigidCoord3d`
 
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

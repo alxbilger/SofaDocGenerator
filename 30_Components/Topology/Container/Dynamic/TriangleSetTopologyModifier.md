@@ -3,13 +3,13 @@
 Triangle set topology modifier
 
 
-__Target__: Sofa.Component.Topology.Container.Dynamic
+__Target__: `Sofa.Component.Topology.Container.Dynamic`
 
-__namespace__: sofa::component::topology::container::dynamic
+__namespace__: `#!c++ sofa::component::topology::container::dynamic`
 
 __parents__: 
 
-- EdgeSetTopologyModifier
+- `#!c++ EdgeSetTopologyModifier`
 
 Data: 
 

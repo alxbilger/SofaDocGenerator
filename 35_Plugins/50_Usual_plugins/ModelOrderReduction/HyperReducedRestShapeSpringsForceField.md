@@ -5,16 +5,16 @@ Simple elastic springs applied to given degrees of freedom between their current
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::solidmechanics::spring
+__namespace__: `#!c++ sofa::component::solidmechanics::spring`
 
 __parents__: 
 
-- RestShapeSpringsForceField
-- HyperReducedHelper
+- `#!c++ RestShapeSpringsForceField`
+- `#!c++ HyperReducedHelper`
 
 Data: 
 

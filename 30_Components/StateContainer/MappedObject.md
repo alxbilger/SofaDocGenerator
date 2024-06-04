@@ -6,20 +6,20 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Rigid2d
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Rigid2d`
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.StateContainer
+__Target__: `Sofa.Component.StateContainer`
 
-__namespace__: sofa::component::statecontainer
+__namespace__: `#!c++ sofa::component::statecontainer`
 
 __parents__: 
 
-- State
+- `#!c++ State`
 
 Data: 
 

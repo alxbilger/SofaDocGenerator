@@ -5,20 +5,20 @@ This component interpolates between two consecutive inputs when a jump is detect
 
 __Templates__:
 
-- Vec1d
-- Vec1i
-- Vec2d
-- Vec2i
-- Vec3d
-- Vec3i
+- `#!c++ Vec1d`
+- `#!c++ Vec1i`
+- `#!c++ Vec2d`
+- `#!c++ Vec2i`
+- `#!c++ Vec3d`
+- `#!c++ Vec3i`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::controller
+__namespace__: `#!c++ softrobots::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

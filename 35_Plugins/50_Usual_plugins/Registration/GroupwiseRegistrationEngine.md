@@ -5,15 +5,15 @@ Register a set of meshes of similar topology
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

@@ -6,15 +6,15 @@ GPU support using CUDA.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

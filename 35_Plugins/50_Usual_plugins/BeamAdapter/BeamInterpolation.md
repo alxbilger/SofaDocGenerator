@@ -5,15 +5,15 @@ Adaptive Beam Interpolation
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::fem::_beaminterpolation_
+__namespace__: `#!c++ sofa::component::fem::_beaminterpolation_`
 
 __parents__: 
 
-- BaseBeamInterpolation
+- `#!c++ BaseBeamInterpolation`
 
 Data: 
 

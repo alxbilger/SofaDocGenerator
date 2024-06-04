@@ -5,16 +5,16 @@ Tetrahedral finite elements
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::forcefield
+__namespace__: `#!c++ sofa::component::forcefield`
 
 __parents__: 
 
-- TetrahedronFEMForceField
-- HyperReducedHelper
+- `#!c++ TetrahedronFEMForceField`
+- `#!c++ HyperReducedHelper`
 
 Data: 
 

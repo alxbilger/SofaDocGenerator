@@ -3,13 +3,13 @@
 Save State vectors from file at each timestep
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::_vtkexporter_
+__namespace__: `#!c++ sofa::component::_vtkexporter_`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Collision model representing a cube
 
 
-__Target__: Sofa.Component.Collision.Geometry
+__Target__: `Sofa.Component.Collision.Geometry`
 
-__namespace__: sofa::component::collision::geometry
+__namespace__: `#!c++ sofa::component::collision::geometry`
 
 __parents__: 
 
-- CollisionModel
+- `#!c++ CollisionModel`
 
 Data: 
 

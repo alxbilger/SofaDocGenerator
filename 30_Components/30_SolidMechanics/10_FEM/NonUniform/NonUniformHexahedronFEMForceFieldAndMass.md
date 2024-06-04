@@ -5,15 +5,15 @@ Non uniform Hexahedral finite elements
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.SolidMechanics.FEM.NonUniform
+__Target__: `Sofa.Component.SolidMechanics.FEM.NonUniform`
 
-__namespace__: sofa::component::solidmechanics::fem::nonuniform
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::nonuniform`
 
 __parents__: 
 
-- HexahedronFEMForceFieldAndMass
+- `#!c++ HexahedronFEMForceFieldAndMass`
 
 Data: 
 

@@ -3,14 +3,14 @@
 Collision detection using incremental sweep and prune
 
 
-__Target__: Sofa.Component.Collision.Detection.Algorithm
+__Target__: `Sofa.Component.Collision.Detection.Algorithm`
 
-__namespace__: sofa::component::collision::detection::algorithm
+__namespace__: `#!c++ sofa::component::collision::detection::algorithm`
 
 __parents__: 
 
-- BroadPhaseDetection
-- NarrowPhaseDetection
+- `#!c++ BroadPhaseDetection`
+- `#!c++ NarrowPhaseDetection`
 
 Data: 
 

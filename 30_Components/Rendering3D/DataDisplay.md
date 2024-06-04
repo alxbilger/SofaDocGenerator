@@ -3,14 +3,14 @@
 Rendering of meshes colored by data
 
 
-__Target__: Sofa.GL.Component.Rendering3D
+__Target__: `Sofa.GL.Component.Rendering3D`
 
-__namespace__: sofa::gl::component::rendering3d
+__namespace__: `#!c++ sofa::gl::component::rendering3d`
 
 __parents__: 
 
-- VisualModel
-- VisualState
+- `#!c++ VisualModel`
+- `#!c++ VisualState`
 
 Data: 
 

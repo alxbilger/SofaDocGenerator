@@ -3,13 +3,13 @@
 Null force feedback for haptic feedback device
 
 
-__Target__: Sofa.Component.Haptics
+__Target__: `Sofa.Component.Haptics`
 
-__namespace__: sofa::component::haptics
+__namespace__: `#!c++ sofa::component::haptics`
 
 __parents__: 
 
-- ForceFeedback
+- `#!c++ ForceFeedback`
 
 Data: 
 

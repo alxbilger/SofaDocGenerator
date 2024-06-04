@@ -10,15 +10,15 @@ seen by allowing the 'Collision Model' in the 'View' tab.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::constraint
+__namespace__: `#!c++ softrobots::constraint`
 
 __parents__: 
 
-- SoftRobotsConstraint
+- `#!c++ SoftRobotsConstraint`
 
 Data: 
 

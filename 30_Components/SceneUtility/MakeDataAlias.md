@@ -3,13 +3,13 @@
 This object create an alias to a data field. 
 
 
-__Target__: Sofa.Component.SceneUtility
+__Target__: `Sofa.Component.SceneUtility`
 
-__namespace__: sofa::component::sceneutility::makedataaliascomponent
+__namespace__: `#!c++ sofa::component::sceneutility::makedataaliascomponent`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

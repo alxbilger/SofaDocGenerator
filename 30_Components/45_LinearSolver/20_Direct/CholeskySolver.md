@@ -5,16 +5,16 @@ Direct linear solver based on Cholesky factorization, for dense matrices
 
 __Templates__:
 
-- FullMatrix
-- SparseMatrix
+- `#!c++ FullMatrix`
+- `#!c++ SparseMatrix`
 
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

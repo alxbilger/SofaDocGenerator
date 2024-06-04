@@ -5,15 +5,15 @@ Linear system solver using the conjugate gradient iterative algorithm
 
 __Templates__:
 
-- GraphScattered
+- `#!c++ GraphScattered`
 
-__Target__: Sofa.Component.LinearSolver.Iterative
+__Target__: `Sofa.Component.LinearSolver.Iterative`
 
-__namespace__: sofa::component::linearsolver::iterative
+__namespace__: `#!c++ sofa::component::linearsolver::iterative`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Add a path to PluginRepository
 
 
-__Target__: Sofa.Component.SceneUtility
+__Target__: `Sofa.Component.SceneUtility`
 
-__namespace__: sofa::component::sceneutility
+__namespace__: `#!c++ sofa::component::sceneutility`
 
 __parents__: 
 
-- BaseAddResourceRepository
+- `#!c++ BaseAddResourceRepository`
 
 Data: 
 

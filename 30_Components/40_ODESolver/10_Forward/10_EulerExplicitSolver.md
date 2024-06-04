@@ -66,13 +66,13 @@ Examples of scenes involving a EulerExplicitSolver are available in [*examples/C
 - [EulerSymplecticSolver.scn](https://github.com/sofa-framework/sofa/blob/master/examples/Component/ODESolver/Forward/EulerSymplecticSolver.scn): symplectic and non-diagonal mass matrix
 - [EulerSymplecticSolver_diagonal.scn](https://github.com/sofa-framework/sofa/blob/master/examples/Component/ODESolver/Forward/EulerSymplecticSolver_diagonal.scn): symplectic and diagonal mass matrix
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.ODESolver.Forward
+__Target__: `Sofa.Component.ODESolver.Forward`
 
-__namespace__: sofa::component::odesolver::forward
+__namespace__: `#!c++ sofa::component::odesolver::forward`
 
 __parents__: 
 
-- OdeSolver
+- `#!c++ OdeSolver`
 
 Data: 
 

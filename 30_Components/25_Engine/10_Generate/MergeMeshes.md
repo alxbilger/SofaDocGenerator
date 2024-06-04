@@ -5,19 +5,19 @@ Merge several meshes
 
 __Templates__:
 
-- Rigid2d
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Rigid2d`
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Generate
+__Target__: `Sofa.Component.Engine.Generate`
 
-__namespace__: sofa::component::engine::generate
+__namespace__: `#!c++ sofa::component::engine::generate`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

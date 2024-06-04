@@ -5,19 +5,19 @@ Compute the Hausdorff distance of two point clouds
 
 __Templates__:
 
-- Rigid2d
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Rigid2d`
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Analyze
+__Target__: `Sofa.Component.Engine.Analyze`
 
-__namespace__: sofa::component::engine::analyze
+__namespace__: `#!c++ sofa::component::engine::analyze`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

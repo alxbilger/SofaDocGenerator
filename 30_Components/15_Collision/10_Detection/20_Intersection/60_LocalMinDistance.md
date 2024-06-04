@@ -69,13 +69,13 @@ node.addObject('LocalMinDistance', name='LMD-proximity', alarmDistance='.5', con
 
 An example scene involving a LocalMinDistance is available in [*examples/Component/Collision/Response/FrictionContact.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Collision/Response/FrictionContact.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Collision.Detection.Intersection
+__Target__: `Sofa.Component.Collision.Detection.Intersection`
 
-__namespace__: sofa::component::collision::detection::intersection
+__namespace__: `#!c++ sofa::component::collision::detection::intersection`
 
 __parents__: 
 
-- BaseProximityIntersection
+- `#!c++ BaseProximityIntersection`
 
 Data: 
 

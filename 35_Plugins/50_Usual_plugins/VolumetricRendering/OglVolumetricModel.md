@@ -3,14 +3,14 @@
 Volumetric model for OpenGL display
 
 
-__Target__: VolumetricRendering
+__Target__: `VolumetricRendering`
 
-__namespace__: sofa::component::visualmodel
+__namespace__: `#!c++ sofa::component::visualmodel`
 
 __parents__: 
 
-- VisualModel
-- VisualState
+- `#!c++ VisualModel`
+- `#!c++ VisualState`
 
 Data: 
 

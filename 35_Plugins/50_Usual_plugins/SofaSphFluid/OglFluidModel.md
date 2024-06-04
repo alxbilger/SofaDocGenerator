@@ -5,15 +5,15 @@ Particle model for OpenGL display, using glsl
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::visualmodel
+__namespace__: `#!c++ sofa::component::visualmodel`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

@@ -3,13 +3,13 @@
 collision model using a triangular mesh mapped to an Octree
 
 
-__Target__: Sofa.Component.Collision.Geometry
+__Target__: `Sofa.Component.Collision.Geometry`
 
-__namespace__: sofa::component::collision::geometry
+__namespace__: `#!c++ sofa::component::collision::geometry`
 
 __parents__: 
 
-- TriangleCollisionModel
+- `#!c++ TriangleCollisionModel`
 
 Data: 
 

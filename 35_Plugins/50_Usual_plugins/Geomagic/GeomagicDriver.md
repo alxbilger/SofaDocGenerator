@@ -3,13 +3,13 @@
 Driver allowing interfacing with Geomagic haptic devices.
 
 
-__Target__: Geomagic
+__Target__: `Geomagic`
 
-__namespace__: sofa::component::controller
+__namespace__: `#!c++ sofa::component::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

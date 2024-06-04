@@ -5,15 +5,15 @@ Matrix mapping computing the matrix projection using the Eigen library
 
 __Templates__:
 
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: Sofa.Component.LinearSystem
+__Target__: `Sofa.Component.LinearSystem`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- BaseMatrixProjectionMethod
+- `#!c++ BaseMatrixProjectionMethod`
 
 Data: 
 

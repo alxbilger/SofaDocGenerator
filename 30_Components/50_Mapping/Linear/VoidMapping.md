@@ -3,13 +3,13 @@
 Special mapping that 'map' points for void ( no input DOF ). This is useful to be able to create animated objects mixed with real DOFs.
 
 
-__Target__: Sofa.Component.Mapping.Linear
+__Target__: `Sofa.Component.Mapping.Linear`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

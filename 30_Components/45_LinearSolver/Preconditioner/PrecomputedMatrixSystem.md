@@ -5,15 +5,15 @@ Matrix system
 
 __Templates__:
 
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: Sofa.Component.LinearSolver.Preconditioner
+__Target__: `Sofa.Component.LinearSolver.Preconditioner`
 
-__namespace__: sofa::component::linearsolver::preconditioner
+__namespace__: `#!c++ sofa::component::linearsolver::preconditioner`
 
 __parents__: 
 
-- TypedMatrixLinearSystem
+- `#!c++ TypedMatrixLinearSystem`
 
 Data: 
 

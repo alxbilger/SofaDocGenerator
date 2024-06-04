@@ -5,15 +5,15 @@ Computes the difference between given points and their projection on a beam.
 
 __Templates__:
 
-- Rigid3d,Rigid3d,Rigid3d
+- `#!c++ Rigid3d,Rigid3d,Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: beamadapter::mapping
+__namespace__: `#!c++ beamadapter::mapping`
 
 __parents__: 
 
-- Multi2Mapping
+- `#!c++ Multi2Mapping`
 
 Data: 
 

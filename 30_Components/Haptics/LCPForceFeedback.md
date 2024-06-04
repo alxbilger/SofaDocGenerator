@@ -5,16 +5,16 @@ LCP force feedback for the device
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
 
-__Target__: Sofa.Component.Haptics
+__Target__: `Sofa.Component.Haptics`
 
-__namespace__: sofa::component::haptics
+__namespace__: `#!c++ sofa::component::haptics`
 
 __parents__: 
 
-- MechanicalStateForceFeedback
+- `#!c++ MechanicalStateForceFeedback`
 
 Data: 
 

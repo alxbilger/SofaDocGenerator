@@ -46,13 +46,13 @@ node.addObject('FreeMotionAnimationLoop')
 
 An example scene involving a FreeAnimationLoop is available in [*examples/Component/AnimationLoop/FreeMotionAnimationLoop.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/AnimationLoop/FreeMotionAnimationLoop.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.AnimationLoop
+__Target__: `Sofa.Component.AnimationLoop`
 
-__namespace__: sofa::component::animationloop
+__namespace__: `#!c++ sofa::component::animationloop`
 
 __parents__: 
 
-- BaseAnimationLoop
+- `#!c++ BaseAnimationLoop`
 
 Data: 
 

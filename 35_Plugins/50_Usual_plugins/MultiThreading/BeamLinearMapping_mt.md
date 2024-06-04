@@ -5,15 +5,15 @@ Set the positions and velocities of points attached to a beam using linear inter
 
 __Templates__:
 
-- Rigid3d,Vec3d
+- `#!c++ Rigid3d,Vec3d`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::mapping::linear
+__namespace__: `#!c++ multithreading::component::mapping::linear`
 
 __parents__: 
 
-- BeamLinearMapping
+- `#!c++ BeamLinearMapping`
 
 Data: 
 

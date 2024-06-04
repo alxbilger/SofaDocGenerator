@@ -3,13 +3,13 @@
 Narrow phase collision detection based on boundary volume hierarchy
 
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::collision::detection::algorithm
+__namespace__: `#!c++ multithreading::component::collision::detection::algorithm`
 
 __parents__: 
 
-- BVHNarrowPhase
+- `#!c++ BVHNarrowPhase`
 
 Data: 
 

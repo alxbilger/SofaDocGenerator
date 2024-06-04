@@ -5,23 +5,23 @@ Apply a math operation to combine several inputs
 
 __Templates__:
 
-- vector<RigidCoord2d>
-- vector<RigidCoord3d>
-- vector<RigidDeriv2d>
-- vector<RigidDeriv3d>
-- vector<Vec2d>
-- vector<Vec3d>
-- vector<bool>
-- vector<d>
-- vector<i>
+- `#!c++ vector<RigidCoord2d>`
+- `#!c++ vector<RigidCoord3d>`
+- `#!c++ vector<RigidDeriv2d>`
+- `#!c++ vector<RigidDeriv3d>`
+- `#!c++ vector<Vec2d>`
+- `#!c++ vector<Vec3d>`
+- `#!c++ vector<bool>`
+- `#!c++ vector<d>`
+- `#!c++ vector<i>`
 
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

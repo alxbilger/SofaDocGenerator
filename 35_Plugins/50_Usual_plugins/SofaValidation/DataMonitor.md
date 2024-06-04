@@ -3,13 +3,13 @@
 DataMonitor
 
 
-__Target__: SofaValidation
+__Target__: `SofaValidation`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

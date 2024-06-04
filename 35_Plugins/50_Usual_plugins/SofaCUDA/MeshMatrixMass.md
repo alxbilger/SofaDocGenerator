@@ -6,26 +6,26 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- CudaVec1d,CudaVec1d
-- CudaVec1d,CudaVec2d
-- CudaVec1d,CudaVec3d
-- CudaVec1f,CudaVec1f
-- CudaVec1f,CudaVec2f
-- CudaVec1f,CudaVec3f
-- CudaVec2d,CudaVec2d
-- CudaVec2d,CudaVec3d
-- CudaVec2f,CudaVec2f
-- CudaVec2f,CudaVec3f
-- CudaVec3d,CudaVec3d
-- CudaVec3f,CudaVec3f
+- `#!c++ CudaVec1d,CudaVec1d`
+- `#!c++ CudaVec1d,CudaVec2d`
+- `#!c++ CudaVec1d,CudaVec3d`
+- `#!c++ CudaVec1f,CudaVec1f`
+- `#!c++ CudaVec1f,CudaVec2f`
+- `#!c++ CudaVec1f,CudaVec3f`
+- `#!c++ CudaVec2d,CudaVec2d`
+- `#!c++ CudaVec2d,CudaVec3d`
+- `#!c++ CudaVec2f,CudaVec2f`
+- `#!c++ CudaVec2f,CudaVec3f`
+- `#!c++ CudaVec3d,CudaVec3d`
+- `#!c++ CudaVec3f,CudaVec3f`
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::component::mass
+__namespace__: `#!c++ sofa::component::mass`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 

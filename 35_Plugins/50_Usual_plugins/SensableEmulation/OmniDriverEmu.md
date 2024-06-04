@@ -3,13 +3,13 @@
 Solver to test compliance computation for new articulated system objects
 
 
-__Target__: SensableEmulation
+__Target__: `SensableEmulation`
 
-__namespace__: sofa::component::controller
+__namespace__: `#!c++ sofa::component::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

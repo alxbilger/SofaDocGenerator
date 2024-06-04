@@ -3,13 +3,13 @@
 Sparse grid in 3D
 
 
-__Target__: Sofa.Component.Topology.Container.Grid
+__Target__: `Sofa.Component.Topology.Container.Grid`
 
-__namespace__: sofa::component::topology::container::grid
+__namespace__: `#!c++ sofa::component::topology::container::grid`
 
 __parents__: 
 
-- SparseGridRamificationTopology
+- `#!c++ SparseGridRamificationTopology`
 
 Data: 
 

@@ -2,13 +2,13 @@
 
 
 
-__Target__: Sofa.Component.Topology.Mapping
+__Target__: `Sofa.Component.Topology.Mapping`
 
-__namespace__: sofa::component::topology::mapping
+__namespace__: `#!c++ sofa::component::topology::mapping`
 
 __parents__: 
 
-- TopologicalMapping
+- `#!c++ TopologicalMapping`
 
 Data: 
 

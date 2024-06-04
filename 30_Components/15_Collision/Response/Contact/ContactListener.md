@@ -3,13 +3,13 @@
 ContactListener .. 
 
 
-__Target__: Sofa.Component.Collision.Response.Contact
+__Target__: `Sofa.Component.Collision.Response.Contact`
 
-__namespace__: sofa::component::collision::response::contact
+__namespace__: `#!c++ sofa::component::collision::response::contact`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

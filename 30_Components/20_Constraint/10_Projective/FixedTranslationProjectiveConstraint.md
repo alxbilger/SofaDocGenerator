@@ -6,17 +6,17 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Rigid2d
-- Rigid3d
-- Vec6d
+- `#!c++ Rigid2d`
+- `#!c++ Rigid3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.Constraint.Projective
+__Target__: `Sofa.Component.Constraint.Projective`
 
-__namespace__: sofa::component::constraint::projective
+__namespace__: `#!c++ sofa::component::constraint::projective`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

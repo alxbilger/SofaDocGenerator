@@ -71,14 +71,14 @@ node.addObject('NewmarkImplicitSolver', rayleighMass='0.01', rayleighStiffness='
 
 An example scene involving a NewmarkImplicitSolver is available in [*examples/Component/ODESolver/Backward/NewmarkImplicitSolver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/ODESolver/Backward/NewmarkImplicitSolver.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.ODESolver.Backward
+__Target__: `Sofa.Component.ODESolver.Backward`
 
-__namespace__: sofa::component::odesolver::backward
+__namespace__: `#!c++ sofa::component::odesolver::backward`
 
 __parents__: 
 
-- OdeSolver
-- LinearSolverAccessor
+- `#!c++ OdeSolver`
+- `#!c++ LinearSolverAccessor`
 
 Data: 
 

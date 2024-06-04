@@ -5,17 +5,17 @@ just an example of templated component
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec3d`
 
-__Target__: PluginExample
+__Target__: `PluginExample`
 
-__namespace__: sofa::component::projectiveconstraintset
+__namespace__: `#!c++ sofa::component::projectiveconstraintset`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

@@ -5,18 +5,18 @@ Parallel stiff springs acting along the edges of a mesh
 
 __Templates__:
 
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::solidmechanics::spring
+__namespace__: `#!c++ multithreading::component::solidmechanics::spring`
 
 __parents__: 
 
-- MeshSpringForceField
-- ParallelStiffSpringForceField
+- `#!c++ MeshSpringForceField`
+- `#!c++ ParallelStiffSpringForceField`
 
 Data: 
 

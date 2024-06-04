@@ -5,19 +5,19 @@ Filter an image
 
 __Templates__:
 
-- ImageD,ImageB
-- ImageD,ImageD
-- ImageD,ImageUC
-- ImageUC,ImageD
-- ImageUC,ImageUC
+- `#!c++ ImageD,ImageB`
+- `#!c++ ImageD,ImageD`
+- `#!c++ ImageD,ImageUC`
+- `#!c++ ImageUC,ImageD`
+- `#!c++ ImageUC,ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

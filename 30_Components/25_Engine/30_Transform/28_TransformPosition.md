@@ -31,13 +31,13 @@ Examples
 
 An example scene involving the TransformPosition engine is available in [*examples/Component/Engine/Transform/TransformPosition.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Engine/Transform/TransformPosition.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

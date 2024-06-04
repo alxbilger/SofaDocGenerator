@@ -5,17 +5,17 @@ Store custom data in an image. A template input image with non zero voxels (wher
 
 __Templates__:
 
-- ImageB,ImageD
-- ImageD,ImageD
-- ImageUC,ImageD
+- `#!c++ ImageB,ImageD`
+- `#!c++ ImageD,ImageD`
+- `#!c++ ImageUC,ImageD`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

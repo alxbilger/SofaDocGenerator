@@ -5,16 +5,16 @@ Get interpolated coordinates at sample locations in an image with 3 channels
 
 __Templates__:
 
-- ImageD
-- ImageF
+- `#!c++ ImageD`
+- `#!c++ ImageF`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

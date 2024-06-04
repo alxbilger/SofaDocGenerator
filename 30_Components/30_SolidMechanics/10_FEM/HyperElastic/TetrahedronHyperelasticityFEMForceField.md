@@ -5,15 +5,15 @@ Generic Tetrahedral finite elements
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.SolidMechanics.FEM.HyperElastic
+__Target__: `Sofa.Component.SolidMechanics.FEM.HyperElastic`
 
-__namespace__: sofa::component::solidmechanics::fem::hyperelastic
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::hyperelastic`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

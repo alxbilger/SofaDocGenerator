@@ -6,16 +6,16 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.SolidMechanics.FEM.Elastic
+__Target__: `Sofa.Component.SolidMechanics.FEM.Elastic`
 
-__namespace__: sofa::component::solidmechanics::fem::elastic
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::elastic`
 
 __parents__: 
 
-- ForceField
-- BaseObject
+- `#!c++ ForceField`
+- `#!c++ BaseObject`
 
 Data: 
 

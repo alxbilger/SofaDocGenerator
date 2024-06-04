@@ -5,15 +5,15 @@ SurfacePressure
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 
@@ -195,15 +195,15 @@ Links:
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

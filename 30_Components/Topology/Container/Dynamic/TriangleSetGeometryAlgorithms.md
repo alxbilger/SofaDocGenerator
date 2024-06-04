@@ -5,16 +5,16 @@ Triangle set geometry algorithms
 
 __Templates__:
 
-- Vec2d
-- Vec3d
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Topology.Container.Dynamic
+__Target__: `Sofa.Component.Topology.Container.Dynamic`
 
-__namespace__: sofa::component::topology::container::dynamic
+__namespace__: `#!c++ sofa::component::topology::container::dynamic`
 
 __parents__: 
 
-- EdgeSetGeometryAlgorithms
+- `#!c++ EdgeSetGeometryAlgorithms`
 
 Data: 
 

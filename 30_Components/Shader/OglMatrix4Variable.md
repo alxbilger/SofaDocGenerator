@@ -3,13 +3,13 @@
 OglMatrix4Variable
 
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- OglMatrix2Variable
+- `#!c++ OglMatrix2Variable`
 
 Data: 
 

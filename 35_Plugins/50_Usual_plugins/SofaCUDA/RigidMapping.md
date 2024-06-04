@@ -6,26 +6,26 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- CudaRigid3f,CudaVec3d
-- CudaRigid3f,CudaVec3d1
-- CudaRigid3f,CudaVec3f
-- CudaRigid3f,CudaVec3f1
-- Rigid3d,CudaVec3d
-- Rigid3d,CudaVec3d1
-- Rigid3d,CudaVec3f
-- Rigid3d,CudaVec3f1
-- Rigid3f,CudaVec3d
-- Rigid3f,CudaVec3d1
-- Rigid3f,CudaVec3f
-- Rigid3f,CudaVec3f1
+- `#!c++ CudaRigid3f,CudaVec3d`
+- `#!c++ CudaRigid3f,CudaVec3d1`
+- `#!c++ CudaRigid3f,CudaVec3f`
+- `#!c++ CudaRigid3f,CudaVec3f1`
+- `#!c++ Rigid3d,CudaVec3d`
+- `#!c++ Rigid3d,CudaVec3d1`
+- `#!c++ Rigid3d,CudaVec3f`
+- `#!c++ Rigid3d,CudaVec3f1`
+- `#!c++ Rigid3f,CudaVec3d`
+- `#!c++ Rigid3f,CudaVec3d1`
+- `#!c++ Rigid3f,CudaVec3f`
+- `#!c++ Rigid3f,CudaVec3f1`
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::component::mapping::nonlinear
+__namespace__: `#!c++ sofa::component::mapping::nonlinear`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

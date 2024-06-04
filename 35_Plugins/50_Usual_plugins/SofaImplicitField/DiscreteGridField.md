@@ -3,13 +3,13 @@
 A discrete scalar field from a regular grid storing field value with interpolation.
 
 
-__Target__: SofaImplicitField
+__Target__: `SofaImplicitField`
 
-__namespace__: sofa::component::geometry::_discretegrid_
+__namespace__: `#!c++ sofa::component::geometry::_discretegrid_`
 
 __parents__: 
 
-- ScalarField
+- `#!c++ ScalarField`
 
 Data: 
 

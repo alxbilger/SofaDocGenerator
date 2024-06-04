@@ -3,13 +3,13 @@
 View the global linear system matrix as a binary image.
 
 
-__Target__: SofaMatrix
+__Target__: `SofaMatrix`
 
-__namespace__: sofa::component::linearsolver
+__namespace__: `#!c++ sofa::component::linearsolver`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

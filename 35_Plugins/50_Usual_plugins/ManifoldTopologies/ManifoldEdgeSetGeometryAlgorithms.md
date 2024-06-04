@@ -5,19 +5,19 @@ ManifoldEdge set geometry algorithms
 
 __Templates__:
 
-- Rigid2d
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Rigid2d`
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: ManifoldTopologies
+__Target__: `ManifoldTopologies`
 
-__namespace__: sofa::component::topology::container::dynamic
+__namespace__: `#!c++ sofa::component::topology::container::dynamic`
 
 __parents__: 
 
-- EdgeSetGeometryAlgorithms
+- `#!c++ EdgeSetGeometryAlgorithms`
 
 Data: 
 

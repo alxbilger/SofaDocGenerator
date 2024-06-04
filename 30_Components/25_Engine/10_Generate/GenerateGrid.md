@@ -5,16 +5,16 @@ Generate a Grid Tetrahedral or Hexahedral Mesh
 
 __Templates__:
 
-- Vec2d
-- Vec3d
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Generate
+__Target__: `Sofa.Component.Engine.Generate`
 
-__namespace__: sofa::component::engine::generate
+__namespace__: `#!c++ sofa::component::engine::generate`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

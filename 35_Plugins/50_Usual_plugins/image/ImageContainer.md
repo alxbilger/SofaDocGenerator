@@ -5,17 +5,17 @@ Image Container
 
 __Templates__:
 
-- ImageB
-- ImageD
-- ImageUC
+- `#!c++ ImageB`
+- `#!c++ ImageD`
+- `#!c++ ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

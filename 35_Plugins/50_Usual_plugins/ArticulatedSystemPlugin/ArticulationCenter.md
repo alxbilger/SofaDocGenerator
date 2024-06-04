@@ -3,13 +3,13 @@
 This class defines an articulation center. This contains a set of articulations.
 
 
-__Target__: ArticulatedSystemPlugin
+__Target__: `ArticulatedSystemPlugin`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

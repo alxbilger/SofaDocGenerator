@@ -5,15 +5,15 @@ Beam finite elements
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: Sofa.Component.SolidMechanics.FEM.Elastic
+__Target__: `Sofa.Component.SolidMechanics.FEM.Elastic`
 
-__namespace__: sofa::component::solidmechanics::fem::elastic::_beamfemforcefield_
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::elastic::_beamfemforcefield_`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

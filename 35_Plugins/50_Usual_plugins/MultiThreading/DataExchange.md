@@ -6,27 +6,27 @@ DataExchange
 
 __Templates__:
 
-- Vec3d
-- Vec3f
-- bool
-- d
-- f
-- vector<I>
-- vector<Vec2d>
-- vector<Vec2f>
-- vector<Vec3d>
-- vector<Vec3f>
-- vector<d>
-- vector<f>
-- vector<i>
+- `#!c++ Vec3d`
+- `#!c++ Vec3f`
+- `#!c++ bool`
+- `#!c++ d`
+- `#!c++ f`
+- `#!c++ vector<I>`
+- `#!c++ vector<Vec2d>`
+- `#!c++ vector<Vec2f>`
+- `#!c++ vector<Vec3d>`
+- `#!c++ vector<Vec3f>`
+- `#!c++ vector<d>`
+- `#!c++ vector<f>`
+- `#!c++ vector<i>`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: sofa::core
+__namespace__: `#!c++ sofa::core`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

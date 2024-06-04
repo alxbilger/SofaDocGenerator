@@ -3,13 +3,13 @@
 Grid-based deformable distance field
 
 
-__Target__: SofaDistanceGrid
+__Target__: `SofaDistanceGrid`
 
-__namespace__: sofa::component::collision
+__namespace__: `#!c++ sofa::component::collision`
 
 __parents__: 
 
-- CollisionModel
+- `#!c++ CollisionModel`
 
 Data: 
 

@@ -5,16 +5,16 @@ Computing the Sum between two vector of dofs
 
 __Templates__:
 
-- Vec1d
-- Vec3d
+- `#!c++ Vec1d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Analyze
+__Target__: `Sofa.Component.Engine.Analyze`
 
-__namespace__: sofa::component::engine::analyze
+__namespace__: `#!c++ sofa::component::engine::analyze`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

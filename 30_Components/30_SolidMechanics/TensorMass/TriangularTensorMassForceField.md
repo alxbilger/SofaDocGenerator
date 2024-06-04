@@ -5,15 +5,15 @@ Linear Elastic Membrane on a Triangular Mesh
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.SolidMechanics.TensorMass
+__Target__: `Sofa.Component.SolidMechanics.TensorMass`
 
-__namespace__: sofa::component::solidmechanics::tensormass
+__namespace__: `#!c++ sofa::component::solidmechanics::tensormass`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

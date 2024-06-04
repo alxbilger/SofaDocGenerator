@@ -3,13 +3,13 @@
 Sphere topology constructed with deformed quads
 
 
-__Target__: Sofa.Component.Topology.Container.Constant
+__Target__: `Sofa.Component.Topology.Container.Constant`
 
-__namespace__: sofa::component::topology::container::constant
+__namespace__: `#!c++ sofa::component::topology::container::constant`
 
 __parents__: 
 
-- CubeTopology
+- `#!c++ CubeTopology`
 
 Data: 
 

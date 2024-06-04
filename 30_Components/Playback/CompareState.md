@@ -3,13 +3,13 @@
 Compare State vectors from a reference frame to the associated Mechanical State
 
 
-__Target__: Sofa.Component.Playback
+__Target__: `Sofa.Component.Playback`
 
-__namespace__: sofa::component::playback
+__namespace__: `#!c++ sofa::component::playback`
 
 __parents__: 
 
-- ReadState
+- `#!c++ ReadState`
 
 Data: 
 

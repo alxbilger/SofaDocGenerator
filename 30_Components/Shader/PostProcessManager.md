@@ -3,13 +3,13 @@
 PostProcessManager
 
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

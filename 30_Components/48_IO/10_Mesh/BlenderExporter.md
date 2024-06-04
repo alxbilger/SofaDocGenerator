@@ -5,16 +5,16 @@ Export the simulation result as blender point cache files
 
 __Templates__:
 
-- Rigid3d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::_blenderexporter_
+__namespace__: `#!c++ sofa::component::_blenderexporter_`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

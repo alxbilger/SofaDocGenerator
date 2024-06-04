@@ -5,17 +5,17 @@ Save an image
 
 __Templates__:
 
-- ImageB
-- ImageD
-- ImageUC
+- `#!c++ ImageB`
+- `#!c++ ImageD`
+- `#!c++ ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

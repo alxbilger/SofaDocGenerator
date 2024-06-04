@@ -3,13 +3,13 @@
 Natural order (no permutation). Corresponding to an identity matrix.
 
 
-__Target__: Sofa.Component.LinearSolver.Ordering
+__Target__: `Sofa.Component.LinearSolver.Ordering`
 
-__namespace__: sofa::component::linearsolver::ordering
+__namespace__: `#!c++ sofa::component::linearsolver::ordering`
 
 __parents__: 
 
-- BaseOrderingMethod
+- `#!c++ BaseOrderingMethod`
 
 Data: 
 

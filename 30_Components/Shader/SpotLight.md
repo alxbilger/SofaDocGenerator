@@ -3,13 +3,13 @@
 A spot light illuminating the scene.The light has a location and a illumination cone restricting the directionstaken by the rays of light  (can cast shadows).
 
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- PositionalLight
+- `#!c++ PositionalLight`
 
 Data: 
 

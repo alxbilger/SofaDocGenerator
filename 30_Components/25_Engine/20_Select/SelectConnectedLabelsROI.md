@@ -5,18 +5,18 @@ Select a subset of points or cells labeled from different sources, that are conn
 
 __Templates__:
 
-- B
-- H
-- I
-- i
+- `#!c++ B`
+- `#!c++ H`
+- `#!c++ I`
+- `#!c++ i`
 
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

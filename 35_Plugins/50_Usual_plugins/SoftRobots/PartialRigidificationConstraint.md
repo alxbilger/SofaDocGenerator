@@ -5,15 +5,15 @@ PartialRigidificationConstraint
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::constraint
+__namespace__: `#!c++ softrobots::constraint`
 
 __parents__: 
 
-- Constraint
+- `#!c++ Constraint`
 
 Data: 
 

@@ -5,15 +5,15 @@ Parallel hexahedral finite elements
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::forcefield::solidmechanics::fem::elastic
+__namespace__: `#!c++ multithreading::component::forcefield::solidmechanics::fem::elastic`
 
 __parents__: 
 
-- HexahedronFEMForceField
+- `#!c++ HexahedronFEMForceField`
 
 Data: 
 

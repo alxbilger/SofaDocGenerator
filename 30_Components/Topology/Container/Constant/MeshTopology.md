@@ -3,13 +3,13 @@
 Generic mesh topology
 
 
-__Target__: Sofa.Component.Topology.Container.Constant
+__Target__: `Sofa.Component.Topology.Container.Constant`
 
-__namespace__: sofa::component::topology::container::constant
+__namespace__: `#!c++ sofa::component::topology::container::constant`
 
 __parents__: 
 
-- BaseMeshTopology
+- `#!c++ BaseMeshTopology`
 
 Data: 
 

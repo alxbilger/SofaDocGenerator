@@ -5,15 +5,15 @@ This class computes the center of mass of the object in its context.
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::engine
+__namespace__: `#!c++ softrobots::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

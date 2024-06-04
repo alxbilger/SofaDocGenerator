@@ -5,16 +5,16 @@ Apply a parabolic trajectory to given points
 
 __Templates__:
 
-- Rigid3d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Constraint.Projective
+__Target__: `Sofa.Component.Constraint.Projective`
 
-__namespace__: sofa::component::constraint::projective
+__namespace__: `#!c++ sofa::component::constraint::projective`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

@@ -5,23 +5,23 @@ Linear system solver using the MINRES iterative algorithm
 
 __Templates__:
 
-- CompressedRowSparseMatrixMat2x2d
-- CompressedRowSparseMatrixMat3x3d
-- CompressedRowSparseMatrixMat4x4d
-- CompressedRowSparseMatrixMat6x6d
-- CompressedRowSparseMatrixMat8x8d
-- CompressedRowSparseMatrixd
-- FullMatrix
-- GraphScattered
-- SparseMatrix
+- `#!c++ CompressedRowSparseMatrixMat2x2d`
+- `#!c++ CompressedRowSparseMatrixMat3x3d`
+- `#!c++ CompressedRowSparseMatrixMat4x4d`
+- `#!c++ CompressedRowSparseMatrixMat6x6d`
+- `#!c++ CompressedRowSparseMatrixMat8x8d`
+- `#!c++ CompressedRowSparseMatrixd`
+- `#!c++ FullMatrix`
+- `#!c++ GraphScattered`
+- `#!c++ SparseMatrix`
 
-__Target__: Sofa.Component.LinearSolver.Iterative
+__Target__: `Sofa.Component.LinearSolver.Iterative`
 
-__namespace__: sofa::component::linearsolver::iterative
+__namespace__: `#!c++ sofa::component::linearsolver::iterative`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

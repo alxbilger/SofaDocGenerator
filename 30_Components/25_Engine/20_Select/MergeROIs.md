@@ -3,13 +3,13 @@
 Merge a list of ROIs (vector<Indices>) into a single Data (vector<svector<Indices>>)
 
 
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

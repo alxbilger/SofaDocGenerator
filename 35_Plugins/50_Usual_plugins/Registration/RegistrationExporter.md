@@ -3,13 +3,13 @@
 Replicate loaded obj files into path, with current positions
 
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

@@ -5,15 +5,15 @@ Partial Rigidification equivalent stiffness forcefield
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::forcefield
+__namespace__: `#!c++ softrobots::forcefield`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

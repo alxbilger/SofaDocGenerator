@@ -5,15 +5,15 @@ Constrain the length of a beam.
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::constraintset::_adaptivebeamlengthconstraint_
+__namespace__: `#!c++ sofa::component::constraintset::_adaptivebeamlengthconstraint_`
 
 __parents__: 
 
-- Constraint
+- `#!c++ Constraint`
 
 Data: 
 

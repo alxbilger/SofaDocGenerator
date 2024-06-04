@@ -5,16 +5,16 @@ Direct Linear Solver using a Sparse LU factorization.
 
 __Templates__:
 
-- CompressedRowSparseMatrixMat3x3d
-- CompressedRowSparseMatrixd
+- `#!c++ CompressedRowSparseMatrixMat3x3d`
+- `#!c++ CompressedRowSparseMatrixd`
 
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- EigenDirectSparseSolver
+- `#!c++ EigenDirectSparseSolver`
 
 Data: 
 

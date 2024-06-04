@@ -3,13 +3,13 @@
 Functions to corefine triangulated surface meshes and compute triangulated surface meshes of the union, difference and intersection of the bounded volumes.
 
 
-__Target__: CGALPlugin
+__Target__: `CGALPlugin`
 
-__namespace__: cgal
+__namespace__: `#!c++ cgal`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

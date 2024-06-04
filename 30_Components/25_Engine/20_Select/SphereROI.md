@@ -6,16 +6,16 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Rigid3d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Select
+__Target__: `Sofa.Component.Engine.Select`
 
-__namespace__: sofa::component::engine::select
+__namespace__: `#!c++ sofa::component::engine::select`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

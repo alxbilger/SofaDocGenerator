@@ -5,15 +5,15 @@ Spring force field acting along the edges of a mesh
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.SolidMechanics.Spring
+__Target__: `Sofa.Component.SolidMechanics.Spring`
 
-__namespace__: sofa::component::solidmechanics::spring
+__namespace__: `#!c++ sofa::component::solidmechanics::spring`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

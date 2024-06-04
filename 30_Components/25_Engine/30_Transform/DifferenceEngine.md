@@ -5,16 +5,16 @@ Computing the difference between two vector of dofs
 
 __Templates__:
 
-- Vec1d
-- Vec3d
+- `#!c++ Vec1d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

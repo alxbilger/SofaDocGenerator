@@ -5,25 +5,25 @@ Compute normal forces on a point set based on the closest intensity profile in t
 
 __Templates__:
 
-- Vec3d,ImageB
-- Vec3d,ImageC
-- Vec3d,ImageD
-- Vec3d,ImageF
-- Vec3d,ImageI
-- Vec3d,ImageL
-- Vec3d,ImageS
-- Vec3d,ImageUC
-- Vec3d,ImageUI
-- Vec3d,ImageUL
-- Vec3d,ImageUS
+- `#!c++ Vec3d,ImageB`
+- `#!c++ Vec3d,ImageC`
+- `#!c++ Vec3d,ImageD`
+- `#!c++ Vec3d,ImageF`
+- `#!c++ Vec3d,ImageI`
+- `#!c++ Vec3d,ImageL`
+- `#!c++ Vec3d,ImageS`
+- `#!c++ Vec3d,ImageUC`
+- `#!c++ Vec3d,ImageUI`
+- `#!c++ Vec3d,ImageUL`
+- `#!c++ Vec3d,ImageUS`
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component::forcefield
+__namespace__: `#!c++ sofa::component::forcefield`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

@@ -5,15 +5,15 @@ This component constrains a model by applying pressure on surfaces (for exemple 
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::constraint
+__namespace__: `#!c++ softrobots::constraint`
 
 __parents__: 
 
-- SurfacePressureModel
+- `#!c++ SurfacePressureModel`
 
 Data: 
 

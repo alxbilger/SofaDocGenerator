@@ -5,16 +5,16 @@ Generic visual model. If a viewer is active it will replace the VisualModel alia
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.Visual
+__Target__: `Sofa.Component.Visual`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- VisualModel
-- VisualState
+- `#!c++ VisualModel`
+- `#!c++ VisualState`
 
 Data: 
 

@@ -5,16 +5,16 @@ Mapping from an angle to a point in 2D
 
 __Templates__:
 
-- Vec1d,Vec2d
-- Vec1d,Vec3d
+- `#!c++ Vec1d,Vec2d`
+- `#!c++ Vec1d,Vec3d`
 
-__Target__: PluginExample
+__Target__: `PluginExample`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

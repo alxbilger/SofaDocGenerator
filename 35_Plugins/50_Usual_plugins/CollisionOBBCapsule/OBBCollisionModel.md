@@ -5,15 +5,15 @@ Collision model which represents a set of OBBs
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: CollisionOBBCapsule
+__Target__: `CollisionOBBCapsule`
 
-__namespace__: collisionobbcapsule::geometry
+__namespace__: `#!c++ collisionobbcapsule::geometry`
 
 __parents__: 
 
-- CollisionModel
+- `#!c++ CollisionModel`
 
 Data: 
 

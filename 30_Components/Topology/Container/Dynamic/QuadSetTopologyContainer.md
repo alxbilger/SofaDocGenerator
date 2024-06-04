@@ -3,13 +3,13 @@
 Quad set topology container
 
 
-__Target__: Sofa.Component.Topology.Container.Dynamic
+__Target__: `Sofa.Component.Topology.Container.Dynamic`
 
-__namespace__: sofa::component::topology::container::dynamic
+__namespace__: `#!c++ sofa::component::topology::container::dynamic`
 
 __parents__: 
 
-- EdgeSetTopologyContainer
+- `#!c++ EdgeSetTopologyContainer`
 
 Data: 
 

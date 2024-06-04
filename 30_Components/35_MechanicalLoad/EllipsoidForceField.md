@@ -6,17 +6,17 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Vec1d
-- Vec2d
-- Vec3d
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

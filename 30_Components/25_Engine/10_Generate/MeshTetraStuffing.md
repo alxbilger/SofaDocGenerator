@@ -3,13 +3,13 @@
 Create a tetrahedral volume mesh from a surface, using the algorithm from F. Labelle and J.R. Shewchuk, "Isosurface Stuffing: Fast Tetrahedral Meshes with Good Dihedral Angles", SIGGRAPH 2007.
 
 
-__Target__: Sofa.Component.Engine.Generate
+__Target__: `Sofa.Component.Engine.Generate`
 
-__namespace__: sofa::component::engine::generate
+__namespace__: `#!c++ sofa::component::engine::generate`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

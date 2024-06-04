@@ -5,17 +5,17 @@ Linear system solver using a SVD decomposition of a dense matrix
 
 __Templates__:
 
-- CompressedRowSparseMatrixMat3x3d
-- CompressedRowSparseMatrixd
-- FullMatrix
+- `#!c++ CompressedRowSparseMatrixMat3x3d`
+- `#!c++ CompressedRowSparseMatrixd`
+- `#!c++ FullMatrix`
 
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

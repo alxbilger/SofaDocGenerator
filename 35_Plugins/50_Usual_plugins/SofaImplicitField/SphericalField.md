@@ -3,13 +3,13 @@
 A spherical implicit field.
 
 
-__Target__: SofaImplicitField
+__Target__: `SofaImplicitField`
 
-__namespace__: sofa::component::geometry::_sphericalfield_
+__namespace__: `#!c++ sofa::component::geometry::_sphericalfield_`
 
 __parents__: 
 
-- ScalarField
+- `#!c++ ScalarField`
 
 Data: 
 

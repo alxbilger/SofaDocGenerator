@@ -3,13 +3,13 @@
 Export the compliance matrix from a constraint solver.
 
 
-__Target__: SofaMatrix
+__Target__: `SofaMatrix`
 
-__namespace__: sofa::component::constraintset
+__namespace__: `#!c++ sofa::component::constraintset`
 
 __parents__: 
 
-- BaseSimulationExporter
+- `#!c++ BaseSimulationExporter`
 
 Data: 
 

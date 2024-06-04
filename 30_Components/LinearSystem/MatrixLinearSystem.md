@@ -6,22 +6,22 @@ Linear system
 
 __Templates__:
 
-- CompressedRowSparseMatrixMat2x2d
-- CompressedRowSparseMatrixMat3x3d
-- CompressedRowSparseMatrixMat4x4d
-- CompressedRowSparseMatrixMat6x6d
-- CompressedRowSparseMatrixMat8x8d
-- CompressedRowSparseMatrixd
-- FullMatrix
-- SparseMatrix
+- `#!c++ CompressedRowSparseMatrixMat2x2d`
+- `#!c++ CompressedRowSparseMatrixMat3x3d`
+- `#!c++ CompressedRowSparseMatrixMat4x4d`
+- `#!c++ CompressedRowSparseMatrixMat6x6d`
+- `#!c++ CompressedRowSparseMatrixMat8x8d`
+- `#!c++ CompressedRowSparseMatrixd`
+- `#!c++ FullMatrix`
+- `#!c++ SparseMatrix`
 
-__Target__: Sofa.Component.LinearSystem
+__Target__: `Sofa.Component.LinearSystem`
 
-__namespace__: sofa::component::linearsystem
+__namespace__: `#!c++ sofa::component::linearsystem`
 
 __parents__: 
 
-- TypedMatrixLinearSystem
+- `#!c++ TypedMatrixLinearSystem`
 
 Data: 
 

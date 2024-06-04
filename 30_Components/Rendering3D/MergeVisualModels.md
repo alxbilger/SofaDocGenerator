@@ -5,15 +5,15 @@ Merge several visual models
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.GL.Component.Rendering3D
+__Target__: `Sofa.GL.Component.Rendering3D`
 
-__namespace__: sofa::gl::component::rendering3d
+__namespace__: `#!c++ sofa::gl::component::rendering3d`
 
 __parents__: 
 
-- OglModel
+- `#!c++ OglModel`
 
 Data: 
 

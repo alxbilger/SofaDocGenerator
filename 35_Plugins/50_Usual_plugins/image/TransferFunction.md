@@ -5,23 +5,23 @@ Transforms pixel intensities
 
 __Templates__:
 
-- ImageD,ImageD
-- ImageD,ImageUC
-- ImageUC,ImageB
-- ImageUC,ImageD
-- ImageUC,ImageF
-- ImageUC,ImageUC
-- ImageUC,ImageUI
-- ImageUC,ImageUS
-- ImageUS,ImageUC
+- `#!c++ ImageD,ImageD`
+- `#!c++ ImageD,ImageUC`
+- `#!c++ ImageUC,ImageB`
+- `#!c++ ImageUC,ImageD`
+- `#!c++ ImageUC,ImageF`
+- `#!c++ ImageUC,ImageUC`
+- `#!c++ ImageUC,ImageUI`
+- `#!c++ ImageUC,ImageUS`
+- `#!c++ ImageUS,ImageUC`
 
-__Target__: image
+__Target__: `image`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

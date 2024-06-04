@@ -5,16 +5,16 @@ ContourImageToolBox
 
 __Templates__:
 
-- ImageD
-- ImageUC
+- `#!c++ ImageD`
+- `#!c++ ImageUC`
 
-__Target__: image_gui
+__Target__: `image_gui`
 
-__namespace__: sofa::component::engine
+__namespace__: `#!c++ sofa::component::engine`
 
 __parents__: 
 
-- ContourImageToolBoxNoTemplated
+- `#!c++ ContourImageToolBoxNoTemplated`
 
 Data: 
 

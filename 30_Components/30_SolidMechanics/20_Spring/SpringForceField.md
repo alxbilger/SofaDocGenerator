@@ -5,19 +5,19 @@ Springs
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: Sofa.Component.SolidMechanics.Spring
+__Target__: `Sofa.Component.SolidMechanics.Spring`
 
-__namespace__: sofa::component::solidmechanics::spring
+__namespace__: `#!c++ sofa::component::solidmechanics::spring`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

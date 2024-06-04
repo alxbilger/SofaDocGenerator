@@ -5,19 +5,19 @@ Parallel stiff springs
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
-- Vec2d
-- Vec3d
-- Vec6d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
+- `#!c++ Vec6d`
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::solidmechanics::spring
+__namespace__: `#!c++ multithreading::component::solidmechanics::spring`
 
 __parents__: 
 
-- StiffSpringForceField
+- `#!c++ StiffSpringForceField`
 
 Data: 
 

@@ -58,13 +58,13 @@ node.addObject('AsyncSparseLDLSolver')
 - The example in [*examples/Component/LinearSolver/Preconditioner/FEMBAR_PCG_AsyncSparseLDLSolver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/LinearSolver/Preconditioner/FEMBAR_PCG_AsyncSparseLDLSolver.scn) shows how to use AsyncSparseLDLSolver as a preconditioner of ShewchukPCGLinearSolver.
 - Finally, the example in [*examples/Component/LinearSolver/Preconditioner/FEMBAR_PCG_WarpedAsyncSparseLDLSolver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/LinearSolver/Preconditioner/FEMBAR_PCG_WarpedAsyncSparseLDLSolver.scn) shows how the factorization in AsyncSparseLDLSolver can be warped using a WarpPreconditioner.
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- SparseLDLSolver
+- `#!c++ SparseLDLSolver`
 
 Data: 
 

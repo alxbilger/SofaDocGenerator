@@ -72,13 +72,13 @@ node.createObject('DiagonalMass', massDensity='1000')
 
 An example scene involving a PolynomialSpringsForceField is available in [*examples/Component/SolidMechanics/Spring/PolynomialSpringsForceField.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/SolidMechanics/Spring/PolynomialSpringsForceField.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.SolidMechanics.Spring
+__Target__: `Sofa.Component.SolidMechanics.Spring`
 
-__namespace__: sofa::component::solidmechanics::spring
+__namespace__: `#!c++ sofa::component::solidmechanics::spring`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

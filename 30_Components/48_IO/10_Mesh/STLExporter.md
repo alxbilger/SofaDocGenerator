@@ -3,13 +3,13 @@
 Save a topology in file
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::_stlexporter_
+__namespace__: `#!c++ sofa::component::_stlexporter_`
 
 __parents__: 
 
-- BaseSimulationExporter
+- `#!c++ BaseSimulationExporter`
 
 Data: 
 

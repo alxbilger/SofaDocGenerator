@@ -3,13 +3,13 @@
 ManifoldEdge set topology modifier
 
 
-__Target__: ManifoldTopologies
+__Target__: `ManifoldTopologies`
 
-__namespace__: sofa::component::topology::container::dynamic
+__namespace__: `#!c++ sofa::component::topology::container::dynamic`
 
 __parents__: 
 
-- EdgeSetTopologyModifier
+- `#!c++ EdgeSetTopologyModifier`
 
 Data: 
 

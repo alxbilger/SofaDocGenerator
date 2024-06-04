@@ -3,13 +3,13 @@
 Provides color palette and support for conversion of numbers to colors.
 
 
-__Target__: Sofa.GL.Component.Rendering2D
+__Target__: `Sofa.GL.Component.Rendering2D`
 
-__namespace__: sofa::gl::component::rendering2d
+__namespace__: `#!c++ sofa::gl::component::rendering2d`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

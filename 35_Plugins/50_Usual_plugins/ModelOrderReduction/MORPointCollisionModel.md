@@ -5,15 +5,15 @@ Collision model which represents a set of points
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::collision::geometry
+__namespace__: `#!c++ sofa::component::collision::geometry`
 
 __parents__: 
 
-- PointCollisionModel
+- `#!c++ PointCollisionModel`
 
 Data: 
 

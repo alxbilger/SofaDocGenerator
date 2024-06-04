@@ -6,22 +6,22 @@ Compute a subset of the input MechanicalObjects according to a dof index list
 
 __Templates__:
 
-- CudaRigid3d,CudaRigid3d
-- CudaRigid3d,CudaVec3d
-- CudaRigid3f,CudaRigid3f
-- CudaRigid3f,CudaVec3f
-- CudaVec1d,CudaVec1d
-- CudaVec1f,CudaVec1f
-- CudaVec3d,CudaVec3d
-- CudaVec3f,CudaVec3f
+- `#!c++ CudaRigid3d,CudaRigid3d`
+- `#!c++ CudaRigid3d,CudaVec3d`
+- `#!c++ CudaRigid3f,CudaRigid3f`
+- `#!c++ CudaRigid3f,CudaVec3f`
+- `#!c++ CudaVec1d,CudaVec1d`
+- `#!c++ CudaVec1f,CudaVec1f`
+- `#!c++ CudaVec3d,CudaVec3d`
+- `#!c++ CudaVec3f,CudaVec3f`
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

@@ -5,15 +5,15 @@ Linear system solver based on a precomputed inverse matrix
 
 __Templates__:
 
-- FullVector
+- `#!c++ FullVector`
 
-__Target__: Sofa.Component.LinearSolver.Direct
+__Target__: `Sofa.Component.LinearSolver.Direct`
 
-__namespace__: sofa::component::linearsolver::direct
+__namespace__: `#!c++ sofa::component::linearsolver::direct`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

@@ -5,15 +5,15 @@ Contact using attractive springs
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Registration
+__Target__: `Registration`
 
-__namespace__: sofa::component::interactionforcefield
+__namespace__: `#!c++ sofa::component::interactionforcefield`
 
 __parents__: 
 
-- PairInteractionForceField
+- `#!c++ PairInteractionForceField`
 
 Data: 
 

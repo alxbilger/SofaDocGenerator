@@ -5,15 +5,15 @@ Provides a Mouse & Keyboard user control on an EdgeSet Topology.
 
 __Templates__:
 
-- Rigid3d
+- `#!c++ Rigid3d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::controller::_suturecontroller_
+__namespace__: `#!c++ sofa::component::controller::_suturecontroller_`
 
 __parents__: 
 
-- MechanicalStateController
+- `#!c++ MechanicalStateController`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Plastic material
 
 
-__Target__: Sofa.Component.SolidMechanics.FEM.HyperElastic
+__Target__: `Sofa.Component.SolidMechanics.FEM.HyperElastic`
 
-__namespace__: sofa::component::solidmechanics::fem::hyperelastic::material
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::hyperelastic::material`
 
 __parents__: 
 
-- BaseMaterial
+- `#!c++ BaseMaterial`
 
 Data: 
 

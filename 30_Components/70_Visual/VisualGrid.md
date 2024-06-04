@@ -3,13 +3,13 @@
 Display a simple grid
 
 
-__Target__: Sofa.Component.Visual
+__Target__: `Sofa.Component.Visual`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

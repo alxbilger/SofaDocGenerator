@@ -6,15 +6,15 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::forcefield
+__namespace__: `#!c++ sofa::component::forcefield`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

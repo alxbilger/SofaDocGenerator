@@ -5,15 +5,15 @@ Meshless deformations based on shape matching
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ShapeMatchingPlugin
+__Target__: `ShapeMatchingPlugin`
 
-__namespace__: sofa::component::forcefield
+__namespace__: `#!c++ sofa::component::forcefield`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

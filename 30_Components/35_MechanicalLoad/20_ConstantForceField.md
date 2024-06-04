@@ -46,13 +46,13 @@ With a description of each data
 
 An example scene involving a ConstantForceField is available in [*examples/Component/MechanicalLoad/ConstantForceField.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/MechanicalLoad/ConstantForceField.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.MechanicalLoad
+__Target__: `Sofa.Component.MechanicalLoad`
 
-__namespace__: sofa::component::mechanicalload
+__namespace__: `#!c++ sofa::component::mechanicalload`
 
 __parents__: 
 
-- ForceField
+- `#!c++ ForceField`
 
 Data: 
 

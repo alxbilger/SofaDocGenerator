@@ -43,13 +43,13 @@ node.addObject("MechanicalObject", name="transform", template="Vec3d", position=
 
 An example scene involving the TransformEngine engine is available in [*examples/Component/Engine/Transform/TransformEngine.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Engine/Transform/TransformEngine.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Engine.Transform
+__Target__: `Sofa.Component.Engine.Transform`
 
-__namespace__: sofa::component::engine::transform
+__namespace__: `#!c++ sofa::component::engine::transform`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

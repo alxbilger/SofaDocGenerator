@@ -5,16 +5,16 @@ Compute an iso-surface from a set of particles
 
 __Templates__:
 
-- Vec3d,Vec3d
+- `#!c++ Vec3d,Vec3d`
 
-__Target__: SofaImplicitField
+__Target__: `SofaImplicitField`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- Mapping
-- MeshTopology
+- `#!c++ Mapping`
+- `#!c++ MeshTopology`
 
 Data: 
 

@@ -5,15 +5,15 @@ Generic visual model for OpenGL display
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: Sofa.GL.Component.Rendering3D
+__Target__: `Sofa.GL.Component.Rendering3D`
 
-__namespace__: sofa::gl::component::rendering3d
+__namespace__: `#!c++ sofa::gl::component::rendering3d`
 
 __parents__: 
 
-- VisualModelImpl
+- `#!c++ VisualModelImpl`
 
 Data: 
 

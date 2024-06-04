@@ -5,15 +5,15 @@ Reduced model
 
 __Templates__:
 
-- Vec1d,Vec3d
+- `#!c++ Vec1d,Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

@@ -5,16 +5,16 @@ Merge two sets of indices using specified boolean operation
 
 __Templates__:
 
-- I
-- i
+- `#!c++ I`
+- `#!c++ i`
 
-__Target__: Sofa.Component.Engine.Generate
+__Target__: `Sofa.Component.Engine.Generate`
 
-__namespace__: sofa::component::engine::generate
+__namespace__: `#!c++ sofa::component::engine::generate`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

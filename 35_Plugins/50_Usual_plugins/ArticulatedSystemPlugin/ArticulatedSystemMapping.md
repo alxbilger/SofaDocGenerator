@@ -5,15 +5,15 @@ Mapping between a set of 6D DOF's and a set of angles (µ) using an articulated 
 
 __Templates__:
 
-- Vec1d,Rigid3d,Rigid3d
+- `#!c++ Vec1d,Rigid3d,Rigid3d`
 
-__Target__: ArticulatedSystemPlugin
+__Target__: `ArticulatedSystemPlugin`
 
-__namespace__: sofa::component::mapping
+__namespace__: `#!c++ sofa::component::mapping`
 
 __parents__: 
 
-- Multi2Mapping
+- `#!c++ Multi2Mapping`
 
 Data: 
 

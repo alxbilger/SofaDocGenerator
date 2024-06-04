@@ -5,15 +5,15 @@ Partially rigidify a mechanical object using a rigid mapping.
 
 __Templates__:
 
-- Vec3d,Rigid3d
+- `#!c++ Vec3d,Rigid3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::forcefield
+__namespace__: `#!c++ softrobots::forcefield`
 
 __parents__: 
 
-- MixedInteractionForceField
+- `#!c++ MixedInteractionForceField`
 
 Data: 
 

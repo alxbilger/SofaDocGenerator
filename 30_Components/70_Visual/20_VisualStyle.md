@@ -72,13 +72,13 @@ node and return a WriteAccessor on the display flags:
 addVisualStyle(root)->setShowVisual().setShowBehavior().setShowMapping(false);
 ```
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Visual
+__Target__: `Sofa.Component.Visual`
 
-__namespace__: sofa::component::visual
+__namespace__: `#!c++ sofa::component::visual`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

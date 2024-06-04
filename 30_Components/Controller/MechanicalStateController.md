@@ -5,16 +5,16 @@ Provides a Mouse & Keyboard user control on a Mechanical State.
 
 __Templates__:
 
-- Rigid3d
-- Vec1d
+- `#!c++ Rigid3d`
+- `#!c++ Vec1d`
 
-__Target__: Sofa.Component.Controller
+__Target__: `Sofa.Component.Controller`
 
-__namespace__: sofa::component::controller
+__namespace__: `#!c++ sofa::component::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

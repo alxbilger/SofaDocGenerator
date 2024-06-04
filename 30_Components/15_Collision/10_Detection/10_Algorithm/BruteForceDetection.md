@@ -3,13 +3,13 @@
 Combination of brute force broad phase and BVH narrow phase collision detection
 
 
-__Target__: Sofa.Component.Collision.Detection.Algorithm
+__Target__: `Sofa.Component.Collision.Detection.Algorithm`
 
-__namespace__: sofa::component::collision::detection::algorithm
+__namespace__: `#!c++ sofa::component::collision::detection::algorithm`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

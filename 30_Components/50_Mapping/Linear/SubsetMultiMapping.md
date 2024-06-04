@@ -6,19 +6,19 @@ Compute a subset of the input MechanicalObjects according to a dof index list
 
 __Templates__:
 
-- Rigid3d,Rigid3d
-- Rigid3d,Vec3d
-- Vec1d,Vec1d
-- Vec2d,Vec2d
-- Vec3d,Vec3d
+- `#!c++ Rigid3d,Rigid3d`
+- `#!c++ Rigid3d,Vec3d`
+- `#!c++ Vec1d,Vec1d`
+- `#!c++ Vec2d,Vec2d`
+- `#!c++ Vec3d,Vec3d`
 
-__Target__: Sofa.Component.Mapping.Linear
+__Target__: `Sofa.Component.Mapping.Linear`
 
-__namespace__: sofa::component::mapping::linear
+__namespace__: `#!c++ sofa::component::mapping::linear`
 
 __parents__: 
 
-- CRTPLinearMapping
+- `#!c++ CRTPLinearMapping`
 
 Data: 
 

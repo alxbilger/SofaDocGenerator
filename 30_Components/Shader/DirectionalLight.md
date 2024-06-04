@@ -3,13 +3,13 @@
 A directional light illuminating the scene with parallel rays of light (can cast shadows).
 
 
-__Target__: Sofa.GL.Component.Shader
+__Target__: `Sofa.GL.Component.Shader`
 
-__namespace__: sofa::gl::component::shader
+__namespace__: `#!c++ sofa::gl::component::shader`
 
 __parents__: 
 
-- Light
+- `#!c++ Light`
 
 Data: 
 

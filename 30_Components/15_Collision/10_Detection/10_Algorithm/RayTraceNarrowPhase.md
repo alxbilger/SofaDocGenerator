@@ -3,13 +3,13 @@
 Collision detection using TriangleOctreeModel
 
 
-__Target__: Sofa.Component.Collision.Detection.Algorithm
+__Target__: `Sofa.Component.Collision.Detection.Algorithm`
 
-__namespace__: sofa::component::collision::detection::algorithm
+__namespace__: `#!c++ sofa::component::collision::detection::algorithm`
 
 __parents__: 
 
-- NarrowPhaseDetection
+- `#!c++ NarrowPhaseDetection`
 
 Data: 
 

@@ -14,16 +14,16 @@ ctrl+(pgDn/pgUp): move the cursor to the next/previous keyframe
 
 __Templates__:
 
-- Rigid3d
-- Vec3d
+- `#!c++ Rigid3d`
+- `#!c++ Vec3d`
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::controller
+__namespace__: `#!c++ softrobots::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

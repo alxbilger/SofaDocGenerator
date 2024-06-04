@@ -3,14 +3,14 @@
 GPU-based collision detection using CUDA
 
 
-__Target__: SofaCUDA
+__Target__: `SofaCUDA`
 
-__namespace__: sofa::gpu::cuda
+__namespace__: `#!c++ sofa::gpu::cuda`
 
 __parents__: 
 
-- BruteForceBroadPhase
-- NarrowPhaseDetection
+- `#!c++ BruteForceBroadPhase`
+- `#!c++ NarrowPhaseDetection`
 
 Data: 
 

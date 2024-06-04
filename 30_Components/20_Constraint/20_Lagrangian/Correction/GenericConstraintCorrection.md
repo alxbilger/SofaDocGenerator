@@ -2,13 +2,13 @@
 
 
 
-__Target__: Sofa.Component.Constraint.Lagrangian.Correction
+__Target__: `Sofa.Component.Constraint.Lagrangian.Correction`
 
-__namespace__: sofa::component::constraint::lagrangian::correction
+__namespace__: `#!c++ sofa::component::constraint::lagrangian::correction`
 
 __parents__: 
 
-- BaseConstraintCorrection
+- `#!c++ BaseConstraintCorrection`
 
 Data: 
 

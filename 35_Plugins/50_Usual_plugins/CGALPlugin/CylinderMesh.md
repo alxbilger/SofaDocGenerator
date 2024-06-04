@@ -5,15 +5,15 @@ Generate a regular tetrahedron mesh of a cylinder
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: CGALPlugin
+__Target__: `CGALPlugin`
 
-__namespace__: cgal
+__namespace__: `#!c++ cgal`
 
 __parents__: 
 
-- DataEngine
+- `#!c++ DataEngine`
 
 Data: 
 

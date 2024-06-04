@@ -3,13 +3,13 @@
 parallel animation loop, using intel tbb library
 
 
-__Target__: MultiThreading
+__Target__: `MultiThreading`
 
-__namespace__: multithreading::component::animationloop
+__namespace__: `#!c++ multithreading::component::animationloop`
 
 __parents__: 
 
-- BaseAnimationLoop
+- `#!c++ BaseAnimationLoop`
 
 Data: 
 

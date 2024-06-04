@@ -4,13 +4,13 @@ Send data (ex: force, displacement, pressure…) through the usb port.
 Usually used to send data to an Arduino card to control the real robot.
 
 
-__Target__: SoftRobots
+__Target__: `SoftRobots`
 
-__namespace__: softrobots::controller
+__namespace__: `#!c++ softrobots::controller`
 
 __parents__: 
 
-- Controller
+- `#!c++ Controller`
 
 Data: 
 

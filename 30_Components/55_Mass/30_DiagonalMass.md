@@ -96,13 +96,13 @@ node.addObject('DiagonalMass', massDensity='1000')
 
 An example scene involving a DiagonalMass is available in [*examples/Component/Mass/DiagonalMass.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Mass/DiagonalMass.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Mass
+__Target__: `Sofa.Component.Mass`
 
-__namespace__: sofa::component::mass
+__namespace__: `#!c++ sofa::component::mass`
 
 __parents__: 
 
-- Mass
+- `#!c++ Mass`
 
 Data: 
 

@@ -3,13 +3,13 @@
 View the compliance matrix as an binary image.
 
 
-__Target__: SofaMatrix
+__Target__: `SofaMatrix`
 
-__namespace__: sofa::component::constraintset
+__namespace__: `#!c++ sofa::component::constraintset`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

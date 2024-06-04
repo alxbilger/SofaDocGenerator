@@ -5,15 +5,15 @@ Tetrahedral model for OpenGL display
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: VolumetricRendering
+__Target__: `VolumetricRendering`
 
-__namespace__: sofa::component::visualmodel
+__namespace__: `#!c++ sofa::component::visualmodel`
 
 __parents__: 
 
-- VisualModel
+- `#!c++ VisualModel`
 
 Data: 
 

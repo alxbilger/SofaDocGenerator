@@ -5,15 +5,15 @@ computes the lengths of the beams
 
 __Templates__:
 
-- Rigid3d,Vec1d
+- `#!c++ Rigid3d,Vec1d`
 
-__Target__: BeamAdapter
+__Target__: `BeamAdapter`
 
-__namespace__: sofa::component::mapping::_beamlengthmapping_
+__namespace__: `#!c++ sofa::component::mapping::_beamlengthmapping_`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

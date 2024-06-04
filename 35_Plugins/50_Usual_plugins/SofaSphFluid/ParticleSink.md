@@ -5,16 +5,16 @@ Parametrable particle generator
 
 __Templates__:
 
-- Vec2d
-- Vec3d
+- `#!c++ Vec2d`
+- `#!c++ Vec3d`
 
-__Target__: SofaSphFluid
+__Target__: `SofaSphFluid`
 
-__namespace__: sofa::component::misc
+__namespace__: `#!c++ sofa::component::misc`
 
 __parents__: 
 
-- ProjectiveConstraintSet
+- `#!c++ ProjectiveConstraintSet`
 
 Data: 
 

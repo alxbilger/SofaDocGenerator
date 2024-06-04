@@ -76,13 +76,13 @@ node.addObject('MinProximityIntersection', name='Proximity', alarmDistance='.5',
 
 An example scene involving a MinProximityIntersection is available in [*examples/Component/Collision/Geometry/TriangleModel.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Component/Collision/Geometry/TriangleModel.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.Collision.Detection.Intersection
+__Target__: `Sofa.Component.Collision.Detection.Intersection`
 
-__namespace__: sofa::component::collision::detection::intersection
+__namespace__: `#!c++ sofa::component::collision::detection::intersection`
 
 __parents__: 
 
-- BaseProximityIntersection
+- `#!c++ BaseProximityIntersection`
 
 Data: 
 

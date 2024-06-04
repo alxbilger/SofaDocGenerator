@@ -3,13 +3,13 @@
 This class is a specific implementation of TopologicalMapping where the destination topology is a subset of the source topology. The implementation currently assumes that both topologies have been initialized correctly.
 
 
-__Target__: Sofa.Component.Topology.Mapping
+__Target__: `Sofa.Component.Topology.Mapping`
 
-__namespace__: sofa::component::topology::mapping
+__namespace__: `#!c++ sofa::component::topology::mapping`
 
 __parents__: 
 
-- TopologicalMapping
+- `#!c++ TopologicalMapping`
 
 Data: 
 

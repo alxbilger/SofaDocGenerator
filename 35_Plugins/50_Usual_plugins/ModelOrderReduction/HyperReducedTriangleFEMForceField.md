@@ -5,16 +5,16 @@ Triangular finite elements
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ModelOrderReduction
+__Target__: `ModelOrderReduction`
 
-__namespace__: sofa::component::solidmechanics::fem::elastic
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::elastic`
 
 __parents__: 
 
-- TriangleFEMForceField
-- HyperReducedHelper
+- `#!c++ TriangleFEMForceField`
+- `#!c++ HyperReducedHelper`
 
 Data: 
 

@@ -59,13 +59,13 @@ node.addObject('CGLinearSolver', iterations='100', tolerance='1e-5', threshold='
 
 A lot of scene examples are available in SOFA involving a CGLinearSolver. One is available in [*examples/Demos/liver.scn*](https://github.com/sofa-framework/sofa/blob/master/examples/Demos/liver.scn)
 <!-- automatically generated doc START -->
-__Target__: Sofa.Component.LinearSolver.Iterative
+__Target__: `Sofa.Component.LinearSolver.Iterative`
 
-__namespace__: sofa::component::linearsolver::iterative
+__namespace__: `#!c++ sofa::component::linearsolver::iterative`
 
 __parents__: 
 
-- MatrixLinearSolver
+- `#!c++ MatrixLinearSolver`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Read and load an .off file at each timestep
 
 
-__Target__: Sofa.Component.IO.Mesh
+__Target__: `Sofa.Component.IO.Mesh`
 
-__namespace__: sofa::component::io::mesh
+__namespace__: `#!c++ sofa::component::io::mesh`
 
 __parents__: 
 
-- MeshOffLoader
+- `#!c++ MeshOffLoader`
 
 Data: 
 

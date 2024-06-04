@@ -3,13 +3,13 @@
 Constraint animation loop manager
 
 
-__Target__: Sofa.Component.AnimationLoop
+__Target__: `Sofa.Component.AnimationLoop`
 
-__namespace__: sofa::component::animationloop
+__namespace__: `#!c++ sofa::component::animationloop`
 
 __parents__: 
 
-- BaseAnimationLoop
+- `#!c++ BaseAnimationLoop`
 
 Data: 
 

@@ -6,17 +6,17 @@ Supports GPU-side computations using CUDA
 
 __Templates__:
 
-- Rigid2d,Vec2d
-- Rigid3d,Rigid3d
-- Rigid3d,Vec3d
+- `#!c++ Rigid2d,Vec2d`
+- `#!c++ Rigid3d,Rigid3d`
+- `#!c++ Rigid3d,Vec3d`
 
-__Target__: Sofa.Component.Mapping.NonLinear
+__Target__: `Sofa.Component.Mapping.NonLinear`
 
-__namespace__: sofa::component::mapping::nonlinear
+__namespace__: `#!c++ sofa::component::mapping::nonlinear`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

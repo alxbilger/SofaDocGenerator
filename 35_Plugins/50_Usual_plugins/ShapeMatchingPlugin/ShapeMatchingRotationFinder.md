@@ -5,15 +5,15 @@ ShapeMatchingRotationFinder
 
 __Templates__:
 
-- Vec3d
+- `#!c++ Vec3d`
 
-__Target__: ShapeMatchingPlugin
+__Target__: `ShapeMatchingPlugin`
 
-__namespace__: sofa::component::container
+__namespace__: `#!c++ sofa::component::container`
 
 __parents__: 
 
-- BaseObject
+- `#!c++ BaseObject`
 
 Data: 
 

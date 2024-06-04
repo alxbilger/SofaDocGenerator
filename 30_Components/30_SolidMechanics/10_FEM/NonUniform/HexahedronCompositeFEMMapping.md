@@ -5,15 +5,15 @@ Set the point to the center of mass of the DOFs it is attached to
 
 __Templates__:
 
-- Mapping<StdVectorTypes<Vec<3u,double>,Vec<3u,double>,double>,StdVectorTypes<Vec<3u,double>,Vec<3u,double>,double>>
+- `#!c++ Mapping<StdVectorTypes<Vec<3u,double>,Vec<3u,double>,double>,StdVectorTypes<Vec<3u,double>,Vec<3u,double>,double>>`
 
-__Target__: Sofa.Component.SolidMechanics.FEM.NonUniform
+__Target__: `Sofa.Component.SolidMechanics.FEM.NonUniform`
 
-__namespace__: sofa::component::solidmechanics::fem::nonuniform
+__namespace__: `#!c++ sofa::component::solidmechanics::fem::nonuniform`
 
 __parents__: 
 
-- Mapping
+- `#!c++ Mapping`
 
 Data: 
 

@@ -3,13 +3,13 @@
 Eulerian 2D fluid
 
 
-__Target__: SofaEulerianFluid
+__Target__: `SofaEulerianFluid`
 
-__namespace__: sofa::component::behaviormodel::eulerianfluid
+__namespace__: `#!c++ sofa::component::behaviormodel::eulerianfluid`
 
 __parents__: 
 
-- BehaviorModel
+- `#!c++ BehaviorModel`
 
 Data: 
 
