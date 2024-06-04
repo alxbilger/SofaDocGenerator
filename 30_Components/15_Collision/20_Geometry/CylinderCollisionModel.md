@@ -4,6 +4,7 @@ Collision model which represents a set of rigid cylinders
 
 
 __Templates__:
+
 - Rigid3d
 
 __Target__: Sofa.Component.Collision.Geometry
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Collision.Geometry
 __namespace__: sofa::component::collision::geometry
 
 __parents__: 
+
 - CollisionModel
 
 Data: 

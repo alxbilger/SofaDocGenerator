@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Topology.Utility
 __namespace__: sofa::component::topology::utility
 
 __parents__: 
+
 - BaseObject
 
 Data: 

@@ -1,3 +1,7 @@
+---
+title: ExtrudeSurface
+---
+
 ExtrudeSurface
 ==============
 
@@ -33,6 +37,7 @@ __Target__: Sofa.Component.Engine.Generate
 __namespace__: sofa::component::engine::generate
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -159,62 +164,70 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [ExtrudeSurface RandomPointDistributionInSurface] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [SphereROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Engine/Generate/ExtrudeSurface.scn
 
-    <DefaultAnimationLoop/>
-    <Node name="extrude">
-        <MeshOBJLoader name="meshLoader" filename="mesh/liver.obj" />
-        <MechanicalObject src="@meshLoader"/>
-        <SphereROI name="surface1" centers="2 4 0" radii="0.88" drawSize="0" isVisible="0" src="@meshLoader" />
-        <ExtrudeSurface template="Vec3" name="extrusion" triangles="@meshLoader.triangles" surfaceVertices="@meshLoader.position" surfaceTriangles="@surface1.triangleIndices" isVisible="0" />
-        <RandomPointDistributionInSurface template="Vec3" vertices="@extrusion.extrusionVertices" triangles="@extrusion.extrusionTriangles" numberOfInPoints="100" numberOfTests="3" minDistanceBetweenPoints="0.1" />
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [ExtrudeSurface RandomPointDistributionInSurface] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [SphereROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <DefaultAnimationLoop/>
+        <Node name="extrude">
+            <MeshOBJLoader name="meshLoader" filename="mesh/liver.obj" />
+            <MechanicalObject src="@meshLoader"/>
+            <SphereROI name="surface1" centers="2 4 0" radii="0.88" drawSize="0" isVisible="0" src="@meshLoader" />
+            <ExtrudeSurface template="Vec3" name="extrusion" triangles="@meshLoader.triangles" surfaceVertices="@meshLoader.position" surfaceTriangles="@surface1.triangleIndices" isVisible="0" />
+            <RandomPointDistributionInSurface template="Vec3" vertices="@extrusion.extrusionVertices" triangles="@extrusion.extrusionTriangles" numberOfInPoints="100" numberOfTests="3" minDistanceBetweenPoints="0.1" />
+        </Node>
+        <Node name="Extrusion">
+            <MeshTopology points="@../extrude/extrusion.extrusionVertices" triangles="@../extrude/extrusion.extrusionTriangles" />
+            <MechanicalObject position="@../extrude/extrusion.extrusionVertices"/>
+            <OglModel color="red" />
+        </Node>
+        <Node>
+            <MeshOBJLoader name='myLoader' filename='mesh/liver.obj'/>
+            <OglModel src='@myLoader'/>
+        </Node>
     </Node>
-    <Node name="Extrusion">
-        <MeshTopology points="@../extrude/extrusion.extrusionVertices" triangles="@../extrude/extrusion.extrusionTriangles" />
-        <MechanicalObject position="@../extrude/extrusion.extrusionVertices"/>
-        <OglModel color="red" />
-    </Node>
-    <Node>
-        <MeshOBJLoader name='myLoader' filename='mesh/liver.obj'/>
-        <OglModel src='@myLoader'/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	extrude = root.addChild('extrude')
-	extrude.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/liver.obj")
-	extrude.addObject('MechanicalObject', src="@meshLoader")
-	extrude.addObject('SphereROI', name="surface1", centers="2 4 0", radii="0.88", drawSize="0", isVisible="0", src="@meshLoader")
-	extrude.addObject('ExtrudeSurface', template="Vec3", name="extrusion", triangles="@meshLoader.triangles", surfaceVertices="@meshLoader.position", surfaceTriangles="@surface1.triangleIndices", isVisible="0")
-	extrude.addObject('RandomPointDistributionInSurface', template="Vec3", vertices="@extrusion.extrusionVertices", triangles="@extrusion.extrusionTriangles", numberOfInPoints="100", numberOfTests="3", minDistanceBetweenPoints="0.1")
+    ```python
+    def createScene(rootNode):
 
-	Extrusion = root.addChild('Extrusion')
-	Extrusion.addObject('MeshTopology', points="@../extrude/extrusion.extrusionVertices", triangles="@../extrude/extrusion.extrusionTriangles")
-	Extrusion.addObject('MechanicalObject', position="@../extrude/extrusion.extrusionVertices")
-	Extrusion.addObject('OglModel', color="red")
+        root = rootNode.addChild('root', dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
 
-	root = root.addChild('root')
-	root.addObject('MeshOBJLoader', name="myLoader", filename="mesh/liver.obj")
-	root.addObject('OglModel', src="@myLoader")
-```
+        extrude = root.addChild('extrude')
+        extrude.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/liver.obj")
+        extrude.addObject('MechanicalObject', src="@meshLoader")
+        extrude.addObject('SphereROI', name="surface1", centers="2 4 0", radii="0.88", drawSize="0", isVisible="0", src="@meshLoader")
+        extrude.addObject('ExtrudeSurface', template="Vec3", name="extrusion", triangles="@meshLoader.triangles", surfaceVertices="@meshLoader.position", surfaceTriangles="@surface1.triangleIndices", isVisible="0")
+        extrude.addObject('RandomPointDistributionInSurface', template="Vec3", vertices="@extrusion.extrusionVertices", triangles="@extrusion.extrusionTriangles", numberOfInPoints="100", numberOfTests="3", minDistanceBetweenPoints="0.1")
+
+        Extrusion = root.addChild('Extrusion')
+        Extrusion.addObject('MeshTopology', points="@../extrude/extrusion.extrusionVertices", triangles="@../extrude/extrusion.extrusionTriangles")
+        Extrusion.addObject('MechanicalObject', position="@../extrude/extrusion.extrusionVertices")
+        Extrusion.addObject('OglModel', color="red")
+
+        root = root.addChild('root')
+        root.addObject('MeshOBJLoader', name="myLoader", filename="mesh/liver.obj")
+        root.addObject('OglModel', src="@myLoader")
+    ```
+
 
 <!-- automatically generated doc END -->

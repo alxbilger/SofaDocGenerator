@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Haptics
 __namespace__: sofa::component::haptics
 
 __parents__: 
+
 - ForceFeedback
 
 Data: 

@@ -4,6 +4,7 @@ Extract a mesh subset based on selected vertices
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Engine.Select
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Engine.Select
 __namespace__: sofa::component::engine::select
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -151,45 +153,53 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node 	name="root" gravity="0 -1 0" dt="0.05"  >
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI MeshSubsetEngine] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Setting"/> <!-- Needed to use components [BackgroundSetting] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Engine/Select/MeshSubsetEngine.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node 	name="root" gravity="0 -1 0" dt="0.05"  >
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI MeshSubsetEngine] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Setting"/> <!-- Needed to use components [BackgroundSetting] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        
+        <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+        <BackgroundSetting color="1 1 1"/>
+        <DefaultAnimationLoop/>
+        
+        <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
+        <BoxROI name="boxroi" template="Vec3" position="@loader.position" box="-15 0 -5 0 10 5" drawBoxes="1"/>
+        <MeshSubsetEngine name="engine" inputPosition="@loader.position" inputTriangles="@loader.triangles" inputQuads="@loader.quads" indices="@boxroi.indices"/>
     
-    <VisualStyle displayFlags="showBehaviorModels showForceFields" />
-    <BackgroundSetting color="1 1 1"/>
-    <DefaultAnimationLoop/>
+        <MeshOBJLoader name="meshLoader_0" filename="mesh/dragon.obj" handleSeams="1" />
+        <OglModel name="Original Mesh (red)" src="@meshLoader_0" color="1 0 0 0.4" dz="0" />
+        <OglModel name="Subset Mesh (blue)" position="@engine.position" triangles="@engine.triangles" quads="@engine.quads" color="0 0.4 1 1"  />
     
-    <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
-    <BoxROI name="boxroi" template="Vec3" position="@loader.position" box="-15 0 -5 0 10 5" drawBoxes="1"/>
-    <MeshSubsetEngine name="engine" inputPosition="@loader.position" inputTriangles="@loader.triangles" inputQuads="@loader.quads" indices="@boxroi.indices"/>
+    </Node>
+    ```
 
-    <MeshOBJLoader name="meshLoader_0" filename="mesh/dragon.obj" handleSeams="1" />
-    <OglModel name="Original Mesh (red)" src="@meshLoader_0" color="1 0 0 0.4" dz="0" />
-    <OglModel name="Subset Mesh (blue)" position="@engine.position" triangles="@engine.triangles" quads="@engine.quads" color="0 0.4 1 1"  />
+=== "Python"
 
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```python
+    def createScene(rootNode):
 
-	root = rootNode.addChild('root', gravity="0 -1 0", dt="0.05")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Setting")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
-	root.addObject('BackgroundSetting', color="1 1 1")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
-	root.addObject('BoxROI', name="boxroi", template="Vec3", position="@loader.position", box="-15 0 -5 0 10 5", drawBoxes="1")
-	root.addObject('MeshSubsetEngine', name="engine", inputPosition="@loader.position", inputTriangles="@loader.triangles", inputQuads="@loader.quads", indices="@boxroi.indices")
-	root.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/dragon.obj", handleSeams="1")
-	root.addObject('OglModel', name="Original Mesh (red)", src="@meshLoader_0", color="1 0 0 0.4", dz="0")
-	root.addObject('OglModel', name="Subset Mesh (blue)", position="@engine.position", triangles="@engine.triangles", quads="@engine.quads", color="0 0.4 1 1")
-```
+        root = rootNode.addChild('root', gravity="0 -1 0", dt="0.05")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Setting")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+        root.addObject('BackgroundSetting', color="1 1 1")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
+        root.addObject('BoxROI', name="boxroi", template="Vec3", position="@loader.position", box="-15 0 -5 0 10 5", drawBoxes="1")
+        root.addObject('MeshSubsetEngine', name="engine", inputPosition="@loader.position", inputTriangles="@loader.triangles", inputQuads="@loader.quads", indices="@boxroi.indices")
+        root.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/dragon.obj", handleSeams="1")
+        root.addObject('OglModel', name="Original Mesh (red)", src="@meshLoader_0", color="1 0 0 0.4", dz="0")
+        root.addObject('OglModel', name="Subset Mesh (blue)", position="@engine.position", triangles="@engine.triangles", quads="@engine.quads", color="0 0.4 1 1")
+    ```
+

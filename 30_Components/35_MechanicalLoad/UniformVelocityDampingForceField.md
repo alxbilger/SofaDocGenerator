@@ -4,6 +4,7 @@ Uniform velocity damping
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec1d
@@ -16,6 +17,7 @@ __Target__: Sofa.Component.MechanicalLoad
 __namespace__: sofa::component::mechanicalload
 
 __parents__: 
+
 - ForceField
 
 Data: 

@@ -4,6 +4,7 @@ Triangular finite element model using anisotropic material
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
 __namespace__: sofa::component::solidmechanics::fem::elastic
 
 __parents__: 
+
 - TriangularFEMForceField
 
 Data: 

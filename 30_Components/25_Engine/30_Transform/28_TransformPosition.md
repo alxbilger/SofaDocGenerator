@@ -1,3 +1,7 @@
+---
+title: TransformPosition
+---
+
 TransformPosition
 ===============
 
@@ -32,6 +36,7 @@ __Target__: Sofa.Component.Engine.Transform
 __namespace__: sofa::component::engine::transform
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -224,97 +229,105 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" gravity="0 0 -9.81" dt="0.05">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Transform"/> <!-- Needed to use components [TransformPosition] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [PlaneForceField] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [HexahedronFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Engine/Transform/TransformPosition.scn
 
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showVisual showBehaviorModels" />
-    <CollisionPipeline name="DefaultCollisionPipeline" verbose="0" draw="0" depth="6" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <MinProximityIntersection name="Proximity" alarmDistance="3" contactDistance="2" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-    <Node name="Object" gravity="0 -9.81 0">
-        <EulerImplicitSolver name="Implicit Euler Solver"  rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver  name="Conjugate Gradient" tolerance="1e-05" threshold="1e-05" iterations="5"/>
-        <SparseGridTopology name="grid" fileTopology="mesh/dragon.obj" n="7 6 5" />
-        <TransformPosition name="transfo" method="fromFile" filename="transfo.tfm" input_position="@grid.position"/>
-        <MechanicalObject  name="Particles" restScale="1" position="@transfo.output_position" />
-        <UniformMass  name="Mass" />
-        <PlaneForceField  name="Plane" normal="0 0 1" d="-10" />
-        <HexahedronFEMForceField  name="FEM" youngModulus="200" poissonRatio="0.45"/>
-        <Node name="VisualNode" gravity="0 -9.81 0">
-            <MeshOBJLoader name="meshLoader_0" filename="mesh/dragon.obj" handleSeams="1" />
-            <OglModel name="Objective" src="@meshLoader_0" />
-            <BarycentricMapping  name="Visual Mapping" output="@Objective"  />
+=== "XML"
+
+    ```xml
+    <Node name="root" gravity="0 0 -9.81" dt="0.05">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Transform"/> <!-- Needed to use components [TransformPosition] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [PlaneForceField] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [HexahedronFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showVisual showBehaviorModels" />
+        <CollisionPipeline name="DefaultCollisionPipeline" verbose="0" draw="0" depth="6" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <MinProximityIntersection name="Proximity" alarmDistance="3" contactDistance="2" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+        <Node name="Object" gravity="0 -9.81 0">
+            <EulerImplicitSolver name="Implicit Euler Solver"  rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver  name="Conjugate Gradient" tolerance="1e-05" threshold="1e-05" iterations="5"/>
+            <SparseGridTopology name="grid" fileTopology="mesh/dragon.obj" n="7 6 5" />
+            <TransformPosition name="transfo" method="fromFile" filename="transfo.tfm" input_position="@grid.position"/>
+            <MechanicalObject  name="Particles" restScale="1" position="@transfo.output_position" />
+            <UniformMass  name="Mass" />
+            <PlaneForceField  name="Plane" normal="0 0 1" d="-10" />
+            <HexahedronFEMForceField  name="FEM" youngModulus="200" poissonRatio="0.45"/>
+            <Node name="VisualNode" gravity="0 -9.81 0">
+                <MeshOBJLoader name="meshLoader_0" filename="mesh/dragon.obj" handleSeams="1" />
+                <OglModel name="Objective" src="@meshLoader_0" />
+                <BarycentricMapping  name="Visual Mapping" output="@Objective"  />
+            </Node>
+        </Node>
+        <Node name="Floor">
+            <MeshOBJLoader name="ObjLoader" filename="mesh/floor.obj" />
+            <OglModel name="VisualModel" src="@./ObjLoader" translation="0 0 -9" rotation="90 0 0"/>
         </Node>
     </Node>
-    <Node name="Floor">
-        <MeshOBJLoader name="ObjLoader" filename="mesh/floor.obj" />
-        <OglModel name="VisualModel" src="@./ObjLoader" translation="0 0 -9" rotation="90 0 0"/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 0 -9.81", dt="0.05")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Transform")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels")
-	root.addObject('CollisionPipeline', name="DefaultCollisionPipeline", verbose="0", draw="0", depth="6")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="3", contactDistance="2")
-	root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+=== "Python"
 
-	Object = root.addChild('Object', gravity="0 -9.81 0")
-	Object.addObject('EulerImplicitSolver', name="Implicit Euler Solver", rayleighStiffness="0.1", rayleighMass="0.1")
-	Object.addObject('CGLinearSolver', name="Conjugate Gradient", tolerance="1e-05", threshold="1e-05", iterations="5")
-	Object.addObject('SparseGridTopology', name="grid", fileTopology="mesh/dragon.obj", n="7 6 5")
-	Object.addObject('TransformPosition', name="transfo", method="fromFile", filename="transfo.tfm", input_position="@grid.position")
-	Object.addObject('MechanicalObject', name="Particles", restScale="1", position="@transfo.output_position")
-	Object.addObject('UniformMass', name="Mass")
-	Object.addObject('PlaneForceField', name="Plane", normal="0 0 1", d="-10")
-	Object.addObject('HexahedronFEMForceField', name="FEM", youngModulus="200", poissonRatio="0.45")
+    ```python
+    def createScene(rootNode):
 
-	VisualNode = Object.addChild('VisualNode', gravity="0 -9.81 0")
-	VisualNode.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/dragon.obj", handleSeams="1")
-	VisualNode.addObject('OglModel', name="Objective", src="@meshLoader_0")
-	VisualNode.addObject('BarycentricMapping', name="Visual Mapping", output="@Objective")
+        root = rootNode.addChild('root', gravity="0 0 -9.81", dt="0.05")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Transform")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels")
+        root.addObject('CollisionPipeline', name="DefaultCollisionPipeline", verbose="0", draw="0", depth="6")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="3", contactDistance="2")
+        root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
 
-	Floor = root.addChild('Floor')
-	Floor.addObject('MeshOBJLoader', name="ObjLoader", filename="mesh/floor.obj")
-	Floor.addObject('OglModel', name="VisualModel", src="@./ObjLoader", translation="0 0 -9", rotation="90 0 0")
-```
+        Object = root.addChild('Object', gravity="0 -9.81 0")
+        Object.addObject('EulerImplicitSolver', name="Implicit Euler Solver", rayleighStiffness="0.1", rayleighMass="0.1")
+        Object.addObject('CGLinearSolver', name="Conjugate Gradient", tolerance="1e-05", threshold="1e-05", iterations="5")
+        Object.addObject('SparseGridTopology', name="grid", fileTopology="mesh/dragon.obj", n="7 6 5")
+        Object.addObject('TransformPosition', name="transfo", method="fromFile", filename="transfo.tfm", input_position="@grid.position")
+        Object.addObject('MechanicalObject', name="Particles", restScale="1", position="@transfo.output_position")
+        Object.addObject('UniformMass', name="Mass")
+        Object.addObject('PlaneForceField', name="Plane", normal="0 0 1", d="-10")
+        Object.addObject('HexahedronFEMForceField', name="FEM", youngModulus="200", poissonRatio="0.45")
+
+        VisualNode = Object.addChild('VisualNode', gravity="0 -9.81 0")
+        VisualNode.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/dragon.obj", handleSeams="1")
+        VisualNode.addObject('OglModel', name="Objective", src="@meshLoader_0")
+        VisualNode.addObject('BarycentricMapping', name="Visual Mapping", output="@Objective")
+
+        Floor = root.addChild('Floor')
+        Floor.addObject('MeshOBJLoader', name="ObjLoader", filename="mesh/floor.obj")
+        Floor.addObject('OglModel', name="VisualModel", src="@./ObjLoader", translation="0 0 -9", rotation="90 0 0")
+    ```
+
 
 <!-- automatically generated doc END -->

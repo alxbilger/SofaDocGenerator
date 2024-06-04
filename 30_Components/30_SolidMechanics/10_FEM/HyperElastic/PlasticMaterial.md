@@ -8,6 +8,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.HyperElastic
 __namespace__: sofa::component::solidmechanics::fem::hyperelastic::material
 
 __parents__: 
+
 - BaseMaterial
 
 Data: 

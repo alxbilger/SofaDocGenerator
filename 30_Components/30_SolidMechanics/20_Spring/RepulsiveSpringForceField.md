@@ -4,6 +4,7 @@ Springs which only repell
 
 
 __Templates__:
+
 - Vec1d
 - Vec2d
 - Vec3d
@@ -13,6 +14,7 @@ __Target__: Sofa.Component.SolidMechanics.Spring
 __namespace__: sofa::component::solidmechanics::spring
 
 __parents__: 
+
 - StiffSpringForceField
 
 Data: 

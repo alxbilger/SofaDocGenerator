@@ -4,6 +4,7 @@ Compute distances based on a grid.
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Engine.Analyze
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Engine.Analyze
 __namespace__: sofa::component::engine::analyze
 
 __parents__: 
+
 - DataEngine
 
 Data: 

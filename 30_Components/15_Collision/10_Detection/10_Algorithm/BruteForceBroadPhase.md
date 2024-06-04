@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Collision.Detection.Algorithm
 __namespace__: sofa::component::collision::detection::algorithm
 
 __parents__: 
+
 - BroadPhaseDetection
 
 Data: 

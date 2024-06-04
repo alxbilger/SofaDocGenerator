@@ -4,6 +4,7 @@ Linear system solver using a SVD decomposition of a dense matrix
 
 
 __Templates__:
+
 - CompressedRowSparseMatrixMat3x3d
 - CompressedRowSparseMatrixd
 - FullMatrix
@@ -13,6 +14,7 @@ __Target__: Sofa.Component.LinearSolver.Direct
 __namespace__: sofa::component::linearsolver::direct
 
 __parents__: 
+
 - MatrixLinearSolver
 
 Data: 

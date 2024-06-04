@@ -4,6 +4,7 @@ Find the values given a list of indices
 
 
 __Templates__:
+
 - I
 - RigidCoord2d
 - RigidCoord3d
@@ -26,6 +27,7 @@ __Target__: Sofa.Component.Engine.Select
 __namespace__: sofa::component::engine::select
 
 __parents__: 
+
 - DataEngine
 
 Data: 

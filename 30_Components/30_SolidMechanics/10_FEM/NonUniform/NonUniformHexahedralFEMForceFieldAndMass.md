@@ -4,6 +4,7 @@ Non uniform Hexahedral finite elements
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.SolidMechanics.FEM.NonUniform
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.NonUniform
 __namespace__: sofa::component::solidmechanics::fem::nonuniform
 
 __parents__: 
+
 - HexahedralFEMForceFieldAndMass
 
 Data: 

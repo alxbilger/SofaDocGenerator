@@ -4,6 +4,7 @@ Beam finite elements
 
 
 __Templates__:
+
 - Rigid3d
 
 __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
 __namespace__: sofa::component::solidmechanics::fem::elastic::_beamfemforcefield_
 
 __parents__: 
+
 - ForceField
 
 Data: 
@@ -148,174 +150,182 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
+Component/SolidMechanics/FEM/BeamFEMForceField.scn
 
-<!-- BeamFEMForceField example -->
-<Node name="root" dt="0.01">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel SphereCollisionModel TriangleCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [BTDLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BeamLinearMapping IdentityMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [BeamFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [CubeTopology MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
     
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showBehaviorModels hideForceFields showCollisionModels hideVisual showInteractionForceFields" />
-    <CollisionPipeline depth="6" verbose="0" draw="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <MinProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-
-    <Node name="beam-withPointCollision">
-        <EulerImplicitSolver rayleighStiffness="0" printLog="false"  rayleighMass="0.1" />
-        <BTDLinearSolver template="BTDMatrix6d" printLog="false" verbose="false" />
-        <MechanicalObject template="Rigid3" name="DOFs" position="0 0 0 0 0 0 1  1 0 0 0 0 0 1  2 0 0 0 0 0 1  3 0 0 0 0 0 1  4 0 0 0 0 0 1  5 0 0 0 0 0 1  6 0 0 0 0 0 1  7 0 0 0 0 0 1" />
-        <MeshTopology name="lines" lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7" />
-
-        <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
-        <UniformMass vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1" printLog="false" />
-        <BeamFEMForceField name="FEM" radius="0.1" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
-
-
-        <Node name="Collision">
-            <MechanicalObject />
-            <IdentityMapping  />
-            <PointCollisionModel name="FloorPoint" />
+    <!-- BeamFEMForceField example -->
+    <Node name="root" dt="0.01">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel SphereCollisionModel TriangleCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [BTDLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BeamLinearMapping IdentityMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [BeamFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [CubeTopology MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showBehaviorModels hideForceFields showCollisionModels hideVisual showInteractionForceFields" />
+        <CollisionPipeline depth="6" verbose="0" draw="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <MinProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+    
+        <Node name="beam-withPointCollision">
+            <EulerImplicitSolver rayleighStiffness="0" printLog="false"  rayleighMass="0.1" />
+            <BTDLinearSolver template="BTDMatrix6d" printLog="false" verbose="false" />
+            <MechanicalObject template="Rigid3" name="DOFs" position="0 0 0 0 0 0 1  1 0 0 0 0 0 1  2 0 0 0 0 0 1  3 0 0 0 0 0 1  4 0 0 0 0 0 1  5 0 0 0 0 0 1  6 0 0 0 0 0 1  7 0 0 0 0 0 1" />
+            <MeshTopology name="lines" lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7" />
+    
+            <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
+            <UniformMass vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1" printLog="false" />
+            <BeamFEMForceField name="FEM" radius="0.1" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
+    
+    
+            <Node name="Collision">
+                <MechanicalObject />
+                <IdentityMapping  />
+                <PointCollisionModel name="FloorPoint" />
+            </Node>
+        </Node>
+    
+        <Node name="beam-withTriangulatedCubeCollision">
+            <EulerImplicitSolver rayleighStiffness="0" printLog="false"  rayleighMass="0.1" />
+            <BTDLinearSolver template="BTDMatrix6d" printLog="false" verbose="false" />
+            <MechanicalObject template="Rigid3" name="DOFs" position="0 0 -1 0 0 0 1  1 0 -1 0 0 0 1  2 0 -1 0 0 0 1  3 0 -1 0 0 0 1  4 0 -1 0 0 0 1  5 0 -1 0 0 0 1  6 0  -1 0 0 0 1  7 0 -1 0 0 0 1" />
+            <MeshTopology name="lines" lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7" />
+            <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
+            <UniformMass vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1" printLog="false" />
+            <BeamFEMForceField name="FEM" radius="0.1" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
+    
+            <Node name="Collision">
+                <CubeTopology nx="15" ny="2" nz="2" min="0 -0.1 -0.1" max="7 0.1 0.1" />
+                <MechanicalObject />
+                <BeamLinearMapping isMechanical="true" />
+                <TriangleCollisionModel />
+                <LineCollisionModel />
+                <PointCollisionModel  />
+            </Node>
+        </Node>
+    
+    
+        <Node name="beam-withSphereCollision">
+            <EulerImplicitSolver rayleighStiffness="0" printLog="false" rayleighMass="0.1"/>
+            <CGLinearSolver threshold="0.000000001" tolerance="0.0000000001" iterations="25" printLog="false" />
+    
+            <MechanicalObject template="Rigid3" name="DOFs" position="0 0 1 0 0 0 1  1 0 1 0 0 0 1  2 0 1 0 0 0 1  3 0 1 0 0 0 1" />
+            <MeshTopology name="lines" lines="0 1 1 2 2 3" />
+            <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
+            <UniformMass totalMass="4" />
+            <BeamFEMForceField name="FEM" radius="0.05" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
+    
+            <Node name="Collision">
+                <MechanicalObject />
+                <SphereCollisionModel radius="0.4" />
+                <IdentityMapping />
+            </Node>
+        </Node>
+    
+    
+        <Node name="Floor">
+            <MeshOBJLoader name="loader" filename="mesh/floor3.obj" scale3d="0.5 0.5 0.5"/>
+            <MeshTopology src="@loader" />
+            <MechanicalObject src="@loader"  dy="-1"/>
+            <TriangleCollisionModel name="FloorTriangle" simulated="0" moving="0" contactStiffness="100" />
         </Node>
     </Node>
+    ```
 
-    <Node name="beam-withTriangulatedCubeCollision">
-        <EulerImplicitSolver rayleighStiffness="0" printLog="false"  rayleighMass="0.1" />
-        <BTDLinearSolver template="BTDMatrix6d" printLog="false" verbose="false" />
-        <MechanicalObject template="Rigid3" name="DOFs" position="0 0 -1 0 0 0 1  1 0 -1 0 0 0 1  2 0 -1 0 0 0 1  3 0 -1 0 0 0 1  4 0 -1 0 0 0 1  5 0 -1 0 0 0 1  6 0  -1 0 0 0 1  7 0 -1 0 0 0 1" />
-        <MeshTopology name="lines" lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7" />
-        <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
-        <UniformMass vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1" printLog="false" />
-        <BeamFEMForceField name="FEM" radius="0.1" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
+=== "Python"
 
-        <Node name="Collision">
-            <CubeTopology nx="15" ny="2" nz="2" min="0 -0.1 -0.1" max="7 0.1 0.1" />
-            <MechanicalObject />
-            <BeamLinearMapping isMechanical="true" />
-            <TriangleCollisionModel />
-            <LineCollisionModel />
-            <PointCollisionModel  />
-        </Node>
-    </Node>
+    ```python
+    def createScene(rootNode):
 
+        root = rootNode.addChild('root', dt="0.01")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels hideForceFields showCollisionModels hideVisual showInteractionForceFields")
+        root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
+        root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
 
-    <Node name="beam-withSphereCollision">
-        <EulerImplicitSolver rayleighStiffness="0" printLog="false" rayleighMass="0.1"/>
-        <CGLinearSolver threshold="0.000000001" tolerance="0.0000000001" iterations="25" printLog="false" />
+        beam-withPointCollision = root.addChild('beam-withPointCollision')
+        beam-withPointCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
+        beam-withPointCollision.addObject('BTDLinearSolver', template="BTDMatrix6d", printLog="false", verbose="false")
+        beam-withPointCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 0 0 0 0 1  1 0 0 0 0 0 1  2 0 0 0 0 0 1  3 0 0 0 0 0 1  4 0 0 0 0 0 1  5 0 0 0 0 0 1  6 0 0 0 0 0 1  7 0 0 0 0 0 1")
+        beam-withPointCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7")
+        beam-withPointCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
+        beam-withPointCollision.addObject('UniformMass', vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1", printLog="false")
+        beam-withPointCollision.addObject('BeamFEMForceField', name="FEM", radius="0.1", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
 
-        <MechanicalObject template="Rigid3" name="DOFs" position="0 0 1 0 0 0 1  1 0 1 0 0 0 1  2 0 1 0 0 0 1  3 0 1 0 0 0 1" />
-        <MeshTopology name="lines" lines="0 1 1 2 2 3" />
-        <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="0" />
-        <UniformMass totalMass="4" />
-        <BeamFEMForceField name="FEM" radius="0.05" radiusInner="0" youngModulus="20000000" poissonRatio="0.49"/>
+        Collision = beam-withPointCollision.addChild('Collision')
+        Collision.addObject('MechanicalObject')
+        Collision.addObject('IdentityMapping')
+        Collision.addObject('PointCollisionModel', name="FloorPoint")
 
-        <Node name="Collision">
-            <MechanicalObject />
-            <SphereCollisionModel radius="0.4" />
-            <IdentityMapping />
-        </Node>
-    </Node>
+        beam-withTriangulatedCubeCollision = root.addChild('beam-withTriangulatedCubeCollision')
+        beam-withTriangulatedCubeCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
+        beam-withTriangulatedCubeCollision.addObject('BTDLinearSolver', template="BTDMatrix6d", printLog="false", verbose="false")
+        beam-withTriangulatedCubeCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 -1 0 0 0 1  1 0 -1 0 0 0 1  2 0 -1 0 0 0 1  3 0 -1 0 0 0 1  4 0 -1 0 0 0 1  5 0 -1 0 0 0 1  6 0  -1 0 0 0 1  7 0 -1 0 0 0 1")
+        beam-withTriangulatedCubeCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7")
+        beam-withTriangulatedCubeCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
+        beam-withTriangulatedCubeCollision.addObject('UniformMass', vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1", printLog="false")
+        beam-withTriangulatedCubeCollision.addObject('BeamFEMForceField', name="FEM", radius="0.1", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
 
+        Collision = beam-withTriangulatedCubeCollision.addChild('Collision')
+        Collision.addObject('CubeTopology', nx="15", ny="2", nz="2", min="0 -0.1 -0.1", max="7 0.1 0.1")
+        Collision.addObject('MechanicalObject')
+        Collision.addObject('BeamLinearMapping', isMechanical="true")
+        Collision.addObject('TriangleCollisionModel')
+        Collision.addObject('LineCollisionModel')
+        Collision.addObject('PointCollisionModel')
 
-    <Node name="Floor">
-        <MeshOBJLoader name="loader" filename="mesh/floor3.obj" scale3d="0.5 0.5 0.5"/>
-        <MeshTopology src="@loader" />
-        <MechanicalObject src="@loader"  dy="-1"/>
-        <TriangleCollisionModel name="FloorTriangle" simulated="0" moving="0" contactStiffness="100" />
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+        beam-withSphereCollision = root.addChild('beam-withSphereCollision')
+        beam-withSphereCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
+        beam-withSphereCollision.addObject('CGLinearSolver', threshold="0.000000001", tolerance="0.0000000001", iterations="25", printLog="false")
+        beam-withSphereCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 1 0 0 0 1  1 0 1 0 0 0 1  2 0 1 0 0 0 1  3 0 1 0 0 0 1")
+        beam-withSphereCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3")
+        beam-withSphereCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
+        beam-withSphereCollision.addObject('UniformMass', totalMass="4")
+        beam-withSphereCollision.addObject('BeamFEMForceField', name="FEM", radius="0.05", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
 
-	root = rootNode.addChild('root', dt="0.01")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels hideForceFields showCollisionModels hideVisual showInteractionForceFields")
-	root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
-	root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+        Collision = beam-withSphereCollision.addChild('Collision')
+        Collision.addObject('MechanicalObject')
+        Collision.addObject('SphereCollisionModel', radius="0.4")
+        Collision.addObject('IdentityMapping')
 
-	beam-withPointCollision = root.addChild('beam-withPointCollision')
-	beam-withPointCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
-	beam-withPointCollision.addObject('BTDLinearSolver', template="BTDMatrix6d", printLog="false", verbose="false")
-	beam-withPointCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 0 0 0 0 1  1 0 0 0 0 0 1  2 0 0 0 0 0 1  3 0 0 0 0 0 1  4 0 0 0 0 0 1  5 0 0 0 0 0 1  6 0 0 0 0 0 1  7 0 0 0 0 0 1")
-	beam-withPointCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7")
-	beam-withPointCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
-	beam-withPointCollision.addObject('UniformMass', vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1", printLog="false")
-	beam-withPointCollision.addObject('BeamFEMForceField', name="FEM", radius="0.1", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
+        Floor = root.addChild('Floor')
+        Floor.addObject('MeshOBJLoader', name="loader", filename="mesh/floor3.obj", scale3d="0.5 0.5 0.5")
+        Floor.addObject('MeshTopology', src="@loader")
+        Floor.addObject('MechanicalObject', src="@loader", dy="-1")
+        Floor.addObject('TriangleCollisionModel', name="FloorTriangle", simulated="0", moving="0", contactStiffness="100")
+    ```
 
-	Collision = beam-withPointCollision.addChild('Collision')
-	Collision.addObject('MechanicalObject')
-	Collision.addObject('IdentityMapping')
-	Collision.addObject('PointCollisionModel', name="FloorPoint")
-
-	beam-withTriangulatedCubeCollision = root.addChild('beam-withTriangulatedCubeCollision')
-	beam-withTriangulatedCubeCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
-	beam-withTriangulatedCubeCollision.addObject('BTDLinearSolver', template="BTDMatrix6d", printLog="false", verbose="false")
-	beam-withTriangulatedCubeCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 -1 0 0 0 1  1 0 -1 0 0 0 1  2 0 -1 0 0 0 1  3 0 -1 0 0 0 1  4 0 -1 0 0 0 1  5 0 -1 0 0 0 1  6 0  -1 0 0 0 1  7 0 -1 0 0 0 1")
-	beam-withTriangulatedCubeCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3 3 4 4 5 5 6 6 7")
-	beam-withTriangulatedCubeCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
-	beam-withTriangulatedCubeCollision.addObject('UniformMass', vertexMass="1 1 0.01 0 0 0 0.1 0 0 0 0.1", printLog="false")
-	beam-withTriangulatedCubeCollision.addObject('BeamFEMForceField', name="FEM", radius="0.1", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
-
-	Collision = beam-withTriangulatedCubeCollision.addChild('Collision')
-	Collision.addObject('CubeTopology', nx="15", ny="2", nz="2", min="0 -0.1 -0.1", max="7 0.1 0.1")
-	Collision.addObject('MechanicalObject')
-	Collision.addObject('BeamLinearMapping', isMechanical="true")
-	Collision.addObject('TriangleCollisionModel')
-	Collision.addObject('LineCollisionModel')
-	Collision.addObject('PointCollisionModel')
-
-	beam-withSphereCollision = root.addChild('beam-withSphereCollision')
-	beam-withSphereCollision.addObject('EulerImplicitSolver', rayleighStiffness="0", printLog="false", rayleighMass="0.1")
-	beam-withSphereCollision.addObject('CGLinearSolver', threshold="0.000000001", tolerance="0.0000000001", iterations="25", printLog="false")
-	beam-withSphereCollision.addObject('MechanicalObject', template="Rigid3", name="DOFs", position="0 0 1 0 0 0 1  1 0 1 0 0 0 1  2 0 1 0 0 0 1  3 0 1 0 0 0 1")
-	beam-withSphereCollision.addObject('MeshTopology', name="lines", lines="0 1 1 2 2 3")
-	beam-withSphereCollision.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="0")
-	beam-withSphereCollision.addObject('UniformMass', totalMass="4")
-	beam-withSphereCollision.addObject('BeamFEMForceField', name="FEM", radius="0.05", radiusInner="0", youngModulus="20000000", poissonRatio="0.49")
-
-	Collision = beam-withSphereCollision.addChild('Collision')
-	Collision.addObject('MechanicalObject')
-	Collision.addObject('SphereCollisionModel', radius="0.4")
-	Collision.addObject('IdentityMapping')
-
-	Floor = root.addChild('Floor')
-	Floor.addObject('MeshOBJLoader', name="loader", filename="mesh/floor3.obj", scale3d="0.5 0.5 0.5")
-	Floor.addObject('MeshTopology', src="@loader")
-	Floor.addObject('MechanicalObject', src="@loader", dy="-1")
-	Floor.addObject('TriangleCollisionModel', name="FloorTriangle", simulated="0", moving="0", contactStiffness="100")
-```

@@ -8,6 +8,7 @@ __Target__: Sofa.Component.LinearSolver.Ordering
 __namespace__: sofa::component::linearsolver::ordering
 
 __parents__: 
+
 - BaseOrderingMethod
 
 Data: 

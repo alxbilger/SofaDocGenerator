@@ -4,6 +4,7 @@ Generic Tetrahedral finite elements
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.SolidMechanics.FEM.HyperElastic
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.HyperElastic
 __namespace__: sofa::component::solidmechanics::fem::hyperelastic
 
 __parents__: 
+
 - ForceField
 
 Data: 
@@ -141,333 +143,349 @@ Links:
 
 ## Examples
 
-```xml
-﻿<?xml version="1.0" ?>
-<Node name="root" dt="0.00005" showBoundingTree="0" gravity="0 0 0">
-    <Node name="plugins">
-        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-        <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
-        <RequiredPlugin name="Sofa.Component.LinearSystem"/> <!-- Needed to use components [ConstantSparsityPatternSystem] -->
-        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.HyperElastic"/> <!-- Needed to use components [TetrahedronHyperelasticityFEMForceField] -->
-        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
-        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-        <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2TetraTopologicalMapping] -->
-        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    </Node>
+Component/SolidMechanics/FEM/TetrahedronHyperelasticityFEMForceField_invertedTets.scn
 
-    <VisualStyle displayFlags="showForceFields showBehaviorModels" />
+=== "XML"
 
-    <DefaultAnimationLoop/>
-
-    <Node name="StableNeoHookean">
-        <EulerImplicitSolver name="odesolver"/>
-        <ConstantSparsityPatternSystem template="CompressedRowSparseMatrixd" name="A"/>
-        <SparseLDLSolver template="CompressedRowSparseMatrixd"/>
-
-        <RegularGridTopology name="hexaGrid"     min="0 0 0" max="1 1 2.7" n="6 6 16" p0="0 0 0"/>
-        <RegularGridTopology name="hexaGridRest" min="0 0 0" max="1 1 -2.7"   n="6 6 16" p0="0 0 0"/>
-
-        <MechanicalObject name="mechObj" rest_position="@hexaGrid.position" position="@hexaGridRest.position"/>
-        <UniformMass/>
-
-        <Node name="tetras">
-            <TetrahedronSetTopologyContainer name="Container"/>
-            <TetrahedronSetTopologyModifier name="Modifier" />
-            <TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-            <Hexa2TetraTopologicalMapping name="default28" input="@../hexaGrid" output="@Container" printLog="0" />
-
-            <TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="1644295.30201342 33557.0469798658" materialName="StableNeoHookean"/>
+    ```xml
+    ﻿<?xml version="1.0" ?>
+    <Node name="root" dt="0.00005" showBoundingTree="0" gravity="0 0 0">
+        <Node name="plugins">
+            <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+            <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+            <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
+            <RequiredPlugin name="Sofa.Component.LinearSystem"/> <!-- Needed to use components [ConstantSparsityPatternSystem] -->
+            <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [MeshMatrixMass] -->
+            <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+            <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.HyperElastic"/> <!-- Needed to use components [TetrahedronHyperelasticityFEMForceField] -->
+            <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+            <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
+            <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+            <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2TetraTopologicalMapping] -->
+            <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
         </Node>
-
-        <BoxROI drawBoxes="1" box="0 0 0 1 1 0.05" name="box"/>
-        <FixedProjectiveConstraint indices="@box.indices"/>
+    
+        <VisualStyle displayFlags="showForceFields showBehaviorModels" />
+    
+        <DefaultAnimationLoop/>
+    
+        <Node name="StableNeoHookean">
+            <EulerImplicitSolver name="odesolver"/>
+            <ConstantSparsityPatternSystem template="CompressedRowSparseMatrixd" name="A"/>
+            <SparseLDLSolver template="CompressedRowSparseMatrixd"/>
+    
+            <RegularGridTopology name="hexaGrid"     min="0 0 0" max="1 1 2.7" n="6 6 16" p0="0 0 0"/>
+            <RegularGridTopology name="hexaGridRest" min="0 0 0" max="1 1 -2.7"   n="6 6 16" p0="0 0 0"/>
+    
+            <MechanicalObject name="mechObj" rest_position="@hexaGrid.position" position="@hexaGridRest.position"/>
+            <MeshMatrixMass totalMass="1.0"/>
+    
+            <Node name="tetras">
+                <TetrahedronSetTopologyContainer name="Container"/>
+                <TetrahedronSetTopologyModifier name="Modifier" />
+                <TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+                <Hexa2TetraTopologicalMapping name="default28" input="@../hexaGrid" output="@Container" printLog="0" />
+    
+                <TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="1644295.30201342 33557.0469798658" materialName="StableNeoHookean"/>
+            </Node>
+    
+            <BoxROI drawBoxes="1" box="0 0 0 1 1 0.05" name="box"/>
+            <FixedProjectiveConstraint indices="@box.indices"/>
+        </Node>
+    
     </Node>
+    ```
 
-</Node>
-```
-```python
-def createScene(rootNode):
+=== "Python"
 
-	root = rootNode.addChild('root', dt="0.00005", showBoundingTree="0", gravity="0 0 0")
+    ```python
+    def createScene(rootNode):
 
-	plugins = root.addChild('plugins')
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSystem")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.HyperElastic")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels")
-	root.addObject('DefaultAnimationLoop')
+        root = rootNode.addChild('root', dt="0.00005", showBoundingTree="0", gravity="0 0 0")
 
-	StableNeoHookean = root.addChild('StableNeoHookean')
-	StableNeoHookean.addObject('EulerImplicitSolver', name="odesolver")
-	StableNeoHookean.addObject('ConstantSparsityPatternSystem', template="CompressedRowSparseMatrixd", name="A")
-	StableNeoHookean.addObject('SparseLDLSolver', template="CompressedRowSparseMatrixd")
-	StableNeoHookean.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="6 6 16", p0="0 0 0")
-	StableNeoHookean.addObject('RegularGridTopology', name="hexaGridRest", min="0 0 0", max="1 1 -2.7", n="6 6 16", p0="0 0 0")
-	StableNeoHookean.addObject('MechanicalObject', name="mechObj", rest_position="@hexaGrid.position", position="@hexaGridRest.position")
-	StableNeoHookean.addObject('UniformMass')
+        plugins = root.addChild('plugins')
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSystem")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.HyperElastic")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels")
+        root.addObject('DefaultAnimationLoop')
 
-	tetras = StableNeoHookean.addChild('tetras')
-	tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
-	tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
-	tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../hexaGrid", output="@Container", printLog="0")
-	tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="1644295.30201342 33557.0469798658", materialName="StableNeoHookean")
-	StableNeoHookean.addObject('BoxROI', drawBoxes="1", box="0 0 0 1 1 0.05", name="box")
-	StableNeoHookean.addObject('FixedProjectiveConstraint', indices="@box.indices")
-```
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="0.005" showBoundingTree="0" gravity="0 -9 0">
-	<RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-	<RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-	<RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-	<RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-	<RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-	<RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-	<RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-	<RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-	<RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
-	<RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.HyperElastic"/> <!-- Needed to use components [TetrahedronHyperelasticityFEMForceField] -->
-	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2TetraTopologicalMapping] -->
-	<RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [Visual3DText VisualStyle] -->
+        StableNeoHookean = root.addChild('StableNeoHookean')
+        StableNeoHookean.addObject('EulerImplicitSolver', name="odesolver")
+        StableNeoHookean.addObject('ConstantSparsityPatternSystem', template="CompressedRowSparseMatrixd", name="A")
+        StableNeoHookean.addObject('SparseLDLSolver', template="CompressedRowSparseMatrixd")
+        StableNeoHookean.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="6 6 16", p0="0 0 0")
+        StableNeoHookean.addObject('RegularGridTopology', name="hexaGridRest", min="0 0 0", max="1 1 -2.7", n="6 6 16", p0="0 0 0")
+        StableNeoHookean.addObject('MechanicalObject', name="mechObj", rest_position="@hexaGrid.position", position="@hexaGridRest.position")
+        StableNeoHookean.addObject('MeshMatrixMass', totalMass="1.0")
 
-	<VisualStyle displayFlags="showForceFields showBehaviorModels" />
-	<CollisionPipeline verbose="0" />
-	<BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-	<CollisionResponse response="PenalityContactForceField" />
-	<MinProximityIntersection name="Proximity" alarmDistance="0.8" contactDistance="0.5" />
-	<DefaultAnimationLoop/>
-	
-	<Node name="Corrotational">
-		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
-		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-		
-		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="0 0 0"/>
-		
-		<MechanicalObject name="mechObj"/>
-		<UniformMass/>
-		<TetrahedronFEMForceField name="FEM" youngModulus="10000" poissonRatio="0.45" method="large" />
-		
-		<BoxROI drawBoxes="0" box="0 0 0 1 1 0.05" name="box"/>
-		<FixedProjectiveConstraint indices="@box.indices"/>
-		<Visual3DText text="Corrotational" position="1 0 -0.5" scale="0.2" />
-	</Node>
-	
-	<Node name="ArrudaBoyce">		
-		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
-		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-			
-		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="2 0 0"/>
-		
-		<MechanicalObject name="mechObj"/>
-		<UniformMass/>
-		
-		<Node name="tetras">
-			<TetrahedronSetTopologyContainer name="Container"/>
-			<TetrahedronSetTopologyModifier name="Modifier" />
-			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
-			
-			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483"/>
-		</Node>
-		
-		<BoxROI drawBoxes="1" box="2 0 0 3 1 0.05" name="box"/>
-		<FixedProjectiveConstraint indices="@box.indices"/>
-		<Visual3DText text="ArrudaBoyce" position="3 0 -0.5" scale="0.2" />
-	</Node>
-	
-	<Node name="StVenantKirchhoff">		
-		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
-		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-			
-		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="4 0 0"/>
-		
-		<MechanicalObject name="mechObj"/>
-		<UniformMass/>
-		
-		<Node name="tetras">
-			<TetrahedronSetTopologyContainer name="Container"/>
-			<TetrahedronSetTopologyModifier name="Modifier" />
-			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
-			
-			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483" materialName="StVenantKirchhoff"/>
-		</Node>
-		
-		<BoxROI drawBoxes="1" box="4 0 0 5 1 0.05" name="box"/>
-		<FixedProjectiveConstraint indices="@box.indices"/>
-		<Visual3DText text="StVenantKirchhoff" position="5 0 -0.5" scale="0.2" />
-	</Node>
-	
-	
-	<Node name="NeoHookean">		
-		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
-		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-			
-		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="6 0 0"/>
-		
-		<MechanicalObject name="mechObj"/>
-		<UniformMass/>
-		
-		<Node name="tetras">
-			<TetrahedronSetTopologyContainer name="Container"/>
-			<TetrahedronSetTopologyModifier name="Modifier" />
-			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
-			
-			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483" materialName="NeoHookean"/>
-		</Node>
-		
-		<BoxROI drawBoxes="1" box="6 0 0 7 1 0.05" name="box"/>
-		<FixedProjectiveConstraint indices="@box.indices"/>
-		<Visual3DText text="NeoHookean" position="7 0 -0.5" scale="0.2" />
-	</Node>
-	
-	
-	<Node name="MooneyRivlin">		
-		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
-		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-			
-		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="8 0 0"/>
-		
-		<MechanicalObject name="mechObj"/>
-		<UniformMass/>
-		
-		<Node name="tetras">
-			<TetrahedronSetTopologyContainer name="Container"/>
-			<TetrahedronSetTopologyModifier name="Modifier" />
-			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
-			
-			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="5000 7000 10" materialName="MooneyRivlin"/>
-		</Node>
-		
-		<BoxROI drawBoxes="1" box="8 0 0 9 1 0.05" name="box"/>
-		<FixedProjectiveConstraint indices="@box.indices"/>
-		<Visual3DText text="MooneyRivlin" position="9 0 -0.5" scale="0.2" />
-	</Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+        tetras = StableNeoHookean.addChild('tetras')
+        tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
+        tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
+        tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../hexaGrid", output="@Container", printLog="0")
+        tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="1644295.30201342 33557.0469798658", materialName="StableNeoHookean")
+        StableNeoHookean.addObject('BoxROI', drawBoxes="1", box="0 0 0 1 1 0.05", name="box")
+        StableNeoHookean.addObject('FixedProjectiveConstraint', indices="@box.indices")
+    ```
 
-	root = rootNode.addChild('root', dt="0.005", showBoundingTree="0", gravity="0 -9 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.HyperElastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels")
-	root.addObject('CollisionPipeline', verbose="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('CollisionResponse', response="PenalityContactForceField")
-	root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.8", contactDistance="0.5")
-	root.addObject('DefaultAnimationLoop')
+Component/SolidMechanics/FEM/TetrahedronHyperelasticityFEMForceField.scn
 
-	Corrotational = root.addChild('Corrotational')
-	Corrotational.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
-	Corrotational.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	Corrotational.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="0 0 0")
-	Corrotational.addObject('MechanicalObject', name="mechObj")
-	Corrotational.addObject('UniformMass')
-	Corrotational.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="10000", poissonRatio="0.45", method="large")
-	Corrotational.addObject('BoxROI', drawBoxes="0", box="0 0 0 1 1 0.05", name="box")
-	Corrotational.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	Corrotational.addObject('Visual3DText', text="Corrotational", position="1 0 -0.5", scale="0.2")
+=== "XML"
 
-	ArrudaBoyce = root.addChild('ArrudaBoyce')
-	ArrudaBoyce.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
-	ArrudaBoyce.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	ArrudaBoyce.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="2 0 0")
-	ArrudaBoyce.addObject('MechanicalObject', name="mechObj")
-	ArrudaBoyce.addObject('UniformMass')
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="0.005" showBoundingTree="0" gravity="0 -9 0">
+    	<RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+    	<RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+    	<RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+    	<RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+    	<RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+    	<RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+    	<RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [MeshMatrixMass] -->
+    	<RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+    	<RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
+    	<RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.HyperElastic"/> <!-- Needed to use components [TetrahedronHyperelasticityFEMForceField] -->
+    	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2TetraTopologicalMapping] -->
+    	<RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [Visual3DText VisualStyle] -->
+    
+    	<VisualStyle displayFlags="showForceFields showBehaviorModels" />
+    	<CollisionPipeline verbose="0" />
+    	<BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+    	<CollisionResponse response="PenalityContactForceField" />
+    	<MinProximityIntersection name="Proximity" alarmDistance="0.8" contactDistance="0.5" />
+    	<DefaultAnimationLoop/>
+    	
+    	<Node name="Corrotational">
+    		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
+    		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+    		
+    		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="0 0 0"/>
+    		
+    		<MechanicalObject name="mechObj"/>
+    		<MeshMatrixMass totalMass="1.0"/>
+    		<TetrahedronFEMForceField name="FEM" youngModulus="10000" poissonRatio="0.45" method="large" />
+    		
+    		<BoxROI drawBoxes="0" box="0 0 0 1 1 0.05" name="box"/>
+    		<FixedProjectiveConstraint indices="@box.indices"/>
+    		<Visual3DText text="Corrotational" position="1 0 -0.5" scale="0.2" />
+    	</Node>
+    	
+    	<Node name="ArrudaBoyce">		
+    		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
+    		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+    			
+    		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="2 0 0"/>
+    		
+    		<MechanicalObject name="mechObj"/>
+    		<MeshMatrixMass totalMass="1.0"/>
+    		
+    		<Node name="tetras">
+    			<TetrahedronSetTopologyContainer name="Container"/>
+    			<TetrahedronSetTopologyModifier name="Modifier" />
+    			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+    			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
+    			
+    			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483"/>
+    		</Node>
+    		
+    		<BoxROI drawBoxes="1" box="2 0 0 3 1 0.05" name="box"/>
+    		<FixedProjectiveConstraint indices="@box.indices"/>
+    		<Visual3DText text="ArrudaBoyce" position="3 0 -0.5" scale="0.2" />
+    	</Node>
+    	
+    	<Node name="StVenantKirchhoff">		
+    		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
+    		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+    			
+    		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="4 0 0"/>
+    		
+    		<MechanicalObject name="mechObj"/>
+    		<MeshMatrixMass totalMass="1.0"/>
+    		
+    		<Node name="tetras">
+    			<TetrahedronSetTopologyContainer name="Container"/>
+    			<TetrahedronSetTopologyModifier name="Modifier" />
+    			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+    			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
+    			
+    			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483" materialName="StVenantKirchhoff"/>
+    		</Node>
+    		
+    		<BoxROI drawBoxes="1" box="4 0 0 5 1 0.05" name="box"/>
+    		<FixedProjectiveConstraint indices="@box.indices"/>
+    		<Visual3DText text="StVenantKirchhoff" position="5 0 -0.5" scale="0.2" />
+    	</Node>
+    	
+    	
+    	<Node name="NeoHookean">		
+    		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
+    		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+    			
+    		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="6 0 0"/>
+    		
+    		<MechanicalObject name="mechObj"/>
+    		<MeshMatrixMass totalMass="1.0"/>
+    		
+    		<Node name="tetras">
+    			<TetrahedronSetTopologyContainer name="Container"/>
+    			<TetrahedronSetTopologyModifier name="Modifier" />
+    			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+    			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
+    			
+    			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="3448.2759 31034.483" materialName="NeoHookean"/>
+    		</Node>
+    		
+    		<BoxROI drawBoxes="1" box="6 0 0 7 1 0.05" name="box"/>
+    		<FixedProjectiveConstraint indices="@box.indices"/>
+    		<Visual3DText text="NeoHookean" position="7 0 -0.5" scale="0.2" />
+    	</Node>
+    	
+    	
+    	<Node name="MooneyRivlin">		
+    		<EulerImplicitSolver name="cg_odesolver" printLog="false" />
+    		<CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+    			
+    		<RegularGridTopology name="hexaGrid" min="0 0 0" max="1 1 2.7" n="3 3 8" p0="8 0 0"/>
+    		
+    		<MechanicalObject name="mechObj"/>
+    		<MeshMatrixMass totalMass="1.0"/>
+    		
+    		<Node name="tetras">
+    			<TetrahedronSetTopologyContainer name="Container"/>
+    			<TetrahedronSetTopologyModifier name="Modifier" />
+    			<TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+    			<Hexa2TetraTopologicalMapping name="default28" input="@../" output="@Container" printLog="0" />
+    			
+    			<TetrahedronHyperelasticityFEMForceField name="FEM" ParameterSet="5000 7000 10" materialName="MooneyRivlin"/>
+    		</Node>
+    		
+    		<BoxROI drawBoxes="1" box="8 0 0 9 1 0.05" name="box"/>
+    		<FixedProjectiveConstraint indices="@box.indices"/>
+    		<Visual3DText text="MooneyRivlin" position="9 0 -0.5" scale="0.2" />
+    	</Node>
+    </Node>
+    ```
 
-	tetras = ArrudaBoyce.addChild('tetras')
-	tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
-	tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
-	tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
-	tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483")
-	ArrudaBoyce.addObject('BoxROI', drawBoxes="1", box="2 0 0 3 1 0.05", name="box")
-	ArrudaBoyce.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	ArrudaBoyce.addObject('Visual3DText', text="ArrudaBoyce", position="3 0 -0.5", scale="0.2")
+=== "Python"
 
-	StVenantKirchhoff = root.addChild('StVenantKirchhoff')
-	StVenantKirchhoff.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
-	StVenantKirchhoff.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	StVenantKirchhoff.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="4 0 0")
-	StVenantKirchhoff.addObject('MechanicalObject', name="mechObj")
-	StVenantKirchhoff.addObject('UniformMass')
+    ```python
+    def createScene(rootNode):
 
-	tetras = StVenantKirchhoff.addChild('tetras')
-	tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
-	tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
-	tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
-	tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483", materialName="StVenantKirchhoff")
-	StVenantKirchhoff.addObject('BoxROI', drawBoxes="1", box="4 0 0 5 1 0.05", name="box")
-	StVenantKirchhoff.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	StVenantKirchhoff.addObject('Visual3DText', text="StVenantKirchhoff", position="5 0 -0.5", scale="0.2")
+        root = rootNode.addChild('root', dt="0.005", showBoundingTree="0", gravity="0 -9 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.HyperElastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels")
+        root.addObject('CollisionPipeline', verbose="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('CollisionResponse', response="PenalityContactForceField")
+        root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.8", contactDistance="0.5")
+        root.addObject('DefaultAnimationLoop')
 
-	NeoHookean = root.addChild('NeoHookean')
-	NeoHookean.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
-	NeoHookean.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	NeoHookean.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="6 0 0")
-	NeoHookean.addObject('MechanicalObject', name="mechObj")
-	NeoHookean.addObject('UniformMass')
+        Corrotational = root.addChild('Corrotational')
+        Corrotational.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
+        Corrotational.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        Corrotational.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="0 0 0")
+        Corrotational.addObject('MechanicalObject', name="mechObj")
+        Corrotational.addObject('MeshMatrixMass', totalMass="1.0")
+        Corrotational.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="10000", poissonRatio="0.45", method="large")
+        Corrotational.addObject('BoxROI', drawBoxes="0", box="0 0 0 1 1 0.05", name="box")
+        Corrotational.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        Corrotational.addObject('Visual3DText', text="Corrotational", position="1 0 -0.5", scale="0.2")
 
-	tetras = NeoHookean.addChild('tetras')
-	tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
-	tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
-	tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
-	tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483", materialName="NeoHookean")
-	NeoHookean.addObject('BoxROI', drawBoxes="1", box="6 0 0 7 1 0.05", name="box")
-	NeoHookean.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	NeoHookean.addObject('Visual3DText', text="NeoHookean", position="7 0 -0.5", scale="0.2")
+        ArrudaBoyce = root.addChild('ArrudaBoyce')
+        ArrudaBoyce.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
+        ArrudaBoyce.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        ArrudaBoyce.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="2 0 0")
+        ArrudaBoyce.addObject('MechanicalObject', name="mechObj")
+        ArrudaBoyce.addObject('MeshMatrixMass', totalMass="1.0")
 
-	MooneyRivlin = root.addChild('MooneyRivlin')
-	MooneyRivlin.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
-	MooneyRivlin.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	MooneyRivlin.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="8 0 0")
-	MooneyRivlin.addObject('MechanicalObject', name="mechObj")
-	MooneyRivlin.addObject('UniformMass')
+        tetras = ArrudaBoyce.addChild('tetras')
+        tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
+        tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
+        tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
+        tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483")
+        ArrudaBoyce.addObject('BoxROI', drawBoxes="1", box="2 0 0 3 1 0.05", name="box")
+        ArrudaBoyce.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        ArrudaBoyce.addObject('Visual3DText', text="ArrudaBoyce", position="3 0 -0.5", scale="0.2")
 
-	tetras = MooneyRivlin.addChild('tetras')
-	tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
-	tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
-	tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
-	tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="5000 7000 10", materialName="MooneyRivlin")
-	MooneyRivlin.addObject('BoxROI', drawBoxes="1", box="8 0 0 9 1 0.05", name="box")
-	MooneyRivlin.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	MooneyRivlin.addObject('Visual3DText', text="MooneyRivlin", position="9 0 -0.5", scale="0.2")
-```
+        StVenantKirchhoff = root.addChild('StVenantKirchhoff')
+        StVenantKirchhoff.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
+        StVenantKirchhoff.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        StVenantKirchhoff.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="4 0 0")
+        StVenantKirchhoff.addObject('MechanicalObject', name="mechObj")
+        StVenantKirchhoff.addObject('MeshMatrixMass', totalMass="1.0")
+
+        tetras = StVenantKirchhoff.addChild('tetras')
+        tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
+        tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
+        tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
+        tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483", materialName="StVenantKirchhoff")
+        StVenantKirchhoff.addObject('BoxROI', drawBoxes="1", box="4 0 0 5 1 0.05", name="box")
+        StVenantKirchhoff.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        StVenantKirchhoff.addObject('Visual3DText', text="StVenantKirchhoff", position="5 0 -0.5", scale="0.2")
+
+        NeoHookean = root.addChild('NeoHookean')
+        NeoHookean.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
+        NeoHookean.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        NeoHookean.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="6 0 0")
+        NeoHookean.addObject('MechanicalObject', name="mechObj")
+        NeoHookean.addObject('MeshMatrixMass', totalMass="1.0")
+
+        tetras = NeoHookean.addChild('tetras')
+        tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
+        tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
+        tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
+        tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="3448.2759 31034.483", materialName="NeoHookean")
+        NeoHookean.addObject('BoxROI', drawBoxes="1", box="6 0 0 7 1 0.05", name="box")
+        NeoHookean.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        NeoHookean.addObject('Visual3DText', text="NeoHookean", position="7 0 -0.5", scale="0.2")
+
+        MooneyRivlin = root.addChild('MooneyRivlin')
+        MooneyRivlin.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false")
+        MooneyRivlin.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        MooneyRivlin.addObject('RegularGridTopology', name="hexaGrid", min="0 0 0", max="1 1 2.7", n="3 3 8", p0="8 0 0")
+        MooneyRivlin.addObject('MechanicalObject', name="mechObj")
+        MooneyRivlin.addObject('MeshMatrixMass', totalMass="1.0")
+
+        tetras = MooneyRivlin.addChild('tetras')
+        tetras.addObject('TetrahedronSetTopologyContainer', name="Container")
+        tetras.addObject('TetrahedronSetTopologyModifier', name="Modifier")
+        tetras.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        tetras.addObject('Hexa2TetraTopologicalMapping', name="default28", input="@../", output="@Container", printLog="0")
+        tetras.addObject('TetrahedronHyperelasticityFEMForceField', name="FEM", ParameterSet="5000 7000 10", materialName="MooneyRivlin")
+        MooneyRivlin.addObject('BoxROI', drawBoxes="1", box="8 0 0 9 1 0.05", name="box")
+        MooneyRivlin.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        MooneyRivlin.addObject('Visual3DText', text="MooneyRivlin", position="9 0 -0.5", scale="0.2")
+    ```
+

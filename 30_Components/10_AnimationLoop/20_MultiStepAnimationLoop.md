@@ -1,3 +1,7 @@
+---
+title: MultiStepAnimationLoop
+---
+
 MultiStepAnimationLoop
 ======================
 
@@ -47,6 +51,7 @@ __Target__: Sofa.Component.AnimationLoop
 __namespace__: sofa::component::animationloop
 
 __parents__: 
+
 - BaseAnimationLoop
 
 Data: 
@@ -140,218 +145,226 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="1.0">
-    <RequiredPlugin name="Sofa.Component.AnimationLoop"/> <!-- Needed to use components [MultiStepAnimationLoop] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [NewProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [TriangleCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.NonLinear"/> <!-- Needed to use components [RigidMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/AnimationLoop/MultiStepAnimationLoop.scn
 
-    <CollisionPipeline depth="6" verbose="0" draw="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <NewProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-    <MultiStepAnimationLoop collisionSteps="10" integrationSteps="2" />
-    <Node name="ChainRigid">
-        <Node name="TorusFixed">
-            <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel simulated="0" moving="0" />
-            <MeshOBJLoader name="meshLoader_4" filename="mesh/torus2.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_4" color="gray" />
-        </Node>
-        <Node name="TorusRigid-1">
-            <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-            <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
-            <MechanicalObject template="Rigid3" dx="2.5" />
-            <UniformMass />
-            <Node name="Visu">
-                <MeshOBJLoader name="meshLoader_3" filename="mesh/torus.obj" handleSeams="1" />
-                <OglModel name="Visual" src="@meshLoader_3" color="gray" />
-                <RigidMapping input="@.." output="@Visual" />
-            </Node>
-            <Node name="Surf2">
-                <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
-                <MeshTopology src="@loader" />
-                <MechanicalObject src="@loader" />
-                <TriangleCollisionModel />
-                <RigidMapping />
-            </Node>
-        </Node>
-        <Node name="TorusRigid-2">
-            <EulerImplicitSolver />
-            <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
-            <MechanicalObject template="Rigid3" dx="5" />
-            <UniformMass />
-            <Node name="Visu">
-                <MeshOBJLoader name="meshLoader_0" filename="mesh/torus2.obj" handleSeams="1" />
-                <OglModel name="Visual" src="@meshLoader_0" color="gray" />
-                <RigidMapping input="@.." output="@Visual" />
-            </Node>
-            <Node name="Surf2">
+=== "XML"
+
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="1.0">
+        <RequiredPlugin name="Sofa.Component.AnimationLoop"/> <!-- Needed to use components [MultiStepAnimationLoop] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [NewProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [TriangleCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.NonLinear"/> <!-- Needed to use components [RigidMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <CollisionPipeline depth="6" verbose="0" draw="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <NewProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+        <MultiStepAnimationLoop collisionSteps="10" integrationSteps="2" />
+        <Node name="ChainRigid">
+            <Node name="TorusFixed">
                 <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
                 <MeshTopology src="@loader" />
                 <MechanicalObject src="@loader" />
-                <TriangleCollisionModel />
-                <RigidMapping />
+                <TriangleCollisionModel simulated="0" moving="0" />
+                <MeshOBJLoader name="meshLoader_4" filename="mesh/torus2.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_4" color="gray" />
             </Node>
-        </Node>
-        <Node name="TorusRigid-3">
-            <EulerImplicitSolver />
-            <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
-            <MechanicalObject template="Rigid3" dx="7.5" />
-            <UniformMass />
-            <Node name="Visu">
-                <MeshOBJLoader name="meshLoader_1" filename="mesh/torus.obj" handleSeams="1" />
-                <OglModel name="Visual" src="@meshLoader_1" color="gray" />
-                <RigidMapping input="@.." output="@Visual" />
+            <Node name="TorusRigid-1">
+                <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+                <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
+                <MechanicalObject template="Rigid3" dx="2.5" />
+                <UniformMass />
+                <Node name="Visu">
+                    <MeshOBJLoader name="meshLoader_3" filename="mesh/torus.obj" handleSeams="1" />
+                    <OglModel name="Visual" src="@meshLoader_3" color="gray" />
+                    <RigidMapping input="@.." output="@Visual" />
+                </Node>
+                <Node name="Surf2">
+                    <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
+                    <MeshTopology src="@loader" />
+                    <MechanicalObject src="@loader" />
+                    <TriangleCollisionModel />
+                    <RigidMapping />
+                </Node>
             </Node>
-            <Node name="Surf2">
-                <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
-                <MeshTopology src="@loader" />
-                <MechanicalObject src="@loader" />
-                <TriangleCollisionModel />
-                <RigidMapping />
+            <Node name="TorusRigid-2">
+                <EulerImplicitSolver />
+                <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
+                <MechanicalObject template="Rigid3" dx="5" />
+                <UniformMass />
+                <Node name="Visu">
+                    <MeshOBJLoader name="meshLoader_0" filename="mesh/torus2.obj" handleSeams="1" />
+                    <OglModel name="Visual" src="@meshLoader_0" color="gray" />
+                    <RigidMapping input="@.." output="@Visual" />
+                </Node>
+                <Node name="Surf2">
+                    <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
+                    <MeshTopology src="@loader" />
+                    <MechanicalObject src="@loader" />
+                    <TriangleCollisionModel />
+                    <RigidMapping />
+                </Node>
             </Node>
-        </Node>
-        <Node name="TorusRigid-4">
-            <EulerImplicitSolver />
-            <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
-            <MechanicalObject template="Rigid3" dx="10" />
-            <UniformMass />
-            <Node name="Visu">
-                <MeshOBJLoader name="meshLoader_2" filename="mesh/torus2.obj" handleSeams="1" />
-                <OglModel name="Visual" src="@meshLoader_2" color="gray" />
-                <RigidMapping input="@.." output="@Visual" />
+            <Node name="TorusRigid-3">
+                <EulerImplicitSolver />
+                <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
+                <MechanicalObject template="Rigid3" dx="7.5" />
+                <UniformMass />
+                <Node name="Visu">
+                    <MeshOBJLoader name="meshLoader_1" filename="mesh/torus.obj" handleSeams="1" />
+                    <OglModel name="Visual" src="@meshLoader_1" color="gray" />
+                    <RigidMapping input="@.." output="@Visual" />
+                </Node>
+                <Node name="Surf2">
+                    <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
+                    <MeshTopology src="@loader" />
+                    <MechanicalObject src="@loader" />
+                    <TriangleCollisionModel />
+                    <RigidMapping />
+                </Node>
             </Node>
-            <Node name="Surf2">
-                <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
-                <MeshTopology src="@loader" />
-                <MechanicalObject src="@loader" />
-                <TriangleCollisionModel />
-                <RigidMapping />
+            <Node name="TorusRigid-4">
+                <EulerImplicitSolver />
+                <CGLinearSolver iterations="25" threshold="0.000000000001" tolerance="0.000001" />
+                <MechanicalObject template="Rigid3" dx="10" />
+                <UniformMass />
+                <Node name="Visu">
+                    <MeshOBJLoader name="meshLoader_2" filename="mesh/torus2.obj" handleSeams="1" />
+                    <OglModel name="Visual" src="@meshLoader_2" color="gray" />
+                    <RigidMapping input="@.." output="@Visual" />
+                </Node>
+                <Node name="Surf2">
+                    <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
+                    <MeshTopology src="@loader" />
+                    <MechanicalObject src="@loader" />
+                    <TriangleCollisionModel />
+                    <RigidMapping />
+                </Node>
             </Node>
         </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="1.0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.AnimationLoop")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.NonLinear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('NewProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
-	root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
-	root.addObject('MultiStepAnimationLoop', collisionSteps="10", integrationSteps="2")
+=== "Python"
 
-	ChainRigid = root.addChild('ChainRigid')
+    ```python
+    def createScene(rootNode):
 
-	TorusFixed = ChainRigid.addChild('TorusFixed')
-	TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
-	TorusFixed.addObject('MeshTopology', src="@loader")
-	TorusFixed.addObject('MechanicalObject', src="@loader")
-	TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
-	TorusFixed.addObject('MeshOBJLoader', name="meshLoader_4", filename="mesh/torus2.obj", handleSeams="1")
-	TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_4", color="gray")
+        root = rootNode.addChild('root', dt="1.0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.AnimationLoop")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.NonLinear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('NewProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
+        root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+        root.addObject('MultiStepAnimationLoop', collisionSteps="10", integrationSteps="2")
 
-	TorusRigid-1 = ChainRigid.addChild('TorusRigid-1')
-	TorusRigid-1.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	TorusRigid-1.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
-	TorusRigid-1.addObject('MechanicalObject', template="Rigid3", dx="2.5")
-	TorusRigid-1.addObject('UniformMass')
+        ChainRigid = root.addChild('ChainRigid')
 
-	Visu = TorusRigid-1.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_3", filename="mesh/torus.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_3", color="gray")
-	Visu.addObject('RigidMapping', input="@..", output="@Visual")
+        TorusFixed = ChainRigid.addChild('TorusFixed')
+        TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
+        TorusFixed.addObject('MeshTopology', src="@loader")
+        TorusFixed.addObject('MechanicalObject', src="@loader")
+        TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
+        TorusFixed.addObject('MeshOBJLoader', name="meshLoader_4", filename="mesh/torus2.obj", handleSeams="1")
+        TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_4", color="gray")
 
-	Surf2 = TorusRigid-1.addChild('Surf2')
-	Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
-	Surf2.addObject('MeshTopology', src="@loader")
-	Surf2.addObject('MechanicalObject', src="@loader")
-	Surf2.addObject('TriangleCollisionModel')
-	Surf2.addObject('RigidMapping')
+        TorusRigid-1 = ChainRigid.addChild('TorusRigid-1')
+        TorusRigid-1.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        TorusRigid-1.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
+        TorusRigid-1.addObject('MechanicalObject', template="Rigid3", dx="2.5")
+        TorusRigid-1.addObject('UniformMass')
 
-	TorusRigid-2 = ChainRigid.addChild('TorusRigid-2')
-	TorusRigid-2.addObject('EulerImplicitSolver')
-	TorusRigid-2.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
-	TorusRigid-2.addObject('MechanicalObject', template="Rigid3", dx="5")
-	TorusRigid-2.addObject('UniformMass')
+        Visu = TorusRigid-1.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_3", filename="mesh/torus.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_3", color="gray")
+        Visu.addObject('RigidMapping', input="@..", output="@Visual")
 
-	Visu = TorusRigid-2.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus2.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
-	Visu.addObject('RigidMapping', input="@..", output="@Visual")
+        Surf2 = TorusRigid-1.addChild('Surf2')
+        Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
+        Surf2.addObject('MeshTopology', src="@loader")
+        Surf2.addObject('MechanicalObject', src="@loader")
+        Surf2.addObject('TriangleCollisionModel')
+        Surf2.addObject('RigidMapping')
 
-	Surf2 = TorusRigid-2.addChild('Surf2')
-	Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
-	Surf2.addObject('MeshTopology', src="@loader")
-	Surf2.addObject('MechanicalObject', src="@loader")
-	Surf2.addObject('TriangleCollisionModel')
-	Surf2.addObject('RigidMapping')
+        TorusRigid-2 = ChainRigid.addChild('TorusRigid-2')
+        TorusRigid-2.addObject('EulerImplicitSolver')
+        TorusRigid-2.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
+        TorusRigid-2.addObject('MechanicalObject', template="Rigid3", dx="5")
+        TorusRigid-2.addObject('UniformMass')
 
-	TorusRigid-3 = ChainRigid.addChild('TorusRigid-3')
-	TorusRigid-3.addObject('EulerImplicitSolver')
-	TorusRigid-3.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
-	TorusRigid-3.addObject('MechanicalObject', template="Rigid3", dx="7.5")
-	TorusRigid-3.addObject('UniformMass')
+        Visu = TorusRigid-2.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus2.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
+        Visu.addObject('RigidMapping', input="@..", output="@Visual")
 
-	Visu = TorusRigid-3.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
-	Visu.addObject('RigidMapping', input="@..", output="@Visual")
+        Surf2 = TorusRigid-2.addChild('Surf2')
+        Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
+        Surf2.addObject('MeshTopology', src="@loader")
+        Surf2.addObject('MechanicalObject', src="@loader")
+        Surf2.addObject('TriangleCollisionModel')
+        Surf2.addObject('RigidMapping')
 
-	Surf2 = TorusRigid-3.addChild('Surf2')
-	Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
-	Surf2.addObject('MeshTopology', src="@loader")
-	Surf2.addObject('MechanicalObject', src="@loader")
-	Surf2.addObject('TriangleCollisionModel')
-	Surf2.addObject('RigidMapping')
+        TorusRigid-3 = ChainRigid.addChild('TorusRigid-3')
+        TorusRigid-3.addObject('EulerImplicitSolver')
+        TorusRigid-3.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
+        TorusRigid-3.addObject('MechanicalObject', template="Rigid3", dx="7.5")
+        TorusRigid-3.addObject('UniformMass')
 
-	TorusRigid-4 = ChainRigid.addChild('TorusRigid-4')
-	TorusRigid-4.addObject('EulerImplicitSolver')
-	TorusRigid-4.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
-	TorusRigid-4.addObject('MechanicalObject', template="Rigid3", dx="10")
-	TorusRigid-4.addObject('UniformMass')
+        Visu = TorusRigid-3.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
+        Visu.addObject('RigidMapping', input="@..", output="@Visual")
 
-	Visu = TorusRigid-4.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_2", filename="mesh/torus2.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_2", color="gray")
-	Visu.addObject('RigidMapping', input="@..", output="@Visual")
+        Surf2 = TorusRigid-3.addChild('Surf2')
+        Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
+        Surf2.addObject('MeshTopology', src="@loader")
+        Surf2.addObject('MechanicalObject', src="@loader")
+        Surf2.addObject('TriangleCollisionModel')
+        Surf2.addObject('RigidMapping')
 
-	Surf2 = TorusRigid-4.addChild('Surf2')
-	Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
-	Surf2.addObject('MeshTopology', src="@loader")
-	Surf2.addObject('MechanicalObject', src="@loader")
-	Surf2.addObject('TriangleCollisionModel')
-	Surf2.addObject('RigidMapping')
-```
+        TorusRigid-4 = ChainRigid.addChild('TorusRigid-4')
+        TorusRigid-4.addObject('EulerImplicitSolver')
+        TorusRigid-4.addObject('CGLinearSolver', iterations="25", threshold="0.000000000001", tolerance="0.000001")
+        TorusRigid-4.addObject('MechanicalObject', template="Rigid3", dx="10")
+        TorusRigid-4.addObject('UniformMass')
+
+        Visu = TorusRigid-4.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_2", filename="mesh/torus2.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_2", color="gray")
+        Visu.addObject('RigidMapping', input="@..", output="@Visual")
+
+        Surf2 = TorusRigid-4.addChild('Surf2')
+        Surf2.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
+        Surf2.addObject('MeshTopology', src="@loader")
+        Surf2.addObject('MechanicalObject', src="@loader")
+        Surf2.addObject('TriangleCollisionModel')
+        Surf2.addObject('RigidMapping')
+    ```
+
 
 <!-- automatically generated doc END -->

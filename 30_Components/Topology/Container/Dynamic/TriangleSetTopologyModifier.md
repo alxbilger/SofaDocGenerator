@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Topology.Container.Dynamic
 __namespace__: sofa::component::topology::container::dynamic
 
 __parents__: 
+
 - EdgeSetTopologyModifier
 
 Data: 

@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - TopologicalMapping
 
 Data: 
@@ -147,95 +148,103 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="0.05" showBoundingTree="0" gravity="0 0 0">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [DiscreteIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [Mesh2PointTopologicalMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [PointSetTopologyContainer TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <VisualStyle displayFlags="showBehaviorModels showForceFields showCollisionModels showVisual" />
-    <CollisionPipeline verbose="0" name="CollisionPipeline" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <CollisionResponse response="PenalityContactForceField" name="collision response" />
-    <DiscreteIntersection/>
-    <DefaultAnimationLoop/>
-    
-    <Node name="MeshTopology">
-        <EulerImplicitSolver name="cg_odesolver" printLog="false"  rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-        <MeshGmshLoader name="meshLoader0" filename="mesh/liver.msh" />
-        <TetrahedronSetTopologyContainer name="Container1" src="@meshLoader0" />
-        <TetrahedronSetTopologyModifier />
-        <TetrahedronSetGeometryAlgorithms name="GeomAlgo" />
-        <MechanicalObject name="dofs" />
-        <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="3 39 64" />
-        <DiagonalMass massDensity="1" name="computed using mass density" />
-        <TetrahedralCorotationalFEMForceField name="FEM" youngModulus="3000" poissonRatio="0.3" computeGlobalMatrix="false" method="large" />
-        <Node name="PointSetTopology">
-            <PointSetTopologyContainer name="Container2" />
-            <!--<PointSetTopologyModifier/>-->
-            <!--<Mesh2PointTopologicalMapping input="@Container1" output="@Container2" pointBaryCoords="0 0 0" tetraBaryCoords="0.25 0.25 0.25" />-->
-            <Mesh2PointTopologicalMapping input="@Container1" output="@Container2" pointBaryCoords="0 0 0" edgeBaryCoords="0.5 0.5 0.0" />
-            <MechanicalObject />
-            <!--<Mesh2PointMechanicalMapping/>-->
-            <SphereCollisionModel radius="0.25" />
+Component/Topology/Mapping/Mesh2PointTopologicalMapping.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="0.05" showBoundingTree="0" gravity="0 0 0">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [DiscreteIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [Mesh2PointTopologicalMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [PointSetTopologyContainer TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer TetrahedronSetTopologyModifier] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <VisualStyle displayFlags="showBehaviorModels showForceFields showCollisionModels showVisual" />
+        <CollisionPipeline verbose="0" name="CollisionPipeline" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <CollisionResponse response="PenalityContactForceField" name="collision response" />
+        <DiscreteIntersection/>
+        <DefaultAnimationLoop/>
+        
+        <Node name="MeshTopology">
+            <EulerImplicitSolver name="cg_odesolver" printLog="false"  rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+            <MeshGmshLoader name="meshLoader0" filename="mesh/liver.msh" />
+            <TetrahedronSetTopologyContainer name="Container1" src="@meshLoader0" />
+            <TetrahedronSetTopologyModifier />
+            <TetrahedronSetGeometryAlgorithms name="GeomAlgo" />
+            <MechanicalObject name="dofs" />
+            <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="3 39 64" />
+            <DiagonalMass massDensity="1" name="computed using mass density" />
+            <TetrahedralCorotationalFEMForceField name="FEM" youngModulus="3000" poissonRatio="0.3" computeGlobalMatrix="false" method="large" />
+            <Node name="PointSetTopology">
+                <PointSetTopologyContainer name="Container2" />
+                <!--<PointSetTopologyModifier/>-->
+                <!--<Mesh2PointTopologicalMapping input="@Container1" output="@Container2" pointBaryCoords="0 0 0" tetraBaryCoords="0.25 0.25 0.25" />-->
+                <Mesh2PointTopologicalMapping input="@Container1" output="@Container2" pointBaryCoords="0 0 0" edgeBaryCoords="0.5 0.5 0.0" />
+                <MechanicalObject />
+                <!--<Mesh2PointMechanicalMapping/>-->
+                <SphereCollisionModel radius="0.25" />
+            </Node>
         </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.05", showBoundingTree="0", gravity="0 0 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields showCollisionModels showVisual")
-	root.addObject('CollisionPipeline', verbose="0", name="CollisionPipeline")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('CollisionResponse', response="PenalityContactForceField", name="collision response")
-	root.addObject('DiscreteIntersection')
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	MeshTopology = root.addChild('MeshTopology')
-	MeshTopology.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false", rayleighStiffness="0.1", rayleighMass="0.1")
-	MeshTopology.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	MeshTopology.addObject('MeshGmshLoader', name="meshLoader0", filename="mesh/liver.msh")
-	MeshTopology.addObject('TetrahedronSetTopologyContainer', name="Container1", src="@meshLoader0")
-	MeshTopology.addObject('TetrahedronSetTopologyModifier')
-	MeshTopology.addObject('TetrahedronSetGeometryAlgorithms', name="GeomAlgo")
-	MeshTopology.addObject('MechanicalObject', name="dofs")
-	MeshTopology.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
-	MeshTopology.addObject('DiagonalMass', massDensity="1", name="computed using mass density")
-	MeshTopology.addObject('TetrahedralCorotationalFEMForceField', name="FEM", youngModulus="3000", poissonRatio="0.3", computeGlobalMatrix="false", method="large")
+    ```python
+    def createScene(rootNode):
 
-	PointSetTopology = MeshTopology.addChild('PointSetTopology')
-	PointSetTopology.addObject('PointSetTopologyContainer', name="Container2")
-	PointSetTopology.addObject('Mesh2PointTopologicalMapping', input="@Container1", output="@Container2", pointBaryCoords="0 0 0", edgeBaryCoords="0.5 0.5 0.0")
-	PointSetTopology.addObject('MechanicalObject')
-	PointSetTopology.addObject('SphereCollisionModel', radius="0.25")
-```
+        root = rootNode.addChild('root', dt="0.05", showBoundingTree="0", gravity="0 0 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields showCollisionModels showVisual")
+        root.addObject('CollisionPipeline', verbose="0", name="CollisionPipeline")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('CollisionResponse', response="PenalityContactForceField", name="collision response")
+        root.addObject('DiscreteIntersection')
+        root.addObject('DefaultAnimationLoop')
+
+        MeshTopology = root.addChild('MeshTopology')
+        MeshTopology.addObject('EulerImplicitSolver', name="cg_odesolver", printLog="false", rayleighStiffness="0.1", rayleighMass="0.1")
+        MeshTopology.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        MeshTopology.addObject('MeshGmshLoader', name="meshLoader0", filename="mesh/liver.msh")
+        MeshTopology.addObject('TetrahedronSetTopologyContainer', name="Container1", src="@meshLoader0")
+        MeshTopology.addObject('TetrahedronSetTopologyModifier')
+        MeshTopology.addObject('TetrahedronSetGeometryAlgorithms', name="GeomAlgo")
+        MeshTopology.addObject('MechanicalObject', name="dofs")
+        MeshTopology.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
+        MeshTopology.addObject('DiagonalMass', massDensity="1", name="computed using mass density")
+        MeshTopology.addObject('TetrahedralCorotationalFEMForceField', name="FEM", youngModulus="3000", poissonRatio="0.3", computeGlobalMatrix="false", method="large")
+
+        PointSetTopology = MeshTopology.addChild('PointSetTopology')
+        PointSetTopology.addObject('PointSetTopologyContainer', name="Container2")
+        PointSetTopology.addObject('Mesh2PointTopologicalMapping', input="@Container1", output="@Container2", pointBaryCoords="0 0 0", edgeBaryCoords="0.5 0.5 0.0")
+        PointSetTopology.addObject('MechanicalObject')
+        PointSetTopology.addObject('SphereCollisionModel', radius="0.25")
+    ```
+

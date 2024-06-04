@@ -1,3 +1,7 @@
+---
+title: CollisionPipeline
+---
+
 Collision Pipelines
 ===================
 
@@ -80,6 +84,7 @@ __Target__: Sofa.Component.Collision.Detection.Algorithm
 __namespace__: sofa::component::collision::detection::algorithm
 
 __parents__: 
+
 - Pipeline
 
 Data: 

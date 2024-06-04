@@ -4,6 +4,7 @@ Linear system solver wrapping another (precomputed) linear solver by a per-node 
 
 
 __Templates__:
+
 - RotationMatrixd
 
 __Target__: Sofa.Component.LinearSolver.Preconditioner
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.LinearSolver.Preconditioner
 __namespace__: sofa::component::linearsolver::preconditioner
 
 __parents__: 
+
 - MatrixLinearSolver
 
 Data: 

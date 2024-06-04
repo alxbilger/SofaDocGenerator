@@ -7,6 +7,7 @@ __Target__: Sofa.Component.Constraint.Lagrangian.Correction
 __namespace__: sofa::component::constraint::lagrangian::correction
 
 __parents__: 
+
 - BaseConstraintCorrection
 
 Data: 

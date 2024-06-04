@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Collision.Geometry
 __namespace__: sofa::component::collision::geometry
 
 __parents__: 
+
 - CollisionModel
 
 Data: 

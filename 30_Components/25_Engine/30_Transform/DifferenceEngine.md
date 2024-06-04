@@ -4,6 +4,7 @@ Computing the difference between two vector of dofs
 
 
 __Templates__:
+
 - Vec1d
 - Vec3d
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Engine.Transform
 __namespace__: sofa::component::engine::transform
 
 __parents__: 
+
 - DataEngine
 
 Data: 

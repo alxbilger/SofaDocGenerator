@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Visual
 __namespace__: sofa::component::visual
 
 __parents__: 
+
 - BaseCamera
 
 Data: 
@@ -327,59 +328,67 @@ Links:
 
 ## Examples
 
-```xml
-<!-- For more details see: https://wiki.sofa-framework.org/tdev/wiki/Notes/NewLoaderArchitecture -->
-<Node name="Root" gravity="0 -9.81 0" dt="0.15">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [RecordedCamera VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Visual/RecordedCamera.scn
 
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showVisual" />
-    <CollisionPipeline name="DefaultCollisionPipeline" verbose="0" draw="0" depth="6" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <MinProximityIntersection name="Proximity" alarmDistance="0.8" contactDistance="0.64" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-    <!-- <InteractiveCamera name="cam" position="0 0 0" lookAt="0 -1 1"/> -->
-    <RecordedCamera name="cam" position="0 10 0" rotationLookAt="0 30 0" rotationStartPoint="0 100 100" rotationCenter="0 100 0" listening="true" endTime="1000" drawRotation="1" rotationMode="1" />
-    <Node name="Model 3D">
-        <MeshOBJLoader name="meshLoader_0"  scale="10" translation="10 15 0"filename="mesh/liver-smoothUV.obj" handleSeams="1" />
-        <OglModel name="VisualModel" texturename="textures/RustySteel.bmp" src="@meshLoader_0" />
+=== "XML"
+
+    ```xml
+    <!-- For more details see: https://wiki.sofa-framework.org/tdev/wiki/Notes/NewLoaderArchitecture -->
+    <Node name="Root" gravity="0 -9.81 0" dt="0.15">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [RecordedCamera VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showVisual" />
+        <CollisionPipeline name="DefaultCollisionPipeline" verbose="0" draw="0" depth="6" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <MinProximityIntersection name="Proximity" alarmDistance="0.8" contactDistance="0.64" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+        <!-- <InteractiveCamera name="cam" position="0 0 0" lookAt="0 -1 1"/> -->
+        <RecordedCamera name="cam" position="0 10 0" rotationLookAt="0 30 0" rotationStartPoint="0 100 100" rotationCenter="0 100 0" listening="true" endTime="1000" drawRotation="1" rotationMode="1" />
+        <Node name="Model 3D">
+            <MeshOBJLoader name="meshLoader_0"  scale="10" translation="10 15 0"filename="mesh/liver-smoothUV.obj" handleSeams="1" />
+            <OglModel name="VisualModel" texturename="textures/RustySteel.bmp" src="@meshLoader_0" />
+        </Node>
+        <Node name="floor">
+            <MeshOBJLoader name="meshLoader_1" filename="mesh/floor.obj" scale3d="1 1 1" translation="0 0 0" handleSeams="1" />
+            <OglModel name="VisualModel" src="@meshLoader_1" texturename="textures/ice_chess.bmp" />
+        </Node>
     </Node>
-    <Node name="floor">
-        <MeshOBJLoader name="meshLoader_1" filename="mesh/floor.obj" scale3d="1 1 1" translation="0 0 0" handleSeams="1" />
-        <OglModel name="VisualModel" src="@meshLoader_1" texturename="textures/ice_chess.bmp" />
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	Root = rootNode.addChild('Root', gravity="0 -9.81 0", dt="0.15")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	Root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	Root.addObject('DefaultAnimationLoop')
-	Root.addObject('VisualStyle', displayFlags="showVisual")
-	Root.addObject('CollisionPipeline', name="DefaultCollisionPipeline", verbose="0", draw="0", depth="6")
-	Root.addObject('BruteForceBroadPhase')
-	Root.addObject('BVHNarrowPhase')
-	Root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.8", contactDistance="0.64")
-	Root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
-	Root.addObject('RecordedCamera', name="cam", position="0 10 0", rotationLookAt="0 30 0", rotationStartPoint="0 100 100", rotationCenter="0 100 0", listening="true", endTime="1000", drawRotation="1", rotationMode="1")
+=== "Python"
 
-	Model 3D = Root.addChild('Model 3D')
-	Model 3D.addObject('MeshOBJLoader', name="meshLoader_0", scale="10", translation="10 15 0", filename="mesh/liver-smoothUV.obj", handleSeams="1")
-	Model 3D.addObject('OglModel', name="VisualModel", texturename="textures/RustySteel.bmp", src="@meshLoader_0")
+    ```python
+    def createScene(rootNode):
 
-	floor = Root.addChild('floor')
-	floor.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/floor.obj", scale3d="1 1 1", translation="0 0 0", handleSeams="1")
-	floor.addObject('OglModel', name="VisualModel", src="@meshLoader_1", texturename="textures/ice_chess.bmp")
-```
+        Root = rootNode.addChild('Root', gravity="0 -9.81 0", dt="0.15")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        Root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        Root.addObject('DefaultAnimationLoop')
+        Root.addObject('VisualStyle', displayFlags="showVisual")
+        Root.addObject('CollisionPipeline', name="DefaultCollisionPipeline", verbose="0", draw="0", depth="6")
+        Root.addObject('BruteForceBroadPhase')
+        Root.addObject('BVHNarrowPhase')
+        Root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.8", contactDistance="0.64")
+        Root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+        Root.addObject('RecordedCamera', name="cam", position="0 10 0", rotationLookAt="0 30 0", rotationStartPoint="0 100 100", rotationCenter="0 100 0", listening="true", endTime="1000", drawRotation="1", rotationMode="1")
+
+        Model 3D = Root.addChild('Model 3D')
+        Model 3D.addObject('MeshOBJLoader', name="meshLoader_0", scale="10", translation="10 15 0", filename="mesh/liver-smoothUV.obj", handleSeams="1")
+        Model 3D.addObject('OglModel', name="VisualModel", texturename="textures/RustySteel.bmp", src="@meshLoader_0")
+
+        floor = Root.addChild('floor')
+        floor.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/floor.obj", scale3d="1 1 1", translation="0 0 0", handleSeams="1")
+        floor.addObject('OglModel', name="VisualModel", src="@meshLoader_1", texturename="textures/ice_chess.bmp")
+    ```
+

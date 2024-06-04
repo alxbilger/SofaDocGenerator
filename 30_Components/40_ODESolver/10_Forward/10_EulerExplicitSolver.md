@@ -1,3 +1,7 @@
+---
+title: EulerExplicitSolver
+---
+
 EulerExplicitSolver  
 ===================
 
@@ -67,6 +71,7 @@ __Target__: Sofa.Component.ODESolver.Forward
 __namespace__: sofa::component::odesolver::forward
 
 __parents__: 
+
 - OdeSolver
 
 Data: 
@@ -153,210 +158,226 @@ Links:
 
 ## Examples
 
-```xml
-<!--
-This scene shows an example of a forward Euler integration scheme.
-This is the variant of the component EulerExplicitSolver where the Data
-'symplectic' is set to false (true by default).
-In this example, the mass is diagonal. Since it can be inverted
-trivially, it does not require a linear solver.
--->
+Component/ODESolver/Forward/EulerExplicitSolver_diagonal.scn
 
-<Node name="root" gravity="0 -9.81 0" dt="0.00001">
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [EulerExplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [MeshSpringForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2QuadTopologicalMapping] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+=== "XML"
 
-    <Node name="DeformableObject">
-
-        <!-- Matrix system is diagonal because integration is explicit and Mass is diagonal -->
-        <!-- No need for a LinearSolver -->
-        <EulerExplicitSolver name="odeExplicitSolver" symplectic="false"/>
-
-        <MechanicalObject name="dofs"/>
-
-        <RegularGridTopology name="topology" nx="4" ny="4" nz="11" xmin="-1.5" xmax="1.5" ymin="-1.5" ymax="1.5" zmin="0" zmax="10" />
-        <HexahedronSetGeometryAlgorithms/>
-        <UniformMass totalMass="15"/>
-
-        <BoxROI box="-1.5 -1.5 0 1.5 1.5 0.0001" name="box"/>
-        <FixedProjectiveConstraint indices="@box.indices" />
-        <MeshSpringForceField stiffness="3E2"/>
-
-        <Node name="visual">
-            <QuadSetTopologyContainer  name="Container" />
-            <QuadSetTopologyModifier/>
-            <Hexa2QuadTopologicalMapping input="@../topology" output="@Container" />
-            <OglModel name="Visual" color="yellow" quads="@Container.quads" />
-            <IdentityMapping input="@../dofs" output="@Visual" />
+    ```xml
+    <!--
+    This scene shows an example of a forward Euler integration scheme.
+    This is the variant of the component EulerExplicitSolver where the Data
+    'symplectic' is set to false (true by default).
+    In this example, the mass is diagonal. Since it can be inverted
+    trivially, it does not require a linear solver.
+    -->
+    
+    <Node name="root" gravity="0 -9.81 0" dt="0.00001">
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [EulerExplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [MeshSpringForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2QuadTopologicalMapping] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+    
+        <Node name="DeformableObject">
+    
+            <!-- Matrix system is diagonal because integration is explicit and Mass is diagonal -->
+            <!-- No need for a LinearSolver -->
+            <EulerExplicitSolver name="odeExplicitSolver" symplectic="false"/>
+    
+            <MechanicalObject name="dofs"/>
+    
+            <RegularGridTopology name="topology" nx="4" ny="4" nz="11" xmin="-1.5" xmax="1.5" ymin="-1.5" ymax="1.5" zmin="0" zmax="10" />
+            <HexahedronSetGeometryAlgorithms/>
+            <UniformMass totalMass="15"/>
+    
+            <BoxROI box="-1.5 -1.5 0 1.5 1.5 0.0001" name="box"/>
+            <FixedProjectiveConstraint indices="@box.indices" />
+            <MeshSpringForceField stiffness="3E2"/>
+    
+            <Node name="visual">
+                <QuadSetTopologyContainer  name="Container" />
+                <QuadSetTopologyModifier/>
+                <Hexa2QuadTopologicalMapping input="@../topology" output="@Container" />
+                <OglModel name="Visual" color="yellow" quads="@Container.quads" />
+                <IdentityMapping input="@../dofs" output="@Visual" />
+            </Node>
+    
         </Node>
-
-    </Node>
-
-    <Node name="floor-visual">
-        <MeshOBJLoader name="meshLoader" filename="mesh/floorFlat.obj" scale3d="0.5 0.5 0.5"/>
-        <OglModel src="@meshLoader" dy="-8" dz="10"/>
-        <OglModel src="@meshLoader" rx="90" dy="2"/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
-
-	root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.00001")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
-
-	DeformableObject = root.addChild('DeformableObject')
-	DeformableObject.addObject('EulerExplicitSolver', name="odeExplicitSolver", symplectic="false")
-	DeformableObject.addObject('MechanicalObject', name="dofs")
-	DeformableObject.addObject('RegularGridTopology', name="topology", nx="4", ny="4", nz="11", xmin="-1.5", xmax="1.5", ymin="-1.5", ymax="1.5", zmin="0", zmax="10")
-	DeformableObject.addObject('HexahedronSetGeometryAlgorithms')
-	DeformableObject.addObject('UniformMass', totalMass="15")
-	DeformableObject.addObject('BoxROI', box="-1.5 -1.5 0 1.5 1.5 0.0001", name="box")
-	DeformableObject.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	DeformableObject.addObject('MeshSpringForceField', stiffness="3E2")
-
-	visual = DeformableObject.addChild('visual')
-	visual.addObject('QuadSetTopologyContainer', name="Container")
-	visual.addObject('QuadSetTopologyModifier')
-	visual.addObject('Hexa2QuadTopologicalMapping', input="@../topology", output="@Container")
-	visual.addObject('OglModel', name="Visual", color="yellow", quads="@Container.quads")
-	visual.addObject('IdentityMapping', input="@../dofs", output="@Visual")
-
-	floor-visual = root.addChild('floor-visual')
-	floor-visual.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/floorFlat.obj", scale3d="0.5 0.5 0.5")
-	floor-visual.addObject('OglModel', src="@meshLoader", dy="-8", dz="10")
-	floor-visual.addObject('OglModel', src="@meshLoader", rx="90", dy="2")
-```
-```xml
-<!--
-This scene shows an example of a forward Euler integration scheme.
-This is the variant of the component EulerExplicitSolver where the Data
-'symplectic' is set to false (true by default).
-In this example, the mass is not diagonal. Since it cannot be inverted
-trivially, it requires a linear solver, here SparseLDLSolver.
--->
-
-<Node name="root" gravity="0 -9.81 0" dt="0.00001">
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [MeshMatrixMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [EulerExplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [MeshSpringForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2QuadTopologicalMapping] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <DefaultAnimationLoop/>
-
-    <VisualStyle displayFlags="showBehaviorModels showForceFields" />
-
-    <Node name="DeformableObject">
-
-        <EulerExplicitSolver name="odeExplicitSolver" symplectic="false"/>
-        <SparseLDLSolver />
-
-        <MechanicalObject name="dofs"/>
-
-        <RegularGridTopology name="topology" nx="4" ny="4" nz="11" xmin="-1.5" xmax="1.5" ymin="-1.5" ymax="1.5" zmin="0" zmax="10" />
-        <HexahedronSetGeometryAlgorithms/>
-        <MeshMatrixMass totalMass="15"/>
-
-        <BoxROI box="-1.5 -1.5 0 1.5 1.5 0.0001" name="box"/>
-        <FixedProjectiveConstraint indices="@box.indices" />
-        <MeshSpringForceField stiffness="3E2"/>
-
-        <Node name="visual">
-            <QuadSetTopologyContainer  name="Container" />
-            <QuadSetTopologyModifier/>
-            <Hexa2QuadTopologicalMapping input="@../topology" output="@Container" />
-            <OglModel name="Visual" color="yellow" quads="@Container.quads" />
-            <IdentityMapping input="@../dofs" output="@Visual" />
+    
+        <Node name="floor-visual">
+            <MeshOBJLoader name="meshLoader" filename="mesh/floorFlat.obj" scale3d="0.5 0.5 0.5"/>
+            <OglModel src="@meshLoader" dy="-8" dz="10"/>
+            <OglModel src="@meshLoader" rx="90" dy="2"/>
         </Node>
-
     </Node>
+    ```
 
-    <Node name="floor-visual">
-        <MeshOBJLoader name="meshLoader" filename="mesh/floorFlat.obj" scale3d="0.5 0.5 0.5"/>
-        <OglModel src="@meshLoader" dy="-8" dz="10"/>
-        <OglModel src="@meshLoader" rx="90" dy="2"/>
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.00001")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+
+        DeformableObject = root.addChild('DeformableObject')
+        DeformableObject.addObject('EulerExplicitSolver', name="odeExplicitSolver", symplectic="false")
+        DeformableObject.addObject('MechanicalObject', name="dofs")
+        DeformableObject.addObject('RegularGridTopology', name="topology", nx="4", ny="4", nz="11", xmin="-1.5", xmax="1.5", ymin="-1.5", ymax="1.5", zmin="0", zmax="10")
+        DeformableObject.addObject('HexahedronSetGeometryAlgorithms')
+        DeformableObject.addObject('UniformMass', totalMass="15")
+        DeformableObject.addObject('BoxROI', box="-1.5 -1.5 0 1.5 1.5 0.0001", name="box")
+        DeformableObject.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        DeformableObject.addObject('MeshSpringForceField', stiffness="3E2")
+
+        visual = DeformableObject.addChild('visual')
+        visual.addObject('QuadSetTopologyContainer', name="Container")
+        visual.addObject('QuadSetTopologyModifier')
+        visual.addObject('Hexa2QuadTopologicalMapping', input="@../topology", output="@Container")
+        visual.addObject('OglModel', name="Visual", color="yellow", quads="@Container.quads")
+        visual.addObject('IdentityMapping', input="@../dofs", output="@Visual")
+
+        floor-visual = root.addChild('floor-visual')
+        floor-visual.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/floorFlat.obj", scale3d="0.5 0.5 0.5")
+        floor-visual.addObject('OglModel', src="@meshLoader", dy="-8", dz="10")
+        floor-visual.addObject('OglModel', src="@meshLoader", rx="90", dy="2")
+    ```
+
+Component/ODESolver/Forward/EulerExplicitSolver.scn
+
+=== "XML"
+
+    ```xml
+    <!--
+    This scene shows an example of a forward Euler integration scheme.
+    This is the variant of the component EulerExplicitSolver where the Data
+    'symplectic' is set to false (true by default).
+    In this example, the mass is not diagonal. Since it cannot be inverted
+    trivially, it requires a linear solver, here SparseLDLSolver.
+    -->
+    
+    <Node name="root" gravity="0 -9.81 0" dt="0.00001">
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [MeshMatrixMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [EulerExplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [MeshSpringForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Mapping"/> <!-- Needed to use components [Hexa2QuadTopologicalMapping] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <DefaultAnimationLoop/>
+    
+        <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+    
+        <Node name="DeformableObject">
+    
+            <EulerExplicitSolver name="odeExplicitSolver" symplectic="false"/>
+            <SparseLDLSolver />
+    
+            <MechanicalObject name="dofs"/>
+    
+            <RegularGridTopology name="topology" nx="4" ny="4" nz="11" xmin="-1.5" xmax="1.5" ymin="-1.5" ymax="1.5" zmin="0" zmax="10" />
+            <HexahedronSetGeometryAlgorithms/>
+            <MeshMatrixMass totalMass="15"/>
+    
+            <BoxROI box="-1.5 -1.5 0 1.5 1.5 0.0001" name="box"/>
+            <FixedProjectiveConstraint indices="@box.indices" />
+            <MeshSpringForceField stiffness="3E2"/>
+    
+            <Node name="visual">
+                <QuadSetTopologyContainer  name="Container" />
+                <QuadSetTopologyModifier/>
+                <Hexa2QuadTopologicalMapping input="@../topology" output="@Container" />
+                <OglModel name="Visual" color="yellow" quads="@Container.quads" />
+                <IdentityMapping input="@../dofs" output="@Visual" />
+            </Node>
+    
+        </Node>
+    
+        <Node name="floor-visual">
+            <MeshOBJLoader name="meshLoader" filename="mesh/floorFlat.obj" scale3d="0.5 0.5 0.5"/>
+            <OglModel src="@meshLoader" dy="-8" dz="10"/>
+            <OglModel src="@meshLoader" rx="90" dy="2"/>
+        </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.00001")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+=== "Python"
 
-	DeformableObject = root.addChild('DeformableObject')
-	DeformableObject.addObject('EulerExplicitSolver', name="odeExplicitSolver", symplectic="false")
-	DeformableObject.addObject('SparseLDLSolver')
-	DeformableObject.addObject('MechanicalObject', name="dofs")
-	DeformableObject.addObject('RegularGridTopology', name="topology", nx="4", ny="4", nz="11", xmin="-1.5", xmax="1.5", ymin="-1.5", ymax="1.5", zmin="0", zmax="10")
-	DeformableObject.addObject('HexahedronSetGeometryAlgorithms')
-	DeformableObject.addObject('MeshMatrixMass', totalMass="15")
-	DeformableObject.addObject('BoxROI', box="-1.5 -1.5 0 1.5 1.5 0.0001", name="box")
-	DeformableObject.addObject('FixedProjectiveConstraint', indices="@box.indices")
-	DeformableObject.addObject('MeshSpringForceField', stiffness="3E2")
+    ```python
+    def createScene(rootNode):
 
-	visual = DeformableObject.addChild('visual')
-	visual.addObject('QuadSetTopologyContainer', name="Container")
-	visual.addObject('QuadSetTopologyModifier')
-	visual.addObject('Hexa2QuadTopologicalMapping', input="@../topology", output="@Container")
-	visual.addObject('OglModel', name="Visual", color="yellow", quads="@Container.quads")
-	visual.addObject('IdentityMapping', input="@../dofs", output="@Visual")
+        root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.00001")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Mapping")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
 
-	floor-visual = root.addChild('floor-visual')
-	floor-visual.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/floorFlat.obj", scale3d="0.5 0.5 0.5")
-	floor-visual.addObject('OglModel', src="@meshLoader", dy="-8", dz="10")
-	floor-visual.addObject('OglModel', src="@meshLoader", rx="90", dy="2")
-```
+        DeformableObject = root.addChild('DeformableObject')
+        DeformableObject.addObject('EulerExplicitSolver', name="odeExplicitSolver", symplectic="false")
+        DeformableObject.addObject('SparseLDLSolver')
+        DeformableObject.addObject('MechanicalObject', name="dofs")
+        DeformableObject.addObject('RegularGridTopology', name="topology", nx="4", ny="4", nz="11", xmin="-1.5", xmax="1.5", ymin="-1.5", ymax="1.5", zmin="0", zmax="10")
+        DeformableObject.addObject('HexahedronSetGeometryAlgorithms')
+        DeformableObject.addObject('MeshMatrixMass', totalMass="15")
+        DeformableObject.addObject('BoxROI', box="-1.5 -1.5 0 1.5 1.5 0.0001", name="box")
+        DeformableObject.addObject('FixedProjectiveConstraint', indices="@box.indices")
+        DeformableObject.addObject('MeshSpringForceField', stiffness="3E2")
+
+        visual = DeformableObject.addChild('visual')
+        visual.addObject('QuadSetTopologyContainer', name="Container")
+        visual.addObject('QuadSetTopologyModifier')
+        visual.addObject('Hexa2QuadTopologicalMapping', input="@../topology", output="@Container")
+        visual.addObject('OglModel', name="Visual", color="yellow", quads="@Container.quads")
+        visual.addObject('IdentityMapping', input="@../dofs", output="@Visual")
+
+        floor-visual = root.addChild('floor-visual')
+        floor-visual.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/floorFlat.obj", scale3d="0.5 0.5 0.5")
+        floor-visual.addObject('OglModel', src="@meshLoader", dy="-8", dz="10")
+        floor-visual.addObject('OglModel', src="@meshLoader", rx="90", dy="2")
+    ```
+
 
 <!-- automatically generated doc END -->

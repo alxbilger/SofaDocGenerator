@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Collision.Response.Contact
 __namespace__: sofa::component::collision::response::contact
 
 __parents__: 
+
 - ContactManager
 
 Data: 

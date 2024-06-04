@@ -1,3 +1,7 @@
+---
+title: VisualStyle
+---
+
 Customize what to render on screen
 ----------------------------------
 
@@ -73,6 +77,7 @@ __Target__: Sofa.Component.Visual
 __namespace__: sofa::component::visual
 
 __parents__: 
+
 - VisualModel
 
 Data: 
@@ -158,100 +163,108 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" gravity="0 -9.81 0" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader MeshOBJLoader SphereLoader] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Visual/VisualStyle.scn
 
-    <!-- Using the VisualStyle choose your visual options! -->
-    <!-- ACTIVATE: showVisual showBehavior showForceFields showInteractionForceFields showCollision showCollisionModels showWireFrame -->
-    <!-- DE-ACTIVATE: hideVisual hideBehavior hideForceFields hideInteractionForceFields hideCollision hideCollisionModels hideWireFrame -->
-    <VisualStyle displayFlags="showVisual showCollisionModels" />
-    <DefaultAnimationLoop/>
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" gravity="0 -9.81 0" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader MeshOBJLoader SphereLoader] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
     
-    <Node name="Liver" >
-        <MeshGmshLoader name="meshLoader" filename="mesh/liver.msh" />
-        <TetrahedronSetTopologyContainer name="topo" src="@meshLoader" />
-        <MechanicalObject name="dofs" src="@meshLoader" />
-        <TetrahedronSetGeometryAlgorithms name="GeomAlgo" />
-        <DiagonalMass name="computed using mass density" massDensity="1" />
-        <TetrahedralCorotationalFEMForceField template="Vec3" name="FEM" method="large" poissonRatio="0.3" youngModulus="3000" computeGlobalMatrix="0" />
-        <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="3 39 64" />
-        <Node name="WireframeVisu" >
-            <VisualStyle displayFlags="showVisual showWireframe" />
-            <MeshOBJLoader name="meshLoader_1" filename="mesh/liver-smooth.obj" handleSeams="1" />
-            <OglModel name="VisualModel" src="@meshLoader_1" />
-            <BarycentricMapping name="visual mapping" input="@../dofs" output="@VisualModel" />
-        </Node>
-        <Node name="Sphere" >
-            <VisualStyle displayFlags="hideBehavior showCollision showWireframe" />
-	    <SphereLoader filename="mesh/liver.sph" />
-            <MechanicalObject name="spheres" position="@[-1].position" />
-            <SphereCollisionModel name="CollisionModel" listRadius="@[-2].listRadius" />
-            <BarycentricMapping name="sphere mapping" input="@../dofs" output="@spheres" />
-        </Node>
+        <!-- Using the VisualStyle choose your visual options! -->
+        <!-- ACTIVATE: showVisual showBehavior showForceFields showInteractionForceFields showCollision showCollisionModels showWireFrame -->
+        <!-- DE-ACTIVATE: hideVisual hideBehavior hideForceFields hideInteractionForceFields hideCollision hideCollisionModels hideWireFrame -->
+        <VisualStyle displayFlags="showVisual showCollisionModels" />
+        <DefaultAnimationLoop/>
         
-        
-        <Node name="TranslatedSurface" gravity="0 -9.81 0">
-<!--             default rendering should be flat rendered and not wireframed -->
-            <MeshOBJLoader name="meshLoader_0" filename="mesh/liver.obj" translation="5 0 0" handleSeams="1" />
-            <OglModel src="@meshLoader_0" />
+        <Node name="Liver" >
+            <MeshGmshLoader name="meshLoader" filename="mesh/liver.msh" />
+            <TetrahedronSetTopologyContainer name="topo" src="@meshLoader" />
+            <MechanicalObject name="dofs" src="@meshLoader" />
+            <TetrahedronSetGeometryAlgorithms name="GeomAlgo" />
+            <DiagonalMass name="computed using mass density" massDensity="1" />
+            <TetrahedralCorotationalFEMForceField template="Vec3" name="FEM" method="large" poissonRatio="0.3" youngModulus="3000" computeGlobalMatrix="0" />
+            <FixedProjectiveConstraint name="FixedProjectiveConstraint" indices="3 39 64" />
+            <Node name="WireframeVisu" >
+                <VisualStyle displayFlags="showVisual showWireframe" />
+                <MeshOBJLoader name="meshLoader_1" filename="mesh/liver-smooth.obj" handleSeams="1" />
+                <OglModel name="VisualModel" src="@meshLoader_1" />
+                <BarycentricMapping name="visual mapping" input="@../dofs" output="@VisualModel" />
+            </Node>
+            <Node name="Sphere" >
+                <VisualStyle displayFlags="hideBehavior showCollision showWireframe" />
+    	    <SphereLoader filename="mesh/liver.sph" />
+                <MechanicalObject name="spheres" position="@[-1].position" />
+                <SphereCollisionModel name="CollisionModel" listRadius="@[-2].listRadius" />
+                <BarycentricMapping name="sphere mapping" input="@../dofs" output="@spheres" />
+            </Node>
+            
+            
+            <Node name="TranslatedSurface" gravity="0 -9.81 0">
+    <!--             default rendering should be flat rendered and not wireframed -->
+                <MeshOBJLoader name="meshLoader_0" filename="mesh/liver.obj" translation="5 0 0" handleSeams="1" />
+                <OglModel src="@meshLoader_0" />
+            </Node>
+            
         </Node>
-        
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showVisual showCollisionModels")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	Liver = root.addChild('Liver')
-	Liver.addObject('MeshGmshLoader', name="meshLoader", filename="mesh/liver.msh")
-	Liver.addObject('TetrahedronSetTopologyContainer', name="topo", src="@meshLoader")
-	Liver.addObject('MechanicalObject', name="dofs", src="@meshLoader")
-	Liver.addObject('TetrahedronSetGeometryAlgorithms', name="GeomAlgo")
-	Liver.addObject('DiagonalMass', name="computed using mass density", massDensity="1")
-	Liver.addObject('TetrahedralCorotationalFEMForceField', template="Vec3", name="FEM", method="large", poissonRatio="0.3", youngModulus="3000", computeGlobalMatrix="0")
-	Liver.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
+    ```python
+    def createScene(rootNode):
 
-	WireframeVisu = Liver.addChild('WireframeVisu')
-	WireframeVisu.addObject('VisualStyle', displayFlags="showVisual showWireframe")
-	WireframeVisu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/liver-smooth.obj", handleSeams="1")
-	WireframeVisu.addObject('OglModel', name="VisualModel", src="@meshLoader_1")
-	WireframeVisu.addObject('BarycentricMapping', name="visual mapping", input="@../dofs", output="@VisualModel")
+        root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showVisual showCollisionModels")
+        root.addObject('DefaultAnimationLoop')
 
-	Sphere = Liver.addChild('Sphere')
-	Sphere.addObject('VisualStyle', displayFlags="hideBehavior showCollision showWireframe")
-	Sphere.addObject('SphereLoader', filename="mesh/liver.sph")
-	Sphere.addObject('MechanicalObject', name="spheres", position="@[-1].position")
-	Sphere.addObject('SphereCollisionModel', name="CollisionModel", listRadius="@[-2].listRadius")
-	Sphere.addObject('BarycentricMapping', name="sphere mapping", input="@../dofs", output="@spheres")
+        Liver = root.addChild('Liver')
+        Liver.addObject('MeshGmshLoader', name="meshLoader", filename="mesh/liver.msh")
+        Liver.addObject('TetrahedronSetTopologyContainer', name="topo", src="@meshLoader")
+        Liver.addObject('MechanicalObject', name="dofs", src="@meshLoader")
+        Liver.addObject('TetrahedronSetGeometryAlgorithms', name="GeomAlgo")
+        Liver.addObject('DiagonalMass', name="computed using mass density", massDensity="1")
+        Liver.addObject('TetrahedralCorotationalFEMForceField', template="Vec3", name="FEM", method="large", poissonRatio="0.3", youngModulus="3000", computeGlobalMatrix="0")
+        Liver.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
 
-	TranslatedSurface = Liver.addChild('TranslatedSurface', gravity="0 -9.81 0")
-	TranslatedSurface.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/liver.obj", translation="5 0 0", handleSeams="1")
-	TranslatedSurface.addObject('OglModel', src="@meshLoader_0")
-```
+        WireframeVisu = Liver.addChild('WireframeVisu')
+        WireframeVisu.addObject('VisualStyle', displayFlags="showVisual showWireframe")
+        WireframeVisu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/liver-smooth.obj", handleSeams="1")
+        WireframeVisu.addObject('OglModel', name="VisualModel", src="@meshLoader_1")
+        WireframeVisu.addObject('BarycentricMapping', name="visual mapping", input="@../dofs", output="@VisualModel")
+
+        Sphere = Liver.addChild('Sphere')
+        Sphere.addObject('VisualStyle', displayFlags="hideBehavior showCollision showWireframe")
+        Sphere.addObject('SphereLoader', filename="mesh/liver.sph")
+        Sphere.addObject('MechanicalObject', name="spheres", position="@[-1].position")
+        Sphere.addObject('SphereCollisionModel', name="CollisionModel", listRadius="@[-2].listRadius")
+        Sphere.addObject('BarycentricMapping', name="sphere mapping", input="@../dofs", output="@spheres")
+
+        TranslatedSurface = Liver.addChild('TranslatedSurface', gravity="0 -9.81 0")
+        TranslatedSurface.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/liver.obj", translation="5 0 0", handleSeams="1")
+        TranslatedSurface.addObject('OglModel', src="@meshLoader_0")
+    ```
+
 
 <!-- automatically generated doc END -->

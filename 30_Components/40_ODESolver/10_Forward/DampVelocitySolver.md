@@ -8,6 +8,7 @@ __Target__: Sofa.Component.ODESolver.Forward
 __namespace__: sofa::component::odesolver::forward
 
 __parents__: 
+
 - OdeSolver
 
 Data: 
@@ -93,63 +94,71 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" gravity="0 0 0" dt="0.05">
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [DampVelocitySolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TriangleFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <VisualStyle displayFlags="showBehaviorModels showForceFields" />
-    <DefaultAnimationLoop/>
+Component/ODESolver/Forward/DampVelocitySolver.scn
 
-    <Node name="M0">
-        <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-10"/>
-        <DampVelocitySolver rate="0.9" threshold="0.01" printLog="0" name="damp" />
-        <MechanicalObject position="0 0 0  1 0 0  1 1 0  0 1 0" velocity="1 0 0  1 0 0  1 0 0  1 0 0" />
-        <UniformMass vertexMass="0.1" />
-        <MeshTopology triangles="0 1 2  0 2 3" />
-        <TriangleFEMForceField name="FEM0" youngModulus="100" poissonRatio="0.3" method="large" />
-        <Node name="Visu">
-            <OglModel name="Visual" color="red" />
-            <IdentityMapping input="@.." output="@Visual" />
+=== "XML"
+
+    ```xml
+    <Node name="root" gravity="0 0 0" dt="0.05">
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Forward"/> <!-- Needed to use components [DampVelocitySolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TriangleFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+        <DefaultAnimationLoop/>
+    
+        <Node name="M0">
+            <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-10"/>
+            <DampVelocitySolver rate="0.9" threshold="0.01" printLog="0" name="damp" />
+            <MechanicalObject position="0 0 0  1 0 0  1 1 0  0 1 0" velocity="1 0 0  1 0 0  1 0 0  1 0 0" />
+            <UniformMass vertexMass="0.1" />
+            <MeshTopology triangles="0 1 2  0 2 3" />
+            <TriangleFEMForceField name="FEM0" youngModulus="100" poissonRatio="0.3" method="large" />
+            <Node name="Visu">
+                <OglModel name="Visual" color="red" />
+                <IdentityMapping input="@.." output="@Visual" />
+            </Node>
         </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 0 0", dt="0.05")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	M0 = root.addChild('M0')
-	M0.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	M0.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-10")
-	M0.addObject('DampVelocitySolver', rate="0.9", threshold="0.01", printLog="0", name="damp")
-	M0.addObject('MechanicalObject', position="0 0 0  1 0 0  1 1 0  0 1 0", velocity="1 0 0  1 0 0  1 0 0  1 0 0")
-	M0.addObject('UniformMass', vertexMass="0.1")
-	M0.addObject('MeshTopology', triangles="0 1 2  0 2 3")
-	M0.addObject('TriangleFEMForceField', name="FEM0", youngModulus="100", poissonRatio="0.3", method="large")
+    ```python
+    def createScene(rootNode):
 
-	Visu = M0.addChild('Visu')
-	Visu.addObject('OglModel', name="Visual", color="red")
-	Visu.addObject('IdentityMapping', input="@..", output="@Visual")
-```
+        root = rootNode.addChild('root', gravity="0 0 0", dt="0.05")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Forward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+        root.addObject('DefaultAnimationLoop')
+
+        M0 = root.addChild('M0')
+        M0.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        M0.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-10")
+        M0.addObject('DampVelocitySolver', rate="0.9", threshold="0.01", printLog="0", name="damp")
+        M0.addObject('MechanicalObject', position="0 0 0  1 0 0  1 1 0  0 1 0", velocity="1 0 0  1 0 0  1 0 0  1 0 0")
+        M0.addObject('UniformMass', vertexMass="0.1")
+        M0.addObject('MeshTopology', triangles="0 1 2  0 2 3")
+        M0.addObject('TriangleFEMForceField', name="FEM0", youngModulus="100", poissonRatio="0.3", method="large")
+
+        Visu = M0.addChild('Visu')
+        Visu.addObject('OglModel', name="Visual", color="red")
+        Visu.addObject('IdentityMapping', input="@..", output="@Visual")
+    ```
+

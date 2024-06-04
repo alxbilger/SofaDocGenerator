@@ -4,6 +4,7 @@ Apply a merge operation to combine several inputs
 
 
 __Templates__:
+
 - vector<RigidCoord2d>
 - vector<RigidCoord3d>
 - vector<RigidDeriv2d>
@@ -21,6 +22,7 @@ __Target__: Sofa.Component.Engine.Generate
 __namespace__: sofa::component::engine::generate
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -106,42 +108,50 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="0.05" showBoundingTree="0" gravity="0 -9 1">
-    
-    <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [MergeVectors] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <VisualStyle displayFlags="showVisual showBehaviorModels" />
-    <DefaultAnimationLoop/>
-    
-    <Node name="mesh">
+Component/Engine/Generate/MergeVectors.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="0.05" showBoundingTree="0" gravity="0 -9 1">
         
-		<MeshOBJLoader name="mesh1" filename="mesh/raptor_35kp.obj"/>  
-                <MeshOBJLoader name="mesh2" filename="mesh/snake_body.obj"/>  
-                
-                <MergeVectors template="Data<double>" name="mergedPositions"  nbInputs="2" input1="@mesh1.position" input2="@mesh2.position" />
-                <MechanicalObject  template="Vec3"  position="@mergedPositions.output" showObject="True" />
-                                
+        <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [MergeVectors] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <VisualStyle displayFlags="showVisual showBehaviorModels" />
+        <DefaultAnimationLoop/>
+        
+        <Node name="mesh">
+            
+    		<MeshOBJLoader name="mesh1" filename="mesh/raptor_35kp.obj"/>  
+                    <MeshOBJLoader name="mesh2" filename="mesh/snake_body.obj"/>  
+                    
+                    <MergeVectors template="Data<double>" name="mergedPositions"  nbInputs="2" input1="@mesh1.position" input2="@mesh2.position" />
+                    <MechanicalObject  template="Vec3"  position="@mergedPositions.output" showObject="True" />
+                                    
+        </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.05", showBoundingTree="0", gravity="0 -9 1")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	mesh = root.addChild('mesh')
-	mesh.addObject('MeshOBJLoader', name="mesh1", filename="mesh/raptor_35kp.obj")
-	mesh.addObject('MeshOBJLoader', name="mesh2", filename="mesh/snake_body.obj")
-	mesh.addObject('MergeVectors', template="Data<double>", name="mergedPositions", nbInputs="2", input1="@mesh1.position", input2="@mesh2.position")
-	mesh.addObject('MechanicalObject', template="Vec3", position="@mergedPositions.output", showObject="True")
-```
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.05", showBoundingTree="0", gravity="0 -9 1")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels")
+        root.addObject('DefaultAnimationLoop')
+
+        mesh = root.addChild('mesh')
+        mesh.addObject('MeshOBJLoader', name="mesh1", filename="mesh/raptor_35kp.obj")
+        mesh.addObject('MeshOBJLoader', name="mesh2", filename="mesh/snake_body.obj")
+        mesh.addObject('MergeVectors', template="Data<double>", name="mergedPositions", nbInputs="2", input1="@mesh1.position", input2="@mesh2.position")
+        mesh.addObject('MechanicalObject', template="Vec3", position="@mergedPositions.output", showObject="True")
+    ```
+

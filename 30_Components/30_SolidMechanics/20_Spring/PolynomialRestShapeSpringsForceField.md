@@ -4,6 +4,7 @@ Simple elastic springs applied to given degrees of freedom between their current
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.SolidMechanics.Spring
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.Spring
 __namespace__: sofa::component::solidmechanics::spring
 
 __parents__: 
+
 - ForceField
 
 Data: 
@@ -179,43 +181,51 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" dt="0.01" gravity="0 0 0">
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [PolynomialRestShapeSpringsForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <VisualStyle displayFlags="showForceFields"/>
-    <DefaultAnimationLoop/>
+Component/SolidMechanics/Spring/PolynomialRestShapeSpringsForceField.scn
 
-    <Node name="Particle" bbox="-10 -10 -10 20 20 20" >
-        <EulerImplicitSolver />
-        <CGLinearSolver iterations="200" tolerance="1e-09" threshold="1e-09"/>
-        <MechanicalObject template="Vec3" name="myParticle" rest_position="0 0 0" position="1.1 0 0" showObject="1" showObjectScale="10" />
-        <UniformMass totalMass="1" />
-        <PolynomialRestShapeSpringsForceField polynomialStiffness="10 10" polynomialDegree="2" points='0' smoothShift="0.0001" smoothScale='10000000' drawSpring='1' />
+=== "XML"
+
+    ```xml
+    <Node name="root" dt="0.01" gravity="0 0 0">
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [PolynomialRestShapeSpringsForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <VisualStyle displayFlags="showForceFields"/>
+        <DefaultAnimationLoop/>
+    
+        <Node name="Particle" bbox="-10 -10 -10 20 20 20" >
+            <EulerImplicitSolver />
+            <CGLinearSolver iterations="200" tolerance="1e-09" threshold="1e-09"/>
+            <MechanicalObject template="Vec3" name="myParticle" rest_position="0 0 0" position="1.1 0 0" showObject="1" showObjectScale="10" />
+            <UniformMass totalMass="1" />
+            <PolynomialRestShapeSpringsForceField polynomialStiffness="10 10" polynomialDegree="2" points='0' smoothShift="0.0001" smoothScale='10000000' drawSpring='1' />
+        </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.01", gravity="0 0 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showForceFields")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	Particle = root.addChild('Particle', bbox="-10 -10 -10 20 20 20")
-	Particle.addObject('EulerImplicitSolver')
-	Particle.addObject('CGLinearSolver', iterations="200", tolerance="1e-09", threshold="1e-09")
-	Particle.addObject('MechanicalObject', template="Vec3", name="myParticle", rest_position="0 0 0", position="1.1 0 0", showObject="1", showObjectScale="10")
-	Particle.addObject('UniformMass', totalMass="1")
-	Particle.addObject('PolynomialRestShapeSpringsForceField', polynomialStiffness="10 10", polynomialDegree="2", points="0", smoothShift="0.0001", smoothScale="10000000", drawSpring="1")
-```
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.01", gravity="0 0 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showForceFields")
+        root.addObject('DefaultAnimationLoop')
+
+        Particle = root.addChild('Particle', bbox="-10 -10 -10 20 20 20")
+        Particle.addObject('EulerImplicitSolver')
+        Particle.addObject('CGLinearSolver', iterations="200", tolerance="1e-09", threshold="1e-09")
+        Particle.addObject('MechanicalObject', template="Vec3", name="myParticle", rest_position="0 0 0", position="1.1 0 0", showObject="1", showObjectScale="10")
+        Particle.addObject('UniformMass', totalMass="1")
+        Particle.addObject('PolynomialRestShapeSpringsForceField', polynomialStiffness="10 10", polynomialDegree="2", points="0", smoothShift="0.0001", smoothScale="10000000", drawSpring="1")
+    ```
+

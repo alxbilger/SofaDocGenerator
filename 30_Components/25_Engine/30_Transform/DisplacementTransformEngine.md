@@ -4,6 +4,7 @@ Converts a vector of Rigid to a vector of displacement transforms.
 
 
 __Templates__:
+
 - Rigid3d,Mat4x4d
 - Rigid3d,RigidCoord3d
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Engine.Transform
 __namespace__: sofa::component::engine::transform
 
 __parents__: 
+
 - DataEngine
 
 Data: 

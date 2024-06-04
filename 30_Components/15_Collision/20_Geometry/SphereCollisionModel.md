@@ -5,6 +5,7 @@ Supports GPU-side computations using CUDA
 
 
 __Templates__:
+
 - Rigid3d
 - Vec3d
 
@@ -13,6 +14,7 @@ __Target__: Sofa.Component.Collision.Geometry
 __namespace__: sofa::component::collision::geometry
 
 __parents__: 
+
 - CollisionModel
 
 Data: 

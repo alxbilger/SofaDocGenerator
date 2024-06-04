@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Visual
 __namespace__: sofa::component::visual
 
 __parents__: 
+
 - VisualModel
 
 Data: 
@@ -121,27 +122,35 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" dt="0.01">
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualGrid] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <DefaultAnimationLoop/>
-    
-    <MeshOBJLoader name="meshLoader_0" filename="mesh/liver-smooth.obj" handleSeams="1" />
-    <OglModel name="VisualModel" src="@meshLoader_0" color="red" />
-    <VisualGrid/>
-</Node>
-```
-```python
-def createScene(rootNode):
+Component/Visual/VisualGrid.scn
 
-	root = rootNode.addChild('root', dt="0.01")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/liver-smooth.obj", handleSeams="1")
-	root.addObject('OglModel', name="VisualModel", src="@meshLoader_0", color="red")
-	root.addObject('VisualGrid')
-```
+=== "XML"
+
+    ```xml
+    <Node name="root" dt="0.01">
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualGrid] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <DefaultAnimationLoop/>
+        
+        <MeshOBJLoader name="meshLoader_0" filename="mesh/liver-smooth.obj" handleSeams="1" />
+        <OglModel name="VisualModel" src="@meshLoader_0" color="red" />
+        <VisualGrid/>
+    </Node>
+    ```
+
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.01")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/liver-smooth.obj", handleSeams="1")
+        root.addObject('OglModel', name="VisualModel", src="@meshLoader_0", color="red")
+        root.addObject('VisualGrid')
+    ```
+

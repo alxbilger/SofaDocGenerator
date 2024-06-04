@@ -1,3 +1,7 @@
+---
+title: MeshOBJLoader
+---
+
 MeshOBJLoader
 =============
 
@@ -32,6 +36,7 @@ __Target__: Sofa.Component.IO.Mesh
 __namespace__: sofa::component::io::mesh
 
 __parents__: 
+
 - MeshLoader
 
 Data: 

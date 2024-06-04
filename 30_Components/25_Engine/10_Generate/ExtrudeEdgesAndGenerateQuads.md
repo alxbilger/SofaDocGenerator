@@ -4,6 +4,7 @@ This engine extrudes an edge-based curve into a quad surface patch
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Engine.Generate
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Engine.Generate
 __namespace__: sofa::component::engine::generate
 
 __parents__: 
+
 - DataEngine
 
 Data: 

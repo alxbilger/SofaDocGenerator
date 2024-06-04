@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Visual
 __namespace__: sofa::component::visual
 
 __parents__: 
+
 - VisualModel
 
 Data: 

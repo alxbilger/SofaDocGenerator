@@ -4,6 +4,7 @@ Bending Quad finite elements
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.FEM.Elastic
 __namespace__: sofa::component::solidmechanics::fem::elastic
 
 __parents__: 
+
 - ForceField
 
 Data: 
@@ -148,92 +150,100 @@ Links:
 
 ## Examples
 
-```xml
-<!-- Mechanical QuadbendingFEMForceField Example -->
-<Node name="root" gravity="-1 0 0" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshVTKLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [QuadBendingFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [QuadSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/SolidMechanics/FEM/QuadBendingFEMForceField.scn
 
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showVisual showForceFields showBehaviorModels" />
-    <CollisionPipeline name="CollisionPipeline" verbose="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <CollisionResponse name="collision response" response="PenalityContactForceField" />
-    <MinProximityIntersection name="proximity" alarmDistance="0.5" contactDistance="0.33"/>
+=== "XML"
 
-    <Node name="skin" gravity="0 0 -9.81">
-        <EulerImplicitSolver name="cg_odesolver" />
-        <CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
-        <MeshVTKLoader filename="mesh/test_quad.vtk" name="loader" />
-        <MechanicalObject template="Vec3" src="@loader" name="DOFs" />
-        <QuadSetTopologyContainer src="@loader" name="topology" />
-        <QuadSetTopologyModifier name="Modifier" />
-        <QuadSetGeometryAlgorithms name="GeomAlgo" template="Vec3" />
-        <DiagonalMass massDensity="0.5" name="mass" />
-
-        <QuadBendingFEMForceField name="FEM" youngModulus="2000" poissonRatio="0.49" thickness="0.5" method="small" />
-
-        <FixedProjectiveConstraint indices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58" />
-
-        <Node name="Visual">
-            <OglModel name="Visual" color="yellow" />
-            <IdentityMapping template="Vec3,Vec3" name="visualMapping" input="@../DOFs" output="@Visual" />
+    ```xml
+    <!-- Mechanical QuadbendingFEMForceField Example -->
+    <Node name="root" gravity="-1 0 0" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshVTKLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [QuadBendingFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [QuadSetGeometryAlgorithms QuadSetTopologyContainer QuadSetTopologyModifier] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showVisual showForceFields showBehaviorModels" />
+        <CollisionPipeline name="CollisionPipeline" verbose="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <CollisionResponse name="collision response" response="PenalityContactForceField" />
+        <MinProximityIntersection name="proximity" alarmDistance="0.5" contactDistance="0.33"/>
+    
+        <Node name="skin" gravity="0 0 -9.81">
+            <EulerImplicitSolver name="cg_odesolver" />
+            <CGLinearSolver iterations="25" name="linear solver" tolerance="1.0e-9" threshold="1.0e-9" />
+            <MeshVTKLoader filename="mesh/test_quad.vtk" name="loader" />
+            <MechanicalObject template="Vec3" src="@loader" name="DOFs" />
+            <QuadSetTopologyContainer src="@loader" name="topology" />
+            <QuadSetTopologyModifier name="Modifier" />
+            <QuadSetGeometryAlgorithms name="GeomAlgo" template="Vec3" />
+            <DiagonalMass massDensity="0.5" name="mass" />
+    
+            <QuadBendingFEMForceField name="FEM" youngModulus="2000" poissonRatio="0.49" thickness="0.5" method="small" />
+    
+            <FixedProjectiveConstraint indices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58" />
+    
+            <Node name="Visual">
+                <OglModel name="Visual" color="yellow" />
+                <IdentityMapping template="Vec3,Vec3" name="visualMapping" input="@../DOFs" output="@Visual" />
+            </Node>
         </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="-1 0 0", dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showVisual showForceFields showBehaviorModels")
-	root.addObject('CollisionPipeline', name="CollisionPipeline", verbose="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('CollisionResponse', name="collision response", response="PenalityContactForceField")
-	root.addObject('MinProximityIntersection', name="proximity", alarmDistance="0.5", contactDistance="0.33")
+=== "Python"
 
-	skin = root.addChild('skin', gravity="0 0 -9.81")
-	skin.addObject('EulerImplicitSolver', name="cg_odesolver")
-	skin.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
-	skin.addObject('MeshVTKLoader', filename="mesh/test_quad.vtk", name="loader")
-	skin.addObject('MechanicalObject', template="Vec3", src="@loader", name="DOFs")
-	skin.addObject('QuadSetTopologyContainer', src="@loader", name="topology")
-	skin.addObject('QuadSetTopologyModifier', name="Modifier")
-	skin.addObject('QuadSetGeometryAlgorithms', name="GeomAlgo", template="Vec3")
-	skin.addObject('DiagonalMass', massDensity="0.5", name="mass")
-	skin.addObject('QuadBendingFEMForceField', name="FEM", youngModulus="2000", poissonRatio="0.49", thickness="0.5", method="small")
-	skin.addObject('FixedProjectiveConstraint', indices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58")
+    ```python
+    def createScene(rootNode):
 
-	Visual = skin.addChild('Visual')
-	Visual.addObject('OglModel', name="Visual", color="yellow")
-	Visual.addObject('IdentityMapping', template="Vec3,Vec3", name="visualMapping", input="@../DOFs", output="@Visual")
-```
+        root = rootNode.addChild('root', gravity="-1 0 0", dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showVisual showForceFields showBehaviorModels")
+        root.addObject('CollisionPipeline', name="CollisionPipeline", verbose="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('CollisionResponse', name="collision response", response="PenalityContactForceField")
+        root.addObject('MinProximityIntersection', name="proximity", alarmDistance="0.5", contactDistance="0.33")
+
+        skin = root.addChild('skin', gravity="0 0 -9.81")
+        skin.addObject('EulerImplicitSolver', name="cg_odesolver")
+        skin.addObject('CGLinearSolver', iterations="25", name="linear solver", tolerance="1.0e-9", threshold="1.0e-9")
+        skin.addObject('MeshVTKLoader', filename="mesh/test_quad.vtk", name="loader")
+        skin.addObject('MechanicalObject', template="Vec3", src="@loader", name="DOFs")
+        skin.addObject('QuadSetTopologyContainer', src="@loader", name="topology")
+        skin.addObject('QuadSetTopologyModifier', name="Modifier")
+        skin.addObject('QuadSetGeometryAlgorithms', name="GeomAlgo", template="Vec3")
+        skin.addObject('DiagonalMass', massDensity="0.5", name="mass")
+        skin.addObject('QuadBendingFEMForceField', name="FEM", youngModulus="2000", poissonRatio="0.49", thickness="0.5", method="small")
+        skin.addObject('FixedProjectiveConstraint', indices="0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58")
+
+        Visual = skin.addChild('Visual')
+        Visual.addObject('OglModel', name="Visual", color="yellow")
+        Visual.addObject('IdentityMapping', template="Vec3,Vec3", name="visualMapping", input="@../DOFs", output="@Visual")
+    ```
+

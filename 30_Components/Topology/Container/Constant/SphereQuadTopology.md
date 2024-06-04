@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Topology.Container.Constant
 __namespace__: sofa::component::topology::container::constant
 
 __parents__: 
+
 - CubeTopology
 
 Data: 

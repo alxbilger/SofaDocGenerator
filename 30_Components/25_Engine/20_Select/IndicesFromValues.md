@@ -4,6 +4,7 @@ Find the indices of a list of values within a larger set of values
 
 
 __Templates__:
+
 - I
 - Vec2d
 - Vec3d
@@ -20,6 +21,7 @@ __Target__: Sofa.Component.Engine.Select
 __namespace__: sofa::component::engine::select
 
 __parents__: 
+
 - DataEngine
 
 Data: 

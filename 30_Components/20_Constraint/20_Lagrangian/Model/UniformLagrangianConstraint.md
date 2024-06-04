@@ -4,6 +4,7 @@ A constraint equation applied on all dofs.
 
 
 __Templates__:
+
 - Vec1d
 
 __Target__: Sofa.Component.Constraint.Lagrangian.Model
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Constraint.Lagrangian.Model
 __namespace__: sofa::component::constraint::lagrangian::model
 
 __parents__: 
+
 - Constraint
 
 Data: 

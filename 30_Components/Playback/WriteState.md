@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Playback
 __namespace__: sofa::component::playback
 
 __parents__: 
+
 - BaseObject
 
 Data: 
@@ -156,69 +157,77 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" dt="0.01" gravity="0 -9.81 0">
-    <Node name="plugins">
-        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-        <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
-        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-        <RequiredPlugin name="Sofa.Component.Playback"/> <!-- Needed to use components [WriteState] -->
-        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
-        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+Component/Playback/WriteState.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" dt="0.01" gravity="0 -9.81 0">
+        <Node name="plugins">
+            <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+            <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [SparseLDLSolver] -->
+            <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+            <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+            <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+            <RequiredPlugin name="Sofa.Component.Playback"/> <!-- Needed to use components [WriteState] -->
+            <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
+            <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+            <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+            <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        </Node>
+           
+        <VisualStyle displayFlags="showForceFields showBehaviorModels showVisual showInteractionForceFields" />
+        <DefaultAnimationLoop/>
+    
+        <!-- Beam under gravity -->
+        <Node name="Beam">
+            <EulerImplicitSolver/>                
+            <SparseLDLSolver />
+            
+            <MechanicalObject name="beamMO" template="Vec3" />
+            <RegularGridTopology nx="3" ny="3" nz="7" xmin="0" xmax="3" ymin="0" ymax="3" zmin="0" zmax="7" />
+            <UniformMass totalMass="10" />
+            
+            <!-- WriteState: finds automatically the Mechanical within its node/context -->
+            <!-- Export positions (X) every 0.01 (each time step) -->
+            <WriteState name="StateWriter" filename="beamGravity.txt.gz" period="0.01" writeX="1" writeV="0" writeF="0" time="0"/>
+    
+            <FixedProjectiveConstraint indices="0-8" />
+            <TetrahedronFEMForceField name="FEM" youngModulus="100" poissonRatio="0.3" method="large" />
+        </Node>
     </Node>
-       
-    <VisualStyle displayFlags="showForceFields showBehaviorModels showVisual showInteractionForceFields" />
-    <DefaultAnimationLoop/>
+    ```
 
-    <!-- Beam under gravity -->
-    <Node name="Beam">
-        <EulerImplicitSolver/>                
-        <SparseLDLSolver />
-        
-        <MechanicalObject name="beamMO" template="Vec3" />
-        <RegularGridTopology nx="3" ny="3" nz="7" xmin="0" xmax="3" ymin="0" ymax="3" zmin="0" zmax="7" />
-        <UniformMass totalMass="10" />
-        
-        <!-- WriteState: finds automatically the Mechanical within its node/context -->
-        <!-- Export positions (X) every 0.01 (each time step) -->
-        <WriteState name="StateWriter" filename="beamGravity.txt.gz" period="0.01" writeX="1" writeV="0" writeF="0" time="0"/>
+=== "Python"
 
-        <FixedProjectiveConstraint indices="0-8" />
-        <TetrahedronFEMForceField name="FEM" youngModulus="100" poissonRatio="0.3" method="large" />
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```python
+    def createScene(rootNode):
 
-	root = rootNode.addChild('root', dt="0.01", gravity="0 -9.81 0")
+        root = rootNode.addChild('root', dt="0.01", gravity="0 -9.81 0")
 
-	plugins = root.addChild('plugins')
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Playback")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	plugins.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels showVisual showInteractionForceFields")
-	root.addObject('DefaultAnimationLoop')
+        plugins = root.addChild('plugins')
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Playback")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        plugins.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showForceFields showBehaviorModels showVisual showInteractionForceFields")
+        root.addObject('DefaultAnimationLoop')
 
-	Beam = root.addChild('Beam')
-	Beam.addObject('EulerImplicitSolver')
-	Beam.addObject('SparseLDLSolver')
-	Beam.addObject('MechanicalObject', name="beamMO", template="Vec3")
-	Beam.addObject('RegularGridTopology', nx="3", ny="3", nz="7", xmin="0", xmax="3", ymin="0", ymax="3", zmin="0", zmax="7")
-	Beam.addObject('UniformMass', totalMass="10")
-	Beam.addObject('WriteState', name="StateWriter", filename="beamGravity.txt.gz", period="0.01", writeX="1", writeV="0", writeF="0", time="0")
-	Beam.addObject('FixedProjectiveConstraint', indices="0-8")
-	Beam.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="100", poissonRatio="0.3", method="large")
-```
+        Beam = root.addChild('Beam')
+        Beam.addObject('EulerImplicitSolver')
+        Beam.addObject('SparseLDLSolver')
+        Beam.addObject('MechanicalObject', name="beamMO", template="Vec3")
+        Beam.addObject('RegularGridTopology', nx="3", ny="3", nz="7", xmin="0", xmax="3", ymin="0", ymax="3", zmin="0", zmax="7")
+        Beam.addObject('UniformMass', totalMass="10")
+        Beam.addObject('WriteState', name="StateWriter", filename="beamGravity.txt.gz", period="0.01", writeX="1", writeV="0", writeF="0", time="0")
+        Beam.addObject('FixedProjectiveConstraint', indices="0-8")
+        Beam.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="100", poissonRatio="0.3", method="large")
+    ```
+

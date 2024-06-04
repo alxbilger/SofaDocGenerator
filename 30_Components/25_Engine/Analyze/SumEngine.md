@@ -4,6 +4,7 @@ Computing the Sum between two vector of dofs
 
 
 __Templates__:
+
 - Vec1d
 - Vec3d
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Engine.Analyze
 __namespace__: sofa::component::engine::analyze
 
 __parents__: 
+
 - DataEngine
 
 Data: 

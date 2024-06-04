@@ -7,6 +7,7 @@ __Target__: Sofa.Component.Topology.Mapping
 __namespace__: sofa::component::topology::mapping
 
 __parents__: 
+
 - TopologicalMapping
 
 Data: 

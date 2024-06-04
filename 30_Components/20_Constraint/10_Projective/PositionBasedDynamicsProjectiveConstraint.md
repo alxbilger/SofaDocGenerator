@@ -4,6 +4,7 @@ Position-based dynamics
 
 
 __Templates__:
+
 - Rigid3d
 - Vec1d
 - Vec2d
@@ -15,6 +16,7 @@ __Target__: Sofa.Component.Constraint.Projective
 __namespace__: sofa::component::constraint::projective
 
 __parents__: 
+
 - ProjectiveConstraintSet
 
 Data: 
@@ -107,7 +109,7 @@ Velocities.
 		<td></td>
 	</tr>
 	<tr>
-		<td>d_old_position</td>
+		<td>old_position</td>
 		<td>
 Old positions.
 </td>

@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Setting
 __namespace__: sofa::component::setting
 
 __parents__: 
+
 - ConfigurationSetting
 
 Data: 

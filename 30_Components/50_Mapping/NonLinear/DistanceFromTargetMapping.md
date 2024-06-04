@@ -4,6 +4,7 @@ Compute edge extensions
 
 
 __Templates__:
+
 - Rigid3d,Vec1d
 - Vec1d,Vec1d
 - Vec3d,Vec1d
@@ -13,6 +14,7 @@ __Target__: Sofa.Component.Mapping.NonLinear
 __namespace__: sofa::component::mapping::nonlinear
 
 __parents__: 
+
 - Mapping
 
 Data: 
@@ -169,71 +171,79 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" gravity="0 -9.81 0" dt="0.01">
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [StringMeshCreator] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [EigenSimplicialLLT] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.NonLinear"/> <!-- Needed to use components [DistanceFromTargetMapping DistanceMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [RestShapeSpringsForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [EdgeSetGeometryAlgorithms EdgeSetTopologyContainer] -->
+Component/Mapping/NonLinear/DistanceFromTargetMapping.scn
 
-    <DefaultAnimationLoop/>
-    <DefaultVisualManagerLoop/>
+=== "XML"
 
-    <StringMeshCreator name="loader" resolution="20" scale3d="1 1 1" />
-
-    <EulerImplicitSolver />
-    <EigenSimplicialLLT />
-
-    <EdgeSetTopologyContainer name="topology" position="@loader.position" edges="@loader.edges"/>
-    <MechanicalObject name="dofs" template="Vec3" />
-    <EdgeSetGeometryAlgorithms drawEdges="true" />
-    <DiagonalMass name="mass" totalMass="1e-3"/>
-    <Node name="attach">
-        <MechanicalObject template="Vec1"/>
-        <DistanceFromTargetMapping indices="0" targetPositions="0 0 0"/>
-        <RestShapeSpringsForceField/>
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" gravity="0 -9.81 0" dt="0.01">
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [StringMeshCreator] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Direct"/> <!-- Needed to use components [EigenSimplicialLLT] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.NonLinear"/> <!-- Needed to use components [DistanceFromTargetMapping DistanceMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [RestShapeSpringsForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [EdgeSetGeometryAlgorithms EdgeSetTopologyContainer] -->
+    
+        <DefaultAnimationLoop/>
+        <DefaultVisualManagerLoop/>
+    
+        <StringMeshCreator name="loader" resolution="20" scale3d="1 1 1" />
+    
+        <EulerImplicitSolver />
+        <EigenSimplicialLLT />
+    
+        <EdgeSetTopologyContainer name="topology" position="@loader.position" edges="@loader.edges"/>
+        <MechanicalObject name="dofs" template="Vec3" />
+        <EdgeSetGeometryAlgorithms drawEdges="true" />
+        <DiagonalMass name="mass" totalMass="1e-3"/>
+        <Node name="attach">
+            <MechanicalObject template="Vec1"/>
+            <DistanceFromTargetMapping indices="0" targetPositions="0 0 0"/>
+            <RestShapeSpringsForceField/>
+        </Node>
+        <Node name="extensionsNode" >
+            <MechanicalObject template="Vec1"  name="extensionsDOF" />
+            <DistanceMapping  name="distanceMapping" topology="@../topology"/>
+            <RestShapeSpringsForceField/>
+        </Node>
     </Node>
-    <Node name="extensionsNode" >
-        <MechanicalObject template="Vec1"  name="extensionsDOF" />
-        <DistanceMapping  name="distanceMapping" topology="@../topology"/>
-        <RestShapeSpringsForceField/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.01")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.NonLinear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('DefaultVisualManagerLoop')
-	root.addObject('StringMeshCreator', name="loader", resolution="20", scale3d="1 1 1")
-	root.addObject('EulerImplicitSolver')
-	root.addObject('EigenSimplicialLLT')
-	root.addObject('EdgeSetTopologyContainer', name="topology", position="@loader.position", edges="@loader.edges")
-	root.addObject('MechanicalObject', name="dofs", template="Vec3")
-	root.addObject('EdgeSetGeometryAlgorithms', drawEdges="true")
-	root.addObject('DiagonalMass', name="mass", totalMass="1e-3")
+=== "Python"
 
-	attach = root.addChild('attach')
-	attach.addObject('MechanicalObject', template="Vec1")
-	attach.addObject('DistanceFromTargetMapping', indices="0", targetPositions="0 0 0")
-	attach.addObject('RestShapeSpringsForceField')
+    ```python
+    def createScene(rootNode):
 
-	extensionsNode = root.addChild('extensionsNode')
-	extensionsNode.addObject('MechanicalObject', template="Vec1", name="extensionsDOF")
-	extensionsNode.addObject('DistanceMapping', name="distanceMapping", topology="@../topology")
-	extensionsNode.addObject('RestShapeSpringsForceField')
-```
+        root = rootNode.addChild('root', gravity="0 -9.81 0", dt="0.01")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Direct")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.NonLinear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('DefaultVisualManagerLoop')
+        root.addObject('StringMeshCreator', name="loader", resolution="20", scale3d="1 1 1")
+        root.addObject('EulerImplicitSolver')
+        root.addObject('EigenSimplicialLLT')
+        root.addObject('EdgeSetTopologyContainer', name="topology", position="@loader.position", edges="@loader.edges")
+        root.addObject('MechanicalObject', name="dofs", template="Vec3")
+        root.addObject('EdgeSetGeometryAlgorithms', drawEdges="true")
+        root.addObject('DiagonalMass', name="mass", totalMass="1e-3")
+
+        attach = root.addChild('attach')
+        attach.addObject('MechanicalObject', template="Vec1")
+        attach.addObject('DistanceFromTargetMapping', indices="0", targetPositions="0 0 0")
+        attach.addObject('RestShapeSpringsForceField')
+
+        extensionsNode = root.addChild('extensionsNode')
+        extensionsNode.addObject('MechanicalObject', template="Vec1", name="extensionsDOF")
+        extensionsNode.addObject('DistanceMapping', name="distanceMapping", topology="@../topology")
+        extensionsNode.addObject('RestShapeSpringsForceField')
+    ```
+

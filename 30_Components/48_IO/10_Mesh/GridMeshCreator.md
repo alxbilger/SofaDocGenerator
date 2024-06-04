@@ -8,6 +8,7 @@ __Target__: Sofa.Component.IO.Mesh
 __namespace__: sofa::component::io::mesh
 
 __parents__: 
+
 - MeshLoader
 
 Data: 
@@ -330,66 +331,74 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="0.04" gravity="0 -1 0">
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [GridMeshCreator] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TriangleFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [FastTriangularBendingSprings] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [EdgeSetGeometryAlgorithms] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+Component/IO/Mesh/GridMeshCreator.scn
 
-    <DefaultAnimationLoop/>
-    <VisualStyle displayFlags="showBehavior hideCollision hideVisual " />    
-    <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-    <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-5" />
-    <Node name="Thin shell">
-                <GridMeshCreator name="loader" filename="nofile" resolution="2 2" trianglePattern="1" rotation="180 0 0 " scale="10 10 0" />
-                <MeshTopology src="@loader" />
-                <MechanicalObject name="defoDOF" template="Vec3"  src="@loader" showObject="1"/>
-                <EdgeSetGeometryAlgorithms />
-                <BoxConstraint box="-0.5 -0.5 -0.5  10.5 0.005 0.005  " />
-                <TriangleFEMForceField name="FEM1" youngModulus="20000" poissonRatio="0.3" method="large" />
-                <FastTriangularBendingSprings bendingStiffness="1000" />
-                <UniformMass totalMass="2500" printLog="0" />
+=== "XML"
+
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="0.04" gravity="0 -1 0">
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [GridMeshCreator] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TriangleFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [FastTriangularBendingSprings] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [EdgeSetGeometryAlgorithms] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+    
+        <DefaultAnimationLoop/>
+        <VisualStyle displayFlags="showBehavior hideCollision hideVisual " />    
+        <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+        <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-5" />
+        <Node name="Thin shell">
+                    <GridMeshCreator name="loader" filename="nofile" resolution="2 2" trianglePattern="1" rotation="180 0 0 " scale="10 10 0" />
+                    <MeshTopology src="@loader" />
+                    <MechanicalObject name="defoDOF" template="Vec3"  src="@loader" showObject="1"/>
+                    <EdgeSetGeometryAlgorithms />
+                    <BoxConstraint box="-0.5 -0.5 -0.5  10.5 0.005 0.005  " />
+                    <TriangleFEMForceField name="FEM1" youngModulus="20000" poissonRatio="0.3" method="large" />
+                    <FastTriangularBendingSprings bendingStiffness="1000" />
+                    <UniformMass totalMass="2500" printLog="0" />
+        </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.04", gravity="0 -1 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showBehavior hideCollision hideVisual ")
-	root.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	root.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
+=== "Python"
 
-	Thin shell = root.addChild('Thin shell')
-	Thin shell.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2", trianglePattern="1", rotation="180 0 0 ", scale="10 10 0")
-	Thin shell.addObject('MeshTopology', src="@loader")
-	Thin shell.addObject('MechanicalObject', name="defoDOF", template="Vec3", src="@loader", showObject="1")
-	Thin shell.addObject('EdgeSetGeometryAlgorithms')
-	Thin shell.addObject('BoxConstraint', box="-0.5 -0.5 -0.5  10.5 0.005 0.005  ")
-	Thin shell.addObject('TriangleFEMForceField', name="FEM1", youngModulus="20000", poissonRatio="0.3", method="large")
-	Thin shell.addObject('FastTriangularBendingSprings', bendingStiffness="1000")
-	Thin shell.addObject('UniformMass', totalMass="2500", printLog="0")
-```
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.04", gravity="0 -1 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showBehavior hideCollision hideVisual ")
+        root.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        root.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
+
+        Thin shell = root.addChild('Thin shell')
+        Thin shell.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2", trianglePattern="1", rotation="180 0 0 ", scale="10 10 0")
+        Thin shell.addObject('MeshTopology', src="@loader")
+        Thin shell.addObject('MechanicalObject', name="defoDOF", template="Vec3", src="@loader", showObject="1")
+        Thin shell.addObject('EdgeSetGeometryAlgorithms')
+        Thin shell.addObject('BoxConstraint', box="-0.5 -0.5 -0.5  10.5 0.005 0.005  ")
+        Thin shell.addObject('TriangleFEMForceField', name="FEM1", youngModulus="20000", poissonRatio="0.3", method="large")
+        Thin shell.addObject('FastTriangularBendingSprings', bendingStiffness="1000")
+        Thin shell.addObject('UniformMass', totalMass="2500", printLog="0")
+    ```
+

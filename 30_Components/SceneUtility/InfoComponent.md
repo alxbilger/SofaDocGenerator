@@ -8,6 +8,7 @@ __Target__: Sofa.Component.SceneUtility
 __namespace__: sofa::component::sceneutility::infocomponent
 
 __parents__: 
+
 - BaseObject
 
 Data: 

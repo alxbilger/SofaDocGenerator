@@ -5,6 +5,7 @@ Set the positions and velocities of points attached to a beam using linear inter
 
 
 __Templates__:
+
 - Rigid3d,Vec3d
 
 __Target__: Sofa.Component.Mapping.Linear
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - CRTPLinearMapping
 
 Data: 

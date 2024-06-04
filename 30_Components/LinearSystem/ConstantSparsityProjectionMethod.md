@@ -4,6 +4,7 @@ Matrix mapping computing the matrix projection taking advantage of the constant 
 
 
 __Templates__:
+
 - CompressedRowSparseMatrixd
 
 __Target__: Sofa.Component.LinearSystem
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.LinearSystem
 __namespace__: sofa::component::linearsystem
 
 __parents__: 
+
 - MatrixProjectionMethod
 
 Data: 

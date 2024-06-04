@@ -8,6 +8,7 @@ __Target__: Sofa.Component.SceneUtility
 __namespace__: sofa::component::sceneutility::makedataaliascomponent
 
 __parents__: 
+
 - BaseObject
 
 Data: 
@@ -100,24 +101,32 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version='1.0'?>                                               
-<Node 	name='Root' gravity='0 0 0' time='0' animate='0' bbox="-1 -1 -1 1 1 1"  >   
-       <RequiredPlugin name="Sofa.Component.SceneUtility"/> <!-- Needed to use components [MakeDataAlias] -->
-       <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-       <DefaultAnimationLoop/>      
-       <MakeDataAlias componentname='MechanicalObject' dataname='position' alias='myrest_position'/> 
-       <MechanicalObject name="position should be 1 2 3 " myrest_position='1 2 3'/>                                                 
-</Node>                                                             
+Component/SceneUtility/MakeDataAlias.scn
 
-```
-```python
-def createScene(rootNode):
+=== "XML"
 
-	Root = rootNode.addChild('Root', gravity="0 0 0", time="0", animate="0", bbox="-1 -1 -1 1 1 1")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.SceneUtility")
-	Root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	Root.addObject('DefaultAnimationLoop')
-	Root.addObject('MakeDataAlias', componentname="MechanicalObject", dataname="position", alias="myrest_position")
-	Root.addObject('MechanicalObject', name="position should be 1 2 3 ", myrest_position="1 2 3")
-```
+    ```xml
+    <?xml version='1.0'?>                                               
+    <Node 	name='Root' gravity='0 0 0' time='0' animate='0' bbox="-1 -1 -1 1 1 1"  >   
+           <RequiredPlugin name="Sofa.Component.SceneUtility"/> <!-- Needed to use components [MakeDataAlias] -->
+           <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+           <DefaultAnimationLoop/>      
+           <MakeDataAlias componentname='MechanicalObject' dataname='position' alias='myrest_position'/> 
+           <MechanicalObject name="position should be 1 2 3 " myrest_position='1 2 3'/>                                                 
+    </Node>                                                             
+    
+    ```
+
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        Root = rootNode.addChild('Root', gravity="0 0 0", time="0", animate="0", bbox="-1 -1 -1 1 1 1")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.SceneUtility")
+        Root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        Root.addObject('DefaultAnimationLoop')
+        Root.addObject('MakeDataAlias', componentname="MechanicalObject", dataname="position", alias="myrest_position")
+        Root.addObject('MechanicalObject', name="position should be 1 2 3 ", myrest_position="1 2 3")
+    ```
+

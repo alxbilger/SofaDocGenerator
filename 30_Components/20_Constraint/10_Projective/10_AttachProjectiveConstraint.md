@@ -1,3 +1,7 @@
+---
+title: AttachProjectiveConstraint
+---
+
 AttachProjectiveConstraint
 ================
 
@@ -57,6 +61,7 @@ __Target__: Sofa.Component.Constraint.Projective
 __namespace__: sofa::component::constraint::projective
 
 __parents__: 
+
 - PairInteractionProjectiveConstraintSet
 
 Data: 

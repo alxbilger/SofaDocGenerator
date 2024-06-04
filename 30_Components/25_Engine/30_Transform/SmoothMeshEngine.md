@@ -4,6 +4,7 @@ Compute the laplacian smoothing of a mesh
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Engine.Transform
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Engine.Transform
 __namespace__: sofa::component::engine::transform
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -134,46 +136,54 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" >
-    <RequiredPlugin name="Sofa.Component.Engine.Transform"/> <!-- Needed to use components [SmoothMeshEngine] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Engine/Transform/SmoothMeshEngine.scn
 
-    <DefaultAnimationLoop/>
-    <Node name="origin" >
-        <VisualStyle displayFlags="showWireframe" />
-        <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
-        <OglModel name="visual" src="@loader" color="yellow" />
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" >
+        <RequiredPlugin name="Sofa.Component.Engine.Transform"/> <!-- Needed to use components [SmoothMeshEngine] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <DefaultAnimationLoop/>
+        <Node name="origin" >
+            <VisualStyle displayFlags="showWireframe" />
+            <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
+            <OglModel name="visual" src="@loader" color="yellow" />
+        </Node>
+        <Node name="smoothed" >
+            <VisualStyle displayFlags="hideWireframe" />
+            <MeshTopology name="topology" src="@/origin/loader"/>
+            <SmoothMeshEngine template="Vec3" name="smoother" input_position="@/origin/loader.position" nb_iterations="1" showOutput="true"/>
+        </Node>
     </Node>
-    <Node name="smoothed" >
-        <VisualStyle displayFlags="hideWireframe" />
-        <MeshTopology name="topology" src="@/origin/loader"/>
-        <SmoothMeshEngine template="Vec3" name="smoother" input_position="@/origin/loader.position" nb_iterations="1" showOutput="true"/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root')
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Transform")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	origin = root.addChild('origin')
-	origin.addObject('VisualStyle', displayFlags="showWireframe")
-	origin.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
-	origin.addObject('OglModel', name="visual", src="@loader", color="yellow")
+    ```python
+    def createScene(rootNode):
 
-	smoothed = root.addChild('smoothed')
-	smoothed.addObject('VisualStyle', displayFlags="hideWireframe")
-	smoothed.addObject('MeshTopology', name="topology", src="@/origin/loader")
-	smoothed.addObject('SmoothMeshEngine', template="Vec3", name="smoother", input_position="@/origin/loader.position", nb_iterations="1", showOutput="true")
-```
+        root = rootNode.addChild('root')
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Transform")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('DefaultAnimationLoop')
+
+        origin = root.addChild('origin')
+        origin.addObject('VisualStyle', displayFlags="showWireframe")
+        origin.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
+        origin.addObject('OglModel', name="visual", src="@loader", color="yellow")
+
+        smoothed = root.addChild('smoothed')
+        smoothed.addObject('VisualStyle', displayFlags="hideWireframe")
+        smoothed.addObject('MeshTopology', name="topology", src="@/origin/loader")
+        smoothed.addObject('SmoothMeshEngine', template="Vec3", name="smoother", input_position="@/origin/loader.position", nb_iterations="1", showOutput="true")
+    ```
+

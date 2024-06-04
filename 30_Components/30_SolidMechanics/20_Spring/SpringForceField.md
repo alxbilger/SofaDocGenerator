@@ -4,6 +4,7 @@ Springs
 
 
 __Templates__:
+
 - Rigid3d
 - Vec1d
 - Vec2d
@@ -15,6 +16,7 @@ __Target__: Sofa.Component.SolidMechanics.Spring
 __namespace__: sofa::component::solidmechanics::spring
 
 __parents__: 
+
 - PairInteractionForceField
 
 Data: 

@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Collision.Detection.Intersection
 __namespace__: sofa::component::collision::detection::intersection
 
 __parents__: 
+
 - Intersection
 
 Data: 

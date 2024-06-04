@@ -4,6 +4,7 @@ Apply a sinusoidal trajectory to given points
 
 
 __Templates__:
+
 - Rigid3d
 - Vec3d
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Constraint.Projective
 __namespace__: sofa::component::constraint::projective
 
 __parents__: 
+
 - ProjectiveConstraintSet
 
 Data: 

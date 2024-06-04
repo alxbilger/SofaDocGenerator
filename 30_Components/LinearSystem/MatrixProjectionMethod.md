@@ -4,6 +4,7 @@ Matrix mapping computing the matrix projection using the Eigen library
 
 
 __Templates__:
+
 - CompressedRowSparseMatrixd
 
 __Target__: Sofa.Component.LinearSystem
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.LinearSystem
 __namespace__: sofa::component::linearsystem
 
 __parents__: 
+
 - BaseMatrixProjectionMethod
 
 Data: 

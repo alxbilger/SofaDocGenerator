@@ -16,6 +16,7 @@ __Target__: Sofa.Component.IO.Mesh
 __namespace__: sofa::component::_meshexporter_
 
 __parents__: 
+
 - BaseSimulationExporter
 
 Data: 

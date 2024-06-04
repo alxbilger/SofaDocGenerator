@@ -4,6 +4,7 @@ skin a model from a set of rigid lines
 
 
 __Templates__:
+
 - Rigid3d,Vec3d
 
 __Target__: Sofa.Component.Mapping.Linear
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - CRTPLinearMapping
 
 Data: 

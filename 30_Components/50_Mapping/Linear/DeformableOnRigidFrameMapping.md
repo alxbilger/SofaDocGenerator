@@ -4,6 +4,7 @@ Set the positions and velocities of points attached to a rigid parent
 
 
 __Templates__:
+
 - Vec3d,Rigid3d,Vec3d
 
 __Target__: Sofa.Component.Mapping.Linear
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - CRTPLinearMapping
 
 Data: 
@@ -162,313 +164,329 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="root" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.AnimationLoop"/> <!-- Needed to use components [FreeMotionAnimationLoop] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [LocalMinDistance] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel TriangleCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Lagrangian.Correction"/> <!-- Needed to use components [PrecomputedConstraintCorrection UncoupledConstraintCorrection] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Lagrangian.Solver"/> <!-- Needed to use components [LCPConstraintSolver] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping DeformableOnRigidFrameMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <VisualStyle displayFlags="showBehavior" />
-    <FreeMotionAnimationLoop />
-    <CollisionPipeline depth="6" verbose="0" draw="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <LocalMinDistance name="Proximity" alarmDistance="0.3" contactDistance="0.1" />
-    <CollisionResponse name="Response" response="FrictionContactConstraint" />
-    <LCPConstraintSolver tolerance="0.001" maxIt="1000"/>
-    <FreeMotionAnimationLoop/>
+Component/Mapping/Linear/DeformableOnRigidFrameMappingConstraints.scn
 
-    <Node name="ChainRigid">
-        <Node name="TorusFixed">
-            <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel simulated="0" moving="0" />
-            <LineCollisionModel simulated="0" moving="0" />
-            <PointCollisionModel simulated="0" moving="0" />
-            <MeshOBJLoader name="meshLoader_1" filename="mesh/torus2.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_1" color="gray" />
-        </Node>
-        <Node name="TorusRigid">
-            <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-            <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" />
-            <MechanicalObject name="rigidframe" template="Rigid3" position="1 2 0 0 0 0.7 0.7" />
-            <UniformMass filename="BehaviorModels/torus.rigid" />
-            <UncoupledConstraintCorrection />
-        </Node>
-        <Node name="TorusDeformLocal">
-            <EulerImplicitSolver />
-            <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" />
-            <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
-            <MechanicalObject />
-            <TetrahedronFEMForceField youngModulus="1e4" poissonRatio="0.45"/>
-            <BoxConstraint box="-1 -1 -1 1 1 1" />
-            <PrecomputedConstraintCorrection recompute="true" />
-            <Node name="DeformableMappedModel">
-                <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
-                <MechanicalObject name="deformedMO" />
-                <DeformableOnRigidFrameMapping input1="@.." input2="@../../TorusRigid/rigidframe" output="@deformedMO" printLog="0" />
-                <Node name="TorusCollisLocal">
-                    <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
-                    <MeshTopology src="@loader" />
-                    <MechanicalObject src="@loader" />
-                    <TriangleCollisionModel group="2" />
-                    <LineCollisionModel group="2" />
-                    <PointCollisionModel group="2" />
-                    <BarycentricMapping />
-                </Node>
-                <Node name="Visu">
-                    <MeshOBJLoader name="meshLoader_0" filename="mesh/torus.obj" handleSeams="1" />
-                    <OglModel name="Visual" src="@meshLoader_0" color="gray" />
-                    <BarycentricMapping input="@.." output="@Visual" />
-                </Node>
-            </Node>
-        </Node>
-    </Node>
-    <!---->
-</Node>
-```
-```python
-def createScene(rootNode):
+=== "XML"
 
-	root = rootNode.addChild('root', dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.AnimationLoop")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Lagrangian.Correction")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Lagrangian.Solver")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showBehavior")
-	root.addObject('FreeMotionAnimationLoop')
-	root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('LocalMinDistance', name="Proximity", alarmDistance="0.3", contactDistance="0.1")
-	root.addObject('CollisionResponse', name="Response", response="FrictionContactConstraint")
-	root.addObject('LCPConstraintSolver', tolerance="0.001", maxIt="1000")
-	root.addObject('FreeMotionAnimationLoop')
-
-	ChainRigid = root.addChild('ChainRigid')
-
-	TorusFixed = ChainRigid.addChild('TorusFixed')
-	TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
-	TorusFixed.addObject('MeshTopology', src="@loader")
-	TorusFixed.addObject('MechanicalObject', src="@loader")
-	TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
-	TorusFixed.addObject('LineCollisionModel', simulated="0", moving="0")
-	TorusFixed.addObject('PointCollisionModel', simulated="0", moving="0")
-	TorusFixed.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus2.obj", handleSeams="1")
-	TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
-
-	TorusRigid = ChainRigid.addChild('TorusRigid')
-	TorusRigid.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	TorusRigid.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15")
-	TorusRigid.addObject('MechanicalObject', name="rigidframe", template="Rigid3", position="1 2 0 0 0 0.7 0.7")
-	TorusRigid.addObject('UniformMass', filename="BehaviorModels/torus.rigid")
-	TorusRigid.addObject('UncoupledConstraintCorrection')
-
-	TorusDeformLocal = ChainRigid.addChild('TorusDeformLocal')
-	TorusDeformLocal.addObject('EulerImplicitSolver')
-	TorusDeformLocal.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15")
-	TorusDeformLocal.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
-	TorusDeformLocal.addObject('MechanicalObject')
-	TorusDeformLocal.addObject('TetrahedronFEMForceField', youngModulus="1e4", poissonRatio="0.45")
-	TorusDeformLocal.addObject('BoxConstraint', box="-1 -1 -1 1 1 1")
-	TorusDeformLocal.addObject('PrecomputedConstraintCorrection', recompute="true")
-
-	DeformableMappedModel = TorusDeformLocal.addChild('DeformableMappedModel')
-	DeformableMappedModel.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
-	DeformableMappedModel.addObject('MechanicalObject', name="deformedMO")
-	DeformableMappedModel.addObject('DeformableOnRigidFrameMapping', input1="@..", input2="@../../TorusRigid/rigidframe", output="@deformedMO", printLog="0")
-
-	TorusCollisLocal = DeformableMappedModel.addChild('TorusCollisLocal')
-	TorusCollisLocal.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
-	TorusCollisLocal.addObject('MeshTopology', src="@loader")
-	TorusCollisLocal.addObject('MechanicalObject', src="@loader")
-	TorusCollisLocal.addObject('TriangleCollisionModel', group="2")
-	TorusCollisLocal.addObject('LineCollisionModel', group="2")
-	TorusCollisLocal.addObject('PointCollisionModel', group="2")
-	TorusCollisLocal.addObject('BarycentricMapping')
-
-	Visu = DeformableMappedModel.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
-	Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
-```
-```xml
-<?xml version="1.0" ?>
-<!-- Mechanical DeformableOnRigidFrameMapping Example -->
-<Node name="root" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [NewProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [TriangleCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping DeformableOnRigidFrameMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [PlaneForceField] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <VisualStyle displayFlags="showBehavior showVisual" />
-    <CollisionPipeline depth="6" verbose="0" draw="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <NewProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-    <DefaultAnimationLoop/>
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="root" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.AnimationLoop"/> <!-- Needed to use components [FreeMotionAnimationLoop] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [LocalMinDistance] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel TriangleCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Lagrangian.Correction"/> <!-- Needed to use components [PrecomputedConstraintCorrection UncoupledConstraintCorrection] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Lagrangian.Solver"/> <!-- Needed to use components [LCPConstraintSolver] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping DeformableOnRigidFrameMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <VisualStyle displayFlags="showBehavior" />
+        <FreeMotionAnimationLoop />
+        <CollisionPipeline depth="6" verbose="0" draw="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <LocalMinDistance name="Proximity" alarmDistance="0.3" contactDistance="0.1" />
+        <CollisionResponse name="Response" response="FrictionContactConstraint" />
+        <LCPConstraintSolver tolerance="0.001" maxIt="1000"/>
+        <FreeMotionAnimationLoop/>
     
-    <Node name="ChainRigid">
-        <Node name="TorusFixed">
-            <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel simulated="0" moving="0" />
-            <MeshOBJLoader name="meshLoader_0" filename="mesh/torus2.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_0" color="gray" />
-        </Node>
-        <!-- 		<Node name="TorusRigid"> -->
-        <Node name="Torus">
-            <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-            <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" verbose="0" />
-            <MechanicalObject name="rigidframe" template="Rigid3" position="1 2 0 0 0 0.7 0.7" />
-            <UniformMass filename="BehaviorModels/torus.rigid" />
-            <!--<FixedProjectiveConstraint /> -->
-            <!-- 	</Node> -->
+        <Node name="ChainRigid">
+            <Node name="TorusFixed">
+                <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject src="@loader" />
+                <TriangleCollisionModel simulated="0" moving="0" />
+                <LineCollisionModel simulated="0" moving="0" />
+                <PointCollisionModel simulated="0" moving="0" />
+                <MeshOBJLoader name="meshLoader_1" filename="mesh/torus2.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_1" color="gray" />
+            </Node>
+            <Node name="TorusRigid">
+                <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+                <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" />
+                <MechanicalObject name="rigidframe" template="Rigid3" position="1 2 0 0 0 0.7 0.7" />
+                <UniformMass filename="BehaviorModels/torus.rigid" />
+                <UncoupledConstraintCorrection />
+            </Node>
             <Node name="TorusDeformLocal">
+                <EulerImplicitSolver />
+                <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" />
                 <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
                 <MechanicalObject />
-                <TetrahedronFEMForceField youngModulus="125" poissonRatio="0.45" />
+                <TetrahedronFEMForceField youngModulus="1e4" poissonRatio="0.45"/>
                 <BoxConstraint box="-1 -1 -1 1 1 1" />
+                <PrecomputedConstraintCorrection recompute="true" />
                 <Node name="DeformableMappedModel">
                     <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
                     <MechanicalObject name="deformedMO" />
-                    <DeformableOnRigidFrameMapping input1="@.." input2="@../../rigidframe" output="@deformedMO" printLog="0" />
+                    <DeformableOnRigidFrameMapping input1="@.." input2="@../../TorusRigid/rigidframe" output="@deformedMO" printLog="0" />
                     <Node name="TorusCollisLocal">
                         <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
                         <MeshTopology src="@loader" />
                         <MechanicalObject src="@loader" />
                         <TriangleCollisionModel group="2" />
+                        <LineCollisionModel group="2" />
+                        <PointCollisionModel group="2" />
                         <BarycentricMapping />
-                        <PlaneForceField name="Floor" normal="0 1 0" d="-4" stiffness="100" damping="1" />
                     </Node>
                     <Node name="Visu">
-                        <MeshOBJLoader name="meshLoader_1" filename="mesh/torus.obj" handleSeams="1" />
-                        <OglModel name="Visual" src="@meshLoader_1" color="gray" />
+                        <MeshOBJLoader name="meshLoader_0" filename="mesh/torus.obj" handleSeams="1" />
+                        <OglModel name="Visual" src="@meshLoader_0" color="gray" />
                         <BarycentricMapping input="@.." output="@Visual" />
                     </Node>
                 </Node>
             </Node>
         </Node>
+        <!---->
     </Node>
-    <!---->
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showBehavior showVisual")
-	root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('NewProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
-	root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	ChainRigid = root.addChild('ChainRigid')
+    ```python
+    def createScene(rootNode):
 
-	TorusFixed = ChainRigid.addChild('TorusFixed')
-	TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
-	TorusFixed.addObject('MeshTopology', src="@loader")
-	TorusFixed.addObject('MechanicalObject', src="@loader")
-	TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
-	TorusFixed.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus2.obj", handleSeams="1")
-	TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
+        root = rootNode.addChild('root', dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.AnimationLoop")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Lagrangian.Correction")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Lagrangian.Solver")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showBehavior")
+        root.addObject('FreeMotionAnimationLoop')
+        root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('LocalMinDistance', name="Proximity", alarmDistance="0.3", contactDistance="0.1")
+        root.addObject('CollisionResponse', name="Response", response="FrictionContactConstraint")
+        root.addObject('LCPConstraintSolver', tolerance="0.001", maxIt="1000")
+        root.addObject('FreeMotionAnimationLoop')
 
-	Torus = ChainRigid.addChild('Torus')
-	Torus.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	Torus.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15", verbose="0")
-	Torus.addObject('MechanicalObject', name="rigidframe", template="Rigid3", position="1 2 0 0 0 0.7 0.7")
-	Torus.addObject('UniformMass', filename="BehaviorModels/torus.rigid")
+        ChainRigid = root.addChild('ChainRigid')
 
-	TorusDeformLocal = Torus.addChild('TorusDeformLocal')
-	TorusDeformLocal.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
-	TorusDeformLocal.addObject('MechanicalObject')
-	TorusDeformLocal.addObject('TetrahedronFEMForceField', youngModulus="125", poissonRatio="0.45")
-	TorusDeformLocal.addObject('BoxConstraint', box="-1 -1 -1 1 1 1")
+        TorusFixed = ChainRigid.addChild('TorusFixed')
+        TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
+        TorusFixed.addObject('MeshTopology', src="@loader")
+        TorusFixed.addObject('MechanicalObject', src="@loader")
+        TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
+        TorusFixed.addObject('LineCollisionModel', simulated="0", moving="0")
+        TorusFixed.addObject('PointCollisionModel', simulated="0", moving="0")
+        TorusFixed.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus2.obj", handleSeams="1")
+        TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
 
-	DeformableMappedModel = TorusDeformLocal.addChild('DeformableMappedModel')
-	DeformableMappedModel.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
-	DeformableMappedModel.addObject('MechanicalObject', name="deformedMO")
-	DeformableMappedModel.addObject('DeformableOnRigidFrameMapping', input1="@..", input2="@../../rigidframe", output="@deformedMO", printLog="0")
+        TorusRigid = ChainRigid.addChild('TorusRigid')
+        TorusRigid.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        TorusRigid.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15")
+        TorusRigid.addObject('MechanicalObject', name="rigidframe", template="Rigid3", position="1 2 0 0 0 0.7 0.7")
+        TorusRigid.addObject('UniformMass', filename="BehaviorModels/torus.rigid")
+        TorusRigid.addObject('UncoupledConstraintCorrection')
 
-	TorusCollisLocal = DeformableMappedModel.addChild('TorusCollisLocal')
-	TorusCollisLocal.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
-	TorusCollisLocal.addObject('MeshTopology', src="@loader")
-	TorusCollisLocal.addObject('MechanicalObject', src="@loader")
-	TorusCollisLocal.addObject('TriangleCollisionModel', group="2")
-	TorusCollisLocal.addObject('BarycentricMapping')
-	TorusCollisLocal.addObject('PlaneForceField', name="Floor", normal="0 1 0", d="-4", stiffness="100", damping="1")
+        TorusDeformLocal = ChainRigid.addChild('TorusDeformLocal')
+        TorusDeformLocal.addObject('EulerImplicitSolver')
+        TorusDeformLocal.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15")
+        TorusDeformLocal.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
+        TorusDeformLocal.addObject('MechanicalObject')
+        TorusDeformLocal.addObject('TetrahedronFEMForceField', youngModulus="1e4", poissonRatio="0.45")
+        TorusDeformLocal.addObject('BoxConstraint', box="-1 -1 -1 1 1 1")
+        TorusDeformLocal.addObject('PrecomputedConstraintCorrection', recompute="true")
 
-	Visu = DeformableMappedModel.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
-	Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
-```
+        DeformableMappedModel = TorusDeformLocal.addChild('DeformableMappedModel')
+        DeformableMappedModel.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
+        DeformableMappedModel.addObject('MechanicalObject', name="deformedMO")
+        DeformableMappedModel.addObject('DeformableOnRigidFrameMapping', input1="@..", input2="@../../TorusRigid/rigidframe", output="@deformedMO", printLog="0")
+
+        TorusCollisLocal = DeformableMappedModel.addChild('TorusCollisLocal')
+        TorusCollisLocal.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
+        TorusCollisLocal.addObject('MeshTopology', src="@loader")
+        TorusCollisLocal.addObject('MechanicalObject', src="@loader")
+        TorusCollisLocal.addObject('TriangleCollisionModel', group="2")
+        TorusCollisLocal.addObject('LineCollisionModel', group="2")
+        TorusCollisLocal.addObject('PointCollisionModel', group="2")
+        TorusCollisLocal.addObject('BarycentricMapping')
+
+        Visu = DeformableMappedModel.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
+        Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+    ```
+
+Component/Mapping/Linear/DeformableOnRigidFrameMapping.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0" ?>
+    <!-- Mechanical DeformableOnRigidFrameMapping Example -->
+    <Node name="root" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [NewProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [TriangleCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping DeformableOnRigidFrameMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [PlaneForceField] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <VisualStyle displayFlags="showBehavior showVisual" />
+        <CollisionPipeline depth="6" verbose="0" draw="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <NewProximityIntersection name="Proximity" alarmDistance="0.3" contactDistance="0.2" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+        <DefaultAnimationLoop/>
+        
+        <Node name="ChainRigid">
+            <Node name="TorusFixed">
+                <MeshOBJLoader name="loader" filename="mesh/torus2_for_collision.obj" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject src="@loader" />
+                <TriangleCollisionModel simulated="0" moving="0" />
+                <MeshOBJLoader name="meshLoader_0" filename="mesh/torus2.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_0" color="gray" />
+            </Node>
+            <!-- 		<Node name="TorusRigid"> -->
+            <Node name="Torus">
+                <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+                <CGLinearSolver iterations="50" threshold="1e-15" tolerance="1e-15" verbose="0" />
+                <MechanicalObject name="rigidframe" template="Rigid3" position="1 2 0 0 0 0.7 0.7" />
+                <UniformMass filename="BehaviorModels/torus.rigid" />
+                <!--<FixedProjectiveConstraint /> -->
+                <!-- 	</Node> -->
+                <Node name="TorusDeformLocal">
+                    <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
+                    <MechanicalObject />
+                    <TetrahedronFEMForceField youngModulus="125" poissonRatio="0.45" />
+                    <BoxConstraint box="-1 -1 -1 1 1 1" />
+                    <Node name="DeformableMappedModel">
+                        <SparseGridTopology filename="mesh/torus_for_collision.obj" n="7 2 4" />
+                        <MechanicalObject name="deformedMO" />
+                        <DeformableOnRigidFrameMapping input1="@.." input2="@../../rigidframe" output="@deformedMO" printLog="0" />
+                        <Node name="TorusCollisLocal">
+                            <MeshOBJLoader name="loader" filename="mesh/torus_for_collision.obj" />
+                            <MeshTopology src="@loader" />
+                            <MechanicalObject src="@loader" />
+                            <TriangleCollisionModel group="2" />
+                            <BarycentricMapping />
+                            <PlaneForceField name="Floor" normal="0 1 0" d="-4" stiffness="100" damping="1" />
+                        </Node>
+                        <Node name="Visu">
+                            <MeshOBJLoader name="meshLoader_1" filename="mesh/torus.obj" handleSeams="1" />
+                            <OglModel name="Visual" src="@meshLoader_1" color="gray" />
+                            <BarycentricMapping input="@.." output="@Visual" />
+                        </Node>
+                    </Node>
+                </Node>
+            </Node>
+        </Node>
+        <!---->
+    </Node>
+    ```
+
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showBehavior showVisual")
+        root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('NewProximityIntersection', name="Proximity", alarmDistance="0.3", contactDistance="0.2")
+        root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+        root.addObject('DefaultAnimationLoop')
+
+        ChainRigid = root.addChild('ChainRigid')
+
+        TorusFixed = ChainRigid.addChild('TorusFixed')
+        TorusFixed.addObject('MeshOBJLoader', name="loader", filename="mesh/torus2_for_collision.obj")
+        TorusFixed.addObject('MeshTopology', src="@loader")
+        TorusFixed.addObject('MechanicalObject', src="@loader")
+        TorusFixed.addObject('TriangleCollisionModel', simulated="0", moving="0")
+        TorusFixed.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/torus2.obj", handleSeams="1")
+        TorusFixed.addObject('OglModel', name="Visual", src="@meshLoader_0", color="gray")
+
+        Torus = ChainRigid.addChild('Torus')
+        Torus.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        Torus.addObject('CGLinearSolver', iterations="50", threshold="1e-15", tolerance="1e-15", verbose="0")
+        Torus.addObject('MechanicalObject', name="rigidframe", template="Rigid3", position="1 2 0 0 0 0.7 0.7")
+        Torus.addObject('UniformMass', filename="BehaviorModels/torus.rigid")
+
+        TorusDeformLocal = Torus.addChild('TorusDeformLocal')
+        TorusDeformLocal.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
+        TorusDeformLocal.addObject('MechanicalObject')
+        TorusDeformLocal.addObject('TetrahedronFEMForceField', youngModulus="125", poissonRatio="0.45")
+        TorusDeformLocal.addObject('BoxConstraint', box="-1 -1 -1 1 1 1")
+
+        DeformableMappedModel = TorusDeformLocal.addChild('DeformableMappedModel')
+        DeformableMappedModel.addObject('SparseGridTopology', filename="mesh/torus_for_collision.obj", n="7 2 4")
+        DeformableMappedModel.addObject('MechanicalObject', name="deformedMO")
+        DeformableMappedModel.addObject('DeformableOnRigidFrameMapping', input1="@..", input2="@../../rigidframe", output="@deformedMO", printLog="0")
+
+        TorusCollisLocal = DeformableMappedModel.addChild('TorusCollisLocal')
+        TorusCollisLocal.addObject('MeshOBJLoader', name="loader", filename="mesh/torus_for_collision.obj")
+        TorusCollisLocal.addObject('MeshTopology', src="@loader")
+        TorusCollisLocal.addObject('MechanicalObject', src="@loader")
+        TorusCollisLocal.addObject('TriangleCollisionModel', group="2")
+        TorusCollisLocal.addObject('BarycentricMapping')
+        TorusCollisLocal.addObject('PlaneForceField', name="Floor", normal="0 1 0", d="-4", stiffness="100", damping="1")
+
+        Visu = DeformableMappedModel.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/torus.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="gray")
+        Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+    ```
+

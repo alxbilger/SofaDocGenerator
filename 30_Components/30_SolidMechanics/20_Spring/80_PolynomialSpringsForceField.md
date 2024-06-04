@@ -1,3 +1,7 @@
+---
+title: PolynomialSpringsForceField
+---
+
 PolynomialSpringsForceField
 ===========================
 
@@ -73,6 +77,7 @@ __Target__: Sofa.Component.SolidMechanics.Spring
 __namespace__: sofa::component::solidmechanics::spring
 
 __parents__: 
+
 - PairInteractionForceField
 
 Data: 
@@ -251,89 +256,97 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0" ?>
-<Node name="lroot" gravity="0 0 0" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [PolynomialSpringsForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/SolidMechanics/Spring/PolynomialSpringsForceField.scn
 
-    <VisualStyle displayFlags="showInteractionForceFields"/>
-    <DefaultAnimationLoop/>
-    <MeshOBJLoader name="LiverSurface" filename="mesh/liver-smooth.obj" />
+=== "XML"
 
-    <Node name="Liver" >
-        <EulerImplicitSolver name="cg_odesolver"   rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver name="linear solver" iterations="25" tolerance="1e-09" threshold="1e-09" />
-        <MeshGmshLoader name="meshLoader" filename="mesh/liver.msh" />
-        <TetrahedronSetTopologyContainer name="topo" src="@meshLoader" />
-        <MechanicalObject name="dofs" src="@meshLoader" />
-        <TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
-        <DiagonalMass  name="computed using mass density" massDensity="1" />
-        <TetrahedralCorotationalFEMForceField template="Vec3" name="FEM" method="large" poissonRatio="0.3" youngModulus="3000" computeGlobalMatrix="0" />
-        <FixedProjectiveConstraint  name="FixedProjectiveConstraint" indices="3 39 64" />
-        <Node name="Visu" tags="Visual" gravity="0 -9.81 0">
-            <OglModel  name="VisualModel" src="@../../LiverSurface" />
-            <BarycentricMapping name="visual mapping" input="@../dofs" output="@VisualModel" />
+    ```xml
+    <?xml version="1.0" ?>
+    <Node name="lroot" gravity="0 0 0" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshGmshLoader MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [DiagonalMass UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedralCorotationalFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.Spring"/> <!-- Needed to use components [PolynomialSpringsForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetGeometryAlgorithms TetrahedronSetTopologyContainer] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <VisualStyle displayFlags="showInteractionForceFields"/>
+        <DefaultAnimationLoop/>
+        <MeshOBJLoader name="LiverSurface" filename="mesh/liver-smooth.obj" />
+    
+        <Node name="Liver" >
+            <EulerImplicitSolver name="cg_odesolver"   rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver name="linear solver" iterations="25" tolerance="1e-09" threshold="1e-09" />
+            <MeshGmshLoader name="meshLoader" filename="mesh/liver.msh" />
+            <TetrahedronSetTopologyContainer name="topo" src="@meshLoader" />
+            <MechanicalObject name="dofs" src="@meshLoader" />
+            <TetrahedronSetGeometryAlgorithms template="Vec3" name="GeomAlgo" />
+            <DiagonalMass  name="computed using mass density" massDensity="1" />
+            <TetrahedralCorotationalFEMForceField template="Vec3" name="FEM" method="large" poissonRatio="0.3" youngModulus="3000" computeGlobalMatrix="0" />
+            <FixedProjectiveConstraint  name="FixedProjectiveConstraint" indices="3 39 64" />
+            <Node name="Visu" tags="Visual" gravity="0 -9.81 0">
+                <OglModel  name="VisualModel" src="@../../LiverSurface" />
+                <BarycentricMapping name="visual mapping" input="@../dofs" output="@VisualModel" />
+            </Node>
+    
+            <Node name="Weight" >
+                <MechanicalObject template="Vec3" name="myParticle" rest_position="0 0 0" position="0 0 0" />
+                <UniformMass totalMass="30" />
+                <PolynomialSpringsForceField polynomialDegree="3" polynomialStiffness="20 10 50" object1='@.' firstObjectPoints='0' object2='@../dofs' secondObjectPoints='15' drawMode='0' showIndicesScale="1"/>
+            </Node>
         </Node>
-
-        <Node name="Weight" >
-            <MechanicalObject template="Vec3" name="myParticle" rest_position="0 0 0" position="0 0 0" />
-            <UniformMass totalMass="30" />
-            <PolynomialSpringsForceField polynomialDegree="3" polynomialStiffness="20 10 50" object1='@.' firstObjectPoints='0' object2='@../dofs' secondObjectPoints='15' drawMode='0' showIndicesScale="1"/>
-        </Node>
+    
     </Node>
+    ```
 
-</Node>
-```
-```python
-def createScene(rootNode):
+=== "Python"
 
-	lroot = rootNode.addChild('lroot', gravity="0 0 0", dt="0.02")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	lroot.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	lroot.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	lroot.addObject('VisualStyle', displayFlags="showInteractionForceFields")
-	lroot.addObject('DefaultAnimationLoop')
-	lroot.addObject('MeshOBJLoader', name="LiverSurface", filename="mesh/liver-smooth.obj")
+    ```python
+    def createScene(rootNode):
 
-	Liver = lroot.addChild('Liver')
-	Liver.addObject('EulerImplicitSolver', name="cg_odesolver", rayleighStiffness="0.1", rayleighMass="0.1")
-	Liver.addObject('CGLinearSolver', name="linear solver", iterations="25", tolerance="1e-09", threshold="1e-09")
-	Liver.addObject('MeshGmshLoader', name="meshLoader", filename="mesh/liver.msh")
-	Liver.addObject('TetrahedronSetTopologyContainer', name="topo", src="@meshLoader")
-	Liver.addObject('MechanicalObject', name="dofs", src="@meshLoader")
-	Liver.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
-	Liver.addObject('DiagonalMass', name="computed using mass density", massDensity="1")
-	Liver.addObject('TetrahedralCorotationalFEMForceField', template="Vec3", name="FEM", method="large", poissonRatio="0.3", youngModulus="3000", computeGlobalMatrix="0")
-	Liver.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
+        lroot = rootNode.addChild('lroot', gravity="0 0 0", dt="0.02")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.Spring")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        lroot.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        lroot.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        lroot.addObject('VisualStyle', displayFlags="showInteractionForceFields")
+        lroot.addObject('DefaultAnimationLoop')
+        lroot.addObject('MeshOBJLoader', name="LiverSurface", filename="mesh/liver-smooth.obj")
 
-	Visu = Liver.addChild('Visu', tags="Visual", gravity="0 -9.81 0")
-	Visu.addObject('OglModel', name="VisualModel", src="@../../LiverSurface")
-	Visu.addObject('BarycentricMapping', name="visual mapping", input="@../dofs", output="@VisualModel")
+        Liver = lroot.addChild('Liver')
+        Liver.addObject('EulerImplicitSolver', name="cg_odesolver", rayleighStiffness="0.1", rayleighMass="0.1")
+        Liver.addObject('CGLinearSolver', name="linear solver", iterations="25", tolerance="1e-09", threshold="1e-09")
+        Liver.addObject('MeshGmshLoader', name="meshLoader", filename="mesh/liver.msh")
+        Liver.addObject('TetrahedronSetTopologyContainer', name="topo", src="@meshLoader")
+        Liver.addObject('MechanicalObject', name="dofs", src="@meshLoader")
+        Liver.addObject('TetrahedronSetGeometryAlgorithms', template="Vec3", name="GeomAlgo")
+        Liver.addObject('DiagonalMass', name="computed using mass density", massDensity="1")
+        Liver.addObject('TetrahedralCorotationalFEMForceField', template="Vec3", name="FEM", method="large", poissonRatio="0.3", youngModulus="3000", computeGlobalMatrix="0")
+        Liver.addObject('FixedProjectiveConstraint', name="FixedProjectiveConstraint", indices="3 39 64")
 
-	Weight = Liver.addChild('Weight')
-	Weight.addObject('MechanicalObject', template="Vec3", name="myParticle", rest_position="0 0 0", position="0 0 0")
-	Weight.addObject('UniformMass', totalMass="30")
-	Weight.addObject('PolynomialSpringsForceField', polynomialDegree="3", polynomialStiffness="20 10 50", object1="@.", firstObjectPoints="0", object2="@../dofs", secondObjectPoints="15", drawMode="0", showIndicesScale="1")
-```
+        Visu = Liver.addChild('Visu', tags="Visual", gravity="0 -9.81 0")
+        Visu.addObject('OglModel', name="VisualModel", src="@../../LiverSurface")
+        Visu.addObject('BarycentricMapping', name="visual mapping", input="@../dofs", output="@VisualModel")
+
+        Weight = Liver.addChild('Weight')
+        Weight.addObject('MechanicalObject', template="Vec3", name="myParticle", rest_position="0 0 0", position="0 0 0")
+        Weight.addObject('UniformMass', totalMass="30")
+        Weight.addObject('PolynomialSpringsForceField', polynomialDegree="3", polynomialStiffness="20 10 50", object1="@.", firstObjectPoints="0", object2="@../dofs", secondObjectPoints="15", drawMode="0", showIndicesScale="1")
+    ```
+
 
 <!-- automatically generated doc END -->

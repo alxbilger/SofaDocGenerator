@@ -4,6 +4,7 @@ Compute the Hausdorff distance of two point clouds
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec1d
@@ -15,6 +16,7 @@ __Target__: Sofa.Component.Engine.Analyze
 __namespace__: sofa::component::engine::analyze
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -134,137 +136,145 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="Scene" gravity="0 0 0" dt="0.1" >
-    <RequiredPlugin name="Sofa.Component.Engine.Analyze"/> <!-- Needed to use components [HausdorffDistance] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.Setting"/> <!-- Needed to use components [BackgroundSetting] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Engine/Analyze/HausdorffDistance.scn
 
-    <VisualStyle displayFlags="showBehavior" />
-    <BackgroundSetting color="1 1 1"/>
-    <DefaultAnimationLoop/>
+=== "XML"
 
-    <Node name="case1">
-        <Node name="mesh1">
-            <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj"/>          
-            <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
-
+    ```xml
+    <Node name="Scene" gravity="0 0 0" dt="0.1" >
+        <RequiredPlugin name="Sofa.Component.Engine.Analyze"/> <!-- Needed to use components [HausdorffDistance] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.Setting"/> <!-- Needed to use components [BackgroundSetting] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <VisualStyle displayFlags="showBehavior" />
+        <BackgroundSetting color="1 1 1"/>
+        <DefaultAnimationLoop/>
+    
+        <Node name="case1">
+            <Node name="mesh1">
+                <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj"/>          
+                <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
+    
+            </Node>
+    
+            <Node name="mesh2">
+                <MeshOBJLoader name="meshloader2" filename="mesh/cube.obj" />
+                <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+            </Node>
+    
+            <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
         </Node>
-
-        <Node name="mesh2">
-            <MeshOBJLoader name="meshloader2" filename="mesh/cube.obj" />
-            <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+    
+        <Node name="case2">
+            <Node name="mesh1">
+                <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj" translation="5 0 0"/>          
+                <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
+    
+            </Node>
+    
+            <Node name="mesh2">
+                <MeshOBJLoader name="meshloader2" filename="mesh/cube.obj" translation="6 0 0"/>
+                <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+            </Node>
+    
+            <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
         </Node>
-
-        <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
-    </Node>
-
-    <Node name="case2">
-        <Node name="mesh1">
-            <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj" translation="5 0 0"/>          
-            <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
-
+    
+        <Node name="case3">
+            <Node name="mesh1">
+                <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj" translation="10 0 0"/>          
+                <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
+    
+            </Node>
+    
+            <Node name="mesh2">
+                <MeshOBJLoader name="meshloader2" filename="mesh/sphere.obj" translation="10 0 0"/>
+                <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+            </Node>
+    
+            <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
         </Node>
-
-        <Node name="mesh2">
-            <MeshOBJLoader name="meshloader2" filename="mesh/cube.obj" translation="6 0 0"/>
-            <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+    
+        <Node name="case4">
+            <MeshOBJLoader name="meshloader1" filename="mesh/sphere.obj" translation="10 0 0"/>
+            <HausdorffDistance points1="@meshloader1.position" points2="0 0 0"/>
         </Node>
-
-        <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
-    </Node>
-
-    <Node name="case3">
-        <Node name="mesh1">
-            <MeshOBJLoader name="meshloader1" filename="mesh/cube.obj" translation="10 0 0"/>          
-            <OglModel name="visu1" src="@meshloader1" color="0.8 0.2 0.2 0.5"/>
-
+    
+        <Node name="case5">
+            <HausdorffDistance points1="10 0 0" points2="0 0 0"/>
         </Node>
-
-        <Node name="mesh2">
-            <MeshOBJLoader name="meshloader2" filename="mesh/sphere.obj" translation="10 0 0"/>
-            <OglModel name="visu1" src="@meshloader2" color="0.2 0.2 0.8 0.5"/>
+    
+        <Node name="case6">
+            <HausdorffDistance template="Vec2" points1="10 0" points2="0 0"/>
         </Node>
-
-        <HausdorffDistance points1="@mesh1/meshloader1.position" points2="@mesh2/meshloader2.position"/>
+    
+        <Node name="case7">
+            <HausdorffDistance template="Vec1" points1="10" points2="0"/>
+        </Node>
     </Node>
+    ```
 
-    <Node name="case4">
-        <MeshOBJLoader name="meshloader1" filename="mesh/sphere.obj" translation="10 0 0"/>
-        <HausdorffDistance points1="@meshloader1.position" points2="0 0 0"/>
-    </Node>
+=== "Python"
 
-    <Node name="case5">
-        <HausdorffDistance points1="10 0 0" points2="0 0 0"/>
-    </Node>
+    ```python
+    def createScene(rootNode):
 
-    <Node name="case6">
-        <HausdorffDistance template="Vec2" points1="10 0" points2="0 0"/>
-    </Node>
+        Scene = rootNode.addChild('Scene', gravity="0 0 0", dt="0.1")
+        Scene.addObject('RequiredPlugin', name="Sofa.Component.Engine.Analyze")
+        Scene.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        Scene.addObject('RequiredPlugin', name="Sofa.Component.Setting")
+        Scene.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        Scene.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        Scene.addObject('VisualStyle', displayFlags="showBehavior")
+        Scene.addObject('BackgroundSetting', color="1 1 1")
+        Scene.addObject('DefaultAnimationLoop')
 
-    <Node name="case7">
-        <HausdorffDistance template="Vec1" points1="10" points2="0"/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+        case1 = Scene.addChild('case1')
 
-	Scene = rootNode.addChild('Scene', gravity="0 0 0", dt="0.1")
-	Scene.addObject('RequiredPlugin', name="Sofa.Component.Engine.Analyze")
-	Scene.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	Scene.addObject('RequiredPlugin', name="Sofa.Component.Setting")
-	Scene.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	Scene.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	Scene.addObject('VisualStyle', displayFlags="showBehavior")
-	Scene.addObject('BackgroundSetting', color="1 1 1")
-	Scene.addObject('DefaultAnimationLoop')
+        mesh1 = case1.addChild('mesh1')
+        mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj")
+        mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
 
-	case1 = Scene.addChild('case1')
+        mesh2 = case1.addChild('mesh2')
+        mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/cube.obj")
+        mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
+        case1.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
 
-	mesh1 = case1.addChild('mesh1')
-	mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj")
-	mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
+        case2 = Scene.addChild('case2')
 
-	mesh2 = case1.addChild('mesh2')
-	mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/cube.obj")
-	mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
-	case1.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
+        mesh1 = case2.addChild('mesh1')
+        mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj", translation="5 0 0")
+        mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
 
-	case2 = Scene.addChild('case2')
+        mesh2 = case2.addChild('mesh2')
+        mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/cube.obj", translation="6 0 0")
+        mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
+        case2.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
 
-	mesh1 = case2.addChild('mesh1')
-	mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj", translation="5 0 0")
-	mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
+        case3 = Scene.addChild('case3')
 
-	mesh2 = case2.addChild('mesh2')
-	mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/cube.obj", translation="6 0 0")
-	mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
-	case2.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
+        mesh1 = case3.addChild('mesh1')
+        mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj", translation="10 0 0")
+        mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
 
-	case3 = Scene.addChild('case3')
+        mesh2 = case3.addChild('mesh2')
+        mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/sphere.obj", translation="10 0 0")
+        mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
+        case3.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
 
-	mesh1 = case3.addChild('mesh1')
-	mesh1.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/cube.obj", translation="10 0 0")
-	mesh1.addObject('OglModel', name="visu1", src="@meshloader1", color="0.8 0.2 0.2 0.5")
+        case4 = Scene.addChild('case4')
+        case4.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/sphere.obj", translation="10 0 0")
+        case4.addObject('HausdorffDistance', points1="@meshloader1.position", points2="0 0 0")
 
-	mesh2 = case3.addChild('mesh2')
-	mesh2.addObject('MeshOBJLoader', name="meshloader2", filename="mesh/sphere.obj", translation="10 0 0")
-	mesh2.addObject('OglModel', name="visu1", src="@meshloader2", color="0.2 0.2 0.8 0.5")
-	case3.addObject('HausdorffDistance', points1="@mesh1/meshloader1.position", points2="@mesh2/meshloader2.position")
+        case5 = Scene.addChild('case5')
+        case5.addObject('HausdorffDistance', points1="10 0 0", points2="0 0 0")
 
-	case4 = Scene.addChild('case4')
-	case4.addObject('MeshOBJLoader', name="meshloader1", filename="mesh/sphere.obj", translation="10 0 0")
-	case4.addObject('HausdorffDistance', points1="@meshloader1.position", points2="0 0 0")
+        case6 = Scene.addChild('case6')
+        case6.addObject('HausdorffDistance', template="Vec2", points1="10 0", points2="0 0")
 
-	case5 = Scene.addChild('case5')
-	case5.addObject('HausdorffDistance', points1="10 0 0", points2="0 0 0")
+        case7 = Scene.addChild('case7')
+        case7.addObject('HausdorffDistance', template="Vec1", points1="10", points2="0")
+    ```
 
-	case6 = Scene.addChild('case6')
-	case6.addObject('HausdorffDistance', template="Vec2", points1="10 0", points2="0 0")
-
-	case7 = Scene.addChild('case7')
-	case7.addObject('HausdorffDistance', template="Vec1", points1="10", points2="0")
-```

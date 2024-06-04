@@ -8,6 +8,7 @@ __Target__: Sofa.Component.ODESolver.Backward
 __namespace__: sofa::component::odesolver::backward
 
 __parents__: 
+
 - OdeSolver
 - LinearSolverAccessor
 
@@ -158,58 +159,66 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [VariationalSymplecticSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <DefaultAnimationLoop/>
+Component/ODESolver/Backward/VariationalSymplecticSolver.scn
 
-    <VisualStyle displayFlags="showBehaviorModels showForceFields" />
-    <Node name="Single">
-	<VariationalSymplecticSolver name="default0"  tags="meca" rayleighStiffness="0" rayleighMass="0" newtonError="1e-12" steps="4" file="energy.txt" saveEnergyInFile ="true"/>
-        <CGLinearSolver template="GraphScattered" name="cGLinearSolver1" iterations="300"  tolerance="1e-09"  threshold="1e-9"/>
-        <Node name="M1">
-            <MechanicalObject />
-            <UniformMass vertexMass="1" />
-            <RegularGridTopology nx="4" ny="4" nz="28" xmin="-9" xmax="-6" ymin="0" ymax="3" zmin="0" zmax="27" />
-            <BoxConstraint box="-9.1 -0.1 -0.1 -5.9 3.1 0.1" />
-            <!--<BoxConstraint box="-9.1 -0.1 26.9 -5.9 3.1 27.1" />-->
-            <TetrahedronFEMForceField name="FEM" youngModulus="100000" poissonRatio="0.3" />
+=== "XML"
+
+    ```xml
+    <Node name="root" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [VariationalSymplecticSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [TetrahedronFEMForceField] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [RegularGridTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <DefaultAnimationLoop/>
+    
+        <VisualStyle displayFlags="showBehaviorModels showForceFields" />
+        <Node name="Single">
+    	<VariationalSymplecticSolver name="default0"  tags="meca" rayleighStiffness="0" rayleighMass="0" newtonError="1e-12" steps="4" file="energy.txt" saveEnergyInFile ="true"/>
+            <CGLinearSolver template="GraphScattered" name="cGLinearSolver1" iterations="300"  tolerance="1e-09"  threshold="1e-9"/>
+            <Node name="M1">
+                <MechanicalObject />
+                <UniformMass vertexMass="1" />
+                <RegularGridTopology nx="4" ny="4" nz="28" xmin="-9" xmax="-6" ymin="0" ymax="3" zmin="0" zmax="27" />
+                <BoxConstraint box="-9.1 -0.1 -0.1 -5.9 3.1 0.1" />
+                <!--<BoxConstraint box="-9.1 -0.1 26.9 -5.9 3.1 27.1" />-->
+                <TetrahedronFEMForceField name="FEM" youngModulus="100000" poissonRatio="0.3" />
+            </Node>
         </Node>
     </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+=== "Python"
 
-	Single = root.addChild('Single')
-	Single.addObject('VariationalSymplecticSolver', name="default0", tags="meca", rayleighStiffness="0", rayleighMass="0", newtonError="1e-12", steps="4", file="energy.txt", saveEnergyInFile="true")
-	Single.addObject('CGLinearSolver', template="GraphScattered", name="cGLinearSolver1", iterations="300", tolerance="1e-09", threshold="1e-9")
+    ```python
+    def createScene(rootNode):
 
-	M1 = Single.addChild('M1')
-	M1.addObject('MechanicalObject')
-	M1.addObject('UniformMass', vertexMass="1")
-	M1.addObject('RegularGridTopology', nx="4", ny="4", nz="28", xmin="-9", xmax="-6", ymin="0", ymax="3", zmin="0", zmax="27")
-	M1.addObject('BoxConstraint', box="-9.1 -0.1 -0.1 -5.9 3.1 0.1")
-	M1.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="100000", poissonRatio="0.3")
-```
+        root = rootNode.addChild('root', dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showForceFields")
+
+        Single = root.addChild('Single')
+        Single.addObject('VariationalSymplecticSolver', name="default0", tags="meca", rayleighStiffness="0", rayleighMass="0", newtonError="1e-12", steps="4", file="energy.txt", saveEnergyInFile="true")
+        Single.addObject('CGLinearSolver', template="GraphScattered", name="cGLinearSolver1", iterations="300", tolerance="1e-09", threshold="1e-9")
+
+        M1 = Single.addChild('M1')
+        M1.addObject('MechanicalObject')
+        M1.addObject('UniformMass', vertexMass="1")
+        M1.addObject('RegularGridTopology', nx="4", ny="4", nz="28", xmin="-9", xmax="-6", ymin="0", ymax="3", zmin="0", zmax="27")
+        M1.addObject('BoxConstraint', box="-9.1 -0.1 -0.1 -5.9 3.1 0.1")
+        M1.addObject('TetrahedronFEMForceField', name="FEM", youngModulus="100000", poissonRatio="0.3")
+    ```
+

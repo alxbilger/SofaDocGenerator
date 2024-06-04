@@ -8,6 +8,7 @@ __Target__: Sofa.Component.IO.Mesh
 __namespace__: sofa::component::_vtkexporter_
 
 __parents__: 
+
 - BaseObject
 
 Data: 
@@ -177,33 +178,41 @@ Links:
 
 ## Examples
 
-```xml
-<Node name="root" dt="0.01" gravity="0 -9.81 0">
-	<RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader VTKExporter] -->
-	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetTopologyContainer] -->
-	<DefaultAnimationLoop/>
+Component/IO/Mesh/VTKExporter.scn
 
-    <MeshTopology name="mesh" filename="mesh/dragon.obj" />
-    <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
-    <MechanicalObject src="@loader" template="Vec3" name="mecha" showObject="1" />
-    <TetrahedronSetTopologyContainer src="@loader" name="topo" />
-    <VTKExporter filename="example.vtk" listening="true" edges="0" triangles="1" quads="0" tetras="0" pointsDataFields="mecha.position" exportAtBegin="1" />
-</Node>
-```
-```python
-def createScene(rootNode):
+=== "XML"
 
-	root = rootNode.addChild('root', dt="0.01", gravity="0 -9.81 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('MeshTopology', name="mesh", filename="mesh/dragon.obj")
-	root.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
-	root.addObject('MechanicalObject', src="@loader", template="Vec3", name="mecha", showObject="1")
-	root.addObject('TetrahedronSetTopologyContainer', src="@loader", name="topo")
-	root.addObject('VTKExporter', filename="example.vtk", listening="true", edges="0", triangles="1", quads="0", tetras="0", pointsDataFields="mecha.position", exportAtBegin="1")
-```
+    ```xml
+    <Node name="root" dt="0.01" gravity="0 -9.81 0">
+    	<RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader VTKExporter] -->
+    	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [TetrahedronSetTopologyContainer] -->
+    	<DefaultAnimationLoop/>
+    
+        <MeshTopology name="mesh" filename="mesh/dragon.obj" />
+        <MeshOBJLoader name="loader" filename="mesh/dragon.obj" />
+        <MechanicalObject src="@loader" template="Vec3" name="mecha" showObject="1" />
+        <TetrahedronSetTopologyContainer src="@loader" name="topo" />
+        <VTKExporter filename="example.vtk" listening="true" edges="0" triangles="1" quads="0" tetras="0" pointsDataFields="mecha.position" exportAtBegin="1" />
+    </Node>
+    ```
+
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        root = rootNode.addChild('root', dt="0.01", gravity="0 -9.81 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('MeshTopology', name="mesh", filename="mesh/dragon.obj")
+        root.addObject('MeshOBJLoader', name="loader", filename="mesh/dragon.obj")
+        root.addObject('MechanicalObject', src="@loader", template="Vec3", name="mecha", showObject="1")
+        root.addObject('TetrahedronSetTopologyContainer', src="@loader", name="topo")
+        root.addObject('VTKExporter', filename="example.vtk", listening="true", edges="0", triangles="1", quads="0", tetras="0", pointsDataFields="mecha.position", exportAtBegin="1")
+    ```
+

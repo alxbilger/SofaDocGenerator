@@ -4,6 +4,7 @@ Attach given particles to their initial positions
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec1d
@@ -16,6 +17,7 @@ __Target__: Sofa.Component.Constraint.Projective
 __namespace__: sofa::component::constraint::projective
 
 __parents__: 
+
 - FixedProjectiveConstraint
 
 Data: 

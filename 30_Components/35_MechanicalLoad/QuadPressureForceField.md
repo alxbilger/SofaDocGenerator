@@ -4,6 +4,7 @@ QuadPressure
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.MechanicalLoad
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.MechanicalLoad
 __namespace__: sofa::component::mechanicalload
 
 __parents__: 
+
 - ForceField
 
 Data: 

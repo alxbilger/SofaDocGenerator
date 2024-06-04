@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Topology.Container.Grid
 __namespace__: sofa::component::topology::container::grid
 
 __parents__: 
+
 - SparseGridTopology
 
 Data: 
@@ -199,7 +200,7 @@ Dimension of the convolution kernel to smooth the voxels. 0 if no smoothing is r
 	<tr>
 		<td>facets</td>
 		<td>
-Input mesh d_facets
+Input mesh facets
 </td>
 		<td></td>
 	</tr>
@@ -264,192 +265,200 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" gravity="0 0 -9" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel TriangleCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
-    <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [HexahedronFEMForceFieldAndMass] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridRamificationTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+Component/Topology/Container/Grid/SparseGridRamificationTopology.scn
 
-    <VisualStyle displayFlags="showVisual showBehaviorModels showForceFields" />
-    <DefaultAnimationLoop/>
-    <CollisionPipeline depth="6" verbose="0" draw="0" />
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <MinProximityIntersection name="Proximity" alarmDistance="0.5" contactDistance="0.3" />
-    <CollisionResponse name="Response" response="PenalityContactForceField" />
-    <Node name="UniformC Rough">
-        <SparseGridRamificationTopology n="5 2 2" fileTopology="mesh/c.obj" nbVirtualFinerLevels="3" finestConnectivity="0" />
-        <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
-        <MechanicalObject />
-        <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
-        <BoxConstraint box="-16 -10 -3 -14 10 3" />
-        <Node name="Visu">
-            <MeshOBJLoader name="meshLoader_1" filename="mesh/c.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_1" color="blue" />
-            <BarycentricMapping input="@.." output="@Visual" />
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" gravity="0 0 -9" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [MinProximityIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [LineCollisionModel PointCollisionModel TriangleCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.Constraint.Projective"/> <!-- Needed to use components [FixedProjectiveConstraint] -->
+        <RequiredPlugin name="Sofa.Component.Engine.Select"/> <!-- Needed to use components [BoxROI] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [BarycentricMapping] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.SolidMechanics.FEM.Elastic"/> <!-- Needed to use components [HexahedronFEMForceFieldAndMass] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Grid"/> <!-- Needed to use components [SparseGridRamificationTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+    
+        <VisualStyle displayFlags="showVisual showBehaviorModels showForceFields" />
+        <DefaultAnimationLoop/>
+        <CollisionPipeline depth="6" verbose="0" draw="0" />
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <MinProximityIntersection name="Proximity" alarmDistance="0.5" contactDistance="0.3" />
+        <CollisionResponse name="Response" response="PenalityContactForceField" />
+        <Node name="UniformC Rough">
+            <SparseGridRamificationTopology n="5 2 2" fileTopology="mesh/c.obj" nbVirtualFinerLevels="3" finestConnectivity="0" />
+            <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
+            <MechanicalObject />
+            <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
+            <BoxConstraint box="-16 -10 -3 -14 10 3" />
+            <Node name="Visu">
+                <MeshOBJLoader name="meshLoader_1" filename="mesh/c.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_1" color="blue" />
+                <BarycentricMapping input="@.." output="@Visual" />
+            </Node>
+            <Node name="Surf">
+                <MeshOBJLoader name="loader" filename="mesh/c.obj" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject src="@loader" />
+                <TriangleCollisionModel />
+                <PointCollisionModel />
+                <LineCollisionModel />
+                <BarycentricMapping />
+            </Node>
         </Node>
-        <Node name="Surf">
-            <MeshOBJLoader name="loader" filename="mesh/c.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel />
-            <PointCollisionModel />
-            <LineCollisionModel />
-            <BarycentricMapping />
+        <Node name="UniformC">
+            <SparseGridRamificationTopology n="5 2 2" fileTopology="mesh/c.obj" nbVirtualFinerLevels="3" finestConnectivity="0" />
+            <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
+            <MechanicalObject dx="40" />
+            <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
+            <BoxConstraint box="24 -10 -3 26 10 3" />
+            <Node name="Visu">
+                <MeshOBJLoader name="meshLoader_0" filename="mesh/c.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_0" color="red" />
+                <BarycentricMapping input="@.." output="@Visual" />
+            </Node>
+            <Node name="Surf">
+                <MeshOBJLoader name="loader" filename="mesh/c.obj" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject src="@loader" />
+                <TriangleCollisionModel />
+                <PointCollisionModel />
+                <LineCollisionModel />
+                <BarycentricMapping />
+            </Node>
+        </Node>
+        <Node name="UniformC and finestConnectivity">
+            <SparseGridRamificationTopology n="5 3 3" fileTopology="mesh/c.obj" nbVirtualFinerLevels="0" finestConnectivity="1" />
+            <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
+            <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
+            <MechanicalObject dx="80" />
+            <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
+            <BoxConstraint box="64 -10 -3 66 10 3" />
+            <Node name="Visu">
+                <MeshOBJLoader name="meshLoader_2" filename="mesh/c.obj" handleSeams="1" />
+                <OglModel name="Visual" src="@meshLoader_2" color="yellow" />
+                <BarycentricMapping input="@.." output="@Visual" />
+            </Node>
+            <Node name="Surf">
+                <MeshOBJLoader name="loader" filename="mesh/c.obj" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject src="@loader" />
+                <TriangleCollisionModel />
+                <PointCollisionModel />
+                <LineCollisionModel />
+                <BarycentricMapping />
+            </Node>
         </Node>
     </Node>
-    <Node name="UniformC">
-        <SparseGridRamificationTopology n="5 2 2" fileTopology="mesh/c.obj" nbVirtualFinerLevels="3" finestConnectivity="0" />
-        <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
-        <MechanicalObject dx="40" />
-        <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
-        <BoxConstraint box="24 -10 -3 26 10 3" />
-        <Node name="Visu">
-            <MeshOBJLoader name="meshLoader_0" filename="mesh/c.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_0" color="red" />
-            <BarycentricMapping input="@.." output="@Visual" />
-        </Node>
-        <Node name="Surf">
-            <MeshOBJLoader name="loader" filename="mesh/c.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel />
-            <PointCollisionModel />
-            <LineCollisionModel />
-            <BarycentricMapping />
-        </Node>
-    </Node>
-    <Node name="UniformC and finestConnectivity">
-        <SparseGridRamificationTopology n="5 3 3" fileTopology="mesh/c.obj" nbVirtualFinerLevels="0" finestConnectivity="1" />
-        <EulerImplicitSolver rayleighStiffness="0.1" rayleighMass="0.1" />
-        <CGLinearSolver iterations="10" tolerance="1e-5" threshold="1e-5"/>
-        <MechanicalObject dx="80" />
-        <HexahedronFEMForceFieldAndMass youngModulus="100000" poissonRatio="0.3" method="large" density="3" updateStiffnessMatrix="false" printLog="0" />
-        <BoxConstraint box="64 -10 -3 66 10 3" />
-        <Node name="Visu">
-            <MeshOBJLoader name="meshLoader_2" filename="mesh/c.obj" handleSeams="1" />
-            <OglModel name="Visual" src="@meshLoader_2" color="yellow" />
-            <BarycentricMapping input="@.." output="@Visual" />
-        </Node>
-        <Node name="Surf">
-            <MeshOBJLoader name="loader" filename="mesh/c.obj" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject src="@loader" />
-            <TriangleCollisionModel />
-            <PointCollisionModel />
-            <LineCollisionModel />
-            <BarycentricMapping />
-        </Node>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', gravity="0 0 -9", dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels showForceFields")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.5", contactDistance="0.3")
-	root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
+=== "Python"
 
-	UniformC Rough = root.addChild('UniformC Rough')
-	UniformC Rough.addObject('SparseGridRamificationTopology', n="5 2 2", fileTopology="mesh/c.obj", nbVirtualFinerLevels="3", finestConnectivity="0")
-	UniformC Rough.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	UniformC Rough.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
-	UniformC Rough.addObject('MechanicalObject')
-	UniformC Rough.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
-	UniformC Rough.addObject('BoxConstraint', box="-16 -10 -3 -14 10 3")
+    ```python
+    def createScene(rootNode):
 
-	Visu = UniformC Rough.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/c.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="blue")
-	Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+        root = rootNode.addChild('root', gravity="0 0 -9", dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Constraint.Projective")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Select")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.SolidMechanics.FEM.Elastic")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Grid")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showVisual showBehaviorModels showForceFields")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('CollisionPipeline', depth="6", verbose="0", draw="0")
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('MinProximityIntersection', name="Proximity", alarmDistance="0.5", contactDistance="0.3")
+        root.addObject('CollisionResponse', name="Response", response="PenalityContactForceField")
 
-	Surf = UniformC Rough.addChild('Surf')
-	Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
-	Surf.addObject('MeshTopology', src="@loader")
-	Surf.addObject('MechanicalObject', src="@loader")
-	Surf.addObject('TriangleCollisionModel')
-	Surf.addObject('PointCollisionModel')
-	Surf.addObject('LineCollisionModel')
-	Surf.addObject('BarycentricMapping')
+        UniformC Rough = root.addChild('UniformC Rough')
+        UniformC Rough.addObject('SparseGridRamificationTopology', n="5 2 2", fileTopology="mesh/c.obj", nbVirtualFinerLevels="3", finestConnectivity="0")
+        UniformC Rough.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        UniformC Rough.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
+        UniformC Rough.addObject('MechanicalObject')
+        UniformC Rough.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
+        UniformC Rough.addObject('BoxConstraint', box="-16 -10 -3 -14 10 3")
 
-	UniformC = root.addChild('UniformC')
-	UniformC.addObject('SparseGridRamificationTopology', n="5 2 2", fileTopology="mesh/c.obj", nbVirtualFinerLevels="3", finestConnectivity="0")
-	UniformC.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	UniformC.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
-	UniformC.addObject('MechanicalObject', dx="40")
-	UniformC.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
-	UniformC.addObject('BoxConstraint', box="24 -10 -3 26 10 3")
+        Visu = UniformC Rough.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_1", filename="mesh/c.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_1", color="blue")
+        Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
 
-	Visu = UniformC.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/c.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="red")
-	Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+        Surf = UniformC Rough.addChild('Surf')
+        Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
+        Surf.addObject('MeshTopology', src="@loader")
+        Surf.addObject('MechanicalObject', src="@loader")
+        Surf.addObject('TriangleCollisionModel')
+        Surf.addObject('PointCollisionModel')
+        Surf.addObject('LineCollisionModel')
+        Surf.addObject('BarycentricMapping')
 
-	Surf = UniformC.addChild('Surf')
-	Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
-	Surf.addObject('MeshTopology', src="@loader")
-	Surf.addObject('MechanicalObject', src="@loader")
-	Surf.addObject('TriangleCollisionModel')
-	Surf.addObject('PointCollisionModel')
-	Surf.addObject('LineCollisionModel')
-	Surf.addObject('BarycentricMapping')
+        UniformC = root.addChild('UniformC')
+        UniformC.addObject('SparseGridRamificationTopology', n="5 2 2", fileTopology="mesh/c.obj", nbVirtualFinerLevels="3", finestConnectivity="0")
+        UniformC.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        UniformC.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
+        UniformC.addObject('MechanicalObject', dx="40")
+        UniformC.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
+        UniformC.addObject('BoxConstraint', box="24 -10 -3 26 10 3")
 
-	UniformC and finestConnectivity = root.addChild('UniformC and finestConnectivity')
-	UniformC and finestConnectivity.addObject('SparseGridRamificationTopology', n="5 3 3", fileTopology="mesh/c.obj", nbVirtualFinerLevels="0", finestConnectivity="1")
-	UniformC and finestConnectivity.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	UniformC and finestConnectivity.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
-	UniformC and finestConnectivity.addObject('MechanicalObject', dx="80")
-	UniformC and finestConnectivity.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
-	UniformC and finestConnectivity.addObject('BoxConstraint', box="64 -10 -3 66 10 3")
+        Visu = UniformC.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_0", filename="mesh/c.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_0", color="red")
+        Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
 
-	Visu = UniformC and finestConnectivity.addChild('Visu')
-	Visu.addObject('MeshOBJLoader', name="meshLoader_2", filename="mesh/c.obj", handleSeams="1")
-	Visu.addObject('OglModel', name="Visual", src="@meshLoader_2", color="yellow")
-	Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+        Surf = UniformC.addChild('Surf')
+        Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
+        Surf.addObject('MeshTopology', src="@loader")
+        Surf.addObject('MechanicalObject', src="@loader")
+        Surf.addObject('TriangleCollisionModel')
+        Surf.addObject('PointCollisionModel')
+        Surf.addObject('LineCollisionModel')
+        Surf.addObject('BarycentricMapping')
 
-	Surf = UniformC and finestConnectivity.addChild('Surf')
-	Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
-	Surf.addObject('MeshTopology', src="@loader")
-	Surf.addObject('MechanicalObject', src="@loader")
-	Surf.addObject('TriangleCollisionModel')
-	Surf.addObject('PointCollisionModel')
-	Surf.addObject('LineCollisionModel')
-	Surf.addObject('BarycentricMapping')
-```
+        UniformC and finestConnectivity = root.addChild('UniformC and finestConnectivity')
+        UniformC and finestConnectivity.addObject('SparseGridRamificationTopology', n="5 3 3", fileTopology="mesh/c.obj", nbVirtualFinerLevels="0", finestConnectivity="1")
+        UniformC and finestConnectivity.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        UniformC and finestConnectivity.addObject('CGLinearSolver', iterations="10", tolerance="1e-5", threshold="1e-5")
+        UniformC and finestConnectivity.addObject('MechanicalObject', dx="80")
+        UniformC and finestConnectivity.addObject('HexahedronFEMForceFieldAndMass', youngModulus="100000", poissonRatio="0.3", method="large", density="3", updateStiffnessMatrix="false", printLog="0")
+        UniformC and finestConnectivity.addObject('BoxConstraint', box="64 -10 -3 66 10 3")
+
+        Visu = UniformC and finestConnectivity.addChild('Visu')
+        Visu.addObject('MeshOBJLoader', name="meshLoader_2", filename="mesh/c.obj", handleSeams="1")
+        Visu.addObject('OglModel', name="Visual", src="@meshLoader_2", color="yellow")
+        Visu.addObject('BarycentricMapping', input="@..", output="@Visual")
+
+        Surf = UniformC and finestConnectivity.addChild('Surf')
+        Surf.addObject('MeshOBJLoader', name="loader", filename="mesh/c.obj")
+        Surf.addObject('MeshTopology', src="@loader")
+        Surf.addObject('MechanicalObject', src="@loader")
+        Surf.addObject('TriangleCollisionModel')
+        Surf.addObject('PointCollisionModel')
+        Surf.addObject('LineCollisionModel')
+        Surf.addObject('BarycentricMapping')
+    ```
+

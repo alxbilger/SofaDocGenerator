@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Constraint.Lagrangian.Solver
 __namespace__: sofa::component::constraint::lagrangian::solver
 
 __parents__: 
+
 - ConstraintSolverImpl
 
 Data: 

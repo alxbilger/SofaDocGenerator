@@ -4,6 +4,7 @@ Project particles to a point
 
 
 __Templates__:
+
 - Vec1d
 - Vec2d
 - Vec3d
@@ -14,6 +15,7 @@ __Target__: Sofa.Component.Constraint.Projective
 __namespace__: sofa::component::constraint::projective
 
 __parents__: 
+
 - ProjectiveConstraintSet
 
 Data: 

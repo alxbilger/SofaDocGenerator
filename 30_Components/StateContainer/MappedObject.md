@@ -5,6 +5,7 @@ Supports GPU-side computations using CUDA
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec1d
@@ -17,6 +18,7 @@ __Target__: Sofa.Component.StateContainer
 __namespace__: sofa::component::statecontainer
 
 __parents__: 
+
 - State
 
 Data: 

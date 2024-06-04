@@ -4,6 +4,7 @@ Select a subset of labeled points or cells stored in (vector<svector<label>>) gi
 
 
 __Templates__:
+
 - B
 - H
 - I
@@ -14,6 +15,7 @@ __Target__: Sofa.Component.Engine.Select
 __namespace__: sofa::component::engine::select
 
 __parents__: 
+
 - DataEngine
 
 Data: 

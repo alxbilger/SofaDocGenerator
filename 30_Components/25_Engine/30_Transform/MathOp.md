@@ -4,6 +4,7 @@ Apply a math operation to combine several inputs
 
 
 __Templates__:
+
 - vector<RigidCoord2d>
 - vector<RigidCoord3d>
 - vector<RigidDeriv2d>
@@ -19,6 +20,7 @@ __Target__: Sofa.Component.Engine.Transform
 __namespace__: sofa::component::engine::transform
 
 __parents__: 
+
 - DataEngine
 
 Data: 

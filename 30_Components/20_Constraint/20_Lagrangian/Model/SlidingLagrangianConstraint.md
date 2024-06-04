@@ -4,6 +4,7 @@ TODO-SlidingLagrangianConstraint
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Constraint.Lagrangian.Model
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Constraint.Lagrangian.Model
 __namespace__: sofa::component::constraint::lagrangian::model
 
 __parents__: 
+
 - PairInteractionConstraint
 
 Data: 

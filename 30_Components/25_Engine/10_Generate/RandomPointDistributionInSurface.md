@@ -4,6 +4,7 @@ This class truns on spiral any topological model
 
 
 __Templates__:
+
 - Vec3d
 
 __Target__: Sofa.Component.Engine.Generate
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.Engine.Generate
 __namespace__: sofa::component::engine::generate
 
 __parents__: 
+
 - DataEngine
 
 Data: 
@@ -161,50 +163,58 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" dt="0.02">
-    <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [RandomPointDistributionInSurface] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
-    <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
-    <VisualStyle displayFlags="showBehaviorModels" />
-    <DefaultAnimationLoop/>
-    
-    <Node name="Random">
-        <MeshOBJLoader name="meshLoader" filename="mesh/liver.obj" />
-        <MechanicalObject src="@meshLoader"/>
-        <RandomPointDistributionInSurface template="Vec3" drawOutputPoints="true"
-            vertices="@meshLoader.position" triangles="@meshLoader.triangles" numberOfInPoints="100" numberOfTests="3" minDistanceBetweenPoints="0.1" 
-        />
+Component/Engine/Generate/RandomPointDistributionInSurface.scn
+
+=== "XML"
+
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" dt="0.02">
+        <RequiredPlugin name="Sofa.Component.Engine.Generate"/> <!-- Needed to use components [RandomPointDistributionInSurface] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [MeshOBJLoader] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+        <RequiredPlugin name="Sofa.GL.Component.Rendering3D"/> <!-- Needed to use components [OglModel] -->
+        <VisualStyle displayFlags="showBehaviorModels" />
+        <DefaultAnimationLoop/>
+        
+        <Node name="Random">
+            <MeshOBJLoader name="meshLoader" filename="mesh/liver.obj" />
+            <MechanicalObject src="@meshLoader"/>
+            <RandomPointDistributionInSurface template="Vec3" drawOutputPoints="true"
+                vertices="@meshLoader.position" triangles="@meshLoader.triangles" numberOfInPoints="100" numberOfTests="3" minDistanceBetweenPoints="0.1" 
+            />
+        </Node>
+        <Node name="Visu">
+            <VisualStyle displayFlags="showWireframe" />
+            <MeshOBJLoader name='myLoader' filename='mesh/liver.obj'/>  
+            <OglModel src='@myLoader'/>
+        </Node>
     </Node>
-    <Node name="Visu">
-        <VisualStyle displayFlags="showWireframe" />
-        <MeshOBJLoader name='myLoader' filename='mesh/liver.obj'/>  
-        <OglModel src='@myLoader'/>
-    </Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+    ```
 
-	root = rootNode.addChild('root', dt="0.02")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels")
-	root.addObject('DefaultAnimationLoop')
+=== "Python"
 
-	Random = root.addChild('Random')
-	Random.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/liver.obj")
-	Random.addObject('MechanicalObject', src="@meshLoader")
-	Random.addObject('RandomPointDistributionInSurface', template="Vec3", drawOutputPoints="true", vertices="@meshLoader.position", triangles="@meshLoader.triangles", numberOfInPoints="100", numberOfTests="3", minDistanceBetweenPoints="0.1")
+    ```python
+    def createScene(rootNode):
 
-	Visu = root.addChild('Visu')
-	Visu.addObject('VisualStyle', displayFlags="showWireframe")
-	Visu.addObject('MeshOBJLoader', name="myLoader", filename="mesh/liver.obj")
-	Visu.addObject('OglModel', src="@myLoader")
-```
+        root = rootNode.addChild('root', dt="0.02")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Engine.Generate")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('RequiredPlugin', name="Sofa.GL.Component.Rendering3D")
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels")
+        root.addObject('DefaultAnimationLoop')
+
+        Random = root.addChild('Random')
+        Random.addObject('MeshOBJLoader', name="meshLoader", filename="mesh/liver.obj")
+        Random.addObject('MechanicalObject', src="@meshLoader")
+        Random.addObject('RandomPointDistributionInSurface', template="Vec3", drawOutputPoints="true", vertices="@meshLoader.position", triangles="@meshLoader.triangles", numberOfInPoints="100", numberOfTests="3", minDistanceBetweenPoints="0.1")
+
+        Visu = root.addChild('Visu')
+        Visu.addObject('VisualStyle', displayFlags="showWireframe")
+        Visu.addObject('MeshOBJLoader', name="myLoader", filename="mesh/liver.obj")
+        Visu.addObject('OglModel', src="@myLoader")
+    ```
+

@@ -4,6 +4,7 @@ Compute the average of coordinates
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec2d
@@ -14,6 +15,7 @@ __Target__: Sofa.Component.Engine.Analyze
 __namespace__: sofa::component::engine::analyze
 
 __parents__: 
+
 - DataEngine
 
 Data: 

@@ -4,6 +4,7 @@ Springs for Flexibles
 
 
 __Templates__:
+
 - Rigid3d
 
 __Target__: Sofa.Component.SolidMechanics.Spring
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.SolidMechanics.Spring
 __namespace__: sofa::component::solidmechanics::spring
 
 __parents__: 
+
 - PairInteractionForceField
 
 Data: 

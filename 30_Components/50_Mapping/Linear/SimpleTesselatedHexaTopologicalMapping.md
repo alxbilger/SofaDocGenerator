@@ -8,6 +8,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - TopologicalMapping
 
 Data: 

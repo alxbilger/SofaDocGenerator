@@ -4,6 +4,7 @@ Edge set geometry algorithms
 
 
 __Templates__:
+
 - Rigid2d
 - Rigid3d
 - Vec1d
@@ -15,6 +16,7 @@ __Target__: Sofa.Component.Topology.Container.Dynamic
 __namespace__: sofa::component::topology::container::dynamic
 
 __parents__: 
+
 - PointSetGeometryAlgorithms
 
 Data: 

@@ -8,6 +8,7 @@ __Target__: Sofa.Component.IO.Mesh
 __namespace__: sofa::component::io::mesh
 
 __parents__: 
+
 - VoxelLoader
 
 Data: 
@@ -163,41 +164,49 @@ Links:
 
 ## Examples
 
-```xml
-<Node>
-	<RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [VoxelGridLoader] -->
-	<RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-	<RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms HexahedronSetTopologyContainer] -->
+Component/IO/Mesh/VoxelGridLoader.scn
 
-	<DefaultAnimationLoop/>
-	<EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-	<CGLinearSolver  iterations="25" tolerance="1e-5" threshold="1e-5"/>
-	<Node>
-		<VoxelGridLoader name="gridloader" filename="textures/Test_64_64_4.raw" voxelSize="0.1 0.1 0.1" resolution="64 64 4" bgValue="0" />
-		<HexahedronSetTopologyContainer src="@gridloader" />
-		<HexahedronSetGeometryAlgorithms drawHexa="1"/>
-		<MechanicalObject showObject="1"/>
-	</Node>
-</Node>
-```
-```python
-def createScene(rootNode):
+=== "XML"
 
-	rootNode = rootNode.addChild('rootNode')
-	rootNode.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	rootNode.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	rootNode.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	rootNode.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	rootNode.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
-	rootNode.addObject('DefaultAnimationLoop')
-	rootNode.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	rootNode.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
+    ```xml
+    <Node>
+    	<RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [VoxelGridLoader] -->
+    	<RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+    	<RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+    	<RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+    	<RequiredPlugin name="Sofa.Component.Topology.Container.Dynamic"/> <!-- Needed to use components [HexahedronSetGeometryAlgorithms HexahedronSetTopologyContainer] -->
+    
+    	<DefaultAnimationLoop/>
+    	<EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+    	<CGLinearSolver  iterations="25" tolerance="1e-5" threshold="1e-5"/>
+    	<Node>
+    		<VoxelGridLoader name="gridloader" filename="textures/Test_64_64_4.raw" voxelSize="0.1 0.1 0.1" resolution="64 64 4" bgValue="0" />
+    		<HexahedronSetTopologyContainer src="@gridloader" />
+    		<HexahedronSetGeometryAlgorithms drawHexa="1"/>
+    		<MechanicalObject showObject="1"/>
+    	</Node>
+    </Node>
+    ```
 
-	rootNode = rootNode.addChild('rootNode')
-	rootNode.addObject('VoxelGridLoader', name="gridloader", filename="textures/Test_64_64_4.raw", voxelSize="0.1 0.1 0.1", resolution="64 64 4", bgValue="0")
-	rootNode.addObject('HexahedronSetTopologyContainer', src="@gridloader")
-	rootNode.addObject('HexahedronSetGeometryAlgorithms', drawHexa="1")
-	rootNode.addObject('MechanicalObject', showObject="1")
-```
+=== "Python"
+
+    ```python
+    def createScene(rootNode):
+
+        rootNode = rootNode.addChild('rootNode')
+        rootNode.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        rootNode.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        rootNode.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        rootNode.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        rootNode.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Dynamic")
+        rootNode.addObject('DefaultAnimationLoop')
+        rootNode.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        rootNode.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
+
+        rootNode = rootNode.addChild('rootNode')
+        rootNode.addObject('VoxelGridLoader', name="gridloader", filename="textures/Test_64_64_4.raw", voxelSize="0.1 0.1 0.1", resolution="64 64 4", bgValue="0")
+        rootNode.addObject('HexahedronSetTopologyContainer', src="@gridloader")
+        rootNode.addObject('HexahedronSetGeometryAlgorithms', drawHexa="1")
+        rootNode.addObject('MechanicalObject', showObject="1")
+    ```
+

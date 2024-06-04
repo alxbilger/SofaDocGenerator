@@ -4,6 +4,7 @@ Linear system solver using Thomas Algorithm for Block Tridiagonal matrices
 
 
 __Templates__:
+
 - BTDMatrix6d
 
 __Target__: Sofa.Component.LinearSolver.Direct
@@ -11,6 +12,7 @@ __Target__: Sofa.Component.LinearSolver.Direct
 __namespace__: sofa::component::linearsolver::direct
 
 __parents__: 
+
 - MatrixLinearSolver
 
 Data: 

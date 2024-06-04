@@ -4,6 +4,7 @@ Direct Linear Solver using a Sparse QR factorization.
 
 
 __Templates__:
+
 - CompressedRowSparseMatrixMat3x3d
 - CompressedRowSparseMatrixd
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.LinearSolver.Direct
 __namespace__: sofa::component::linearsolver::direct
 
 __parents__: 
+
 - EigenDirectSparseSolver
 
 Data: 

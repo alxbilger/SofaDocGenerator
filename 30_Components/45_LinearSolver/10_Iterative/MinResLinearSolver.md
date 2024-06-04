@@ -4,6 +4,7 @@ Linear system solver using the MINRES iterative algorithm
 
 
 __Templates__:
+
 - CompressedRowSparseMatrixMat2x2d
 - CompressedRowSparseMatrixMat3x3d
 - CompressedRowSparseMatrixMat4x4d
@@ -19,6 +20,7 @@ __Target__: Sofa.Component.LinearSolver.Iterative
 __namespace__: sofa::component::linearsolver::iterative
 
 __parents__: 
+
 - MatrixLinearSolver
 
 Data: 

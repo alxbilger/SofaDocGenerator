@@ -4,6 +4,7 @@ Concatenate several States together
 
 
 __Templates__:
+
 - Rigid3d,Rigid3d
 - Vec3d,Vec3d
 
@@ -12,6 +13,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - CRTPLinearMapping
 
 Data: 
@@ -120,103 +122,111 @@ Links:
 
 ## Examples
 
-```xml
-<?xml version="1.0"?>
-<Node name="root" dt="0.02" gravity="0 0 0">
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [DiscreteIntersection] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
-    <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
-    <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [GridMeshCreator] -->
-    <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
-    <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMultiMapping] -->
-    <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
-    <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [ConstantForceField] -->
-    <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
-    <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
-    <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
-    <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
+Component/Mapping/Linear/IdentityMultiMapping.scn
 
-    <VisualStyle displayFlags="showBehaviorModels showCollisionModels showForceFields" />
-    <DefaultAnimationLoop/>
-    
-    <CollisionPipeline/>
-    <BruteForceBroadPhase/>
-    <BVHNarrowPhase/>
-    <CollisionResponse response="PenalityContactForceField" />
-    <DiscreteIntersection/>
-    
-    
-    <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
-    <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-5"/>
-    
-    
-    <Node name="object1">        
-        <GridMeshCreator name="loader" filename="nofile" resolution="2 2" />
-        <MeshTopology src="@loader" />
-        <MechanicalObject template="Vec3" src="@loader" name="dof1" />
+=== "XML"
 
-        <Node name="object2">        
-            <GridMeshCreator name="loader" filename="nofile" resolution="2 2" translation="2 0 0" />
-            <MeshTopology src="@loader" />
-            <MechanicalObject template="Vec3" src="@loader"  name="dof2"/>
-            
-            <Node name="concatenation">
-                <MechanicalObject template="Vec3" name="dofall" showObject="1"/>
-                <IdentityMultiMapping template="Vec3,Vec3" input="@../../dof1 @../dof2" output="@./dofall" />
-                <SphereCollisionModel radius="0.3" selfCollision="1"/>
-                <UniformMass vertexMass="1" />
-                <ConstantForceField indices="0" forces="1 0 0"/>
-            </Node>
-            
-        </Node>
+    ```xml
+    <?xml version="1.0"?>
+    <Node name="root" dt="0.02" gravity="0 0 0">
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Algorithm"/> <!-- Needed to use components [BVHNarrowPhase BruteForceBroadPhase CollisionPipeline] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Detection.Intersection"/> <!-- Needed to use components [DiscreteIntersection] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Geometry"/> <!-- Needed to use components [SphereCollisionModel] -->
+        <RequiredPlugin name="Sofa.Component.Collision.Response.Contact"/> <!-- Needed to use components [CollisionResponse] -->
+        <RequiredPlugin name="Sofa.Component.IO.Mesh"/> <!-- Needed to use components [GridMeshCreator] -->
+        <RequiredPlugin name="Sofa.Component.LinearSolver.Iterative"/> <!-- Needed to use components [CGLinearSolver] -->
+        <RequiredPlugin name="Sofa.Component.Mapping.Linear"/> <!-- Needed to use components [IdentityMultiMapping] -->
+        <RequiredPlugin name="Sofa.Component.Mass"/> <!-- Needed to use components [UniformMass] -->
+        <RequiredPlugin name="Sofa.Component.MechanicalLoad"/> <!-- Needed to use components [ConstantForceField] -->
+        <RequiredPlugin name="Sofa.Component.ODESolver.Backward"/> <!-- Needed to use components [EulerImplicitSolver] -->
+        <RequiredPlugin name="Sofa.Component.StateContainer"/> <!-- Needed to use components [MechanicalObject] -->
+        <RequiredPlugin name="Sofa.Component.Topology.Container.Constant"/> <!-- Needed to use components [MeshTopology] -->
+        <RequiredPlugin name="Sofa.Component.Visual"/> <!-- Needed to use components [VisualStyle] -->
     
-    </Node>
+        <VisualStyle displayFlags="showBehaviorModels showCollisionModels showForceFields" />
+        <DefaultAnimationLoop/>
         
+        <CollisionPipeline/>
+        <BruteForceBroadPhase/>
+        <BVHNarrowPhase/>
+        <CollisionResponse response="PenalityContactForceField" />
+        <DiscreteIntersection/>
+        
+        
+        <EulerImplicitSolver  rayleighStiffness="0.1" rayleighMass="0.1" />
+        <CGLinearSolver iterations="25" tolerance="1e-5" threshold="1e-5"/>
+        
+        
+        <Node name="object1">        
+            <GridMeshCreator name="loader" filename="nofile" resolution="2 2" />
+            <MeshTopology src="@loader" />
+            <MechanicalObject template="Vec3" src="@loader" name="dof1" />
     
-</Node>
-```
-```python
-def createScene(rootNode):
+            <Node name="object2">        
+                <GridMeshCreator name="loader" filename="nofile" resolution="2 2" translation="2 0 0" />
+                <MeshTopology src="@loader" />
+                <MechanicalObject template="Vec3" src="@loader"  name="dof2"/>
+                
+                <Node name="concatenation">
+                    <MechanicalObject template="Vec3" name="dofall" showObject="1"/>
+                    <IdentityMultiMapping template="Vec3,Vec3" input="@../../dof1 @../dof2" output="@./dofall" />
+                    <SphereCollisionModel radius="0.3" selfCollision="1"/>
+                    <UniformMass vertexMass="1" />
+                    <ConstantForceField indices="0" forces="1 0 0"/>
+                </Node>
+                
+            </Node>
+        
+        </Node>
+            
+        
+    </Node>
+    ```
 
-	root = rootNode.addChild('root', dt="0.02", gravity="0 0 0")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
-	root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
-	root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
-	root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
-	root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
-	root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
-	root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
-	root.addObject('VisualStyle', displayFlags="showBehaviorModels showCollisionModels showForceFields")
-	root.addObject('DefaultAnimationLoop')
-	root.addObject('CollisionPipeline')
-	root.addObject('BruteForceBroadPhase')
-	root.addObject('BVHNarrowPhase')
-	root.addObject('CollisionResponse', response="PenalityContactForceField")
-	root.addObject('DiscreteIntersection')
-	root.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
-	root.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
+=== "Python"
 
-	object1 = root.addChild('object1')
-	object1.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2")
-	object1.addObject('MeshTopology', src="@loader")
-	object1.addObject('MechanicalObject', template="Vec3", src="@loader", name="dof1")
+    ```python
+    def createScene(rootNode):
 
-	object2 = object1.addChild('object2')
-	object2.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2", translation="2 0 0")
-	object2.addObject('MeshTopology', src="@loader")
-	object2.addObject('MechanicalObject', template="Vec3", src="@loader", name="dof2")
+        root = rootNode.addChild('root', dt="0.02", gravity="0 0 0")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Algorithm")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Detection.Intersection")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Geometry")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Collision.Response.Contact")
+        root.addObject('RequiredPlugin', name="Sofa.Component.IO.Mesh")
+        root.addObject('RequiredPlugin', name="Sofa.Component.LinearSolver.Iterative")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mapping.Linear")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Mass")
+        root.addObject('RequiredPlugin', name="Sofa.Component.MechanicalLoad")
+        root.addObject('RequiredPlugin', name="Sofa.Component.ODESolver.Backward")
+        root.addObject('RequiredPlugin', name="Sofa.Component.StateContainer")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Topology.Container.Constant")
+        root.addObject('RequiredPlugin', name="Sofa.Component.Visual")
+        root.addObject('VisualStyle', displayFlags="showBehaviorModels showCollisionModels showForceFields")
+        root.addObject('DefaultAnimationLoop')
+        root.addObject('CollisionPipeline')
+        root.addObject('BruteForceBroadPhase')
+        root.addObject('BVHNarrowPhase')
+        root.addObject('CollisionResponse', response="PenalityContactForceField")
+        root.addObject('DiscreteIntersection')
+        root.addObject('EulerImplicitSolver', rayleighStiffness="0.1", rayleighMass="0.1")
+        root.addObject('CGLinearSolver', iterations="25", tolerance="1e-5", threshold="1e-5")
 
-	concatenation = object2.addChild('concatenation')
-	concatenation.addObject('MechanicalObject', template="Vec3", name="dofall", showObject="1")
-	concatenation.addObject('IdentityMultiMapping', template="Vec3,Vec3", input="@../../dof1 @../dof2", output="@./dofall")
-	concatenation.addObject('SphereCollisionModel', radius="0.3", selfCollision="1")
-	concatenation.addObject('UniformMass', vertexMass="1")
-	concatenation.addObject('ConstantForceField', indices="0", forces="1 0 0")
-```
+        object1 = root.addChild('object1')
+        object1.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2")
+        object1.addObject('MeshTopology', src="@loader")
+        object1.addObject('MechanicalObject', template="Vec3", src="@loader", name="dof1")
+
+        object2 = object1.addChild('object2')
+        object2.addObject('GridMeshCreator', name="loader", filename="nofile", resolution="2 2", translation="2 0 0")
+        object2.addObject('MeshTopology', src="@loader")
+        object2.addObject('MechanicalObject', template="Vec3", src="@loader", name="dof2")
+
+        concatenation = object2.addChild('concatenation')
+        concatenation.addObject('MechanicalObject', template="Vec3", name="dofall", showObject="1")
+        concatenation.addObject('IdentityMultiMapping', template="Vec3,Vec3", input="@../../dof1 @../dof2", output="@./dofall")
+        concatenation.addObject('SphereCollisionModel', radius="0.3", selfCollision="1")
+        concatenation.addObject('UniformMass', vertexMass="1")
+        concatenation.addObject('ConstantForceField', indices="0", forces="1 0 0")
+    ```
+

@@ -4,6 +4,7 @@ Set the point to the center of mass of the DOFs it is attached to
 
 
 __Templates__:
+
 - Rigid3d,Rigid3d
 - Rigid3d,Vec3d
 - Vec3d,Vec3d
@@ -13,6 +14,7 @@ __Target__: Sofa.Component.Mapping.Linear
 __namespace__: sofa::component::mapping::linear
 
 __parents__: 
+
 - CRTPLinearMapping
 
 Data: 
