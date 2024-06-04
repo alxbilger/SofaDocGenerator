@@ -39,7 +39,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
 
 void find_files_by_prefix(
     const std::string& directory, const std::string& prefix, const std::string& root,
-    std::vector<std::string> outAbsoluteFiles, std::vector<std::string> outRelativeFiles)
+    std::vector<std::string>& outAbsoluteFiles, std::vector<std::string>& outRelativeFiles)
 {
     namespace fs = std::filesystem;
 
