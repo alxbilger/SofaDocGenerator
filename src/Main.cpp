@@ -271,107 +271,6 @@ void generateComponentDoc(
     }
 }
 
-void writeTOCfile(const std::string topicsDirectory, const std::string inTreeFilename, std::map<std::string, FileContent> fileContent)
-{
-    std::ofstream treeFile(inTreeFilename);
-    treeFile << R"(<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE instance-profile
-        SYSTEM "https://resources.jetbrains.com/writerside/1.0/product-profile.dtd">
-
-<instance-profile id="in" name="SOFA" start-page="START.md">\
-    <toc-element topic="START.md"/>
-)";
-
-
-    struct TreeNode
-    {
-        std::string name;
-        std::map<std::string, std::unique_ptr<TreeNode>> children;
-
-        explicit TreeNode(std::string n) : name(std::move(n)) {}
-    };
-
-    class Tree {
-    private:
-        TreeNode root{""};
-
-    public:
-        Tree() = default;
-
-        const TreeNode& getRoot() const { return root; }
-
-        void addPath(const std::string& path)
-        {
-            std::stringstream ss(path);
-            std::string token;
-            TreeNode* current = &root;
-
-            while (getline(ss, token, '/'))
-            {
-                if (token.empty()) continue; // Skip empty tokens
-                if (current->children.find(token) == current->children.end()) {
-                    current->children[token] = std::make_unique<TreeNode>(token);
-                }
-                current = current->children[token].get();
-            }
-        }
-
-    } tree;
-
-
-
-    for (const auto& [filename, content] : fileContent)
-    {
-        auto shortFilename = filename;
-        sofa::helper::replaceAll(shortFilename, topicsDirectory, "");
-
-        while(shortFilename[0] == '/')
-        {
-            shortFilename = shortFilename.substr(1);
-        }
-
-        tree.addPath(shortFilename);
-    }
-
-    std::cout << "----------------" << std::endl;
-
-    std::function<void(const TreeNode&)> traversal;
-    std::string tab;
-    unsigned int id {};
-    traversal = [&treeFile, &traversal, &tab, &id](const TreeNode& node)
-    {
-        if (node.children.empty() && !node.name.empty())
-        {
-            treeFile << tab << "<toc-element topic=\"" << node.name << "\" id=\"" << id++ << "\"/>\n";
-        }
-        else
-        {
-            if (!node.name.empty())
-            {
-                treeFile << tab << "<toc-element toc-title=\"" << node.name << "\" id=\"" << id++ << "\">\n";
-            }
-            for (const auto& [name, child] : node.children)
-            {
-                const auto oldTab = tab;
-                tab += "\t";
-                traversal(*child);
-                tab = oldTab;
-            }
-
-            if (!node.name.empty())
-            {
-                treeFile << tab << "</toc-element>\n";
-            }
-        }
-    };
-
-    traversal(tree.getRoot());
-
-    // f << "\t<toc-element topic=\"" << shortFilename << "\"/>\n";
-
-    treeFile << "</instance-profile>";
-}
-
 void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const std::vector<std::string>& examplesDirectories)
 {
     outputDirectory = sofa::helper::system::FileSystem::convertBackSlashesToSlashes(outputDirectory);
@@ -528,5 +427,4 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
         }
     }
 
-    writeTOCfile(topicsDirectory, inTreeFilename, fileContent);
 }
