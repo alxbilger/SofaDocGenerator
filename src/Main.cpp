@@ -244,8 +244,8 @@ void generateComponentDoc(
 
     auto& templateContent = it->second.templateContentMap[templateName];
 
-    templateContent += "__Target__: " + std::string{creator->getTarget()} + "\n\n";
-    templateContent += "__namespace__: " + creator->getClass()->namespaceName + "\n\n";
+    templateContent += "__Target__: `" + std::string{creator->getTarget()} + "`\n\n";
+    templateContent += "__namespace__: `#!c++ " + creator->getClass()->namespaceName + "`\n\n";
     // templateContent += "__file__: " + std::string{creator->getHeaderFileLocation()} + "\n\n";
     if (!creator->getClass()->parents.empty())
     {
@@ -253,7 +253,7 @@ void generateComponentDoc(
 
         for (const auto& parent : creator->getClass()->parents)
         {
-            templateContent += "- " + parent->className + "\n";
+            templateContent += "- `#!c++ " + parent->className + "`\n";
         }
         templateContent += "\n";
     }
@@ -456,7 +456,7 @@ void generateDoc(std::string outputDirectory, bool skipEmptyModuleName, const st
                 f << "__Templates__:\n\n";
                 for (const auto& templateName : templateNames)
                 {
-                    f << "- " << templateName << '\n';
+                    f << "- `#!c++ " << templateName << "`\n";
                 }
                 f << '\n';
             }
