@@ -148,8 +148,8 @@ jobs:
       - name: Commit merged doc
         run: |
           cd ${{ github.workspace }}/merged_doc
-          rm -rf
-          cp -a ${{ github.workspace }}/doc/* ${{ github.workspace }}/merged_doc
+          rm -rf .
+          cp -a --verbose ${{ github.workspace }}/doc/* ${{ github.workspace }}/merged_doc
           git config --global user.name "doc generator"
           git config --global user.email "username@users.noreply.github.com"
           git add *
